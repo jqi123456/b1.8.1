@@ -33,7 +33,7 @@ public class GuiVideoSettings extends GuiScreen {
 
 			this.controlList.add(b);
 
-			if ((var5 == 6 && EagRuntime.getPlatformType() == EnumPlatformType.WASM_GC)) b.enabled = false;
+			// if ((var5 == 6 && EagRuntime.getPlatformType() == EnumPlatformType.WASM_GC)) b.enabled = false;
 
 			++var2;
 		}
