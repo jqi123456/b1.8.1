@@ -9,10 +9,9 @@ gui.no=No
 
 menu.singleplayer=Singleplayer
 menu.multiplayer=Multiplayer
-menu.mods=Mods and Texture Packs
+menu.mods=Texture Packs
 menu.options=Options...
 menu.quit=Quit Game
-menu.editProfile=Edit Profile
 
 selectWorld.title=Select World
 selectWorld.empty=empty
@@ -50,6 +49,8 @@ selectWorld.mapFeatures=Generate Structures:
 selectWorld.mapFeatures.info=Villages, dungeons etc
 selectWorld.mapType=World Type:
 selectWorld.mapType.normal=Normal
+selectWorld.mapType.flat=Superflat
+selectWorld.mapType.sky=Sky
 
 selectServer.title=Select Server
 selectServer.empty=empty
@@ -719,10 +720,14 @@ death.arrow=%1$s was shot by %2$s
 death.fireball=%1$s was fireballed by %2$s
 death.thrown=%1$s was pummeled by %2$s
 
-
+eaglercraft.enabled=ENABLED
+eaglercraft.disabled=DISABLED
 eaglercraft.key.zoom=Zoom
-eaglercraft.noMultiplayer=Multiplayer has not been added yet.
+eaglercraft.key.command=Command
+eaglercraft.notAdded=%s has not been added yet.
 eaglercraft.willAdd=It will be implemented soon, be patient you eagler!
+eaglercraft.brokenOnRuntime1=%s broken on the %s runtime!
+eaglercraft.brokenOnRuntime2=Please use %s for now.
 eaglercraft.chat.exit=Exit Chat
 eaglercraft.menu.editProfile=Edit Profile
 eaglercraft.profile.title=Edit Profile
@@ -737,12 +742,24 @@ eaglercraft.addServer.SSLWarn1=you are on an https: page!
 eaglercraft.addServer.SSLWarn2=html5 will only allow wss://
 eaglercraft.noConnection=(no connection)
 eaglercraft.cantReachServer=Can't reach server
+eaglercraft.gui.toServerList=Back to Server List
 eaglercraft.options.showFramerate=Show FPS
 eaglercraft.options.showCoords=Show Coordinates
+eaglercraft.options.vsync=Use VSync
+eaglercraft.options.fancyGrass=Fancy Grass
 eaglercraft.openDebugConsole=Open Debug Console
 eaglercraft.lagNotice1=NOTE: The game can lag while chunks are generating,
 eaglercraft.lagNotice2=hold still for a few moments and the lag will stop.
 
 eaglercraft.command.usage=Usage: %s %s
-eaglercraft.command.unknown=Unknown Command
-eaglercraft.command.teleported=Teleported to %s, %s, %s
+eaglercraft.command.unknown=Unknown Command %s
+eaglercraft.command.error=An error occurred: %s
+eaglercraft.command.help=Commands:
+eaglercraft.command.helpLine=- %s %s
+eaglercraft.command.teleported=Teleported to %.3f, %.3f, %.3f
+eaglercraft.command.gave=Gave the player %s %s
+eaglercraft.command.summoned=Summoned %s at %.3f, %.3f, %.3f
+eaglercraft.command.setTime=Set the time to %s
+eaglercraft.command.getTime=The day is %s at %s
+eaglercraft.command.fly=Flight has been %s
+eaglercraft.command.doesntExist='%s' doesn't exist!

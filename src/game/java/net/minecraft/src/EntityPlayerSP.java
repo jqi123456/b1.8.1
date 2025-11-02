@@ -242,7 +242,7 @@ public class EntityPlayerSP extends EntityPlayer {
 	}
 
 	public void sendChatMessage(String var1) {
-		SingleplayerCommands.sendDummyChat(var1);
+		SingleplayerCommands.showDummyChat(var1);
 	}
 
 	public boolean isSneaking() {

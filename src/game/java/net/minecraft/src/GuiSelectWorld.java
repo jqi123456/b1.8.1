@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import dev.colbster937.eaglercraft.utils.SaveUtils;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.internal.PlatformApplication;
@@ -69,7 +70,7 @@ public class GuiSelectWorld extends GuiScreen {
 		this.controlList.add(this.buttonSelect = new GuiButton(1, this.width / 2 - 154, this.height - 52, 150, 20, var1.translateKey("selectWorld.select")));
 		this.controlList.add(this.buttonRename = new GuiButton(6, this.width / 2 - 154, this.height - 28, 70, 20, var1.translateKey("selectWorld.rename")));
 		this.controlList.add(this.buttonDelete = new GuiButton(2, this.width / 2 - 74, this.height - 28, 70, 20, var1.translateKey("selectWorld.delete")));
-		this.controlList.add(this.buttonExport = new GuiButton(4, this.width / 2 + 4, this.height - 28, 70, 20, var1.translateKey("eaglercraft.selectWorld.export")));
+		this.controlList.add(this.buttonExport = new GuiButton(4, this.width / 2 + 4, this.height - 28, 70, 20, I18n.format("selectWorld.export")));
 		this.controlList.add(new GuiButton(3, this.width / 2 + 4, this.height - 52, 150, 20, var1.translateKey("selectWorld.create")));
 		this.controlList.add(new GuiButton(0, this.width / 2 + 84, this.height - 28, 70, 20, var1.translateKey("gui.cancel")));
 		this.buttonSelect.enabled = false;

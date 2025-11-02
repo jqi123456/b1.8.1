@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 public abstract class WorldProvider {
 	public World worldObj;
+	public EnumWorldType worldTypeEnum;
 	public WorldChunkManager worldChunkMgr;
 	public boolean isNether = false;
 	public boolean isHellWorld = false;
@@ -12,6 +13,7 @@ public abstract class WorldProvider {
 
 	public final void registerWorld(World var1) {
 		this.worldObj = var1;
+		this.worldTypeEnum = var1.getWorldInfo().getWorldType();
 		this.registerWorldChunkManager();
 		this.generateLightBrightnessTable();
 	}
@@ -27,11 +29,16 @@ public abstract class WorldProvider {
 	}
 
 	protected void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManager(this.worldObj);
+		if(this.worldObj.getWorldInfo().getWorldType() == EnumWorldType.FLAT) {
+			this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.field_35485_c, 0.5F, 0.5F);
+		} else {
+			this.worldChunkMgr = new WorldChunkManager(this.worldObj);
+		}
+
 	}
 
 	public IChunkProvider getChunkProvider() {
-		return new ChunkProviderGenerate(this.worldObj, this.worldObj.getRandomSeed(), this.worldObj.getWorldInfo().func_35917_r());
+		return this.worldTypeEnum == EnumWorldType.FLAT ? new ChunkProviderFlat(this.worldObj, this.worldObj.getRandomSeed(), this.worldObj.getWorldInfo().func_35917_r()) : new ChunkProviderGenerate(this.worldObj, this.worldObj.getRandomSeed(), this.worldObj.getWorldInfo().func_35917_r());
 	}
 
 	public boolean canCoordinateBeSpawn(int var1, int var2) {
@@ -108,5 +115,17 @@ public abstract class WorldProvider {
 
 	public boolean func_28112_c() {
 		return true;
+	}
+
+	public int func_46066_g() {
+		return this.worldTypeEnum == EnumWorldType.FLAT ? 4 : this.worldObj.field_35472_c / 2;
+	}
+
+	public boolean func_46064_i() {
+		return this.worldTypeEnum != EnumWorldType.FLAT && !this.hasNoSky;
+	}
+
+	public double func_46065_j() {
+		return this.worldTypeEnum == EnumWorldType.FLAT ? 1.0D : 32.0D;
 	}
 }

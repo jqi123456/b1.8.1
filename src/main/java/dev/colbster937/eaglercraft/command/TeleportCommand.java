@@ -1,10 +1,9 @@
 package dev.colbster937.eaglercraft.command;
 
 import dev.colbster937.eaglercraft.SingleplayerCommands;
-
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IChunkProvider;
-import net.minecraft.src.StringTranslate;
 
 public class TeleportCommand extends Command {
   public TeleportCommand() {
@@ -17,7 +16,8 @@ public class TeleportCommand extends Command {
       EntityPlayer player = this.mc.thePlayer;
       double[] pos = this.getRelativePos(player, args[1], args[2], args[3]);
       this.tpPos(player, pos);
-      SingleplayerCommands.showChat(StringTranslate.getInstance().translateKeyFormat("eaglercraft.command.teleported", pos[0], pos[1], pos[2]));
+      SingleplayerCommands
+          .showChat(I18n.format("command.teleported", pos[0], pos[1], pos[2]));
     } else {
       this.showUsage(args[0]);
     }
@@ -28,28 +28,9 @@ public class TeleportCommand extends Command {
         this.getRelativeCoord(z, player.posZ) };
   }
 
-  private double getRelativeCoord(Object offset, double coord) {
-    if (!(offset instanceof String))
-      return coord;
-    String s = ((String) offset).trim();
-    if (s.equals("~"))
-      return coord;
-    if (s.startsWith("~")) {
-      try {
-        return coord + (s.length() == 1 ? 0 : Integer.parseInt(s.substring(1)));
-      } catch (Throwable e) {
-        return coord;
-      }
-    }
-    try {
-      return Integer.parseInt(s);
-    } catch (Throwable t) {
-      return coord;
-    }
-  }
-
   private void tpPos(EntityPlayer player, double[] pos) {
-    if (player.ridingEntity != null) player.mountEntity(null);
+    if (player.ridingEntity != null)
+      player.mountEntity(null);
     player.motionX = 0.0D;
     player.motionY = 0.0D;
     player.motionZ = 0.0D;

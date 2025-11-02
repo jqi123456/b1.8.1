@@ -2,14 +2,13 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-class GuiSlotServer extends GuiSlot {
-	private final StringTranslate translate;
+import dev.colbster937.eaglercraft.utils.I18n;
 
+class GuiSlotServer extends GuiSlot {
 	final GuiMultiplayer field_35410_a;
 
 	public GuiSlotServer(GuiMultiplayer var1) {
 		super(var1.mc, var1.width, var1.height, 32, var1.height - 64, 36);
-		this.translate = StringTranslate.getInstance();
 		this.field_35410_a = var1;
 	}
 
@@ -65,7 +64,7 @@ class GuiSlotServer extends GuiSlot {
 		this.field_35410_a.drawString(this.field_35410_a.fontRenderer, var6.field_35791_d, var2 + 2, var3 + 12, 8421504);
 		this.field_35410_a.drawString(this.field_35410_a.fontRenderer, var6.field_35794_c, var2 + 215 - this.field_35410_a.fontRenderer.getStringWidth(var6.field_35794_c), var3 + 12, 8421504);
 		String addr = var6.field_35793_b;
-		if (var6.hideAddress) addr = translate.translateKey("eaglercraft.selectServer.hiddenAddress");
+		if (var6.hideAddress) addr = I18n.format("selectServer.hiddenAddress");
 		this.field_35410_a.drawString(this.field_35410_a.fontRenderer, addr, var2 + 2, var3 + 12 + 11, 3158064);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.field_35410_a.mc.renderEngine.bindTexture(this.field_35410_a.mc.renderEngine.getTexture("/gui/icons.png"));
@@ -74,7 +73,7 @@ class GuiSlotServer extends GuiSlot {
 		String var9 = "";
 		byte var13;
 		int var14;
-		if(var6.field_35790_f && var6.field_35792_e != -2L) {
+		if(/* var6.field_35790_f && */ var6.field_35792_e != -2L) {
 			var13 = 0;
 			var8 = false;
 			if(var6.field_35792_e < 0L) {
@@ -92,7 +91,7 @@ class GuiSlotServer extends GuiSlot {
 			}
 
 			if(var6.field_35792_e < 0L) {
-				var9 = translate.translateKey("eaglercraft.noConnection");
+				var9 = I18n.format("noConnection");
 			} else {
 				var9 = var6.field_35792_e + "ms";
 			}

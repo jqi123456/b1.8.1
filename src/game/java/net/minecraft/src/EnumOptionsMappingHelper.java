@@ -20,22 +20,27 @@ class EnumOptionsMappingHelper {
 		}
 
 		try {
-			enumOptionsMappingHelperArray[EnumOptions.ADVANCED_OPENGL.ordinal()] = 4;
-		} catch (NoSuchFieldError var2) {
-		}
-
-		try {
-			enumOptionsMappingHelperArray[EnumOptions.AMBIENT_OCCLUSION.ordinal()] = 5;
+			enumOptionsMappingHelperArray[EnumOptions.AMBIENT_OCCLUSION.ordinal()] = 4;
 		} catch (NoSuchFieldError var1) {
 		}
 
 		try {
-			enumOptionsMappingHelperArray[EnumOptions.SHOW_FRAMERATE.ordinal()] = 6;
+			enumOptionsMappingHelperArray[EnumOptions.SHOW_FRAMERATE.ordinal()] = 5;
 		} catch (NoSuchFieldError var1) {
 		}
 
 		try {
-			enumOptionsMappingHelperArray[EnumOptions.SHOW_COORDS.ordinal()] = 7;
+			enumOptionsMappingHelperArray[EnumOptions.SHOW_COORDS.ordinal()] = 6;
+		} catch (NoSuchFieldError var1) {
+		}
+
+		try {
+			enumOptionsMappingHelperArray[EnumOptions.VSYNC.ordinal()] = 7;
+		} catch (NoSuchFieldError var1) {
+		}
+
+		try {
+			enumOptionsMappingHelperArray[EnumOptions.FANCY_GRASS.ordinal()] = 8;
 		} catch (NoSuchFieldError var1) {
 		}
 

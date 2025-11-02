@@ -77,6 +77,7 @@ public abstract class Packet {
 
 			var3.readPacketData(var0);
 		} catch (EOFException var5) {
+			var5.printStackTrace();
 			System.out.println("Reached end of stream");
 			return null;
 		}

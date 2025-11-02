@@ -47,7 +47,7 @@ abstract class ComponentVillage extends StructureComponent {
 				if(var2.func_35742_b(var6, 64, var5)) {
 					int var10001 = var1.getTopSolidOrLiquidBlock(var6, var5);
 					var1.getClass();
-					var3 += Math.max(var10001, 63);
+					var3 += Math.max(var10001, var1.worldProvider.func_46066_g());
 					++var4;
 				}
 			}

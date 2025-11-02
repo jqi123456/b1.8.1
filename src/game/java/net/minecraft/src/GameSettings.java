@@ -21,8 +21,7 @@ public class GameSettings {
 	public boolean viewBobbing = true;
 	public boolean anaglyph = false;
 	public boolean fancyGraphics = false;
-	public boolean ambientOcclusion = true;
-	public boolean vsync = true;
+	public boolean ambientOcclusion = false;
 	public String skin = "Default";
 	public KeyBinding keyBindForward = new KeyBinding("key.forward", 17);
 	public KeyBinding keyBindLeft = new KeyBinding("key.left", 30);
@@ -32,13 +31,13 @@ public class GameSettings {
 	public KeyBinding keyBindInventory = new KeyBinding("key.inventory", 18);
 	public KeyBinding keyBindDrop = new KeyBinding("key.drop", 16);
 	public KeyBinding keyBindChat = new KeyBinding("key.chat", 20);
-	public KeyBinding keyBindCommand = new KeyBinding("key.command", Keyboard.KEY_SLASH);
 	public KeyBinding keyBindSneak = new KeyBinding("key.sneak", 42);
 	public KeyBinding field_35382_v = new KeyBinding("key.attack", -100);
 	public KeyBinding field_35381_w = new KeyBinding("key.use", -99);
 	public KeyBinding field_35384_x = new KeyBinding("key.playerlist", 15);
 	public KeyBinding field_35383_y = new KeyBinding("key.pickItem", -98);
 	public KeyBinding keyBindZoom = new KeyBinding("eaglercraft.key.zoom", Keyboard.KEY_C);
+	public KeyBinding keyBindCommand = new KeyBinding("eaglercraft.key.command", Keyboard.KEY_SLASH);
 	public KeyBinding[] keyBindings = new KeyBinding[]{this.field_35382_v, this.field_35381_w, this.keyBindForward, this.keyBindLeft, this.keyBindBack, this.keyBindRight, this.keyBindJump, this.keyBindSneak, this.keyBindDrop, this.keyBindInventory, this.keyBindChat, this.field_35384_x, this.field_35383_y, this.keyBindZoom};
 	protected Minecraft mc;
 	private VFile2 optionsFile;
@@ -58,7 +57,10 @@ public class GameSettings {
 
 	public boolean showFramerate = true;
 	public boolean showCoords = true;
+	public boolean vsync = true;
+	public boolean fancyGrass = true;
 	public boolean seenAck = false;
+	public boolean farlandsPatch = false;
 
 	public GameSettings(Minecraft var1, VFile2 var2) {
 		this.mc = var1;
@@ -76,7 +78,8 @@ public class GameSettings {
 
 	public String getOptionDisplayString(int var1) {
 		int var2 = this.keyBindings[var1].keyCode;
-		return var2 < 0 ? StatCollector.translateToLocalFormatted("key.mouseButton", new Object[]{Integer.valueOf(var2 + 101)}) : Keyboard.getKeyName(var2);
+		int var3 = Integer.valueOf(var2 + 101);
+		return var2 < 0 ? StatCollector.translateToLocalFormatted("key.mouseButton", new Object[]{var3}) : Keyboard.getKeyName(var2);
 	}
 
 	public void setKeyBinding(int var1, int var2) {
@@ -157,6 +160,11 @@ public class GameSettings {
 			this.vsync = !this.vsync;
 		}
 
+		if(var1 == EnumOptions.FANCY_GRASS) {
+			this.fancyGrass = !this.fancyGrass;
+			this.mc.renderGlobal.loadRenderers();
+		}
+
 		this.saveOptions();
 	}
 
@@ -180,6 +188,8 @@ public class GameSettings {
 			return this.showCoords;
 		case 7:
 			return this.vsync;
+		case 8:
+			return this.fancyGrass;
 		default:
 			return false;
 		}
@@ -294,6 +304,10 @@ public class GameSettings {
 						this.vsync = Boolean.parseBoolean(var3[1]);
 					}
 
+					if(var3[0].equals("fancyGrass")) {
+						this.fancyGrass = Boolean.parseBoolean(var3[1]);
+					}
+
 					for(int var4 = 0; var4 < this.keyBindings.length; ++var4) {
 						if(var3[0].equals("key_" + this.keyBindings[var4].keyDescription)) {
 							this.keyBindings[var4].keyCode = Integer.parseInt(var3[1]);
@@ -336,6 +350,7 @@ public class GameSettings {
 			var1.println("showFramerate:" + this.showFramerate);
 			var1.println("showCoords:" + this.showCoords);
 			var1.println("vsync:" + this.vsync);
+			var1.println("fancyGrass:" + this.fancyGrass);
 
 			for(int var2 = 0; var2 < this.keyBindings.length; ++var2) {
 				var1.println("key_" + this.keyBindings[var2].keyDescription + ":" + this.keyBindings[var2].keyCode);

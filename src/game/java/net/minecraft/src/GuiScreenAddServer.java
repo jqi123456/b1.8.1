@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.input.Keyboard;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 
 public class GuiScreenAddServer extends GuiScreen {
@@ -43,7 +44,7 @@ public class GuiScreenAddServer extends GuiScreen {
 		this.field_35360_b = new GuiTextField(this, this.fontRenderer, this.width / 2 - 100, 116, 200, 20, this.field_35359_d.field_35793_b);
 		this.field_35360_b.setMaxStringLength(128);
 		this.controlList.add(this.hideAddress = new GuiButton(2, this.width / 2 - 100, 148, 200, 20,
-				translate.translateKey("eaglercraft.addServer.hideAddress") + ": "
+				I18n.format("addServer.hideAddress") + ": "
 						+ translate.translateKey(this.field_35359_d.hideAddress ? "gui.yes" : "gui.no")));
 		((GuiButton)this.controlList.get(0)).enabled = this.field_35360_b.getText().length() > 0 && this.field_35361_c.getText().length() > 0;
 	}
@@ -62,8 +63,7 @@ public class GuiScreenAddServer extends GuiScreen {
 				this.field_35362_a.deleteWorld(true, 0);
 			} else if(var1.id == 2) {
 				this.field_35359_d.hideAddress = !this.field_35359_d.hideAddress;
-				this.hideAddress.displayString = translate
-						.translateKey( "eaglercraft.addServer.hideAddress")
+				this.hideAddress.displayString = I18n.format( "addServer.hideAddress")
 						+ ": " + translate.translateKey(this.field_35359_d.hideAddress ? "gui.yes" : "gui.no");
 			}
 
@@ -104,9 +104,9 @@ public class GuiScreenAddServer extends GuiScreen {
 		this.drawString(this.fontRenderer, var4.translateKey("addServer.enterName"), this.width / 2 - 100, 63, 10526880);
 		this.drawString(this.fontRenderer, var4.translateKey("addServer.enterIp"), this.width / 2 - 100, 104, 10526880);
 		if (EagRuntime.requireSSL()) {
-			this.drawCenteredString(this.fontRenderer, translate.translateKey("eaglercraft.addServer.SSLWarn1"), this.width / 2, 174,
+			this.drawCenteredString(this.fontRenderer, I18n.format("addServer.SSLWarn1"), this.width / 2, 174,
 					0xccccff);
-			this.drawCenteredString(this.fontRenderer, translate.translateKey("eaglercraft.addServer.SSLWarn2"), this.width / 2, 186,
+			this.drawCenteredString(this.fontRenderer, I18n.format("addServer.SSLWarn2"), this.width / 2, 186,
 					0xccccff);
 		}
 		this.field_35361_c.drawTextBox();

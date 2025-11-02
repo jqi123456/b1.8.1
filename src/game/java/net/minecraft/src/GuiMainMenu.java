@@ -6,12 +6,18 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import net.lax1dude.eaglercraft.Random;
+import net.lax1dude.eaglercraft.internal.EnumPlatformType;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import dev.colbster937.eaglercraft.EaglercraftVersion;
+import dev.colbster937.eaglercraft.gui.GuiScreenInfo;
+import dev.colbster937.eaglercraft.gui.GuiScreenInfo.TextLine;
 import dev.colbster937.eaglercraft.gui.GuiScreenYap;
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.opengl.ImageData;
 import net.lax1dude.eaglercraft.profile.GuiScreenEditProfile;
@@ -86,7 +92,7 @@ public class GuiMainMenu extends GuiScreen {
 			this.controlList.add(new GuiButton(0, this.width / 2 - 100, var4 + 72, var2.translateKey("menu.options")));
 		} else {
 			this.controlList.add(new GuiButton(0, this.width / 2 - 100, var4 + 72 + 12, 98, 20, var2.translateKey("menu.options")));
-			this.controlList.add(new GuiButton(4, this.width / 2 + 2, var4 + 72 + 12, 98, 20, var2.translateKey("eaglercraft.menu.editProfile")));
+			this.controlList.add(new GuiButton(4, this.width / 2 + 2, var4 + 72 + 12, 98, 20, I18n.format("menu.editProfile")));
 		}
 
 		if(this.mc.session == null) {

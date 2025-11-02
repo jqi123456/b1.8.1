@@ -188,7 +188,7 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 		while(var5.hasNext()) {
 			VFile2 var6 = (VFile2)var5.next();
 			VFile2[] var7 = var6.listFiles(false).toArray(new VFile2[0]);
-			func_22179_a(var7);
+			func_22179_a(var6, var7);
 			var6.delete();
 			++var2;
 			int var8 = (int)Math.round(100.0D * (double)var2 / (double)var3);

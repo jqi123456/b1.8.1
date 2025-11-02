@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.lax1dude.eaglercraft.Random;
+import net.minecraft.client.Minecraft;
 
 public class NoiseGeneratorOctaves extends NoiseGenerator {
 	private NoiseGeneratorPerlin[] generatorCollection;
@@ -47,8 +48,10 @@ public class NoiseGeneratorOctaves extends NoiseGenerator {
 			long var25 = MathHelper.func_35599_c(var21);
 			var17 -= (double)var23;
 			var21 -= (double)var25;
-			var23 %= 16777216L;
-			var25 %= 16777216L;
+			if (Minecraft.getMinecraft().gameSettings.farlandsPatch) {
+				var23 %= 16777216L;
+				var25 %= 16777216L;
+			}
 			var17 += (double)var23;
 			var21 += (double)var25;
 			this.generatorCollection[var16].func_805_a(var1, var17, var19, var21, var5, var6, var7, var8 * var27, var10 * var27, var12 * var27, var27);

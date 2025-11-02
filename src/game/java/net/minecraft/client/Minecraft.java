@@ -21,6 +21,7 @@ import net.minecraft.src.EntityRenderer;
 import net.minecraft.src.EnumMovingObjectType;
 import net.minecraft.src.EnumOS2;
 import net.minecraft.src.EnumOptions;
+import net.minecraft.src.EnumWorldType;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GLAllocation;
 import net.minecraft.src.GameSettings;
@@ -92,7 +93,9 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
+import dev.colbster937.eaglercraft.FormattingCodes;
 import dev.colbster937.eaglercraft.SingleplayerCommands;
+import dev.colbster937.eaglercraft.utils.I18n;
 import dev.colbster937.eaglercraft.utils.SaveUtils;
 import dev.colbster937.eaglercraft.utils.StringPrintStream;
 
@@ -167,7 +170,11 @@ public class Minecraft implements Runnable {
 	}
 
 	public void updateDisplay() {
-		if (Display.isVSyncSupported()) Display.setVSync(true);
+		if (Display.isVSyncSupported()) {
+			if (this.theWorld == null || this.currentScreen != null) Display.setVSync(true);
+			else Display.setVSync(this.gameSettings.vsync);
+		}
+		Display.update();
 		if (Display.wasResized()) this.resize(Display.getWidth(), Display.getHeight());
 	}
 
@@ -435,15 +442,11 @@ public class Minecraft implements Runnable {
 
 					long var24 = System.nanoTime() - var23;
 					this.checkGLError("Pre render");
-					RenderBlocks.fancyGrass = this.gameSettings.fancyGraphics;
+					RenderBlocks.fancyGrass = this.gameSettings.fancyGrass;
 					this.sndManager.func_338_a(this.thePlayer, this.timer.renderPartialTicks);
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					if(this.theWorld != null) {
 						this.theWorld.updatingLighting();
-					}
-
-					if(!Keyboard.isKeyDown(Keyboard.KEY_F7)) {
-						Display.update();
 					}
 
 					if(this.thePlayer != null && this.thePlayer.isEntityInsideOpaqueBlock()) {
@@ -469,9 +472,6 @@ public class Minecraft implements Runnable {
 					}
 
 					this.guiAchievement.updateAchievementWindow();
-					if(Keyboard.isKeyDown(Keyboard.KEY_F7)) {
-						Display.update();
-					}
 
 					this.screenshotListener();
 					this.updateDisplay();
@@ -788,9 +788,8 @@ public class Minecraft implements Runnable {
 					if (thePlayer != null) {
 						this.displayedNotice = true;
 						if (!isMultiplayerWorld()) {
-							StringTranslate translate = StringTranslate.getInstance();
-							ingameGUI.addChatMessage("§c" + translate.translateKey("eaglercraft.lagNotice1"));
-							ingameGUI.addChatMessage("§c" + translate.translateKey("eaglercraft.lagNotice2"));
+							ingameGUI.addChatMessage(FormattingCodes.RED + I18n.format("lagNotice1"));
+							ingameGUI.addChatMessage(FormattingCodes.RED + I18n.format("lagNotice2"));
 						}
 					}
 				}
@@ -878,6 +877,11 @@ public class Minecraft implements Runnable {
 
 							while(this.gameSettings.keyBindChat.func_35962_c()) {
 								this.displayGuiScreen(new GuiChat());
+							}
+
+							while(this.gameSettings.keyBindCommand.func_35962_c()) {
+								this.displayGuiScreen(new GuiChat());
+								if (this.currentScreen instanceof GuiChat) ((GuiChat) this.currentScreen).setMessage("/");
 							}
 
 							if(this.thePlayer.func_35196_Z()) {

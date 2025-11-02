@@ -4,16 +4,15 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.internal.EnumEaglerConnectionState;
 import net.lax1dude.eaglercraft.internal.IWebSocketClient;
 import net.lax1dude.eaglercraft.internal.IWebSocketFrame;
 import net.minecraft.src.ServerNBTStorage;
-import net.minecraft.src.StringTranslate;
 
 public class ServerMOTDDispatcher {
   private final ServerNBTStorage server;
   private final IWebSocketClient webSocket;
-  private final StringTranslate translate;
 
   private long timer = 0L;
   private boolean hasSentAccept = false;
@@ -23,13 +22,12 @@ public class ServerMOTDDispatcher {
     this.server = server;
     this.webSocket = webSocket;
     this.server.pingSentTime = System.currentTimeMillis();
-    this.translate = StringTranslate.getInstance();
   }
 
   public void update() {
     if (this.timer >= 150 || this.webSocket.getState() == EnumEaglerConnectionState.FAILED) {
       this.server.field_35792_e = -1L;
-      this.server.field_35791_d = "\u00a74" + translate.translateKey("eaglercraft.cantReachServer");
+      this.server.field_35791_d = "\u00a74" + I18n.format("cantReachServer");
       finish();
       return;
     }

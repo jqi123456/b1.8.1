@@ -1,8 +1,5 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
@@ -248,10 +245,8 @@ public class GuiMultiplayer extends GuiScreen {
 	}
 
 	private void func_35330_a(ServerNBTStorage var1) {
-		// this.mc.displayGuiScreen(new GuiConnecting(this.mc, this,
-		// var1.field_35793_b));
-		this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("eaglercraft.noMultiplayer", 0xFFCCCC),
-				new TextLine(""), new TextLine("eaglercraft.willAdd", 0x888888)));
+		if (false) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
+		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", 0xFFCCCC, "menu.multiplayer"), new TextLine(""), new TextLine("willAdd", 0x888888)));
 	}
 
 	protected void func_35325_a(String var1, int var2, int var3) {

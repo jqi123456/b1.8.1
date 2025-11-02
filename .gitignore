@@ -6,10 +6,9 @@
 **/gradlew
 **/gradlew.bat
 **/build/
-**/bin/
-**/mcp/*
+**/client/
+**/mcp/
 **/_list.json
 !**/mcp/decompile.*
-!**/gradle/local-libs/**
-!**/gradle/jars/**
+!**/gradle/local-libs/
 !**/gradle/libs.versions.toml

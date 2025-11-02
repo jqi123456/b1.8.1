@@ -29,7 +29,8 @@ public class SaveUtils {
       String path = f.getPath();
       if (path != null && path.startsWith(base)) {
         String rel = path.substring(base.length());
-        if (rel.startsWith("/")) rel = rel.substring(1);
+        if (rel.startsWith("/"))
+          rel = rel.substring(1);
         if (!MathHelper.stringNullOrLengthZero(rel)) {
           int slash = rel.indexOf('/');
           if (slash >= 0) {
@@ -66,8 +67,10 @@ public class SaveUtils {
       for (int i = 0; i < total; ++i) {
         VFile2 f = all.get(i);
         String relPath = f.getPath().substring(basePath.length());
-        if (relPath.startsWith("/")) relPath = relPath.substring(1);
-        if (MathHelper.stringNullOrLengthZero(relPath)) continue;
+        if (relPath.startsWith("/"))
+          relPath = relPath.substring(1);
+        if (MathHelper.stringNullOrLengthZero(relPath))
+          continue;
 
         byte[] data;
         try {
@@ -76,13 +79,14 @@ public class SaveUtils {
           data = null;
         }
         if (data != null) {
-          if (progress != null) progress.displayLoadingString("Exporting: " + relPath);
+          if (progress != null)
+            progress.displayLoadingString("Exporting: " + relPath);
           zos.putNextEntry(new ZipEntry(relPath));
           zos.write(data);
           zos.closeEntry();
         }
         if (progress != null) {
-          progress.setLoadingProgress((int)((i + 1L) * 100L / (total == 0 ? 1 : total)));
+          progress.setLoadingProgress((int) ((i + 1L) * 100L / (total == 0 ? 1 : total)));
         }
       }
 
@@ -132,10 +136,12 @@ public class SaveUtils {
         if (name.endsWith("/")) {
           zis.closeEntry();
           processed++;
-          if (progress != null) progress.setLoadingProgress(processed % 100);
+          if (progress != null)
+            progress.setLoadingProgress(processed % 100);
           continue;
         }
-        if (progress != null) progress.displayLoadingString("Importing: " + name);
+        if (progress != null)
+          progress.displayLoadingString("Importing: " + name);
         VFile2 out = new VFile2(targetDir, name);
         OutputStream os;
         try {
@@ -149,7 +155,8 @@ public class SaveUtils {
         }
         zis.closeEntry();
         processed++;
-        if (progress != null) progress.setLoadingProgress(processed % 100);
+        if (progress != null)
+          progress.setLoadingProgress(processed % 100);
       }
       zis.close();
       is.close();

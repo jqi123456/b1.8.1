@@ -111,7 +111,8 @@ public class GuiScreenYap extends GuiScreen {
 
   @Override
   public void updateScreen() {
-    if (this.renderParent) this.parent.updateScreen();
+    if (this.renderParent)
+      this.parent.updateScreen();
     if (Mouse.isButtonDown(0) && dragstart > 0) {
       int trackHeight = 193;
       scrollPosition = (mousey - dragstart) * this.ackLines.size() / trackHeight + dragstartI;

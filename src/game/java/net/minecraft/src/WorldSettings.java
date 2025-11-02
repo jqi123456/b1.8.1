@@ -4,11 +4,17 @@ public final class WorldSettings {
 	private final long field_35523_a;
 	private final int field_35521_b;
 	private final boolean field_35522_c;
+	private final EnumWorldType worldType;
 
 	public WorldSettings(long var1, int var3, boolean var4) {
+		this(var1, var3, var4, EnumWorldType.NORMAL);
+	}
+
+	public WorldSettings(long var1, int var3, boolean var4, EnumWorldType var5) {
 		this.field_35523_a = var1;
 		this.field_35521_b = var3;
 		this.field_35522_c = var4;
+		this.worldType = var5;
 	}
 
 	public long func_35518_a() {
@@ -21,5 +27,9 @@ public final class WorldSettings {
 
 	public boolean func_35520_c() {
 		return this.field_35522_c;
+	}
+
+	public EnumWorldType getWorldType() {
+		return this.worldType;
 	}
 }

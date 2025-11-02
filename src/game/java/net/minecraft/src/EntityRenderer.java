@@ -574,30 +574,9 @@ public class EntityRenderer {
 			int var15 = var13.getScaledHeight();
 			int var16 = Mouse.getX() * var14 / this.mc.displayWidth;
 			int var17 = var15 - Mouse.getY() * var15 / this.mc.displayHeight - 1;
-			short var7 = 200;
-			if(this.mc.gameSettings.limitFramerate == 1) {
-				var7 = 120;
-			}
 
-			if(this.mc.gameSettings.limitFramerate == 2) {
-				var7 = 40;
-			}
-
-			long var8;
 			if(this.mc.theWorld != null) {
-				if(this.mc.gameSettings.limitFramerate == 0) {
-					this.renderWorld(var1, 0L);
-				} else {
-					this.renderWorld(var1, this.renderEndNanoTime + (long)(1000000000 / var7));
-				}
-
-				if(this.mc.gameSettings.limitFramerate == 2) {
-					var8 = (this.renderEndNanoTime + (long)(1000000000 / var7) - System.nanoTime()) / 1000000L;
-					/* if(var8 > 0L && var8 < 500L) {
-						EagUtils.sleep(var8);
-					} */
-				}
-
+				this.renderWorld(var1, 0L);
 				this.renderEndNanoTime = System.nanoTime();
 				if(!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null) {
 					this.mc.ingameGUI.renderGameOverlay(var1, this.mc.currentScreen != null, var16, var17);
@@ -609,16 +588,6 @@ public class EntityRenderer {
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
 				GL11.glLoadIdentity();
 				this.func_905_b();
-				if(this.mc.gameSettings.limitFramerate == 2) {
-					var8 = (this.renderEndNanoTime + (long)(1000000000 / var7) - System.nanoTime()) / 1000000L;
-					if(var8 < 0L) {
-						var8 += 10L;
-					}
-
-					/* if(var8 > 0L && var8 < 500L) {
-						EagUtils.sleep(var8);
-					} */
-				}
 
 				this.renderEndNanoTime = System.nanoTime();
 			}
@@ -1076,7 +1045,7 @@ public class EntityRenderer {
 		this.fogColorRed *= var19;
 		this.fogColorGreen *= var19;
 		this.fogColorBlue *= var19;
-		double var13 = (var3.lastTickPosY + (var3.posY - var3.lastTickPosY) * (double)var1) / 32.0D;
+		double var13 = (var3.lastTickPosY + (var3.posY - var3.lastTickPosY) * (double)var1) / var2.worldProvider.func_46065_j();
 		if(var13 < 1.0D) {
 			if(var13 < 0.0D) {
 				var13 = 0.0D;
@@ -1102,6 +1071,8 @@ public class EntityRenderer {
 
 	private void setupFog(int var1, float var2) {
 		EntityLiving var3 = this.mc.renderViewEntity;
+		boolean var11 = false;
+		if (var3 instanceof EntityPlayer) var11 = ((EntityPlayer) var3).field_35212_aW.field_35756_d;
 		if(var1 == 999) {
 			GL11.glFog(GL11.GL_FOG_COLOR, this.func_908_a(0.0F, 0.0F, 0.0F, 1.0F));
 			GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
@@ -1154,20 +1125,22 @@ public class EntityRenderer {
 				}
 			} else {
 				var4 = this.farPlaneDistance;
-				double var10 = (double)((var3.func_35115_a(var2) & 15728640) >> 20) / 16.0D + (var3.lastTickPosY + (var3.posY - var3.lastTickPosY) * (double)var2 + 4.0D) / 32.0D;
-				if(var10 < 1.0D) {
-					if(var10 < 0.0D) {
-						var10 = 0.0D;
-					}
+				if(this.mc.theWorld.worldProvider.func_46064_i() && !var11) {
+					double var10 = (double)((var3.func_35115_a(var2) & 15728640) >> 20) / 16.0D + (var3.lastTickPosY + (var3.posY - var3.lastTickPosY) * (double)var2 + 4.0D) / 32.0D;
+					if(var10 < 1.0D) {
+						if(var10 < 0.0D) {
+							var10 = 0.0D;
+						}
 
-					var10 *= var10;
-					var7 = 100.0F * (float)var10;
-					if(var7 < 5.0F) {
-						var7 = 5.0F;
-					}
+						var10 *= var10;
+						var7 = 100.0F * (float)var10;
+						if(var7 < 5.0F) {
+							var7 = 5.0F;
+						}
 
-					if(var4 > var7) {
-						var4 = var7;
+						if(var4 > var7) {
+							var4 = var7;
+						}
 					}
 				}
 

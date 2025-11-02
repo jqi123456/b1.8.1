@@ -1,18 +1,17 @@
 package dev.colbster937.eaglercraft.gui;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiMainMenu;
 import net.minecraft.src.GuiScreen;
-import net.minecraft.src.StringTranslate;
 
 public class GuiScreenInfo extends GuiScreen {
-  private final StringTranslate translate;
+
   private final GuiScreen parent;
   private final TextLine[] lines;
   private final boolean mm;
 
   public GuiScreenInfo(GuiScreen parent, TextLine... lines) {
-    this.translate = StringTranslate.getInstance();
     this.parent = parent;
     this.lines = lines;
     this.mm = parent == null || parent instanceof GuiMainMenu;
@@ -25,7 +24,7 @@ public class GuiScreenInfo extends GuiScreen {
   @Override
   public void initGui() {
     controlList.add(new GuiButton(0, (width - 200) / 2, height / 4 + 132,
-        translate.translateKey(this.mm ? "gui.toMenu" : "gui.done")));
+        I18n.format(this.mm ? "gui.toMenu" : "gui.done")));
   }
 
   @Override
@@ -33,7 +32,7 @@ public class GuiScreenInfo extends GuiScreen {
     drawDefaultBackground();
     for (int i = 0; i < lines.length; i++) {
       TextLine line = lines[i];
-      drawCenteredString(fontRenderer, translate.translateKey(line.text), width / 2, height / 2 - 50 + (i * 10),
+      drawCenteredString(fontRenderer, I18n.format(line.text), width / 2, height / 2 - 50 + (i * 10),
           line.color);
     }
     super.drawScreen(mx, my, f);
@@ -54,9 +53,13 @@ public class GuiScreenInfo extends GuiScreen {
     private final String text;
     private final int color;
 
-    public TextLine(String text, int color) {
-      this.text = text;
+    public TextLine(String text, int color, Object... args) {
       this.color = color;
+      this.text = I18n.format(text, args);
+    }
+
+    public TextLine(String text, int color) {
+      this(text, color, new Object[] {});
     }
 
     public TextLine(String text) {

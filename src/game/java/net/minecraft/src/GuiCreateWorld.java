@@ -18,6 +18,7 @@ public class GuiCreateWorld extends GuiScreen {
 	private GuiButton field_35371_t;
 	private String field_35370_u;
 	private String field_35369_v;
+	private int worldType = 0;
 
 	public GuiCreateWorld(GuiScreen var1) {
 		this.parentGuiScreen = var1;
@@ -40,7 +41,7 @@ public class GuiCreateWorld extends GuiScreen {
 		this.field_35372_s.enabled2 = false;
 		this.controlList.add(this.field_35371_t = new GuiButton(5, this.width / 2 + 5, 100, 150, 20, var1.translateKey("selectWorld.mapType")));
 		this.field_35371_t.enabled2 = false;
-		this.field_35371_t.enabled = false;
+		// this.field_35371_t.enabled = false;
 		this.textboxWorldName = new GuiTextField(this, this.fontRenderer, this.width / 2 - 100, 60, 200, 20, var1.translateKey("selectWorld.newWorld"));
 		this.textboxWorldName.isFocused = true;
 		this.textboxWorldName.setMaxStringLength(32);
@@ -78,7 +79,7 @@ public class GuiCreateWorld extends GuiScreen {
 			this.field_35372_s.displayString = this.field_35372_s.displayString + var1.translateKey("options.off");
 		}
 
-		this.field_35371_t.displayString = var1.translateKey("selectWorld.mapType") + " " + var1.translateKey("selectWorld.mapType.normal");
+		this.field_35371_t.displayString = var1.translateKey("selectWorld.mapType") + " " + var1.translateKey(EnumWorldType.values()[this.worldType].func_46136_a());
 	}
 
 	public static String generateUnusedFolderName(ISaveFormat var0, String var1) {
@@ -125,7 +126,7 @@ public class GuiCreateWorld extends GuiScreen {
 					this.mc.playerController = new PlayerControllerSP(this.mc);
 				}
 
-				this.mc.startWorld(this.folderName, this.textboxWorldName.getText(), new WorldSettings(var2, var9, this.field_35365_g));
+				this.mc.startWorld(this.folderName, this.textboxWorldName.getText(), new WorldSettings(var2, var9, this.field_35365_g, EnumWorldType.values()[this.worldType]));
 				this.mc.displayGuiScreen((GuiScreen)null);
 			} else if(var1.id == 3) {
 				this.field_35368_i = !this.field_35368_i;
@@ -150,6 +151,13 @@ public class GuiCreateWorld extends GuiScreen {
 				this.func_35363_g();
 			} else if(var1.id == 4) {
 				this.field_35365_g = !this.field_35365_g;
+				this.func_35363_g();
+			} else if(var1.id == 5) {
+				++this.worldType;
+				if(this.worldType >= EnumWorldType.values().length) {
+					this.worldType = 0;
+				}
+
 				this.func_35363_g();
 			}
 

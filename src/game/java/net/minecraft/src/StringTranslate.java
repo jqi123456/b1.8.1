@@ -36,4 +36,8 @@ public class StringTranslate {
 	public String translateNamedKey(String var1) {
 		return this.translateTable.getProperty(var1 + ".name", "");
 	}
+
+	public boolean hasTranslateKey(String var0) {
+		return this.translateTable.containsKey(var0);
+	}
 }

@@ -2,6 +2,9 @@ package net.minecraft.src;
 
 import org.lwjgl.input.Keyboard;
 
+import dev.colbster937.eaglercraft.utils.I18n;
+import dev.colbster937.eaglercraft.utils.ScuffedUtils;
+
 public class GuiChat extends GuiScreen {
 	protected String message = "";
 	private int updateCounter = 0;
@@ -9,7 +12,7 @@ public class GuiChat extends GuiScreen {
 
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
-		if (!(this instanceof GuiSleepMP)) this.controlList.add(new GuiButton(0, this.width - 100, 3, 97, 20, StringTranslate.getInstance().translateKey("eaglercraft.chat.exit")));
+		if (!(this instanceof GuiSleepMP)) this.controlList.add(new GuiButton(0, this.width - 100, 3, 97, 20, I18n.format("chat.exit")));
 	}
 
 	public void onGuiClosed() {
@@ -30,6 +33,12 @@ public class GuiChat extends GuiScreen {
 				if(!this.mc.lineIsCommand(var4)) {
 					this.mc.thePlayer.sendChatMessage(var4);
 				}
+			} else if (var2 == Keyboard.KEY_V && ScuffedUtils.isCtrlKeyDown()) {
+				String clip = getClipboardString();
+				if (clip == null) clip = "";
+				this.message += clip;
+				if (this.message.length() > 100) this.message.subSequence(0, 100);
+				return;
 			}
 
 			this.mc.displayGuiScreen((GuiScreen)null);
@@ -75,6 +84,10 @@ public class GuiChat extends GuiScreen {
 			this.mc.displayGuiScreen(null);
 			this.mc.setIngameFocus();
 		}
+	}
+
+	public void setMessage(String var0) {
+		this.message = var0;
 	}
 
 	public boolean doesGuiPauseGame() {

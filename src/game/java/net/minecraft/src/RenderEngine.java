@@ -42,6 +42,7 @@ public class RenderEngine {
 		TexturePackBase var2 = this.texturePack.selectedTexturePack;
 		int[] var3 = (int[])this.field_28151_c.get(var1);
 		if(var3 != null) {
+			System.out.println("exists");
 			return var3;
 		} else {
 			try {
@@ -83,7 +84,7 @@ public class RenderEngine {
 		int var3 = var1.getHeight();
 		int[] var4 = new int[var2 * var3];
 		var1.getRGB(0, 0, var2, var3, var4, 0, var2);
-		return var4;
+		return ImageData.swapRB(var4);
 	}
 
 	private int[] getImageContents(ImageData var1, int[] var2) {

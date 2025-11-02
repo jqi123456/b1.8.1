@@ -597,7 +597,7 @@ public class RenderGlobal implements IWorldAccess {
 			GL11.glPopMatrix();
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glColor3f(0.0F, 0.0F, 0.0F);
-			double var18 = this.mc.thePlayer.getPosition(var1).yCoord - 64.0D;
+			double var18 = this.mc.thePlayer.getPosition(var1).yCoord - this.worldObj.func_46068_G();
 			if(var18 < 0.0D) {
 				GL11.glPushMatrix();
 				GL11.glTranslatef(0.0F, 12.0F, 0.0F);

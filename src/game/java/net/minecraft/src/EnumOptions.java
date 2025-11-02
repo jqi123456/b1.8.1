@@ -10,14 +10,14 @@ public enum EnumOptions {
 	RENDER_DISTANCE("options.renderDistance", false, false),
 	VIEW_BOBBING("options.viewBobbing", false, true),
 	ANAGLYPH("options.anaglyph", false, true),
-	ADVANCED_OPENGL("options.advancedOpengl", false, true),
-	FRAMERATE_LIMIT("options.framerateLimit", false, false),
 	DIFFICULTY("options.difficulty", false, false),
 	GRAPHICS("options.graphics", false, false),
 	AMBIENT_OCCLUSION("options.ao", false, true),
 	GUI_SCALE("options.guiScale", false, false),
 	SHOW_FRAMERATE("eaglercraft.options.showFramerate", false, true),
-	SHOW_COORDS("eaglercraft.options.showCoords", false, true);
+	SHOW_COORDS("eaglercraft.options.showCoords", false, true),
+	VSYNC("eaglercraft.options.vsync", false, true),
+	FANCY_GRASS("eaglercraft.options.fancyGrass", false, true);
 
 	private final boolean enumFloat;
 	private final boolean enumBoolean;

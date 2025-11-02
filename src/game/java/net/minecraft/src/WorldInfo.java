@@ -21,8 +21,16 @@ public class WorldInfo {
 	private int field_35920_p;
 	private boolean field_35919_q;
 
+	private EnumWorldType worldType = EnumWorldType.NORMAL;
+
 	public WorldInfo(NBTTagCompound var1) {
 		this.randomSeed = var1.getLong("RandomSeed");
+
+		if(var1.hasKey("generatorName")) {
+			this.worldType = EnumWorldType.func_46135_a(var1.getString("generatorName"));
+			if (this.worldType == null) this.worldType = EnumWorldType.NORMAL;
+		}
+
 		this.field_35920_p = var1.getInteger("GameType");
 		if(var1.hasKey("MapFeatures")) {
 			this.field_35919_q = var1.getBoolean("MapFeatures");
@@ -54,10 +62,12 @@ public class WorldInfo {
 		this.field_35920_p = var1.func_35519_b();
 		this.field_35919_q = var1.func_35520_c();
 		this.levelName = var2;
+		this.worldType = var1.getWorldType();
 	}
 
 	public WorldInfo(WorldInfo var1) {
 		this.randomSeed = var1.randomSeed;
+		this.worldType = var1.worldType;
 		this.field_35920_p = var1.field_35920_p;
 		this.field_35919_q = var1.field_35919_q;
 		this.spawnX = var1.spawnX;
@@ -101,6 +111,7 @@ public class WorldInfo {
 
 	private void updateTagCompound(NBTTagCompound var1, NBTTagCompound var2) {
 		var1.setLong("RandomSeed", this.randomSeed);
+		var1.setString("generatorName", this.worldType.name());
 		var1.setInteger("GameType", this.field_35920_p);
 		var1.setBoolean("MapFeatures", this.field_35919_q);
 		var1.setInteger("SpawnX", this.spawnX);
@@ -241,5 +252,9 @@ public class WorldInfo {
 
 	public boolean func_35917_r() {
 		return this.field_35919_q;
+	}
+
+	public EnumWorldType getWorldType() {
+		return this.worldType;
 	}
 }

@@ -241,7 +241,7 @@ public class World implements IBlockAccess {
 		Random var3 = new Random(this.getRandomSeed());
 		ChunkPosition var4 = var1.func_35556_a(0, 0, 256, var2, var3);
 		int var5 = 0;
-		byte var6 = 64;
+		int var6 = this.worldProvider.func_46066_g();
 		int var7 = 0;
 		if(var4 != null) {
 			var5 = var4.x;
@@ -2264,7 +2264,7 @@ public class World implements IBlockAccess {
 			int var8 = var2 + this.rand.nextInt(var4) - this.rand.nextInt(var4);
 			int var9 = var3 + this.rand.nextInt(var4) - this.rand.nextInt(var4);
 			int var10 = this.getBlockId(var7, var8, var9);
-			if(this.rand.nextInt(8) > var8 && var10 == 0) {
+			if(this.rand.nextInt(8) > var8 && var10 == 0 && this.worldProvider.func_46064_i()) {
 				this.spawnParticle("depthsuspend", (double)((float)var7 + this.rand.nextFloat()), (double)((float)var8 + this.rand.nextFloat()), (double)((float)var9 + this.rand.nextFloat()), 0.0D, 0.0D, 0.0D);
 			}
 
@@ -2738,5 +2738,9 @@ public class World implements IBlockAccess {
 	}
 
 	public void scheduleLightingUpdate(EnumSkyBlock var1, int var2, int var3, int var4, int var5, int var6, int var7) {
+	}
+
+	public double func_46068_G() {
+		return this.worldInfo.getWorldType() == EnumWorldType.FLAT ? 0.0D : 64.0D;
 	}
 }

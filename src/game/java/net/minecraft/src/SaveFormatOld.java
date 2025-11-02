@@ -91,14 +91,15 @@ public class SaveFormatOld implements ISaveFormat {
 		VFile2 var2 = new VFile2(this.field_22180_a, var1);
 		VFile2 var3 = new VFile2(var2, "level.dat");
 		if(var3.exists()) {
-			func_22179_a(var2.listFiles(true).toArray(new VFile2[0]));
+			func_22179_a(var2, var2.listFiles(true).toArray(new VFile2[0]));
 			var2.delete();
 		}
 	}
 
-	protected static void func_22179_a(VFile2[] var0) {
+	protected static void func_22179_a(VFile2 parent, VFile2[] var0) {
 		for(int var1 = 0; var1 < var0.length; ++var1) {
-			var0[var1].delete();
+			VFile2 file = var0[var1];
+			if (file.getPath().startsWith(parent.getPath() + "/")) file.delete();
 		}
 
 	}

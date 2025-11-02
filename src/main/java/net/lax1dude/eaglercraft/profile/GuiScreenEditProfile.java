@@ -2,6 +2,7 @@ package net.lax1dude.eaglercraft.profile;
 
 import org.lwjgl.opengl.GL11;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.Keyboard;
 import net.lax1dude.eaglercraft.Mouse;
@@ -14,11 +15,9 @@ import net.minecraft.src.GuiScreen;
 import net.minecraft.src.GuiTextField;
 import net.minecraft.src.ModelBiped;
 import net.minecraft.src.RenderHelper;
-import net.minecraft.src.StringTranslate;
 import net.peyton.eagler.minecraft.TextureLocation;
 
 public class GuiScreenEditProfile extends GuiScreen {
-	
 	private GuiScreen parent;
 	private GuiTextField username;
 	
@@ -93,32 +92,26 @@ public class GuiScreenEditProfile extends GuiScreen {
 		
 		this.dropDownOptions = EaglerProfile.concatArrays(n, defaultOptions);
 	}
-	
-	private GuiButton button0, button1, button2, button10, button11, button12;
 
 	public void initGui() {
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
-		StringTranslate var1 = StringTranslate.getInstance();
-		this.screenTitle = var1.translateKey("eaglercraft.profile.title");
+		this.screenTitle = I18n.format("profile.title");
 		this.username = new GuiTextField(this, this.fontRenderer, this.width / 2 - 20 + 1, this.height / 6 + 24 + 1 + trans, 138, 20, EaglerProfile.getName());
 		this.username.isEnabled = true;
 		selectedSlot = EaglerProfile.presetSkinId == -1 ? EaglerProfile.customSkinId : (EaglerProfile.presetSkinId + EaglerProfile.skins.size());
-		//this.buttonList.add(new GuiButton(0, this.width / 2 - 100, 140, "eeeee"));
-		this.controlList.add(button0 = new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, var1.translateKey("gui.done")));
-		//this.controlList.add(button1 = new GuiButton(2, this.width / 2 - 21, this.height / 6 + 110, 71, 20, var1.translateKey("eaglercraft.profile.addSkin")));
-		//this.controlList.add(button2 = new GuiButton(3, this.width / 2 - 21 + 71, this.height / 6 + 110, 72, 20, var1.translateKey("eaglercraft.profile.clearSkin")));
-		//this.buttonList.add(new GuiButton(200, this.width / 2, this.height / 6 + 72, 150, 20, var1.translateKey("gui.done")));
+		this.controlList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done")));
+		//this.controlList.add(new GuiButton(2, this.width / 2 - 21, this.height / 6 + 110, 71, 20, I18n.format("profile.addSkin")));
+		//this.controlList.add(new GuiButton(3, this.width / 2 - 21 + 71, this.height / 6 + 110, 72, 20, I18n.format("profile.clearSkin")));
 	}
 	
 	private static ModelBiped playerModel = null;
 	
 	public void drawScreen(int mx, int my, float par3) {
-		StringTranslate var1 = StringTranslate.getInstance();
 		this.drawDefaultBackground();
 		this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 15, 16777215);
-		this.drawString(this.fontRenderer, var1.translateKey("eaglercraft.profile.screenname"), this.width / 2 - 20, this.height / 6 + 8 + trans, 10526880);
-		this.drawString(this.fontRenderer, var1.translateKey("eaglercraft.profile.playerSkin"), this.width / 2 - 20, this.height / 6 + 66 + trans, 10526880);
+		this.drawString(this.fontRenderer, I18n.format("profile.screenname"), this.width / 2 - 20, this.height / 6 + 8 + trans, 10526880);
+		this.drawString(this.fontRenderer, I18n.format("profile.playerSkin"), this.width / 2 - 20, this.height / 6 + 66 + trans, 10526880);
 		
 		mousex = mx;
 		mousey = my;

@@ -1,10 +1,13 @@
 package net.minecraft.src;
 
+import net.lax1dude.eaglercraft.EagRuntime;
+import net.lax1dude.eaglercraft.internal.EnumPlatformType;
+
 public class GuiVideoSettings extends GuiScreen {
 	private GuiScreen parentGuiScreen;
 	protected String field_22107_a = "Video Settings";
 	private GameSettings guiGameSettings;
-	private static EnumOptions[] videoOptions = new EnumOptions[]{EnumOptions.GRAPHICS, EnumOptions.RENDER_DISTANCE, EnumOptions.AMBIENT_OCCLUSION, EnumOptions.FRAMERATE_LIMIT, EnumOptions.ANAGLYPH, EnumOptions.VIEW_BOBBING, EnumOptions.GUI_SCALE, EnumOptions.ADVANCED_OPENGL, EnumOptions.GAMMA};
+	private static EnumOptions[] videoOptions = new EnumOptions[]{EnumOptions.GRAPHICS, EnumOptions.RENDER_DISTANCE, EnumOptions.AMBIENT_OCCLUSION, EnumOptions.ANAGLYPH, EnumOptions.VIEW_BOBBING, EnumOptions.GUI_SCALE, EnumOptions.VSYNC, EnumOptions.FANCY_GRASS, EnumOptions.GAMMA};
 
 	public GuiVideoSettings(GuiScreen var1, GameSettings var2) {
 		this.parentGuiScreen = var1;
@@ -20,11 +23,17 @@ public class GuiVideoSettings extends GuiScreen {
 
 		for(int var5 = 0; var5 < var4; ++var5) {
 			EnumOptions var6 = var3[var5];
+			GuiButton b;
+
 			if(!var6.getEnumFloat()) {
-				this.controlList.add(new GuiSmallButton(var6.returnEnumOrdinal(), this.width / 2 - 155 + var2 % 2 * 160, this.height / 6 + 24 * (var2 >> 1), var6, this.guiGameSettings.getKeyBinding(var6)));
+				b = new GuiSmallButton(var6.returnEnumOrdinal(), this.width / 2 - 155 + var2 % 2 * 160, this.height / 6 + 24 * (var2 >> 1), var6, this.guiGameSettings.getKeyBinding(var6));
 			} else {
-				this.controlList.add(new GuiSlider(var6.returnEnumOrdinal(), this.width / 2 - 155 + var2 % 2 * 160, this.height / 6 + 24 * (var2 >> 1), var6, this.guiGameSettings.getKeyBinding(var6), this.guiGameSettings.getOptionFloatValue(var6)));
+				b = new GuiSlider(var6.returnEnumOrdinal(), this.width / 2 - 155 + var2 % 2 * 160, this.height / 6 + 24 * (var2 >> 1), var6, this.guiGameSettings.getKeyBinding(var6), this.guiGameSettings.getOptionFloatValue(var6));
 			}
+
+			this.controlList.add(b);
+
+			if ((var5 == 5 && EagRuntime.getPlatformType() == EnumPlatformType.WASM_GC)) b.enabled = false;
 
 			++var2;
 		}
