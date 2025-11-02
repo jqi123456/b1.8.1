@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.ArrayList;
 
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 
 public class GuiOptions extends GuiScreen {
@@ -43,7 +44,7 @@ public class GuiOptions extends GuiScreen {
 		extraOpts.add(new GuiButton(101, this.width / 2 - 100, this.height / 6 + 96 + 12, var1.translateKey("options.video")));
 		extraOpts.add(new GuiButton(100, this.width / 2 - 100, this.height / 6 + 120 + 12, var1.translateKey("options.controls")));
 
-		extraOpts.add(new GuiButton(102, 0, 0, var1.translateKey("menu.mods")));
+		extraOpts.add(new GuiButton(102, 0, 0, var1.translateKey("menu.mods") + I18n.format("more")));
 		// extraOpts.add(new GuiButton(103, 0, 0, I18n.format("openDebugConsole")));
 
 		this.controlList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, var1.translateKey("gui.done")));

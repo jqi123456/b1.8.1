@@ -737,6 +737,7 @@ eaglercraft.profile.addSkin=Add Skin
 eaglercraft.profile.clearSkin=Clear List
 eaglercraft.selectWorld.export=Export
 eaglercraft.selectServer.hiddenAddress=(Address Hidden)
+eaglercraft.more=...
 eaglercraft.addServer.hideAddress=Hide Address
 eaglercraft.addServer.SSLWarn1=you are on an https: page!
 eaglercraft.addServer.SSLWarn2=html5 will only allow wss://
