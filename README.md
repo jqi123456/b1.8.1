@@ -1,4 +1,4 @@
-# Eaglercraft Porting Template
+# Eaglercraft Beta 1.8.1
 
 ![preview](https://raw.githubusercontent.com/EaglerPorts/b1.8.1/refs/heads/main/img/mainmenu.png)
 :-:
