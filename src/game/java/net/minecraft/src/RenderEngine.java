@@ -42,7 +42,6 @@ public class RenderEngine {
 		TexturePackBase var2 = this.texturePack.selectedTexturePack;
 		int[] var3 = (int[])this.field_28151_c.get(var1);
 		if(var3 != null) {
-			System.out.println("exists");
 			return var3;
 		} else {
 			try {
