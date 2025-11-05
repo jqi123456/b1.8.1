@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.io.IOException;
 import java.util.Properties;
 
-import net.lax1dude.eaglercraft.EagRuntime;
+import dev.colbster937.eaglercraft.rp.TexturePack;
 import net.lax1dude.eaglercraft.HString;
 
 public class StringTranslate {
@@ -12,8 +12,8 @@ public class StringTranslate {
 
 	private StringTranslate() {
 		try {
-			this.translateTable.load(EagRuntime.getResourceStream("/lang/en_US.lang"));
-			this.translateTable.load(EagRuntime.getResourceStream("/lang/stats_US.lang"));
+			this.translateTable.load(TexturePack.getResourceAsStream("/lang/en_US.lang"));
+			this.translateTable.load(TexturePack.getResourceAsStream("/lang/stats_US.lang"));
 		} catch (IOException var2) {
 			var2.printStackTrace();
 		}

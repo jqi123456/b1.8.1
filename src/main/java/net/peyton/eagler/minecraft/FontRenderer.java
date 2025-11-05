@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import net.lax1dude.eaglercraft.EagRuntime;
+import dev.colbster937.eaglercraft.rp.TexturePack;
 import net.lax1dude.eaglercraft.Random;
 
 import net.lax1dude.eaglercraft.minecraft.FontMappingHelper;
@@ -18,37 +18,49 @@ import net.lax1dude.eaglercraft.opengl.WorldRenderer;
 import net.minecraft.src.GameSettings;
 import net.minecraft.src.RenderEngine;
 
-/**+
+/**
+ * +
  * This portion of EaglercraftX contains deobfuscated Minecraft 1.8 source code.
  * 
  * Minecraft 1.8.8 bytecode is (c) 2015 Mojang AB. "Do not distribute!"
  * Mod Coder Pack v9.18 deobfuscation configs are (c) Copyright by the MCP Team
  * 
- * EaglercraftX 1.8 patch files (c) 2022-2025 lax1dude, ayunami2000. All Rights Reserved.
+ * EaglercraftX 1.8 patch files (c) 2022-2025 lax1dude, ayunami2000. All Rights
+ * Reserved.
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  * 
  */
 public class FontRenderer {
-	/**+
+	/**
+	 * +
 	 * Array of width of all the characters in default.png
 	 */
 	protected int[] charWidth = new int[256];
-	/**+
+	/**
+	 * +
 	 * the height in pixels of default text
 	 */
 	public int FONT_HEIGHT = 9;
 	public Random fontRandom = new Random();
-	/**+
+	/**
+	 * +
 	 * Array of RGB triplets defining the 16 standard chat colors
 	 * followed by 16 darker version of the same colors for drop
 	 * shadows.
@@ -61,7 +73,7 @@ public class FontRenderer {
 	protected float green;
 	protected float alpha;
 	protected int textColor;
-	
+
 	protected RenderEngine renderEngine;
 	protected String locationFontTexture;
 
@@ -110,12 +122,12 @@ public class FontRenderer {
 
 			this.colorCode[i] = (k & 255) << 16 | (l & 255) << 8 | i1 & 255;
 		}
-		
+
 		readFontTexture();
 	}
 
 	private void readFontTexture() {
-		ImageData bufferedimage = ImageData.loadImageFile(EagRuntime.getResourceStream(this.locationFontTexture));
+		ImageData bufferedimage = ImageData.loadImageFile(TexturePack.getResourceAsStream(this.locationFontTexture));
 
 		int i = bufferedimage.width;
 		int j = bufferedimage.height;
@@ -163,7 +175,8 @@ public class FontRenderer {
 		}
 	}
 
-	/**+
+	/**
+	 * +
 	 * Render a single character with the default.png font at
 	 * current (posX,posY) location...
 	 */
@@ -196,25 +209,28 @@ public class FontRenderer {
 		return (float) l;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Draws the specified string with a shadow.
 	 */
 	public int drawStringWithShadow(String text, float x, float y, int color) {
 		return this.drawString(text, x, y, color, true);
 	}
 
-	/**+
+	/**
+	 * +
 	 * Draws the specified string.
 	 */
 	public int drawString(String text, int x, int y, int color) {
 		return this.drawString(text, (float) x, (float) y, color, false);
 	}
 
-	/**+
+	/**
+	 * +
 	 * Draws the specified string.
 	 */
 	public int drawString(String text, float x, float y, int color, boolean dropShadow) {
-		
+
 		GlStateManager.enableAlpha();
 		int i;
 		if (dropShadow) {
@@ -227,7 +243,8 @@ public class FontRenderer {
 		return i;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Render a single line string at the current (posX,posY) and
 	 * update posX
 	 */
@@ -249,7 +266,7 @@ public class FontRenderer {
 					this.textColor = j1;
 					GlStateManager.color((float) (j1 >> 16) / 255.0F, (float) (j1 >> 8 & 255) / 255.0F,
 							(float) (j1 & 255) / 255.0F, this.alpha);
-				}else if (i1 == 21) {
+				} else if (i1 == 21) {
 					GlStateManager.color(this.red, this.blue, this.green, this.alpha);
 				}
 
@@ -275,7 +292,8 @@ public class FontRenderer {
 
 	}
 
-	/**+
+	/**
+	 * +
 	 * Render single line string by setting GL color, current
 	 * (posX,posY), and calling renderStringAtPos()
 	 */
@@ -304,7 +322,8 @@ public class FontRenderer {
 		return (int) this.posX;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Returns the width of this string. Equivalent of
 	 * FontMetrics.stringWidth(String s).
 	 */
@@ -342,7 +361,8 @@ public class FontRenderer {
 		}
 	}
 
-	/**+
+	/**
+	 * +
 	 * Returns the width of this character as rendered.
 	 */
 	public int getCharWidth(char character) {
@@ -360,14 +380,16 @@ public class FontRenderer {
 		}
 	}
 
-	/**+
+	/**
+	 * +
 	 * Trims a string to fit a specified Width.
 	 */
 	public String trimStringToWidth(String text, int width) {
 		return this.trimStringToWidth(text, width, false);
 	}
 
-	/**+
+	/**
+	 * +
 	 * Trims a string to fit a specified Width.
 	 */
 	public String trimStringToWidth(String text, int width, boolean reverse) {
@@ -413,7 +435,8 @@ public class FontRenderer {
 		return stringbuilder.toString();
 	}
 
-	/**+
+	/**
+	 * +
 	 * Returns the width of the wordwrapped String (maximum length
 	 * is parameter k)
 	 */
@@ -421,7 +444,8 @@ public class FontRenderer {
 		return this.FONT_HEIGHT * this.listFormattedStringToWidth(parString1, parInt1).size();
 	}
 
-	/**+
+	/**
+	 * +
 	 * Breaks a string into a list of pieces that will fit a
 	 * specified width.
 	 */
@@ -429,7 +453,8 @@ public class FontRenderer {
 		return Arrays.asList(this.wrapFormattedStringToWidth(str, wrapWidth, 0).split("\n"));
 	}
 
-	/**+
+	/**
+	 * +
 	 * Inserts newline and formatting into a string to wrap it
 	 * within the specified width.
 	 */
@@ -449,7 +474,8 @@ public class FontRenderer {
 		}
 	}
 
-	/**+
+	/**
+	 * +
 	 * Determines how many characters from the string will fit into
 	 * the specified width.
 	 */
@@ -462,29 +488,29 @@ public class FontRenderer {
 		for (boolean flag = false; k < i; ++k) {
 			char c0 = str.charAt(k);
 			switch (c0) {
-			case '\n':
-				--k;
-				break;
-			case ' ':
-				l = k;
-			default:
-				j += this.getCharWidth(c0);
-				if (flag) {
-					++j;
-				}
-				break;
-			case '\u00a7':
-				if (k < i - 1) {
-					++k;
-					char c1 = str.charAt(k);
-					if (c1 != 108 && c1 != 76) {
-						if (c1 == 114 || c1 == 82 || isFormatColor(c1)) {
-							flag = false;
-						}
-					} else {
-						flag = true;
+				case '\n':
+					--k;
+					break;
+				case ' ':
+					l = k;
+				default:
+					j += this.getCharWidth(c0);
+					if (flag) {
+						++j;
 					}
-				}
+					break;
+				case '\u00a7':
+					if (k < i - 1) {
+						++k;
+						char c1 = str.charAt(k);
+						if (c1 != 108 && c1 != 76) {
+							if (c1 == 114 || c1 == 82 || isFormatColor(c1)) {
+								flag = false;
+							}
+						} else {
+							flag = true;
+						}
+					}
 			}
 
 			if (c0 == 10) {
@@ -501,7 +527,8 @@ public class FontRenderer {
 		return k != i && l != -1 && l < k ? l : k;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Checks if the char code is a hexadecimal character, used to
 	 * set colour.
 	 */
@@ -510,7 +537,8 @@ public class FontRenderer {
 				|| colorChar >= 65 && colorChar <= 70;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Checks if the char code is O-K...lLrRk-o... used to set
 	 * special formatting.
 	 */
@@ -519,7 +547,8 @@ public class FontRenderer {
 				|| formatChar == 82;
 	}
 
-	/**+
+	/**
+	 * +
 	 * Digests a string for nonprinting formatting characters then
 	 * returns a string containing only that formatting.
 	 */
@@ -545,11 +574,11 @@ public class FontRenderer {
 	public int getColorCode(char character) {
 		return this.colorCode["0123456789abcdef".indexOf(character)];
 	}
-	
+
 	public void drawSplitString(String var1, int var2, int var3, int var4, int var5) {
 		String[] var6 = var1.split("\n");
-		if(var6.length > 1) {
-			for(int var11 = 0; var11 < var6.length; ++var11) {
+		if (var6.length > 1) {
+			for (int var11 = 0; var11 < var6.length; ++var11) {
 				this.drawSplitString(var6[var11], var2, var3, var4, var5);
 				var3 += this.func_27277_a(var6[var11], var4);
 			}
@@ -558,23 +587,24 @@ public class FontRenderer {
 			String[] var7 = var1.split(" ");
 			int var8 = 0;
 
-			while(var8 < var7.length) {
+			while (var8 < var7.length) {
 				String var9;
-				for(var9 = var7[var8++] + " "; var8 < var7.length && this.getStringWidth(var9 + var7[var8]) < var4; var9 = var9 + var7[var8++] + " ") {
+				for (var9 = var7[var8++] + " "; var8 < var7.length
+						&& this.getStringWidth(var9 + var7[var8]) < var4; var9 = var9 + var7[var8++] + " ") {
 				}
 
 				int var10;
-				for(; this.getStringWidth(var9) > var4; var9 = var9.substring(var10)) {
-					for(var10 = 0; this.getStringWidth(var9.substring(0, var10 + 1)) <= var4; ++var10) {
+				for (; this.getStringWidth(var9) > var4; var9 = var9.substring(var10)) {
+					for (var10 = 0; this.getStringWidth(var9.substring(0, var10 + 1)) <= var4; ++var10) {
 					}
 
-					if(var9.substring(0, var10).trim().length() > 0) {
+					if (var9.substring(0, var10).trim().length() > 0) {
 						this.drawString(var9.substring(0, var10), var2, var3, var5);
 						var3 += 8;
 					}
 				}
 
-				if(var9.trim().length() > 0) {
+				if (var9.trim().length() > 0) {
 					this.drawString(var9, var2, var3, var5);
 					var3 += 8;
 				}
@@ -586,10 +616,10 @@ public class FontRenderer {
 	public int func_27277_a(String var1, int var2) {
 		String[] var3 = var1.split("\n");
 		int var5;
-		if(var3.length > 1) {
+		if (var3.length > 1) {
 			int var9 = 0;
 
-			for(var5 = 0; var5 < var3.length; ++var5) {
+			for (var5 = 0; var5 < var3.length; ++var5) {
 				var9 += this.func_27277_a(var3[var5], var2);
 			}
 
@@ -599,27 +629,28 @@ public class FontRenderer {
 			var5 = 0;
 			int var6 = 0;
 
-			while(var5 < var4.length) {
+			while (var5 < var4.length) {
 				String var7;
-				for(var7 = var4[var5++] + " "; var5 < var4.length && this.getStringWidth(var7 + var4[var5]) < var2; var7 = var7 + var4[var5++] + " ") {
+				for (var7 = var4[var5++] + " "; var5 < var4.length
+						&& this.getStringWidth(var7 + var4[var5]) < var2; var7 = var7 + var4[var5++] + " ") {
 				}
 
 				int var8;
-				for(; this.getStringWidth(var7) > var2; var7 = var7.substring(var8)) {
-					for(var8 = 0; this.getStringWidth(var7.substring(0, var8 + 1)) <= var2; ++var8) {
+				for (; this.getStringWidth(var7) > var2; var7 = var7.substring(var8)) {
+					for (var8 = 0; this.getStringWidth(var7.substring(0, var8 + 1)) <= var2; ++var8) {
 					}
 
-					if(var7.substring(0, var8).trim().length() > 0) {
+					if (var7.substring(0, var8).trim().length() > 0) {
 						var6 += 8;
 					}
 				}
 
-				if(var7.trim().length() > 0) {
+				if (var7.trim().length() > 0) {
 					var6 += 8;
 				}
 			}
 
-			if(var6 < 8) {
+			if (var6 < 8) {
 				var6 += 8;
 			}
 

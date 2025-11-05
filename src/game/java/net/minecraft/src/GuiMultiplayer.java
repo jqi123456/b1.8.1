@@ -245,7 +245,7 @@ public class GuiMultiplayer extends GuiScreen {
 	}
 
 	private void func_35330_a(ServerNBTStorage var1) {
-		if (false) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
+		if (true) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
 		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", 0xFFCCCC, "menu.multiplayer"), new TextLine(""), new TextLine("willAdd", 0x888888)));
 	}
 

@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.lax1dude.eaglercraft.EagRuntime;
+import dev.colbster937.eaglercraft.rp.TexturePack;
 
 public class AchievementMap {
 	public static AchievementMap instance = new AchievementMap();
@@ -13,11 +13,12 @@ public class AchievementMap {
 
 	private AchievementMap() {
 		try {
-			BufferedReader var1 = new BufferedReader(new InputStreamReader(EagRuntime.getResourceStream("/achievement/map.txt")));
+			BufferedReader var1 = new BufferedReader(
+					new InputStreamReader(TexturePack.getResourceAsStream("/achievement/map.txt")));
 
-			while(true) {
+			while (true) {
 				String var2 = var1.readLine();
-				if(var2 == null) {
+				if (var2 == null) {
 					var1.close();
 					break;
 				}
@@ -33,6 +34,6 @@ public class AchievementMap {
 	}
 
 	public static String getGuid(int var0) {
-		return (String)instance.guidMap.get(Integer.valueOf(var0));
+		return (String) instance.guidMap.get(Integer.valueOf(var0));
 	}
 }

@@ -764,3 +764,11 @@ eaglercraft.command.setTime=Set the time to %s
 eaglercraft.command.getTime=The day is %s at %s
 eaglercraft.command.fly=Flight has been %s
 eaglercraft.command.doesntExist='%s' doesn't exist!
+
+eaglercraft.texturePack.refreshing=Refreshing Texture Pack
+eaglercraft.texturePack.counting=Counting Files
+eaglercraft.texturePack.extracting=Extracting Files
+eaglercraft.texturePack.extracting.file=Extracting %s
+eaglercraft.texturePack.manifest=Updating Manifest
+eaglercraft.texturePack.deleting=Deletinging Files
+eaglercraft.texturePack.deleting.file=Deleting %s

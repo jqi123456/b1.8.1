@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import java.io.IOException;
+
+import dev.colbster937.eaglercraft.rp.TexturePack;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.internal.FileChooserResult;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
@@ -8,7 +11,6 @@ import net.minecraft.client.Minecraft;
 public class GuiTexturePacks extends GuiScreen {
 	protected GuiScreen guiScreen;
 	private int field_6454_o = -1;
-	private String fileLocation = "";
 	private GuiTexturePackSlot guiTexturePackSlot;
 
 	public GuiTexturePacks(GuiScreen var1) {
@@ -17,19 +19,19 @@ public class GuiTexturePacks extends GuiScreen {
 
 	public void initGui() {
 		StringTranslate var1 = StringTranslate.getInstance();
-		this.controlList.add(new GuiSmallButton(5, this.width / 2 - 154, this.height - 48, var1.translateKey("texturePack.openFolder")));
+		this.controlList.add(
+				new GuiSmallButton(5, this.width / 2 - 154, this.height - 48, var1.translateKey("texturePack.openFolder")));
 		this.controlList.add(new GuiSmallButton(6, this.width / 2 + 4, this.height - 48, var1.translateKey("gui.done")));
-		this.mc.texturePackList.updateAvaliableTexturePacks();
-		this.fileLocation = (new VFile2(Minecraft.getMinecraftDir(), "texturepacks")).getPath();
+		TexturePack.getTexturePacks();
 		this.guiTexturePackSlot = new GuiTexturePackSlot(this);
 		this.guiTexturePackSlot.registerScrollButtons(this.controlList, 7, 8);
 	}
 
 	protected void actionPerformed(GuiButton var1) {
-		if(var1.enabled) {
-			if(var1.id == 5) {
+		if (var1.enabled) {
+			if (var1.id == 5) {
 				EagRuntime.displayFileChooser("application/zip", ".zip");
-			} else if(var1.id == 6) {
+			} else if (var1.id == 6) {
 				this.mc.renderEngine.refreshTextures();
 				this.mc.displayGuiScreen(this.guiScreen);
 			} else {
@@ -49,14 +51,15 @@ public class GuiTexturePacks extends GuiScreen {
 
 	public void drawScreen(int var1, int var2, float var3) {
 		this.guiTexturePackSlot.drawScreen(var1, var2, var3);
-		if(this.field_6454_o <= 0) {
-			this.mc.texturePackList.updateAvaliableTexturePacks();
+		if (this.field_6454_o <= 0) {
+			TexturePack.getTexturePacks();
 			this.field_6454_o += 20;
 		}
 
 		StringTranslate var4 = StringTranslate.getInstance();
 		this.drawCenteredString(this.fontRenderer, var4.translateKey("texturePack.title"), this.width / 2, 16, 16777215);
-		this.drawCenteredString(this.fontRenderer, var4.translateKey("texturePack.folderInfo"), this.width / 2 - 77, this.height - 26, 8421504);
+		this.drawCenteredString(this.fontRenderer, var4.translateKey("texturePack.folderInfo"), this.width / 2 - 77,
+				this.height - 26, 8421504);
 		super.drawScreen(var1, var2, var3);
 	}
 
@@ -64,7 +67,11 @@ public class GuiTexturePacks extends GuiScreen {
 		super.updateScreen();
 		if (EagRuntime.fileChooserHasResult()) {
 			FileChooserResult result = EagRuntime.getFileChooserResult();
-			this.mc.texturePackList.addTexturePack(result.fileData, result.fileName);
+			try {
+				TexturePack.addTexturePack(result, this.mc.loadingScreen);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		--this.field_6454_o;
 	}

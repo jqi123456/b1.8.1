@@ -3,27 +3,29 @@ package net.minecraft.src;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import net.lax1dude.eaglercraft.EagRuntime;
+import dev.colbster937.eaglercraft.rp.TexturePack;
 
 public class ChatAllowedCharacters {
 	public static final String allowedCharacters = getAllowedCharacters();
-	public static final char[] allowedCharactersArray = new char[]{'/', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':'};
+	public static final char[] allowedCharactersArray = new char[] { '/', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*',
+			'\\', '<', '>', '|', '\"', ':' };
 
 	private static String getAllowedCharacters() {
 		String var0 = "";
 
 		try {
-			BufferedReader var1 = new BufferedReader(new InputStreamReader(EagRuntime.getResourceStream("/font.txt"), "UTF-8"));
+			BufferedReader var1 = new BufferedReader(
+					new InputStreamReader(TexturePack.getResourceAsStream("/font.txt"), "UTF-8"));
 			String var2 = "";
 
-			while(true) {
+			while (true) {
 				var2 = var1.readLine();
-				if(var2 == null) {
+				if (var2 == null) {
 					var1.close();
 					break;
 				}
 
-				if(!var2.startsWith("#")) {
+				if (!var2.startsWith("#")) {
 					var0 = var0 + var2;
 				}
 			}
