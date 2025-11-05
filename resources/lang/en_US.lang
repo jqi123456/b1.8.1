@@ -770,5 +770,6 @@ eaglercraft.texturePack.counting=Counting Files
 eaglercraft.texturePack.extracting=Extracting Files
 eaglercraft.texturePack.extracting.file=Extracting %s
 eaglercraft.texturePack.manifest=Updating Manifest
-eaglercraft.texturePack.deleting=Deletinging Files
+eaglercraft.texturePack.deleting=Deleting Files
+
 eaglercraft.texturePack.deleting.file=Deleting %s
