@@ -3,7 +3,10 @@ package net.minecraft.src;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
 
+import dev.colbster937.eaglercraft.gui.GuiScreenTexturePackOptions;
 import dev.colbster937.eaglercraft.rp.TexturePack;
+import dev.colbster937.eaglercraft.utils.ScuffedUtils;
+import net.lax1dude.eaglercraft.Keyboard;
 import net.minecraft.client.Minecraft;
 
 class GuiTexturePackSlot extends GuiSlot {
@@ -20,14 +23,16 @@ class GuiTexturePackSlot extends GuiSlot {
 	}
 
 	protected void elementClicked(int var1, boolean var2) {
-		List<TexturePack> packs = TexturePack.getTexturePacks();
+		TexturePack pack = TexturePack.getTexturePacks().get(var1);
+		if (!TexturePack.isDefaultPack(pack) && !ScuffedUtils.isShiftKeyDown()) Minecraft.getMinecraft().displayGuiScreen(new GuiScreenTexturePackOptions(this.parentTexturePackGui, pack));
+		else TexturePack.setSelectedPack(pack);
 
-		try {
+		/* try {
 			TexturePack.setSelectedPack(packs.get(var1), Minecraft.getMinecraft().loadingScreen);
 		} catch (Exception var5) {
 			var5.printStackTrace();
 			TexturePack.setDefaultPack(Minecraft.getMinecraft().loadingScreen);
-		}
+		} */
 
 	}
 

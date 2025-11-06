@@ -765,11 +765,14 @@ eaglercraft.command.getTime=The day is %s at %s
 eaglercraft.command.fly=Flight has been %s
 eaglercraft.command.doesntExist='%s' doesn't exist!
 
+eaglercraft.texturePack.prompt.title=What do you want to do with '%s'?
+eaglercraft.texturePack.prompt.text=Tip: Hold Shift to skip this screen when selecting a texture pack!
+eaglercraft.texturePack.prompt.delete=Delete this texture pack
+eaglercraft.texturePack.prompt.select=Select this texture pack
 eaglercraft.texturePack.refreshing=Refreshing Texture Pack
 eaglercraft.texturePack.counting=Counting Files
 eaglercraft.texturePack.extracting=Extracting Files
-eaglercraft.texturePack.extracting.file=Extracting %s
+eaglercraft.texturePack.extracting.file=Extracting '%s'
 eaglercraft.texturePack.manifest=Updating Manifest
 eaglercraft.texturePack.deleting=Deleting Files
-
-eaglercraft.texturePack.deleting.file=Deleting %s
+eaglercraft.texturePack.deleting.file=Deleting '%s'
