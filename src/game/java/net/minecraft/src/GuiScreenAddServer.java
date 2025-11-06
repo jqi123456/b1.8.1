@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.input.Keyboard;
 
+import dev.colbster937.eaglercraft.FormattingCodes;
 import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 
@@ -105,9 +106,9 @@ public class GuiScreenAddServer extends GuiScreen {
 		this.drawString(this.fontRenderer, var4.translateKey("addServer.enterIp"), this.width / 2 - 100, 104, 10526880);
 		if (EagRuntime.requireSSL()) {
 			this.drawCenteredString(this.fontRenderer, I18n.format("addServer.SSLWarn1"), this.width / 2, 174,
-					0xccccff);
+					FormattingCodes.COLOR_INFO);
 			this.drawCenteredString(this.fontRenderer, I18n.format("addServer.SSLWarn2"), this.width / 2, 186,
-					0xccccff);
+					FormattingCodes.COLOR_INFO);
 		}
 		this.field_35361_c.drawTextBox();
 		this.field_35360_b.drawTextBox();

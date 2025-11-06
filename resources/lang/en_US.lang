@@ -769,6 +769,7 @@ eaglercraft.texturePack.prompt.title=What do you want to do with '%s'?
 eaglercraft.texturePack.prompt.text=Tip: Hold Shift to skip this screen when selecting a texture pack!
 eaglercraft.texturePack.prompt.delete=Delete this texture pack
 eaglercraft.texturePack.prompt.select=Select this texture pack
+eaglercraft.texturePack.invalid='%s' is not a valid texture pack!
 eaglercraft.texturePack.refreshing=Refreshing Texture Pack
 eaglercraft.texturePack.counting=Counting Files
 eaglercraft.texturePack.extracting=Extracting Files

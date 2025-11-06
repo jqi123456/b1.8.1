@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
 
+import dev.colbster937.eaglercraft.FormattingCodes;
 import dev.colbster937.eaglercraft.gui.GuiScreenInfo;
 import dev.colbster937.eaglercraft.gui.GuiScreenInfo.TextLine;
 import dev.colbster937.eaglercraft.socket.ServerMOTDDispatcher;
@@ -245,8 +246,8 @@ public class GuiMultiplayer extends GuiScreen {
 	}
 
 	private void func_35330_a(ServerNBTStorage var1) {
-		if (true) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
-		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", 0xFFCCCC, "menu.multiplayer"), new TextLine(""), new TextLine("willAdd", 0x888888)));
+		if (false) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
+		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", FormattingCodes.COLOR_ERROR, "menu.multiplayer"), new TextLine(""), new TextLine("willAdd", 0x888888)));
 	}
 
 	protected void func_35325_a(String var1, int var2, int var3) {
