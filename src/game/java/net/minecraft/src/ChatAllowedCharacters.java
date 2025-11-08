@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import dev.colbster937.eaglercraft.rp.TexturePack;
+import net.lax1dude.eaglercraft.EagRuntime;
 
 public class ChatAllowedCharacters {
 	public static final String allowedCharacters = getAllowedCharacters();
@@ -15,7 +15,7 @@ public class ChatAllowedCharacters {
 
 		try {
 			BufferedReader var1 = new BufferedReader(
-					new InputStreamReader(TexturePack.getResourceAsStream("/font.txt"), "UTF-8"));
+					new InputStreamReader(EagRuntime.getResourceStream("/font.txt"), "UTF-8"));
 			String var2 = "";
 
 			while (true) {

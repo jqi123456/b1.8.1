@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.colbster937.eaglercraft.rp.TexturePack;
+import net.lax1dude.eaglercraft.EagRuntime;
 
 public class AchievementMap {
 	public static AchievementMap instance = new AchievementMap();
@@ -14,7 +14,7 @@ public class AchievementMap {
 	private AchievementMap() {
 		try {
 			BufferedReader var1 = new BufferedReader(
-					new InputStreamReader(TexturePack.getResourceAsStream("/achievement/map.txt")));
+					new InputStreamReader(EagRuntime.getResourceStream("/achievement/map.txt")));
 
 			while (true) {
 				String var2 = var1.readLine();
