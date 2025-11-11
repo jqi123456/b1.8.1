@@ -1,9 +1,11 @@
 package dev.colbster937.eaglercraft.gui;
 
 import dev.colbster937.eaglercraft.utils.I18n;
+
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiMainMenu;
 import net.minecraft.src.GuiScreen;
+import net.peyton.java.awt.Color;
 
 public class GuiScreenInfo extends GuiScreen {
 
@@ -42,7 +44,7 @@ public class GuiScreenInfo extends GuiScreen {
   protected void actionPerformed(GuiButton var1) {
     if (var1.id == 0) {
       if (this.parent == null)
-        this.mc.displayGuiScreen(new GuiMainMenu());
+        this.mc.displayGuiScreen(this.mc.menu);
       else
         this.mc.displayGuiScreen(parent);
     }
@@ -63,7 +65,7 @@ public class GuiScreenInfo extends GuiScreen {
     }
 
     public TextLine(String text) {
-      this(text, 16777215);
+      this(text, Color.WHITE.getRGB());
     }
   }
 }

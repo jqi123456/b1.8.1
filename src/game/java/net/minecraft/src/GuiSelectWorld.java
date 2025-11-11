@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
+import dev.colbster937.eaglercraft.gui.GuiScreenCreateOrImport;
 import dev.colbster937.eaglercraft.utils.I18n;
 import dev.colbster937.eaglercraft.utils.SaveUtils;
 import net.lax1dude.eaglercraft.EagRuntime;
@@ -96,7 +97,7 @@ public class GuiSelectWorld extends GuiScreen {
 			} else if(var1.id == 1) {
 				this.selectWorld(this.selectedWorld);
 			} else if(var1.id == 3) {
-				this.mc.displayGuiScreen(new GuiCreateWorld(this));
+				this.mc.displayGuiScreen(new GuiScreenCreateOrImport(this));
 			} else if(var1.id == 6) {
 				this.mc.displayGuiScreen(new GuiRenameWorld(this, this.getSaveFileName(this.selectedWorld)));
 			} else if(var1.id == 0) {
@@ -107,7 +108,7 @@ public class GuiSelectWorld extends GuiScreen {
 				WorldInfo worldInfo = saveFormat.getWorldInfo(fileName);
 				String worldName = worldInfo.getWorldName();
 
-				PlatformApplication.downloadFileWithName(worldName + ".zip", SaveUtils.exportWorld(fileName));
+				SaveUtils.i.export(this.mc.loadingScreen, fileName);
 			} else {
 				this.worldSlotContainer.actionPerformed(var1);
 			}
@@ -142,7 +143,7 @@ public class GuiSelectWorld extends GuiScreen {
 			if(var1) {
 				ISaveFormat var3 = this.mc.getSaveLoader();
 				var3.flushCache();
-				var3.func_22172_c(this.getSaveFileName(var2));
+				SaveUtils.i.delete(this.mc.loadingScreen, this.getSaveFileName(var2));
 				this.loadSaves();
 			}
 

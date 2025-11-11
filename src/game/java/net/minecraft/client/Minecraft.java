@@ -152,6 +152,7 @@ public class Minecraft implements Runnable {
 	private int joinPlayerCounter = 0;
 
 	private String serverIP;
+	public GuiMainMenu menu = new GuiMainMenu();
 
 	public Minecraft() {
 		StatList.func_27360_a();
@@ -203,6 +204,7 @@ public class Minecraft implements Runnable {
 		this.gameSettings = new GameSettings(this, this.mcDataDir);
 		this.renderEngine = new RenderEngine(this.gameSettings);
 		TexturePack.init(this);
+		SaveUtils.init(this);
 		this.loadScreen();
 		this.fontRenderer = new FontRenderer(this.gameSettings, "/font/default.png", this.renderEngine);
 		ColorizerWater.func_28182_a(this.renderEngine.getTextureContents("/misc/watercolor.png"));
@@ -245,13 +247,12 @@ public class Minecraft implements Runnable {
 		this.checkGLError("Post startup");
 		this.ingameGUI = new GuiIngame(this);
 		if (this.serverIP != null) {
-			this.displayGuiScreen(new GuiScreenEditProfile(new GuiConnecting(this, new GuiMainMenu(), this.serverIP)));
+			this.displayGuiScreen(new GuiScreenEditProfile(new GuiConnecting(this, this.menu, this.serverIP)));
 		} else {
-			this.displayGuiScreen(new GuiScreenEditProfile(new GuiMainMenu()));
+			this.displayGuiScreen(new GuiScreenEditProfile(this.menu));
 		}
 
 		this.loadingScreen = new LoadingScreenRenderer(this);
-		SaveUtils.setProgressUpdate(this.loadingScreen);
 	}
 
 	private void loadScreen() throws LWJGLException {
@@ -342,7 +343,7 @@ public class Minecraft implements Runnable {
 
 			this.statFileWriter.syncStats();
 			if (var1 == null && this.theWorld == null) {
-				var1 = new GuiMainMenu();
+				var1 = this.menu;
 			} else if (var1 == null && this.thePlayer.health <= 0) {
 				var1 = new GuiGameOver();
 			}
