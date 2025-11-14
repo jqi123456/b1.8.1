@@ -197,7 +197,7 @@ public class Minecraft implements Runnable {
 	}
 
 	public void startGame() throws LWJGLException {
-		Display.setTitle("Minecraft Minecraft Beta 1.8.1");
+		Display.setTitle("Minecraft Beta 1.8.1");
 
 		this.mcDataDir = getMinecraftDir();
 		this.saveLoader = new SaveConverterMcRegion(new VFile2(this.mcDataDir, "saves"));
@@ -640,7 +640,7 @@ public class Minecraft implements Runnable {
 		if (Display.isActive()) {
 			if (!this.inGameHasFocus) {
 				this.inGameHasFocus = true;
-				this.mouseHelper.grabMouseCursor();
+				if (this.currentScreen == null) this.mouseHelper.grabMouseCursor();
 				this.displayGuiScreen((GuiScreen) null);
 				this.leftClickCounter = 10000;
 			}
