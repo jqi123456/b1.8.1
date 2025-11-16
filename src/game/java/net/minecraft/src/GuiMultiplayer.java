@@ -8,6 +8,7 @@ import dev.colbster937.eaglercraft.FormattingCodes;
 import dev.colbster937.eaglercraft.gui.GuiScreenInfo;
 import dev.colbster937.eaglercraft.gui.GuiScreenInfo.TextLine;
 import dev.colbster937.eaglercraft.socket.ServerMOTDDispatcher;
+import dev.colbster937.eaglercraft.utils.I18n;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.internal.IWebSocketClient;
 import net.lax1dude.eaglercraft.internal.PlatformNetworking;
@@ -247,7 +248,7 @@ public class GuiMultiplayer extends GuiScreen {
 
 	private void func_35330_a(ServerNBTStorage var1) {
 		if (false) this.mc.displayGuiScreen(new GuiConnecting(this.mc, this, var1.field_35793_b));
-		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", FormattingCodes.COLOR_ERROR, "menu.multiplayer"), new TextLine(""), new TextLine("willAdd", 0x888888)));
+		else this.mc.displayGuiScreen(new GuiScreenInfo(this, new TextLine("notAdded", FormattingCodes.COLOR_ERROR, I18n.format("menu.multiplayer")), new TextLine(""), new TextLine("willAdd", 0x888888)));
 	}
 
 	protected void func_35325_a(String var1, int var2, int var3) {
