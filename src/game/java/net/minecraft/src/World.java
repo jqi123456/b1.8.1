@@ -1912,13 +1912,13 @@ public class World implements IBlockAccess {
 			--this.soundCounter;
 		}
 
-		Iterator var13 = this.positionsToUpdate.iterator();
-
-		while(var13.hasNext()) {
-			ChunkCoordIntPair var14 = (ChunkCoordIntPair)var13.next();
-			var3 = var14.chunkXPos * 16;
-			var4 = var14.chunkZPos * 16;
-			Chunk var15 = this.getChunkFromChunkCoords(var14.chunkXPos, var14.chunkZPos);
+		for(int i = 0; i < this.positionsToUpdate.size(); ++ i) {
+			long var14 = this.positionsToUpdate.getLong(i);
+			int x = (int) (var14 & 4294967295L);
+			int y = (int) (var14 >>> 32);
+			var3 = x * 16;
+			var4 = y * 16;
+			Chunk var15 = this.getChunkFromChunkCoords(x, y);
 			var15.func_35841_j();
 			int var8;
 			int var9;
