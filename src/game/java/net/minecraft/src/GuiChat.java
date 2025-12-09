@@ -33,15 +33,15 @@ public class GuiChat extends GuiScreen {
 				if(!this.mc.lineIsCommand(var4)) {
 					this.mc.thePlayer.sendChatMessage(var4);
 				}
-			} else if (var2 == Keyboard.KEY_V && ScuffedUtils.isCtrlKeyDown()) {
-				String clip = getClipboardString();
-				if (clip == null) clip = "";
-				this.message += clip;
-				if (this.message.length() > 100) this.message.subSequence(0, 100);
-				return;
 			}
 
 			this.mc.displayGuiScreen((GuiScreen)null);
+		} else if (var2 == Keyboard.KEY_V && ScuffedUtils.isCtrlKeyDown()) {
+			String clip = getClipboardString();
+			if (clip == null) clip = "";
+			this.message += clip;
+			if (this.message.length() > 100) this.message.subSequence(0, 100);
+			return;
 		} else {
 			if(var2 == 14 && this.message.length() > 0) {
 				this.message = this.message.substring(0, this.message.length() - 1);
