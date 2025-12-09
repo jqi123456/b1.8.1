@@ -3,13 +3,10 @@ package net.minecraft.src;
 import java.util.Comparator;
 
 public class RenderSorter implements Comparator {
-	public static RenderSorter instance = new RenderSorter();
-
 	private EntityLiving baseEntity;
-	
-	public RenderSorter setEntity(EntityLiving var1) {
+
+	public RenderSorter(EntityLiving var1) {
 		this.baseEntity = var1;
-		return this;
 	}
 
 	public int doCompare(WorldRenderer var1, WorldRenderer var2) {

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
-import java.util.List;
 
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 
@@ -119,11 +118,11 @@ public class ChunkLoader implements IChunkLoader {
 
 		Iterator var5;
 		NBTTagCompound var7;
-		for(int var4 = 0; var4 < var0.mapSize; ++var4) {
-			List<Entity> list = var0.entities.get(var4);
+		for(int var4 = 0; var4 < var0.entities.length; ++var4) {
+			var5 = var0.entities[var4].iterator();
 
-			for(int i = 0; i < list.size(); ++i) {
-				Entity var6 = (Entity)list.get(i);
+			while(var5.hasNext()) {
+				Entity var6 = (Entity)var5.next();
 				var0.hasEntities = true;
 				var7 = new NBTTagCompound();
 				if(var6.addEntityID(var7)) {

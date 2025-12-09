@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.lax1dude.eaglercraft.Random;
 
 import net.lax1dude.eaglercraft.EagRuntime;
@@ -27,9 +24,8 @@ public class Chunk {
 	public int lowestBlockHeight;
 	public final int xPosition;
 	public final int zPosition;
-	public Map<ChunkPosition, TileEntity> chunkTileEntityMap;
-	public Int2ObjectMap<List<Entity>> entities;
-	public final int mapSize;
+	public Map chunkTileEntityMap;
+	public List[] entities;
 	public boolean isTerrainPopulated;
 	public boolean isModified;
 	public boolean neverSave;
@@ -40,22 +36,21 @@ public class Chunk {
 	public Chunk(World var1, int var2, int var3) {
 		this.field_35845_c = new int[256];
 		this.field_35844_d = new boolean[256];
-		this.chunkTileEntityMap = new HashMap<>();
+		this.chunkTileEntityMap = new HashMap();
 		this.isTerrainPopulated = false;
 		this.isModified = false;
 		this.hasEntities = false;
 		this.lastSaveTime = 0L;
 		this.field_35846_u = false;
 		var1.getClass();
-		this.mapSize = 8;
-		this.entities = new Int2ObjectOpenHashMap<>(this.mapSize);
+		this.entities = new List[128 / 16];
 		this.worldObj = var1;
 		this.xPosition = var2;
 		this.zPosition = var3;
 		this.heightMap = new byte[256];
 
-		for(int var4 = 0; var4 < this.mapSize; ++var4) {
-			this.entities.put(var4, new ArrayList());
+		for(int var4 = 0; var4 < this.entities.length; ++var4) {
+			this.entities[var4] = new ArrayList();
 		}
 
 		Arrays.fill(this.field_35845_c, -999);
@@ -529,13 +524,15 @@ public class Chunk {
 			var4 = 0;
 		}
 
-		if(var4 >= this.mapSize) var4 = this.mapSize - 1;
+		if(var4 >= this.entities.length) {
+			var4 = this.entities.length - 1;
+		}
 
 		var1.addedToChunk = true;
 		var1.chunkCoordX = this.xPosition;
 		var1.chunkCoordY = var4;
 		var1.chunkCoordZ = this.zPosition;
-		this.entities.get(var4).add(var1);
+		this.entities[var4].add(var1);
 	}
 
 	public void removeEntity(Entity var1) {
@@ -547,9 +544,11 @@ public class Chunk {
 			var2 = 0;
 		}
 
-		if(var2 >= this.mapSize) var2 = this.mapSize - 1;
+		if(var2 >= this.entities.length) {
+			var2 = this.entities.length - 1;
+		}
 
-		this.entities.get(var2).remove(var1);
+		this.entities[var2].remove(var1);
 	}
 
 	public boolean canBlockSeeTheSky(int var1, int var2, int var3) {
@@ -621,8 +620,8 @@ public class Chunk {
 		this.isChunkLoaded = true;
 		this.worldObj.addTileEntity(this.chunkTileEntityMap.values());
 
-		for(int var1 = 0; var1 < this.mapSize; ++var1) {
-			this.worldObj.addLoadedEntities(this.entities.get(var1));
+		for(int var1 = 0; var1 < this.entities.length; ++var1) {
+			this.worldObj.addLoadedEntities(this.entities[var1]);
 		}
 
 	}
@@ -636,8 +635,8 @@ public class Chunk {
 			this.worldObj.func_35455_a(var2);
 		}
 
-		for(int var3 = 0; var3 < this.mapSize; ++var3) {
-			this.worldObj.unloadEntities(this.entities.get(var3));
+		for(int var3 = 0; var3 < this.entities.length; ++var3) {
+			this.worldObj.unloadEntities(this.entities[var3]);
 		}
 
 	}
@@ -653,10 +652,12 @@ public class Chunk {
 			var4 = 0;
 		}
 
-		if(var5 >= this.mapSize) var5 = this.mapSize - 1;
+		if(var5 >= this.entities.length) {
+			var5 = this.entities.length - 1;
+		}
 
 		for(int var6 = var4; var6 <= var5; ++var6) {
-			List var7 = this.entities.get(var6);
+			List var7 = this.entities[var6];
 
 			for(int var8 = 0; var8 < var7.size(); ++var8) {
 				Entity var9 = (Entity)var7.get(var8);
@@ -675,10 +676,12 @@ public class Chunk {
 			var4 = 0;
 		}
 
-		if(var5 >= this.mapSize) var5 = this.mapSize - 1;
+		if(var5 >= this.entities.length) {
+			var5 = this.entities.length - 1;
+		}
 
 		for(int var6 = var4; var6 <= var5; ++var6) {
-			List var7 = this.entities.get(var6);
+			List var7 = this.entities[var6];
 
 			for(int var8 = 0; var8 < var7.size(); ++var8) {
 				Entity var9 = (Entity)var7.get(var8);

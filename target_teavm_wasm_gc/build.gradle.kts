@@ -87,7 +87,18 @@ eaglercraftBuild {
 				"$srcFolder/platformNetworking.js",
 				"$srcFolder/platformOpenGL.js",
 				"$srcFolder/platformRuntime.js",
+<<<<<<< HEAD
 				"$srcFolder/WASMGCBufferAllocator.js",
+=======
+//				"$srcFolder/platformScreenRecord.js",
+//				"$srcFolder/platformVoiceClient.js",
+//				"$srcFolder/platformWebRTC.js",
+//				"$srcFolder/platformWebView.js",
+//				"$srcFolder/clientPlatformSingleplayer.js",
+//				"$srcFolder/serverPlatformSingleplayer.js",
+				"$srcFolder/WASMGCBufferAllocator.js",
+//				"$srcFolder/fix-webm-duration.js",
+>>>>>>> parent of c3d0ab2 (start porting some optimizations from b1.1_02)
 				"$srcFolder/teavm_runtime.js",
 				"$srcFolder/eagruntime_entrypoint.js"
 			)

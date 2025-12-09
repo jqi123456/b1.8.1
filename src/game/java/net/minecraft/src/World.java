@@ -9,8 +9,6 @@ import net.lax1dude.eaglercraft.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
-import it.unimi.dsi.fastutil.longs.LongArrayList;
-
 public class World implements IBlockAccess {
 	public final int field_35473_a;
 	public final int field_35471_b;
@@ -55,7 +53,7 @@ public class World implements IBlockAccess {
 	private boolean scanningTileEntities;
 	protected boolean spawnHostileMobs;
 	protected boolean spawnPeacefulMobs;
-	private LongArrayList positionsToUpdate;
+	private Set positionsToUpdate;
 	private int soundCounter;
 	int[] field_35466_H;
 	private List field_1012_M;
@@ -99,7 +97,7 @@ public class World implements IBlockAccess {
 		this.collidingBoundingBoxes = new ArrayList();
 		this.spawnHostileMobs = true;
 		this.spawnPeacefulMobs = true;
-		this.positionsToUpdate = new LongArrayList();
+		this.positionsToUpdate = new HashSet();
 		this.soundCounter = this.rand.nextInt(12000);
 		this.field_35466_H = new int[-Short.MIN_VALUE];
 		this.field_1012_M = new ArrayList();
@@ -145,7 +143,7 @@ public class World implements IBlockAccess {
 		this.collidingBoundingBoxes = new ArrayList();
 		this.spawnHostileMobs = true;
 		this.spawnPeacefulMobs = true;
-		this.positionsToUpdate = new LongArrayList();
+		this.positionsToUpdate = new HashSet();
 		this.soundCounter = this.rand.nextInt(12000);
 		this.field_35466_H = new int[-Short.MIN_VALUE];
 		this.field_1012_M = new ArrayList();
@@ -196,7 +194,7 @@ public class World implements IBlockAccess {
 		this.collidingBoundingBoxes = new ArrayList();
 		this.spawnHostileMobs = true;
 		this.spawnPeacefulMobs = true;
-		this.positionsToUpdate = new LongArrayList();
+		this.positionsToUpdate = new HashSet();
 		this.soundCounter = this.rand.nextInt(12000);
 		this.field_35466_H = new int[-Short.MIN_VALUE];
 		this.field_1012_M = new ArrayList();
@@ -1903,7 +1901,7 @@ public class World implements IBlockAccess {
 
 			for(var6 = -var5; var6 <= var5; ++var6) {
 				for(var7 = -var5; var7 <= var5; ++var7) {
-					this.positionsToUpdate.add(ChunkCoordIntPair.chunkXZ2Int(var6 + var3, var7 + var4));
+					this.positionsToUpdate.add(new ChunkCoordIntPair(var6 + var3, var7 + var4));
 				}
 			}
 		}
