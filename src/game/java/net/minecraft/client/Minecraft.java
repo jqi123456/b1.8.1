@@ -1,8 +1,10 @@
 package net.minecraft.client;
 
 import net.lax1dude.eaglercraft.EagRuntime;
+import net.lax1dude.eaglercraft.internal.PlatformOpenGL;
 import net.lax1dude.eaglercraft.internal.PlatformRuntime;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
+import net.lax1dude.eaglercraft.opengl.GlStateManager;
 import net.lax1dude.eaglercraft.profile.GuiScreenEditProfile;
 import net.minecraft.src.AchievementList;
 import net.minecraft.src.AxisAlignedBB;
@@ -84,6 +86,8 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldProvider;
 import net.minecraft.src.WorldRenderer;
 import net.minecraft.src.WorldSettings;
+import net.peyton.eagler.minecraft.DetectAnisotropicGlitch;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -246,6 +250,7 @@ public class Minecraft implements Runnable {
 
 		this.checkGLError("Post startup");
 		this.ingameGUI = new GuiIngame(this);
+		GlStateManager.anisotropicPatch(PlatformOpenGL.checkAnisotropicFilteringSupport() && DetectAnisotropicGlitch.hasGlitch());
 		if (this.serverIP != null) {
 			this.displayGuiScreen(new GuiScreenEditProfile(new GuiConnecting(this, this.menu, this.serverIP)));
 		} else {

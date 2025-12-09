@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
 
+import dev.colbster937.eaglercraft.render.RenderRegionCache;
+
 public class WorldRenderer {
 	public World worldObj;
 	private int glRenderList = -1;
@@ -97,7 +99,7 @@ public class WorldRenderer {
 			var21.addAll(this.tileEntityRenderers);
 			this.tileEntityRenderers.clear();
 			byte var8 = 1;
-			ChunkCache var9 = new ChunkCache(this.worldObj, var1 - var8, var2 - var8, var3 - var8, var4 + var8, var5 + var8, var6 + var8);
+			RenderRegionCache var9 = new RenderRegionCache(this.worldObj, var1 - var8, var2 - var8, var3 - var8, var4 + var8, var5 + var8, var6 + var8, var8);
 			RenderBlocks var10 = new RenderBlocks(var9);
 
 			for(int var11 = 0; var11 < 2; ++var11) {
@@ -210,6 +212,10 @@ public class WorldRenderer {
 
 	public boolean skipAllRenderPasses() {
 		return !this.isInitialized ? false : this.skipRenderPass[0] && this.skipRenderPass[1];
+	}
+
+	public boolean canRender() {
+		return !this.isInitialized ? false : this.skipRenderPass[0] && this.skipRenderPass[1] && !this.needsUpdate;
 	}
 
 	public void markDirty() {

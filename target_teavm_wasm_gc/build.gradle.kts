@@ -41,7 +41,6 @@ dependencies {
 	compileOnly("org.teavm:teavm-core:0.12.1-EAGLER-R3") // workaround for a few hacks
 	implementation(libs.jorbis)
 	implementation(libs.bundles.common)
-	implementation(fileTree("../gradle/jars") { include("*.jar") })
 }
 
 val wasmFolder = "javascript"
@@ -87,14 +86,14 @@ eaglercraftBuild {
 				"$srcFolder/platformNetworking.js",
 				"$srcFolder/platformOpenGL.js",
 				"$srcFolder/platformRuntime.js",
-//				"$srcFolder/platformScreenRecord.js",
-//				"$srcFolder/platformVoiceClient.js",
-//				"$srcFolder/platformWebRTC.js",
-//				"$srcFolder/platformWebView.js",
-//				"$srcFolder/clientPlatformSingleplayer.js",
-//				"$srcFolder/serverPlatformSingleplayer.js",
+				"$srcFolder/platformScreenRecord.js",
+				"$srcFolder/platformVoiceClient.js",
+				"$srcFolder/platformWebRTC.js",
+				"$srcFolder/platformWebView.js",
+				"$srcFolder/clientPlatformSingleplayer.js",
+				"$srcFolder/serverPlatformSingleplayer.js",
 				"$srcFolder/WASMGCBufferAllocator.js",
-//				"$srcFolder/fix-webm-duration.js",
+				"$srcFolder/fix-webm-duration.js",
 				"$srcFolder/teavm_runtime.js",
 				"$srcFolder/eagruntime_entrypoint.js"
 			)

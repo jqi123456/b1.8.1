@@ -1,19 +1,21 @@
 package net.minecraft.src;
 
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import net.lax1dude.eaglercraft.Random;
 import net.minecraft.client.Minecraft;
+import net.peyton.eagler.minecraft.LegacyMergeSort;
+
 import org.lwjgl.opengl.GL11;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 public class RenderGlobal implements IWorldAccess {
 	public List tileEntities = new ArrayList();
 	private World worldObj;
 	private RenderEngine renderEngine;
-	private List worldRenderersToUpdate = new ArrayList();
+	private ObjectArrayList<WorldRenderer> worldRenderersToUpdate = new ObjectArrayList<>();
 	private WorldRenderer[] sortedWorldRenderers;
 	private WorldRenderer[] worldRenderers;
 	private int renderChunksWide;
@@ -226,7 +228,7 @@ public class RenderGlobal implements IWorldAccess {
 				EntityLiving var7 = this.mc.renderViewEntity;
 				if(var7 != null) {
 					this.markRenderersForNewPosition(MathHelper.floor_double(var7.posX), MathHelper.floor_double(var7.posY), MathHelper.floor_double(var7.posZ));
-					Arrays.sort(this.sortedWorldRenderers, new EntitySorter(var7));
+					LegacyMergeSort.sort(this.sortedWorldRenderers, new EntitySorter(var7));
 				}
 			}
 
@@ -403,7 +405,7 @@ public class RenderGlobal implements IWorldAccess {
 			this.prevSortY = var1.posY;
 			this.prevSortZ = var1.posZ;
 			this.markRenderersForNewPosition(MathHelper.floor_double(var1.posX), MathHelper.floor_double(var1.posY), MathHelper.floor_double(var1.posZ));
-			Arrays.sort(this.sortedWorldRenderers, new EntitySorter(var1));
+			LegacyMergeSort.sort(this.sortedWorldRenderers, new EntitySorter(var1));
 		}
 
 		RenderHelper.disableStandardItemLighting();
@@ -851,147 +853,52 @@ public class RenderGlobal implements IWorldAccess {
 	}
 
 	public boolean updateRenderers(EntityLiving var1, boolean var2) {
-		boolean var3 = false;
-		if(var3) {
-			Collections.sort(this.worldRenderersToUpdate, new RenderSorter(var1));
-			int var17 = this.worldRenderersToUpdate.size() - 1;
-			int var18 = this.worldRenderersToUpdate.size();
-
-			for(int var19 = 0; var19 < var18; ++var19) {
-				WorldRenderer var20 = (WorldRenderer)this.worldRenderersToUpdate.get(var17 - var19);
-				if(!var2) {
-					if(var20.distanceToEntitySquared(var1) > 256.0F) {
-						if(var20.isInFrustum) {
-							if(var19 >= 3) {
-								return false;
-							}
-						} else if(var19 >= 1) {
-							return false;
-						}
+		RenderSorter var4 = RenderSorter.instance.setEntity(var1);
+		ArrayList<WorldRenderer> var6 = null;
+		int var7 = this.worldRenderersToUpdate.size();
+		int var9;
+		WorldRenderer var10;
+		ObjectArrayList<WorldRenderer> laterUpdateList = new ObjectArrayList<>(var7);
+		for (var9 = 0; var9 < var7; ++var9) {
+			var10 = this.worldRenderersToUpdate.get(var9);
+			
+			if (var10 != null) {
+				if (!var10.isInFrustum || !var10.isVisible) {
+					laterUpdateList.add(var10);
+				} else {
+					if (var6 == null) {
+						var6 = new ArrayList<>();
 					}
-				} else if(!var20.isInFrustum) {
-					continue;
+					
+					var6.add(var10);
 				}
-
-				var20.updateRenderer();
-				this.worldRenderersToUpdate.remove(var20);
-				var20.needsUpdate = false;
-			}
-
-			return this.worldRenderersToUpdate.size() == 0;
-		} else {
-			byte var4 = 2;
-			RenderSorter var5 = new RenderSorter(var1);
-			WorldRenderer[] var6 = new WorldRenderer[var4];
-			ArrayList var7 = null;
-			int var8 = this.worldRenderersToUpdate.size();
-			int var9 = 0;
-
-			int var10;
-			WorldRenderer var11;
-			int var12;
-			int var13;
-			label169:
-			for(var10 = 0; var10 < var8; ++var10) {
-				var11 = (WorldRenderer)this.worldRenderersToUpdate.get(var10);
-				if(!var2) {
-					if(var11.distanceToEntitySquared(var1) > 256.0F) {
-						for(var12 = 0; var12 < var4 && (var6[var12] == null || var5.doCompare(var6[var12], var11) <= 0); ++var12) {
-						}
-
-						--var12;
-						if(var12 <= 0) {
-							continue;
-						}
-
-						var13 = var12;
-
-						while(true) {
-							--var13;
-							if(var13 == 0) {
-								var6[var12] = var11;
-								continue label169;
-							}
-
-							var6[var13 - 1] = var6[var13];
-						}
-					}
-				} else if(!var11.isInFrustum) {
-					continue;
-				}
-
-				if(var7 == null) {
-					var7 = new ArrayList();
-				}
-
-				++var9;
-				var7.add(var11);
-				this.worldRenderersToUpdate.set(var10, (Object)null);
-			}
-
-			if(var7 != null) {
-				if(var7.size() > 1) {
-					Collections.sort(var7, var5);
-				}
-
-				for(var10 = var7.size() - 1; var10 >= 0; --var10) {
-					var11 = (WorldRenderer)var7.get(var10);
-					var11.updateRenderer();
-					var11.needsUpdate = false;
-				}
-			}
-
-			var10 = 0;
-
-			int var21;
-			for(var21 = var4 - 1; var21 >= 0; --var21) {
-				WorldRenderer var22 = var6[var21];
-				if(var22 != null) {
-					if(!var22.isInFrustum && var21 != var4 - 1) {
-						var6[var21] = null;
-						var6[0] = null;
-						break;
-					}
-
-					var6[var21].updateRenderer();
-					var6[var21].needsUpdate = false;
-					++var10;
-				}
-			}
-
-			var21 = 0;
-			var12 = 0;
-
-			for(var13 = this.worldRenderersToUpdate.size(); var21 != var13; ++var21) {
-				WorldRenderer var14 = (WorldRenderer)this.worldRenderersToUpdate.get(var21);
-				if(var14 != null) {
-					boolean var15 = false;
-
-					for(int var16 = 0; var16 < var4 && !var15; ++var16) {
-						if(var14 == var6[var16]) {
-							var15 = true;
-						}
-					}
-
-					if(!var15) {
-						if(var12 != var21) {
-							this.worldRenderersToUpdate.set(var12, var14);
-						}
-
-						++var12;
-					}
-				}
-			}
-
-			while(true) {
-				--var21;
-				if(var21 < var12) {
-					return var8 == var9 + var10;
-				}
-
-				this.worldRenderersToUpdate.remove(var21);
 			}
 		}
+		
+		this.worldRenderersToUpdate = laterUpdateList;
+		
+		int updates = 0;
+		if (var6 != null) {
+			int size = var6.size();
+			if (size > 1) {
+				var6.sort(var4);
+			}
+			
+			for (var9 = size - 1; var9 >= 0; --var9) {
+				var10 = var6.get(var9);
+				if(updates >= 1) {
+					this.worldRenderersToUpdate.add(var10);
+				} else {
+					var10.updateRenderer();
+					var10.needsUpdate = false;
+					if(!var10.canRender()) {
+						++updates;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 
 	public void drawBlockBreaking(EntityPlayer var1, MovingObjectPosition var2, int var3, ItemStack var4, float var5) {
