@@ -10,6 +10,8 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import dev.colbster937.eaglercraft.utils.ScuffedUtils;
+
 public class GuiIngame extends Gui {
 	private static RenderItem itemRenderer = new RenderItem();
 	private List chatMessageList = new ArrayList();
@@ -21,7 +23,9 @@ public class GuiIngame extends Gui {
 	private int recordPlayingUpFor = 0;
 	private boolean recordIsPlaying = false;
 	public float damageGuiPartialTime;
-	float prevVignetteBrightness = 1.0F;
+	float prevVignetteBrightness = 1.0f;
+
+	private static final String gameVer = "Minecraft Beta 1.8.1";
 
 	public GuiIngame(Minecraft var1) {
 		this.mc = var1;
@@ -262,7 +266,7 @@ public class GuiIngame extends Gui {
 				GL11.glTranslatef(0.0F, 32.0F, 0.0F);
 			}
 
-			var8.drawStringWithShadow("Minecraft Beta 1.8.1 (" + this.mc.debug + ")", 2, 2, 16777215);
+			var8.drawStringWithShadow(gameVer + " (" + this.mc.debug + ")", 2, 2, 16777215);
 			var8.drawStringWithShadow(this.mc.debugInfoRenders(), 2, 12, 16777215);
 			var8.drawStringWithShadow(this.mc.func_6262_n(), 2, 22, 16777215);
 			var8.drawStringWithShadow(this.mc.debugInfoEntities(), 2, 32, 16777215);
@@ -282,9 +286,7 @@ public class GuiIngame extends Gui {
 			this.drawString(var8, "Seed: " + this.mc.theWorld.getRandomSeed(), 2, 104, 14737632);
 			GL11.glPopMatrix();
 		} else {
-			if (this.mc.gameSettings.showFramerate) var8.drawStringWithShadow("Minecraft Beta 1.8.1 (" + this.mc.fps + " fps)", 2, 2, 16777215);
-			else var8.drawStringWithShadow("Minecraft Beta 1.8.1", 2, 2, 16777215);
-			if (this.mc.gameSettings.showCoords) var8.drawStringWithShadow("x: " + (int) Math.floor(this.mc.thePlayer.posX) + ", y: " + (int) Math.floor(this.mc.thePlayer.posY) + ", z: " + (int) Math.floor(this.mc.thePlayer.posZ), 2, 12, 16777215);
+			ScuffedUtils.drawIngameGUI(gameVer, this.mc);
 		}
 
 		if(this.recordPlayingUpFor > 0) {

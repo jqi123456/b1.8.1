@@ -9,6 +9,9 @@ import org.lwjgl.input.Keyboard;
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.HString;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
+import net.minecraft.client.Minecraft;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.FontRenderer;
 
 public class ScuffedUtils {
   public static File getFileFromVFile(VFile2 vfile) throws IOException {
@@ -57,5 +60,21 @@ public class ScuffedUtils {
 
   public static boolean isStringEmpty(String str) {
     return str == null || str.isEmpty() || str.isBlank() || str.length() < 1;
+  }
+
+  public static void drawIngameGUI(String version, Minecraft mc) {
+    FontRenderer fontRenderer = mc.fontRenderer;
+    if (mc.gameSettings.showFramerate) fontRenderer.drawStringWithShadow(version + " (" + mc.fps + " fps)", 2, 2, 16777215);
+    else fontRenderer.drawStringWithShadow(version, 2, 2, 16777215);
+    if (mc.gameSettings.showCoords) fontRenderer.drawStringWithShadow(getPlayerCoordinateString(mc), 2, 12, 16777215);
+  }
+
+  public static String getPlayerCoordinateString(Minecraft mc) {
+    EntityPlayer player = mc.thePlayer;
+    return HString.format("x: %d, y: %d, z: %d", truncateCoordinate(player.posX), truncateCoordinate(player.posY), truncateCoordinate(player.posZ));
+  }
+
+  public static int truncateCoordinate(double coord) {
+    return (int) Math.floor(coord);
   }
 }

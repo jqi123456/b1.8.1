@@ -197,8 +197,11 @@ public class ModelRenderer {
 		GL11.glNewList(this.displayList, GL11.GL_COMPILE);
 		Tessellator var2 = Tessellator.instance;
 
-		for(int var3 = 0; var3 < this.faces.length; ++var3) {
-			this.faces[var3].draw(var2, var1);
+		int j = this.faces.length;
+		if (j > 0) {
+			var2.startDrawingQuads();
+			for(int i = 0; i < j; ++i) this.faces[i].draw(var2, var1);
+			var2.draw();
 		}
 
 		GL11.glEndList();

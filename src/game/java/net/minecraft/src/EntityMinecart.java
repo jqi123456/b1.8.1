@@ -123,7 +123,7 @@ public class EntityMinecart extends Entity implements IInventory {
 	}
 
 	public void performHurtAnimation() {
-		System.out.println("Animating hurt");
+		// System.out.println("Animating hurt");
 		this.minecartRockDirection = -this.minecartRockDirection;
 		this.minecartTimeSinceHit = 10;
 		this.minecartCurrentDamage += this.minecartCurrentDamage * 10;

@@ -4,37 +4,40 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.peyton.eagler.minecraft.suppliers.PacketSupplier;
 
 public abstract class Packet {
-	private static MCHash packetIdToClassMap = new MCHash();
-	private static Map packetClassToIdMap = new HashMap();
+	private static Int2ObjectMap packetIdToClassMap = new Int2ObjectOpenHashMap();
+	private static Object2IntMap packetClassToIdMap = new Object2IntOpenHashMap();
 	private static Set clientPacketIdList = new HashSet();
 	private static Set serverPacketIdList = new HashSet();
-	public final long creationTimeMillis = System.currentTimeMillis();
+	public final long creationTimeMillis = EagRuntime.steadyTimeMillis();
 	public boolean isChunkDataPacket = false;
 	private static MCHash totalPacketsCount;
 	private static int packetStats;
 
 	static void addIdClassMapping(int var0, boolean var1, boolean var2, Class var3, PacketSupplier var4) {
-		if(packetIdToClassMap.func_35858_b(var0)) {
+		if(packetIdToClassMap.containsKey(var0)) {
 			throw new IllegalArgumentException("Duplicate packet id:" + var0);
 		} else if(packetClassToIdMap.containsKey(var3)) {
 			throw new IllegalArgumentException("Duplicate packet class:" + var3);
 		} else {
-			packetIdToClassMap.addKey(var0, var4);
-			packetClassToIdMap.put(var3, Integer.valueOf(var0));
+			packetIdToClassMap.put(var0, var4);
+			packetClassToIdMap.put(var3, var0);
 			if(var1) {
-				clientPacketIdList.add(Integer.valueOf(var0));
+				clientPacketIdList.add(var0);
 			}
 
 			if(var2) {
-				serverPacketIdList.add(Integer.valueOf(var0));
+				serverPacketIdList.add(var0);
 			}
 
 		}
@@ -42,7 +45,7 @@ public abstract class Packet {
 
 	public static Packet getNewPacket(int var0) {
 		try {
-			PacketSupplier var1 = (PacketSupplier)packetIdToClassMap.lookup(var0);
+			PacketSupplier var1 = (PacketSupplier)packetIdToClassMap.get(var0);
 			return var1 == null ? null : var1.createPacket();
 		} catch (Exception var2) {
 			var2.printStackTrace();
@@ -66,7 +69,7 @@ public abstract class Packet {
 				return null;
 			}
 
-			if(var1 && !serverPacketIdList.contains(Integer.valueOf(var6)) || !var1 && !clientPacketIdList.contains(Integer.valueOf(var6))) {
+			if(var1 && !serverPacketIdList.contains(var6) || !var1 && !clientPacketIdList.contains(var6)) {
 				throw new IOException("Bad packet id " + var6);
 			}
 

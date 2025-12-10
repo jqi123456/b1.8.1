@@ -4,6 +4,7 @@ import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.internal.PlatformOpenGL;
 import net.lax1dude.eaglercraft.internal.PlatformRuntime;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
+import net.lax1dude.eaglercraft.opengl.EaglercraftGPU;
 import net.lax1dude.eaglercraft.opengl.GlStateManager;
 import net.lax1dude.eaglercraft.profile.GuiScreenEditProfile;
 import net.minecraft.src.AchievementList;
@@ -106,7 +107,6 @@ public class Minecraft implements Runnable {
 	public static byte[] field_28006_b = new byte[10485760];
 	private static Minecraft theMinecraft;
 	public PlayerController playerController;
-	private boolean fullscreen = false;
 	private boolean hasCrashed = false;
 	public int displayWidth;
 	public int displayHeight;
@@ -152,7 +152,7 @@ public class Minecraft implements Runnable {
 	long prevFrameTime = -1L;
 	public boolean inGameHasFocus = false;
 	public boolean isRaining = false;
-	long systemTime = System.currentTimeMillis();
+	long systemTime = EagRuntime.steadyTimeMillis();
 	private int joinPlayerCounter = 0;
 
 	private String serverIP;
@@ -162,7 +162,6 @@ public class Minecraft implements Runnable {
 		StatList.func_27360_a();
 		this.displayWidth = Display.getWidth();
 		this.displayHeight = Display.getHeight();
-		this.fullscreen = false;
 
 		this.session = new Session("Player", "");
 		theMinecraft = this;
@@ -277,7 +276,8 @@ public class Minecraft implements Runnable {
 		GL11.glDisable(GL11.GL_FOG);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.renderEngine.getTexture("/title/mojang.png"));
 		var2.startDrawingQuads();
-		var2.setColorOpaque_I(16777215);
+		// var2.setColorOpaque_I(16777215);
+		var2.setColorRGBA(255, 255, 255, 255);
 		var2.addVertexWithUV(0.0D, (double) this.displayHeight, 0.0D, 0.0D, 0.0D);
 		var2.addVertexWithUV((double) this.displayWidth, (double) this.displayHeight, 0.0D, 0.0D, 0.0D);
 		var2.addVertexWithUV((double) this.displayWidth, 0.0D, 0.0D, 0.0D, 0.0D);
@@ -290,8 +290,9 @@ public class Minecraft implements Runnable {
 		this.scaledTessellator((var1.getScaledWidth() - var3) / 2, (var1.getScaledHeight() - var4) / 2, 0, 0, var3, var4);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_FOG);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glEnable(GL11.GL_ALPHA);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+		Display.update();
 	}
 
 	public void scaledTessellator(int var1, int var2, int var3, int var4, int var5, int var6) {
@@ -423,16 +424,15 @@ public class Minecraft implements Runnable {
 		}
 
 		try {
-			long var1 = System.currentTimeMillis();
+			long var1 = EagRuntime.steadyTimeMillis();
 			int var3 = 0;
 
 			while (this.running) {
 				try {
 					AxisAlignedBB.clearBoundingBoxPool();
 					Vec3D.initialize();
-					if (Display.isCloseRequested()) {
-						this.shutdown();
-					}
+					
+					Display.checkContextLost();
 
 					if (this.isGamePaused && this.theWorld != null) {
 						float var4 = this.timer.renderPartialTicks;
@@ -442,7 +442,7 @@ public class Minecraft implements Runnable {
 						this.timer.updateTimer();
 					}
 
-					long var23 = System.nanoTime();
+					long var23 = EagRuntime.nanoTime();
 
 					for (int var6 = 0; var6 < this.timer.elapsedTicks; ++var6) {
 						++this.ticksRan;
@@ -456,10 +456,15 @@ public class Minecraft implements Runnable {
 						}
 					}
 
-					long var24 = System.nanoTime() - var23;
+					long var24 = EagRuntime.nanoTime() - var23;
 					this.checkGLError("Pre render");
 					RenderBlocks.fancyGrass = this.gameSettings.fancyGrass;
 					this.sndManager.func_338_a(this.thePlayer, this.timer.renderPartialTicks);
+					EaglercraftGPU.optimize();
+					PlatformOpenGL._wglBindFramebuffer(0x8D40, null);
+					GL11.glViewport(0, 0, this.displayWidth, this.displayHeight);
+					GL11.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					if (this.theWorld != null) {
 						this.theWorld.updatingLighting();
@@ -477,14 +482,12 @@ public class Minecraft implements Runnable {
 						this.entityRenderer.updateCameraAndRender(this.timer.renderPartialTicks);
 					}
 
-					if (!Display.isActive() && this.fullscreen) {
-						this.toggleFullscreen();
-					}
+					GL11.glPopMatrix();
 
 					if (this.gameSettings.showDebugInfo) {
 						this.displayDebugInfo(var24);
 					} else {
-						this.prevFrameTime = System.nanoTime();
+						this.prevFrameTime = EagRuntime.nanoTime();
 					}
 
 					this.guiAchievement.updateAchievementWindow();
@@ -496,7 +499,7 @@ public class Minecraft implements Runnable {
 					++var3;
 
 					for (this.isGamePaused = !this.isMultiplayerWorld() && this.currentScreen != null
-							&& this.currentScreen.doesGuiPauseGame(); System.currentTimeMillis() >= var1 + 1000L; var3 = 0) {
+							&& this.currentScreen.doesGuiPauseGame(); EagRuntime.steadyTimeMillis() >= var1 + 1000L; var3 = 0) {
 						this.debug = var3 + " fps, " + WorldRenderer.chunksUpdated + " chunk updates";
 						this.fps = var3;
 						WorldRenderer.chunksUpdated = 0;
@@ -562,10 +565,10 @@ public class Minecraft implements Runnable {
 	private void displayDebugInfo(long var1) {
 		long var3 = 16666666L;
 		if (this.prevFrameTime == -1L) {
-			this.prevFrameTime = System.nanoTime();
+			this.prevFrameTime = EagRuntime.nanoTime();
 		}
 
-		long var5 = System.nanoTime();
+		long var5 = EagRuntime.nanoTime();
 		tickTimes[numRecordedFrameTimes & frameTimes.length - 1] = var1;
 		frameTimes[numRecordedFrameTimes++ & frameTimes.length - 1] = var5 - this.prevFrameTime;
 		this.prevFrameTime = var5;
@@ -853,7 +856,7 @@ public class Minecraft implements Runnable {
 					KeyBinding.func_35960_a(Mouse.getEventButton() - 100);
 				}
 
-				long var5 = System.currentTimeMillis() - this.systemTime;
+				long var5 = EagRuntime.steadyTimeMillis() - this.systemTime;
 				if (var5 <= 200L) {
 					var3 = Mouse.getEventDWheel();
 					if (var3 != 0) {
@@ -1028,7 +1031,7 @@ public class Minecraft implements Runnable {
 			}
 		}
 
-		this.systemTime = System.currentTimeMillis();
+		this.systemTime = EagRuntime.steadyTimeMillis();
 	}
 
 	private void forceReload() {

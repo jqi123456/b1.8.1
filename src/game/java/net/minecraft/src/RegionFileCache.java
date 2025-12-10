@@ -14,19 +14,19 @@ import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 public class RegionFileCache {
 	private static final Map regionsByFilename = new HashMap();
 
-	public static synchronized RegionFile createOrLoadRegionFile(VFile2 var0, int var1, int var2) {
+	public static RegionFile createOrLoadRegionFile(VFile2 var0, int var1, int var2) {
 		VFile2 var3 = new VFile2(var0, "region");
 		VFile2 var4 = new VFile2(var3, "r." + (var1 >> 5) + "." + (var2 >> 5) + ".mcr");
-		Reference var5 = (Reference)regionsByFilename.get(var4);
+		Reference var5 = (Reference) regionsByFilename.get(var4);
 		RegionFile var6;
-		if(var5 != null) {
-			var6 = (RegionFile)var5.get();
-			if(var6 != null) {
+		if (var5 != null) {
+			var6 = (RegionFile) var5.get();
+			if (var6 != null) {
 				return var6;
 			}
 		}
 
-		if(regionsByFilename.size() >= 256) {
+		if (regionsByFilename.size() >= 256) {
 			clearRegionFileReferences();
 		}
 
@@ -35,21 +35,21 @@ public class RegionFileCache {
 		return var6;
 	}
 
-	public static synchronized void clearRegionFileReferences() {
+	public static void clearRegionFileReferences() {
 		saveRegionFiles();
 
 		regionsByFilename.clear();
 	}
 
-	public static synchronized void saveRegionFiles() {
+	public static void saveRegionFiles() {
 		Iterator var0 = regionsByFilename.values().iterator();
 
-		while(var0.hasNext()) {
-			Reference var1 = (Reference)var0.next();
+		while (var0.hasNext()) {
+			Reference var1 = (Reference) var0.next();
 
 			try {
-				RegionFile var2 = (RegionFile)var1.get();
-				if(var2 != null) {
+				RegionFile var2 = (RegionFile) var1.get();
+				if (var2 != null) {
 					var2.close();
 				}
 			} catch (IOException var3) {

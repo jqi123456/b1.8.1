@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -91,7 +93,7 @@ public class World implements IBlockAccess {
 		this.lastLightningBolt = 0;
 		this.field_27172_i = 0;
 		this.editingBlocks = false;
-		this.lockTimestamp = System.currentTimeMillis();
+		this.lockTimestamp = EagRuntime.steadyTimeMillis();
 		this.autosavePeriod = 40;
 		this.rand = new Random();
 		this.isNewWorld = false;
@@ -137,7 +139,7 @@ public class World implements IBlockAccess {
 		this.lastLightningBolt = 0;
 		this.field_27172_i = 0;
 		this.editingBlocks = false;
-		this.lockTimestamp = System.currentTimeMillis();
+		this.lockTimestamp = EagRuntime.steadyTimeMillis();
 		this.autosavePeriod = 40;
 		this.rand = new Random();
 		this.isNewWorld = false;
@@ -188,7 +190,7 @@ public class World implements IBlockAccess {
 		this.lastLightningBolt = 0;
 		this.field_27172_i = 0;
 		this.editingBlocks = false;
-		this.lockTimestamp = System.currentTimeMillis();
+		this.lockTimestamp = EagRuntime.steadyTimeMillis();
 		this.autosavePeriod = 40;
 		this.rand = new Random();
 		this.isNewWorld = false;
@@ -2271,7 +2273,13 @@ public class World implements IBlockAccess {
 			}
 
 			if(var10 > 0) {
-				Block.blocksList[var10].randomDisplayTick(this, var7, var8, var9, var5);
+				Block block;
+				try {
+					block = Block.blocksList[var10];
+				} catch(Throwable t) {
+					return;
+				}
+				if(block != null) block.randomDisplayTick(this, var7, var8, var9, var5);
 			}
 		}
 

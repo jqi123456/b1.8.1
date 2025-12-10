@@ -10,10 +10,10 @@ public class RecipesTools {
 
 			for(int var4 = 0; var4 < this.recipeItems.length - 1; ++var4) {
 				Item var5 = (Item)this.recipeItems[var4 + 1][var2];
-				var1.addRecipe(new ItemStack(var5), new Object[]{this.recipePatterns[var4], Character.valueOf('#'), Item.stick, Character.valueOf('X'), var3});
+				var1.addRecipe(new ItemStack(var5), new Object[]{this.recipePatterns[var4], '#', Item.stick, 'X', var3});
 			}
 		}
 
-		var1.addRecipe(new ItemStack(Item.shears), new Object[]{" #", "# ", Character.valueOf('#'), Item.ingotIron});
+		var1.addRecipe(new ItemStack(Item.shears), new Object[]{" #", "# ", '#', Item.ingotIron});
 	}
 }

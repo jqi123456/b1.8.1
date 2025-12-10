@@ -25,7 +25,7 @@ public class EntityPainting extends Entity {
 		this.yPosition = var3;
 		this.zPosition = var4;
 		ArrayList var6 = new ArrayList();
-		EnumArt[] var7 = EnumArt.values();
+		EnumArt[] var7 = EnumArt.VALUES;
 		int var8 = var7.length;
 
 		for(int var9 = 0; var9 < var8; ++var9) {
@@ -49,7 +49,7 @@ public class EntityPainting extends Entity {
 		this.xPosition = var2;
 		this.yPosition = var3;
 		this.zPosition = var4;
-		EnumArt[] var7 = EnumArt.values();
+		EnumArt[] var7 = EnumArt.VALUES;
 		int var8 = var7.length;
 
 		for(int var9 = 0; var9 < var8; ++var9) {
@@ -221,7 +221,7 @@ public class EntityPainting extends Entity {
 		this.yPosition = var1.getInteger("TileY");
 		this.zPosition = var1.getInteger("TileZ");
 		String var2 = var1.getString("Motive");
-		EnumArt[] var3 = EnumArt.values();
+		EnumArt[] var3 = EnumArt.VALUES;
 		int var4 = var3.length;
 
 		for(int var5 = 0; var5 < var4; ++var5) {

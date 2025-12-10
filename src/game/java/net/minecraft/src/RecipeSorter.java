@@ -3,10 +3,11 @@ package net.minecraft.src;
 import java.util.Comparator;
 
 class RecipeSorter implements Comparator {
-	final CraftingManager craftingManager;
+	public static final RecipeSorter instance = new RecipeSorter();
+	private static CraftingManager craftingManager;
 
-	RecipeSorter(CraftingManager var1) {
-		this.craftingManager = var1;
+	static void setCraftingManager(CraftingManager _craftingManager) {
+		craftingManager = _craftingManager;
 	}
 
 	public int compareRecipes(IRecipe var1, IRecipe var2) {

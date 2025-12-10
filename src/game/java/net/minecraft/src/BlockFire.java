@@ -1,10 +1,12 @@
 package net.minecraft.src;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.lax1dude.eaglercraft.Random;
 
 public class BlockFire extends Block {
-	private int[] chanceToEncourageFire = new int[256];
-	private int[] abilityToCatchFire = new int[256];
+	private Object2IntMap<Integer> chanceToEncourageFire = new Object2IntOpenHashMap<>(256);
+	private Object2IntMap<Integer> abilityToCatchFire = new Object2IntOpenHashMap<>(256);
 
 	protected BlockFire(int var1, int var2) {
 		super(var1, var2, Material.fire);
@@ -25,8 +27,8 @@ public class BlockFire extends Block {
 	}
 
 	private void setBurnRate(int var1, int var2, int var3) {
-		this.chanceToEncourageFire[var1] = var2;
-		this.abilityToCatchFire[var1] = var3;
+		this.chanceToEncourageFire.put(Integer.valueOf(var1), var2);
+		this.abilityToCatchFire.put(Integer.valueOf(var1), var3);
 	}
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4) {
@@ -114,7 +116,7 @@ public class BlockFire extends Block {
 	}
 
 	private void tryToCatchBlockOnFire(World var1, int var2, int var3, int var4, int var5, Random var6, int var7) {
-		int var8 = this.abilityToCatchFire[var1.getBlockId(var2, var3, var4)];
+		int var8 = this.abilityToCatchFire.get(var1.getBlockId(var2, var3, var4));
 		if(var6.nextInt(var5) < var8) {
 			boolean var9 = var1.getBlockId(var2, var3, var4) == Block.tnt.blockID;
 			if(var6.nextInt(var7 + 10) < 5 && !var1.canLightningStrikeAt(var2, var3, var4)) {
@@ -159,11 +161,11 @@ public class BlockFire extends Block {
 	}
 
 	public boolean canBlockCatchFire(IBlockAccess var1, int var2, int var3, int var4) {
-		return this.chanceToEncourageFire[var1.getBlockId(var2, var3, var4)] > 0;
+		return this.chanceToEncourageFire.get(var1.getBlockId(var2, var3, var4)) > 0;
 	}
 
 	public int getChanceToEncourageFire(World var1, int var2, int var3, int var4, int var5) {
-		int var6 = this.chanceToEncourageFire[var1.getBlockId(var2, var3, var4)];
+		int var6 = this.chanceToEncourageFire.get(var1.getBlockId(var2, var3, var4));
 		return var6 > var5 ? var6 : var5;
 	}
 

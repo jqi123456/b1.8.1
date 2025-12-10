@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 import net.lax1dude.eaglercraft.Random;
-
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.EagUtils;
 import net.lax1dude.eaglercraft.internal.buffer.FloatBuffer;
 import net.lax1dude.eaglercraft.opengl.ImageData;
@@ -48,7 +48,7 @@ public class EntityRenderer {
 	private double cameraZoom = 1.0D;
 	private double cameraYaw = 0.0D;
 	private double cameraPitch = 0.0D;
-	private long prevFrameTime = System.currentTimeMillis();
+	private long prevFrameTime = EagRuntime.steadyTimeMillis();
 	private long renderEndNanoTime = 0L;
 	private boolean field_35815_V = false;
 	float field_35819_e = 0.0F;
@@ -541,11 +541,11 @@ public class EntityRenderer {
 		}
 
 		if(!Display.isActive()) {
-			if(System.currentTimeMillis() - this.prevFrameTime > 500L) {
+			if(EagRuntime.steadyTimeMillis() - this.prevFrameTime > 500L) {
 				this.mc.displayInGameMenu();
 			}
 		} else {
-			this.prevFrameTime = System.currentTimeMillis();
+			this.prevFrameTime = EagRuntime.steadyTimeMillis();
 		}
 
 		if(this.mc.inGameHasFocus) {
@@ -703,7 +703,7 @@ public class EntityRenderer {
 					GL11.glShadeModel(GL11.GL_SMOOTH);
 				}
 
-				// GL11.glColorMask(false, false, false, false);
+				GL11.glColorMask(false, false, false, false);
 				var16 = var5.sortAndRender(var4, 1, (double)var1);
 				if(this.mc.gameSettings.anaglyph) {
 					if(anaglyphField == 0) {

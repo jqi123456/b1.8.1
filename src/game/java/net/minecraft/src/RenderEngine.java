@@ -3,14 +3,16 @@ package net.minecraft.src;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
 import dev.colbster937.eaglercraft.rp.TexturePack;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.lax1dude.eaglercraft.internal.buffer.ByteBuffer;
 import net.lax1dude.eaglercraft.internal.buffer.IntBuffer;
 import net.lax1dude.eaglercraft.opengl.ImageData;
@@ -18,13 +20,12 @@ import net.peyton.java.awt.Color;
 
 public class RenderEngine {
 	public static boolean useMipmaps = false;
-	private HashMap textureMap = new HashMap();
-	private HashMap field_28151_c = new HashMap();
+	private Object2IntMap<String> textureMap = new Object2IntOpenHashMap<>();
+	private Object2ObjectMap<String, ImageData> field_28151_c = new Object2ObjectOpenHashMap<>();
 	private MCHash textureNameToImageMap = new MCHash();
 	private IntBuffer singleIntBuffer = GLAllocation.createDirectIntBuffer(1);
 	private ByteBuffer imageData = GLAllocation.createDirectByteBuffer(16777216);
 	private List textureList = new ArrayList();
-	private Map urlToImageDataMap = new HashMap();
 	private GameSettings options;
 	public boolean clampTexture = false;
 	public boolean blurTexture = false;
@@ -39,43 +40,40 @@ public class RenderEngine {
 	}
 
 	public int[] getTextureContents(String var1) {
-		int[] var3 = (int[]) this.field_28151_c.get(var1);
-		if (var3 != null) {
-			return var3;
+		ImageData d = this.field_28151_c.get(var1);
+		if (d != null) {
+			return ImageData.swapRB(d.pixels);
 		} else {
 			try {
-				Object var6 = null;
+				int[] var3;
 				if (var1.startsWith("##")) {
-					var3 = this.getImageContentsAndAllocate(
-							this.unwrapImageByColumns(this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(2)))));
+					d = this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(2)));
+					var3 = this.getImageContentsAndAllocate(this.unwrapImageByColumns(d));
 				} else if (var1.startsWith("%clamp%")) {
 					this.clampTexture = true;
-					var3 = this
-							.getImageContentsAndAllocate(this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(7))));
+					d = this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(7)));
+					var3 = this.getImageContentsAndAllocate(this.unwrapImageByColumns(d));
 					this.clampTexture = false;
 				} else if (var1.startsWith("%blur%")) {
 					this.blurTexture = true;
 					this.clampTexture = true;
-					var3 = this
-							.getImageContentsAndAllocate(this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(6))));
+					d = this.readTextureImage(TexturePack.getResourceAsStream(var1.substring(6)));
+					var3 = this.getImageContentsAndAllocate(this.unwrapImageByColumns(d));
 					this.clampTexture = false;
 					this.blurTexture = false;
 				} else {
 					InputStream var7 = TexturePack.getResourceAsStream(var1);
-					if (var7 == null) {
-						var3 = this.getImageContentsAndAllocate(this.missingTextureImage);
-					} else {
-						var3 = this.getImageContentsAndAllocate(this.readTextureImage(var7));
-					}
+					if (var7 == null) d = this.missingTextureImage;
+					else d = this.readTextureImage(var7);
+					var3 = this.getImageContentsAndAllocate(d);
 				}
 
-				this.field_28151_c.put(var1, var3);
+				this.field_28151_c.put(var1, d);
 				return var3;
 			} catch (IOException var5) {
 				var5.printStackTrace();
-				int[] var4 = this.getImageContentsAndAllocate(this.missingTextureImage);
-				this.field_28151_c.put(var1, var4);
-				return var4;
+				this.field_28151_c.put(var1, this.missingTextureImage);
+				return ImageData.swapRB(this.missingTextureImage.pixels);
 			}
 		}
 	}
@@ -506,7 +504,7 @@ public class RenderEngine {
 					var4 = this.readTextureImage(TexturePack.getResourceAsStream(var9));
 				}
 
-				this.getImageContents(var4, (int[]) this.field_28151_c.get(var9));
+				this.getImageContents(var4, this.field_28151_c.get(var9).pixels);
 				this.blurTexture = false;
 				this.clampTexture = false;
 			} catch (IOException var6) {

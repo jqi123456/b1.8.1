@@ -3,21 +3,26 @@ package net.minecraft.src;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+
 import net.peyton.eagler.minecraft.suppliers.EntitySupplier;
 
 public class EntityList {
 	private static Map stringToClassMapping = new HashMap();
 	private static Map classToStringMapping = new HashMap();
-	private static Map IDtoClassMapping = new HashMap();
-	private static Map classToIDMapping = new HashMap();
+	private static Int2ObjectMap IDtoClassMapping = new Int2ObjectOpenHashMap();
+	private static Object2IntMap classToIDMapping = new Object2IntOpenHashMap();
 	private static Map stringToIDMapping = new HashMap();
 
 	private static void addMapping(Class var0, EntitySupplier var1, String var2, int var3) {
 		stringToClassMapping.put(var2.toLowerCase(), var1);
 		classToStringMapping.put(var0, var2);
-		IDtoClassMapping.put(Integer.valueOf(var3), var1);
-		classToIDMapping.put(var0, Integer.valueOf(var3));
-		stringToIDMapping.put(var2.toLowerCase(), Integer.valueOf(var3));
+		IDtoClassMapping.put(var3, var1);
+		classToIDMapping.put(var0, var3);
+		stringToIDMapping.put(var2.toLowerCase(), var3);
 	}
 
 	public static Entity createEntityInWorld(String var0, World var1) {

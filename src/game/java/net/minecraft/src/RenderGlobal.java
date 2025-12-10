@@ -3,6 +3,8 @@ package net.minecraft.src;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.Random;
 import net.minecraft.client.Minecraft;
 import net.peyton.eagler.minecraft.LegacyMergeSort;
@@ -74,16 +76,16 @@ public class RenderGlobal implements IWorldAccess {
 
 		int var8;
 		int var9;
+		var4.startDrawingQuads();
 		for(var8 = -var6 * var7; var8 <= var6 * var7; var8 += var6) {
 			for(var9 = -var6 * var7; var9 <= var6 * var7; var9 += var6) {
-				var4.startDrawingQuads();
 				var4.addVertex((double)(var8 + 0), (double)var5, (double)(var9 + 0));
 				var4.addVertex((double)(var8 + var6), (double)var5, (double)(var9 + 0));
 				var4.addVertex((double)(var8 + var6), (double)var5, (double)(var9 + var6));
 				var4.addVertex((double)(var8 + 0), (double)var5, (double)(var9 + var6));
-				var4.draw();
 			}
 		}
+		var4.draw();
 
 		GL11.glEndList();
 		this.glSkyList2 = this.starGLCallList + 2;
@@ -228,7 +230,7 @@ public class RenderGlobal implements IWorldAccess {
 				EntityLiving var7 = this.mc.renderViewEntity;
 				if(var7 != null) {
 					this.markRenderersForNewPosition(MathHelper.floor_double(var7.posX), MathHelper.floor_double(var7.posY), MathHelper.floor_double(var7.posZ));
-					LegacyMergeSort.sort(this.sortedWorldRenderers, new EntitySorter(var7));
+					LegacyMergeSort.sort(this.sortedWorldRenderers, EntitySorter.instance.setEntity(var7));
 				}
 			}
 
@@ -405,7 +407,7 @@ public class RenderGlobal implements IWorldAccess {
 			this.prevSortY = var1.posY;
 			this.prevSortZ = var1.posZ;
 			this.markRenderersForNewPosition(MathHelper.floor_double(var1.posX), MathHelper.floor_double(var1.posY), MathHelper.floor_double(var1.posZ));
-			LegacyMergeSort.sort(this.sortedWorldRenderers, new EntitySorter(var1));
+			LegacyMergeSort.sort(this.sortedWorldRenderers, EntitySorter.instance.setEntity(var1));
 		}
 
 		RenderHelper.disableStandardItemLighting();
@@ -514,7 +516,8 @@ public class RenderGlobal implements IWorldAccess {
 			GL11.glDisable(GL11.GL_FOG);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+			
 			RenderHelper.disableStandardItemLighting();
 			float[] var17 = this.worldObj.worldProvider.calcSunriseSunsetColors(this.worldObj.getCelestialAngle(var1), var1);
 			float var9;
@@ -906,7 +909,7 @@ public class RenderGlobal implements IWorldAccess {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, (MathHelper.sin((float)System.currentTimeMillis() / 100.0F) * 0.2F + 0.4F) * 0.5F);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, (MathHelper.sin((float)EagRuntime.steadyTimeMillis() / 100.0F) * 0.2F + 0.4F) * 0.5F);
 		int var8;
 		if(var3 == 0) {
 			if(this.damagePartialTime > 0.0F) {
@@ -943,8 +946,8 @@ public class RenderGlobal implements IWorldAccess {
 			}
 		} else if(var4 != null) {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			float var16 = MathHelper.sin((float)System.currentTimeMillis() / 100.0F) * 0.2F + 0.8F;
-			GL11.glColor4f(var16, var16, var16, MathHelper.sin((float)System.currentTimeMillis() / 200.0F) * 0.2F + 0.5F);
+			float var16 = MathHelper.sin((float)EagRuntime.steadyTimeMillis() / 100.0F) * 0.2F + 0.8F;
+			GL11.glColor4f(var16, var16, var16, MathHelper.sin((float)EagRuntime.steadyTimeMillis() / 200.0F) * 0.2F + 0.5F);
 			var8 = this.renderEngine.getTexture("/terrain.png");
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, var8);
 			int var17 = var2.blockX;

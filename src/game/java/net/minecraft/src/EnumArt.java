@@ -33,6 +33,8 @@ public enum EnumArt {
 	public final int sizeY;
 	public final int offsetX;
 	public final int offsetY;
+	
+	public static EnumArt[] VALUES = values();
 
 	private EnumArt(String var3, int var4, int var5, int var6, int var7) {
 		this.title = var3;

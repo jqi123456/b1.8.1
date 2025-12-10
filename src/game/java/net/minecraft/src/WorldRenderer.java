@@ -165,6 +165,9 @@ public class WorldRenderer {
 					break;
 				}
 			}
+			
+			if (skipRenderPass[0]) GL11.glFlushList(glRenderList, true);
+			if (skipRenderPass[1]) GL11.glFlushList(glRenderList + 1, true);
 
 			HashSet var22 = new HashSet();
 			var22.addAll(this.tileEntityRenderers);
