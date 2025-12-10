@@ -35,7 +35,7 @@ public class GuiOptions extends GuiScreen {
 
 			this.controlList.add(b);
 
-			if (var5 == 0) b.enabled = false;
+			// if (var5 == 0) b.enabled = false;
 
 			++var2;
 		}
