@@ -1,10 +1,12 @@
 package net.peyton.eagler.minecraft;
 
 import net.lax1dude.eaglercraft.opengl.VertexFormat;
+import net.lax1dude.eaglercraft.opengl.WorldRenderer;
 import net.lax1dude.eaglercraft.opengl.WorldVertexBufferUploader;
 
 public class Tessellator {
-	private net.lax1dude.eaglercraft.opengl.WorldRenderer worldRenderer;
+	
+	private WorldRenderer worldRenderer;
 	public static final Tessellator instance = new Tessellator(524288);
 	private final VertexFormat format = VertexFormat.MODIFIABLE;
 	
@@ -24,11 +26,10 @@ public class Tessellator {
 	private double yOffset;
 	private double zOffset;
 	
-	private boolean renderingChunk;
-
+	private int lightmap;
+	
 	protected Tessellator(int var1) {
-		this.renderingChunk = false;
-		this.worldRenderer = new net.lax1dude.eaglercraft.opengl.WorldRenderer(var1);
+		this.worldRenderer = new WorldRenderer(var1);
 	}
 
 	public void draw() {
@@ -99,6 +100,10 @@ public class Tessellator {
 			worldRenderer.normal(this.normalX, this.normalY, this.normalZ);
 		}
 		
+		if(format.attribLightmapEnabled) {
+			this.worldRenderer.lightmap(this.lightmap >>> 16, this.lightmap & 0xFFFF);
+		}
+		
 		worldRenderer.endVertex();
 	}
 
@@ -114,6 +119,11 @@ public class Tessellator {
 		int var4 = var1 >> 8 & 255;
 		int var5 = var1 & 255;
 		this.setColorRGBA(var3, var4, var5, var2);
+	}
+	
+	public void lightmap(int var1) {
+		this.format.setLightmap();
+		this.lightmap = var1;
 	}
 
 	public void disableColor() {
@@ -137,13 +147,5 @@ public class Tessellator {
 		this.xOffset += (double)var1;
 		this.yOffset += (double)var2;
 		this.zOffset += (double)var3;
-	}
-	
-	public boolean isRenderingChunk() {
-		return this.renderingChunk;
-	}
-	
-	public void setRenderingChunk(boolean renderingChunk) {
-		this.renderingChunk = renderingChunk;
 	}
 }

@@ -1,12 +1,12 @@
 package net.minecraft.src;
 
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import net.lax1dude.eaglercraft.Random;
 
 public class BlockFire extends Block {
-	private Object2IntMap<Integer> chanceToEncourageFire = new Object2IntOpenHashMap<>(256);
-	private Object2IntMap<Integer> abilityToCatchFire = new Object2IntOpenHashMap<>(256);
+	private Int2IntMap chanceToEncourageFire = new Int2IntOpenHashMap(256);
+	private Int2IntMap abilityToCatchFire = new Int2IntOpenHashMap(256);
 
 	protected BlockFire(int var1, int var2) {
 		super(var1, var2, Material.fire);
@@ -27,8 +27,8 @@ public class BlockFire extends Block {
 	}
 
 	private void setBurnRate(int var1, int var2, int var3) {
-		this.chanceToEncourageFire.put(Integer.valueOf(var1), var2);
-		this.abilityToCatchFire.put(Integer.valueOf(var1), var3);
+		this.chanceToEncourageFire.put(var1, var2);
+		this.abilityToCatchFire.put(var1, var3);
 	}
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4) {

@@ -629,4 +629,12 @@ public class WorldRenderer {
 		}
 		return this;
 	}
+
+	public WorldRenderer lightmap(int parInt1, int parInt2) {
+		VertexFormat fmt = this.vertexFormat;
+		int i = this.vertexCount * fmt.attribStride + fmt.attribLightmapOffset;
+		this.byteBuffer.putShort(i, (short) parInt2);
+		this.byteBuffer.putShort(i + 2, (short) parInt1);
+		return this;
+	}
 }

@@ -75,13 +75,13 @@ public enum VertexFormat {
 	public int attribNormalSize;
 	public int attribNormalStride;
 
-//	public boolean attribLightmapEnabled;
-//	public int attribLightmapIndex;
-//	public int attribLightmapOffset;
-//	public int attribLightmapFormat;
-//	public boolean attribLightmapNormalized;
-//	public int attribLightmapSize;
-//	public int attribLightmapStride;
+	public boolean attribLightmapEnabled;
+	public int attribLightmapIndex;
+	public int attribLightmapOffset;
+	public int attribLightmapFormat;
+	public boolean attribLightmapNormalized;
+	public int attribLightmapSize;
+	public int attribLightmapStride;
 
 	public int attribCount;
 	public int attribStride;
@@ -89,45 +89,40 @@ public enum VertexFormat {
 	public int eaglercraftAttribBits;
 
 	private boolean init = false;
-	// private boolean compact = false;
-	// public final boolean supportsCompact;
 	private boolean modifiable = false;
-	private boolean hasUpdated = false;
 
 	private VertexFormat(boolean texture, boolean color, boolean normal, boolean lightmap, boolean modifiable) {
 		if (this.init) {
 			throw new IllegalStateException();
 		}
-		this.init = true;
 		this.attribTextureEnabled = texture;
 		this.attribColorEnabled = color;
 		this.attribNormalEnabled = normal;
-		// this.attribLightmapEnabled = lightmap;
+		this.attribLightmapEnabled = lightmap;
 		this.modifiable = modifiable;
-		// this.supportsCompact = !modifiable;
-		updateVertexFormat(/* this.needsUpdate() */);
+		updateVertexFormat();
 	}
 
-	public void updateVertexFormat(/* boolean compact */) {
-		if(this.modifiable && hasUpdated) {
+	public void updateVertexFormat() {
+		if(this.modifiable && this.init) {
 			this.attribTextureEnabled = this.texture;
 			this.attribColorEnabled = this.color;
 			this.attribNormalEnabled = this.normal;
+			this.attribLightmapEnabled = this.lightmap;
 		}
-		this.hasUpdated = true;
+		this.init = true;
 		
 		int index = 0;
 		int bytes = 0;
 		int bitfield = 0;
 
-		// this.compact = compact;
 		this.attribPositionEnabled = true;
 		this.attribPositionIndex = index++;
 		this.attribPositionOffset = bytes;
-		this.attribPositionFormat = /* !compact ? */ COMPONENT_POSITION_FORMAT /* : COMPONENT_POSITION_COMPACT_FORMAT */;
+		this.attribPositionFormat = COMPONENT_POSITION_FORMAT;
 		this.attribPositionNormalized = false;
-		this.attribPositionSize = /* !compact ? */ COMPONENT_POSITION_SIZE /* : COMPONENT_POSITION_COMPACT_SIZE */;
-		this.attribPositionStride = /* !compact ? */ COMPONENT_POSITION_STRIDE /* : COMPONENT_POSITION_COMPACT_STRIDE */;
+		this.attribPositionSize = COMPONENT_POSITION_SIZE;
+		this.attribPositionStride = COMPONENT_POSITION_STRIDE;
 		bytes += this.attribPositionStride;
 
 		if (this.attribColorEnabled) {
@@ -151,10 +146,10 @@ public enum VertexFormat {
 		if (this.attribTextureEnabled) {
 			this.attribTextureIndex = index++;
 			this.attribTextureOffset = bytes;
-			this.attribTextureFormat = /* !compact ? */ COMPONENT_TEX_FORMAT /* : COMPONENT_TEX_COMPACT_FORMAT */;
+			this.attribTextureFormat = COMPONENT_TEX_FORMAT;
 			this.attribTextureNormalized = false;
-			this.attribTextureSize = /* !compact ? */ COMPONENT_TEX_SIZE /* : COMPONENT_TEX_COMPACT_SIZE */;
-			this.attribTextureStride = /* !compact ? */ COMPONENT_TEX_STRIDE /* : COMPONENT_TEX_COMPACT_SIZE */;
+			this.attribTextureSize = COMPONENT_TEX_SIZE;
+			this.attribTextureStride = COMPONENT_TEX_STRIDE;
 			bytes += this.attribTextureStride;
 			bitfield |= EaglercraftGPU.ATTRIB_TEXTURE;
 		} else {
@@ -184,34 +179,33 @@ public enum VertexFormat {
 			this.attribNormalStride = -1;
 		}
 
-//		if (this.attribLightmapEnabled) {
-//			this.attribLightmapIndex = index++;
-//			this.attribLightmapOffset = bytes;
-//			this.attribLightmapFormat = COMPONENT_LIGHTMAP_FORMAT;
-//			this.attribLightmapNormalized = false;
-//			this.attribLightmapSize = COMPONENT_LIGHTMAP_SIZE;
-//			this.attribLightmapStride = COMPONENT_LIGHTMAP_STRIDE;
-//			bytes += this.attribLightmapStride;
-//			bitfield |= EaglercraftGPU.ATTRIB_LIGHTMAP;
-//		} else {
-//			this.attribLightmapIndex = -1;
-//			this.attribLightmapOffset = -1;
-//			this.attribLightmapFormat = -1;
-//			this.attribLightmapNormalized = false;
-//			this.attribLightmapSize = -1;
-//			this.attribLightmapStride = -1;
-//		}
+		if (this.attribLightmapEnabled) {
+			this.attribLightmapIndex = index++;
+			this.attribLightmapOffset = bytes;
+			this.attribLightmapFormat = COMPONENT_LIGHTMAP_FORMAT;
+			this.attribLightmapNormalized = false;
+			this.attribLightmapSize = COMPONENT_LIGHTMAP_SIZE;
+			this.attribLightmapStride = COMPONENT_LIGHTMAP_STRIDE;
+			bytes += this.attribLightmapStride;
+			bitfield |= EaglercraftGPU.ATTRIB_LIGHTMAP;
+		} else {
+			this.attribLightmapIndex = -1;
+			this.attribLightmapOffset = -1;
+			this.attribLightmapFormat = -1;
+			this.attribLightmapNormalized = false;
+			this.attribLightmapSize = -1;
+			this.attribLightmapStride = -1;
+		}
 
 		this.attribCount = index;
 		this.attribStride = bytes;
 		this.eaglercraftAttribBits = bitfield;
-		// setCache(bitfield);
 	}
 
 	private boolean texture = false;
 	private boolean color = false;
 	private boolean normal = false;
-	// private boolean lightmap = false;
+	private boolean lightmap = false;
 
 	public void setTex() {
 		if (!modifiable) {
@@ -234,28 +228,27 @@ public enum VertexFormat {
 		this.normal = true;
 	}
 
-//	public void setLightmap(boolean lm) {
-//		if (!modifiable) {
-//			throw new IllegalStateException("Tried to modify a read-only vertex format...");
-//		}
-//		this.lightmap = lm;
-//	}
+	public void setLightmap() {
+		if (!modifiable) {
+			throw new IllegalStateException("Tried to modify a read-only vertex format...");
+		}
+		this.lightmap = true;
+	}
 	
 	public void reset() {
 		this.texture = false;
 		this.color = false;
 		this.normal = false;
-		//this.setLightmap(false);
+		this.lightmap = false;
 	}
 	
 	public boolean needsUpdate() {
 		if(this.modifiable) {
-			if(this.attribColorEnabled != this.color || this.attribTextureEnabled != this.texture || this.attribNormalEnabled != this.normal /*|| this.attribLightmapEnabled != this.lightmap*/) {
+			if(this.attribColorEnabled != this.color || this.attribTextureEnabled != this.texture || this.attribNormalEnabled != this.normal || this.attribLightmapEnabled != this.lightmap) {
 				return true;
 			}
 		}
 		return false;
-		//return (Minecraft.getMinecraft().gameSettings.sUseCompactVertexFormat != this.compact) && this.supportsCompact;
 	}
 
 }
