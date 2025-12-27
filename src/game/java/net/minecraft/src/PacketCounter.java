@@ -9,7 +9,7 @@ class PacketCounter {
 
 	public void addPacket(int var1) {
 		++this.totalPackets;
-		this.totalBytes += (long)var1;
+		this.totalBytes += (long) var1;
 	}
 
 	PacketCounter(Empty1 var1) {

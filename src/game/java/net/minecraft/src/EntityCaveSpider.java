@@ -12,19 +12,19 @@ public class EntityCaveSpider extends EntitySpider {
 	}
 
 	protected boolean func_35175_b(Entity var1) {
-		if(super.func_35175_b(var1)) {
-			if(var1 instanceof EntityLiving) {
+		if (super.func_35175_b(var1)) {
+			if (var1 instanceof EntityLiving) {
 				byte var2 = 0;
-				if(this.worldObj.difficultySetting > 1) {
-					if(this.worldObj.difficultySetting == 2) {
+				if (this.worldObj.difficultySetting > 1) {
+					if (this.worldObj.difficultySetting == 2) {
 						var2 = 7;
-					} else if(this.worldObj.difficultySetting == 3) {
+					} else if (this.worldObj.difficultySetting == 3) {
 						var2 = 15;
 					}
 				}
 
-				if(var2 > 0) {
-					((EntityLiving)var1).func_35165_a(new PotionEffect(Potion.field_35689_u.field_35670_H, var2 * 20, 0));
+				if (var2 > 0) {
+					((EntityLiving) var1).func_35165_a(new PotionEffect(Potion.field_35689_u.field_35670_H, var2 * 20, 0));
 				}
 			}
 

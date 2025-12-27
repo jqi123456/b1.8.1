@@ -7,9 +7,9 @@ public class ItemSaddle extends Item {
 	}
 
 	public void saddleEntity(ItemStack var1, EntityLiving var2) {
-		if(var2 instanceof EntityPig) {
-			EntityPig var3 = (EntityPig)var2;
-			if(!var3.getSaddled()) {
+		if (var2 instanceof EntityPig) {
+			EntityPig var3 = (EntityPig) var2;
+			if (!var3.getSaddled()) {
 				var3.setSaddled(true);
 				--var1.stackSize;
 			}

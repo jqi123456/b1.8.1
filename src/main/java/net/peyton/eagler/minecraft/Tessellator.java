@@ -4,38 +4,41 @@ import net.lax1dude.eaglercraft.opengl.VertexFormat;
 import net.lax1dude.eaglercraft.opengl.WorldRenderer;
 import net.lax1dude.eaglercraft.opengl.WorldVertexBufferUploader;
 
-public class Tessellator {
-	
+public abstract class Tessellator {
 	private WorldRenderer worldRenderer;
-	public static final Tessellator instance = new Tessellator(524288);
 	private final VertexFormat format = VertexFormat.MODIFIABLE;
-	
+
+	private int vertexCount = 0;
+
 	private double textureU = 0;
 	private double textureV = 0;
-	
+
 	private int colorR;
 	private int colorG;
 	private int colorB;
 	private int colorA;
-	
+
 	private float normalX;
 	private float normalY;
 	private float normalZ;
-	
+
 	private double xOffset;
 	private double yOffset;
 	private double zOffset;
-	
+
 	private int lightmap;
-	
+
 	protected Tessellator(int var1) {
 		this.worldRenderer = new WorldRenderer(var1);
 	}
 
-	public void draw() {
+	public int draw() {
 		this.worldRenderer.finishDrawing();
 		WorldVertexBufferUploader.func_181679_a(this.worldRenderer);
+		int var1 = this.vertexCount * this.format.attribStride;
+		this.vertexCount = 0;
 		this.format.reset();
+		return var1;
 	}
 
 	public void startDrawingQuads() {
@@ -43,6 +46,7 @@ public class Tessellator {
 	}
 
 	public void startDrawing(int var1) {
+		this.vertexCount = 0;
 		this.worldRenderer.begin(var1, format);
 	}
 
@@ -51,13 +55,13 @@ public class Tessellator {
 		textureU = var1;
 		textureV = var3;
 	}
-	
+
 	public void setColorOpaque_F(float var1, float var2, float var3) {
-		this.setColorOpaque((int)(var1 * 255.0F), (int)(var2 * 255.0F), (int)(var3 * 255.0F));
+		this.setColorOpaque((int) (var1 * 255.0F), (int) (var2 * 255.0F), (int) (var3 * 255.0F));
 	}
 
 	public void setColorRGBA_F(float var1, float var2, float var3, float var4) {
-		this.setColorRGBA((int)(var1 * 255.0F), (int)(var2 * 255.0F), (int)(var3 * 255.0F), (int)(var4 * 255.0F));
+		this.setColorRGBA((int) (var1 * 255.0F), (int) (var2 * 255.0F), (int) (var3 * 255.0F), (int) (var4 * 255.0F));
 	}
 
 	public void setColorOpaque(int var1, int var2, int var3) {
@@ -65,7 +69,7 @@ public class Tessellator {
 	}
 
 	public void setColorRGBA(int var1, int var2, int var3, int var4) {
-		if(!this.worldRenderer.needsUpdate) {
+		if (!this.worldRenderer.needsUpdate) {
 			this.format.setColor();
 			this.colorR = var1;
 			this.colorG = var2;
@@ -80,31 +84,32 @@ public class Tessellator {
 	}
 
 	public void addVertex(double var1, double var3, double var5) {
-		if(format.needsUpdate()) {
+		if (format.needsUpdate()) {
 			format.updateVertexFormat();
 		}
-		
+
 		worldRenderer.vertexFormat = this.format;
-		
+
 		worldRenderer.pos(var1 + this.xOffset, var3 + this.yOffset, var5 + this.zOffset);
-		
-		if(format.attribTextureEnabled) {
+
+		if (format.attribTextureEnabled) {
 			worldRenderer.tex(this.textureU, this.textureV);
 		}
-		
-		if(format.attribColorEnabled ) {
+
+		if (format.attribColorEnabled) {
 			worldRenderer.setColorRGBA(colorR, colorG, colorB, colorA);
 		}
-		
-		if(format.attribNormalEnabled) {
+
+		if (format.attribNormalEnabled) {
 			worldRenderer.normal(this.normalX, this.normalY, this.normalZ);
 		}
-		
-		if(format.attribLightmapEnabled) {
+
+		if (format.attribLightmapEnabled) {
 			this.worldRenderer.lightmap(this.lightmap >>> 16, this.lightmap & 0xFFFF);
 		}
-		
+
 		worldRenderer.endVertex();
+		++this.vertexCount;
 	}
 
 	public void setColorOpaque_I(int var1) {
@@ -120,7 +125,7 @@ public class Tessellator {
 		int var5 = var1 & 255;
 		this.setColorRGBA(var3, var4, var5, var2);
 	}
-	
+
 	public void lightmap(int var1) {
 		this.format.setLightmap();
 		this.lightmap = var1;
@@ -144,8 +149,17 @@ public class Tessellator {
 	}
 
 	public void setTranslationF(float var1, float var2, float var3) {
-		this.xOffset += (double)var1;
-		this.yOffset += (double)var2;
-		this.zOffset += (double)var3;
+		this.xOffset += (double) var1;
+		this.yOffset += (double) var2;
+		this.zOffset += (double) var3;
+	}
+
+	public void setBrightness(int var1) {
+		this.format.setLightmap();
+		this.lightmap = var1;
+	}
+
+	public WorldRenderer getWorldRenderer() {
+		return this.worldRenderer;
 	}
 }

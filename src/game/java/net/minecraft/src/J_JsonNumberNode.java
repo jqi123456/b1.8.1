@@ -5,14 +5,16 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 final class J_JsonNumberNode extends J_JsonNode {
-	private static final Pattern field_27226_a = Pattern.compile("(-?)(0|([1-9]([0-9]*)))(\\.[0-9]+)?((e|E)(\\+|-)?[0-9]+)?");
+	private static final Pattern field_27226_a = Pattern
+			.compile("(-?)(0|([1-9]([0-9]*)))(\\.[0-9]+)?((e|E)(\\+|-)?[0-9]+)?");
 	private final String field_27225_b;
 
 	J_JsonNumberNode(String var1) {
-		if(var1 == null) {
+		if (var1 == null) {
 			throw new NullPointerException("Attempt to construct a JsonNumber with a null value.");
-		} else if(!field_27226_a.matcher(var1).matches()) {
-			throw new IllegalArgumentException("Attempt to construct a JsonNumber with a String [" + var1 + "] that does not match the JSON number specification.");
+		} else if (!field_27226_a.matcher(var1).matches()) {
+			throw new IllegalArgumentException("Attempt to construct a JsonNumber with a String [" + var1
+					+ "] that does not match the JSON number specification.");
 		} else {
 			this.field_27225_b = var1;
 		}
@@ -35,10 +37,10 @@ final class J_JsonNumberNode extends J_JsonNode {
 	}
 
 	public boolean equals(Object var1) {
-		if(this == var1) {
+		if (this == var1) {
 			return true;
-		} else if(var1 != null && this.getClass() == var1.getClass()) {
-			J_JsonNumberNode var2 = (J_JsonNumberNode)var1;
+		} else if (var1 != null && this.getClass() == var1.getClass()) {
+			J_JsonNumberNode var2 = (J_JsonNumberNode) var1;
 			return this.field_27225_b.equals(var2.field_27225_b);
 		} else {
 			return false;

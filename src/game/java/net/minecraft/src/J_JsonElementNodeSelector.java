@@ -18,7 +18,7 @@ final class J_JsonElementNodeSelector extends J_LeafFunctor {
 	}
 
 	public J_JsonNode typeSafeApplyTo_(List var1) {
-		return (J_JsonNode)var1.get(this.index);
+		return (J_JsonNode) var1.get(this.index);
 	}
 
 	public String toString() {
@@ -26,10 +26,10 @@ final class J_JsonElementNodeSelector extends J_LeafFunctor {
 	}
 
 	public Object typeSafeApplyTo(Object var1) {
-		return this.typeSafeApplyTo_((List)var1);
+		return this.typeSafeApplyTo_((List) var1);
 	}
 
 	public boolean matchsNode(Object var1) {
-		return this.matchsNode_((List)var1);
+		return this.matchsNode_((List) var1);
 	}
 }

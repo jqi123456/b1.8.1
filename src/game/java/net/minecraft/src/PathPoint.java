@@ -20,22 +20,24 @@ public class PathPoint {
 	}
 
 	public static int func_22329_a(int var0, int var1, int var2) {
-		return var1 & 255 | (var0 & Short.MAX_VALUE) << 8 | (var2 & Short.MAX_VALUE) << 24 | (var0 < 0 ? Integer.MIN_VALUE : 0) | (var2 < 0 ? -Short.MIN_VALUE : 0);
+		return var1 & 255 | (var0 & Short.MAX_VALUE) << 8 | (var2 & Short.MAX_VALUE) << 24
+				| (var0 < 0 ? Integer.MIN_VALUE : 0) | (var2 < 0 ? -Short.MIN_VALUE : 0);
 	}
 
 	public float distanceTo(PathPoint var1) {
-		float var2 = (float)(var1.xCoord - this.xCoord);
-		float var3 = (float)(var1.yCoord - this.yCoord);
-		float var4 = (float)(var1.zCoord - this.zCoord);
+		float var2 = (float) (var1.xCoord - this.xCoord);
+		float var3 = (float) (var1.yCoord - this.yCoord);
+		float var4 = (float) (var1.zCoord - this.zCoord);
 		return MathHelper.sqrt_float(var2 * var2 + var3 * var3 + var4 * var4);
 	}
 
 	public boolean equals(Object var1) {
-		if(!(var1 instanceof PathPoint)) {
+		if (!(var1 instanceof PathPoint)) {
 			return false;
 		} else {
-			PathPoint var2 = (PathPoint)var1;
-			return this.hash == var2.hash && this.xCoord == var2.xCoord && this.yCoord == var2.yCoord && this.zCoord == var2.zCoord;
+			PathPoint var2 = (PathPoint) var1;
+			return this.hash == var2.hash && this.xCoord == var2.xCoord && this.yCoord == var2.yCoord
+					&& this.zCoord == var2.zCoord;
 		}
 	}
 

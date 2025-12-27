@@ -16,14 +16,14 @@ public class GenLayerSmoothZoom extends GenLayer {
 		int var11 = var7 << 1;
 
 		int var13;
-		for(int var12 = 0; var12 < var8 - 1; ++var12) {
+		for (int var12 = 0; var12 < var8 - 1; ++var12) {
 			var13 = var12 << 1;
 			int var14 = var13 * var11;
 			int var15 = var9[0 + (var12 + 0) * var7];
 			int var16 = var9[0 + (var12 + 1) * var7];
 
-			for(int var17 = 0; var17 < var7 - 1; ++var17) {
-				this.func_35499_a((long)(var17 + var5 << 1), (long)(var12 + var6 << 1));
+			for (int var17 = 0; var17 < var7 - 1; ++var17) {
+				this.func_35499_a((long) (var17 + var5 << 1), (long) (var12 + var6 << 1));
 				int var18 = var9[var17 + 1 + (var12 + 0) * var7];
 				int var19 = var9[var17 + 1 + (var12 + 1) * var7];
 				var10[var14] = var15;
@@ -39,7 +39,7 @@ public class GenLayerSmoothZoom extends GenLayer {
 
 		int[] var22 = IntCache.func_35267_a(var3 * var4);
 
-		for(var13 = 0; var13 < var4; ++var13) {
+		for (var13 = 0; var13 < var4; ++var13) {
 			System.arraycopy(var10, (var13 + (var2 & 1)) * (var7 << 1) + (var1 & 1), var22, var13 * var3, var3);
 		}
 
@@ -49,10 +49,10 @@ public class GenLayerSmoothZoom extends GenLayer {
 	public static GenLayer func_35517_a(long var0, GenLayer var2, int var3) {
 		Object var4 = var2;
 
-		for(int var5 = 0; var5 < var3; ++var5) {
-			var4 = new GenLayerSmoothZoom(var0 + (long)var5, (GenLayer)var4);
+		for (int var5 = 0; var5 < var3; ++var5) {
+			var4 = new GenLayerSmoothZoom(var0 + (long) var5, (GenLayer) var4);
 		}
 
-		return (GenLayer)var4;
+		return (GenLayer) var4;
 	}
 }

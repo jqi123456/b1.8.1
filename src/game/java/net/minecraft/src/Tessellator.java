@@ -8,6 +8,6 @@ public class Tessellator extends net.peyton.eagler.minecraft.Tessellator {
 	}
 
 	public void func_35835_b(int var1) {
-		
+		super.setBrightness(var1);
 	}
 }

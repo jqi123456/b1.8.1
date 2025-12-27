@@ -33,8 +33,8 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 		this.field_784_bh = var1;
 		this.field_783_bi = var3;
 		this.field_782_bj = var5;
-		this.field_780_bk = (double)var7;
-		this.field_786_bl = (double)var8;
+		this.field_780_bk = (double) var7;
+		this.field_786_bl = (double) var8;
 		this.field_785_bg = var9;
 	}
 
@@ -45,17 +45,19 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 		double var1 = this.posX - this.prevPosX;
 		double var3 = this.posZ - this.prevPosZ;
 		float var5 = MathHelper.sqrt_double(var1 * var1 + var3 * var3) * 4.0F;
-		if(var5 > 1.0F) {
+		if (var5 > 1.0F) {
 			var5 = 1.0F;
 		}
 
 		this.field_704_R += (var5 - this.field_704_R) * 0.4F;
 		this.field_703_S += this.field_704_R;
-		if(!this.field_35218_b && this.func_35114_R() && this.inventory.mainInventory[this.inventory.currentItem] != null) {
+		if (!this.field_35218_b && this.func_35114_R()
+				&& this.inventory.mainInventory[this.inventory.currentItem] != null) {
 			ItemStack var6 = this.inventory.mainInventory[this.inventory.currentItem];
-			this.func_35199_b(this.inventory.mainInventory[this.inventory.currentItem], Item.itemsList[var6.itemID].func_35411_c(var6));
+			this.func_35199_b(this.inventory.mainInventory[this.inventory.currentItem],
+					Item.itemsList[var6.itemID].func_35411_c(var6));
 			this.field_35218_b = true;
-		} else if(this.field_35218_b && !this.func_35114_R()) {
+		} else if (this.field_35218_b && !this.func_35114_R()) {
 			this.func_35207_ac();
 			this.field_35218_b = false;
 		}
@@ -68,21 +70,22 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 
 	public void onLivingUpdate() {
 		super.updateEntityActionState();
-		if(this.field_785_bg > 0) {
-			double var1 = this.posX + (this.field_784_bh - this.posX) / (double)this.field_785_bg;
-			double var3 = this.posY + (this.field_783_bi - this.posY) / (double)this.field_785_bg;
-			double var5 = this.posZ + (this.field_782_bj - this.posZ) / (double)this.field_785_bg;
+		if (this.field_785_bg > 0) {
+			double var1 = this.posX + (this.field_784_bh - this.posX) / (double) this.field_785_bg;
+			double var3 = this.posY + (this.field_783_bi - this.posY) / (double) this.field_785_bg;
+			double var5 = this.posZ + (this.field_782_bj - this.posZ) / (double) this.field_785_bg;
 
 			double var7;
-			for(var7 = this.field_780_bk - (double)this.rotationYaw; var7 < -180.0D; var7 += 360.0D) {
+			for (var7 = this.field_780_bk - (double) this.rotationYaw; var7 < -180.0D; var7 += 360.0D) {
 			}
 
-			while(var7 >= 180.0D) {
+			while (var7 >= 180.0D) {
 				var7 -= 360.0D;
 			}
 
-			this.rotationYaw = (float)((double)this.rotationYaw + var7 / (double)this.field_785_bg);
-			this.rotationPitch = (float)((double)this.rotationPitch + (this.field_786_bl - (double)this.rotationPitch) / (double)this.field_785_bg);
+			this.rotationYaw = (float) ((double) this.rotationYaw + var7 / (double) this.field_785_bg);
+			this.rotationPitch = (float) ((double) this.rotationPitch
+					+ (this.field_786_bl - (double) this.rotationPitch) / (double) this.field_785_bg);
 			--this.field_785_bg;
 			this.setPosition(var1, var3, var5);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
@@ -90,16 +93,16 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 
 		this.prevCameraYaw = this.cameraYaw;
 		float var9 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		float var2 = (float)Math.atan(-this.motionY * (double)0.2F) * 15.0F;
-		if(var9 > 0.1F) {
+		float var2 = (float) Math.atan(-this.motionY * (double) 0.2F) * 15.0F;
+		if (var9 > 0.1F) {
 			var9 = 0.1F;
 		}
 
-		if(!this.onGround || this.health <= 0) {
+		if (!this.onGround || this.health <= 0) {
 			var9 = 0.0F;
 		}
 
-		if(this.onGround || this.health <= 0) {
+		if (this.onGround || this.health <= 0) {
 			var2 = 0.0F;
 		}
 
@@ -109,11 +112,11 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 
 	public void outfitWithItem(int var1, int var2, int var3) {
 		ItemStack var4 = null;
-		if(var2 >= 0) {
+		if (var2 >= 0) {
 			var4 = new ItemStack(var2, 1, var3);
 		}
 
-		if(var1 == 0) {
+		if (var1 == 0) {
 			this.inventory.mainInventory[this.inventory.currentItem] = var4;
 		} else {
 			this.inventory.armorInventory[var1 - 1] = var4;

@@ -22,15 +22,15 @@ public class ChunkLoader implements IChunkLoader {
 		String var4 = Integer.toString(var1 & 63, 36);
 		String var5 = Integer.toString(var2 & 63, 36);
 		VFile2 var6 = new VFile2(this.saveDir, var4);
-		if(!var6.exists()) {
-			if(!this.createIfNecessary) {
+		if (!var6.exists()) {
+			if (!this.createIfNecessary) {
 				return null;
 			}
 		}
 
 		var6 = new VFile2(var6, var5);
-		if(!var6.exists()) {
-			if(!this.createIfNecessary) {
+		if (!var6.exists()) {
+			if (!this.createIfNecessary) {
 				return null;
 			}
 		}
@@ -41,23 +41,24 @@ public class ChunkLoader implements IChunkLoader {
 
 	public Chunk loadChunk(World var1, int var2, int var3) throws IOException {
 		VFile2 var4 = this.chunkFileForXZ(var2, var3);
-		if(var4 != null && var4.exists()) {
+		if (var4 != null && var4.exists()) {
 			try {
 				InputStream var5 = var4.getInputStream();
 				NBTTagCompound var6 = CompressedStreamTools.loadGzippedCompoundFromOutputStream(var5);
-				if(!var6.hasKey("Level")) {
+				if (!var6.hasKey("Level")) {
 					System.out.println("Chunk file at " + var2 + "," + var3 + " is missing level data, skipping");
 					return null;
 				}
 
-				if(!var6.getCompoundTag("Level").hasKey("Blocks")) {
+				if (!var6.getCompoundTag("Level").hasKey("Blocks")) {
 					System.out.println("Chunk file at " + var2 + "," + var3 + " is missing block data, skipping");
 					return null;
 				}
 
 				Chunk var7 = loadChunkIntoWorldFromCompound(var1, var6.getCompoundTag("Level"));
-				if(!var7.isAtLocation(var2, var3)) {
-					System.out.println("Chunk file at " + var2 + "," + var3 + " is in the wrong location; relocating. (Expected " + var2 + ", " + var3 + ", got " + var7.xPosition + ", " + var7.zPosition + ")");
+				if (!var7.isAtLocation(var2, var3)) {
+					System.out.println("Chunk file at " + var2 + "," + var3 + " is in the wrong location; relocating. (Expected "
+							+ var2 + ", " + var3 + ", got " + var7.xPosition + ", " + var7.zPosition + ")");
 					var6.setInteger("xPos", var2);
 					var6.setInteger("zPos", var3);
 					var7 = loadChunkIntoWorldFromCompound(var1, var6.getCompoundTag("Level"));
@@ -76,7 +77,7 @@ public class ChunkLoader implements IChunkLoader {
 	public void saveChunk(World var1, Chunk var2) throws IOException {
 		var1.checkSessionLock();
 		VFile2 var3 = this.chunkFileForXZ(var2.xPosition, var2.zPosition);
-		if(var3.exists()) {
+		if (var3.exists()) {
 			WorldInfo var4 = var1.getWorldInfo();
 			var4.setSizeOnDisk(var4.getSizeOnDisk() - var3.length());
 		}
@@ -90,7 +91,7 @@ public class ChunkLoader implements IChunkLoader {
 			storeChunkInCompound(var2, var1, var7);
 			CompressedStreamTools.writeGzippedCompoundToOutputStream(var6, var5);
 			var5.close();
-			if(var3.exists()) {
+			if (var3.exists()) {
 				var3.delete();
 			}
 
@@ -119,14 +120,14 @@ public class ChunkLoader implements IChunkLoader {
 
 		Iterator var5;
 		NBTTagCompound var7;
-		for(int var4 = 0; var4 < var0.mapSize; ++var4) {
+		for (int var4 = 0; var4 < var0.mapSize; ++var4) {
 			List<Entity> list = var0.entities.get(var4);
 
-			for(int i = 0; i < list.size(); ++i) {
-				Entity var6 = (Entity)list.get(i);
+			for (int i = 0; i < list.size(); ++i) {
+				Entity var6 = (Entity) list.get(i);
 				var0.hasEntities = true;
 				var7 = new NBTTagCompound();
-				if(var6.addEntityID(var7)) {
+				if (var6.addEntityID(var7)) {
 					var3.setTag(var7);
 				}
 			}
@@ -136,8 +137,8 @@ public class ChunkLoader implements IChunkLoader {
 		NBTTagList var8 = new NBTTagList();
 		var5 = var0.chunkTileEntityMap.values().iterator();
 
-		while(var5.hasNext()) {
-			TileEntity var9 = (TileEntity)var5.next();
+		while (var5.hasNext()) {
+			TileEntity var9 = (TileEntity) var5.next();
 			var7 = new NBTTagCompound();
 			var9.writeToNBT(var7);
 			var8.setTag(var7);
@@ -163,13 +164,13 @@ public class ChunkLoader implements IChunkLoader {
 		var4.heightMap = var1.getByteArray("HeightMap");
 		var4.isTerrainPopulated = var1.getBoolean("TerrainPopulated");
 		int var13;
-		if(!var4.data.isValid()) {
+		if (!var4.data.isValid()) {
 			var13 = var4.blocks.length;
 			var0.getClass();
 			var4.data = new NibbleArray(var13, 7);
 		}
 
-		if(var4.heightMap == null || !var4.skylightMap.isValid()) {
+		if (var4.heightMap == null || !var4.skylightMap.isValid()) {
 			var4.heightMap = new byte[256];
 			var13 = var4.blocks.length;
 			var0.getClass();
@@ -177,7 +178,7 @@ public class ChunkLoader implements IChunkLoader {
 			var4.generateSkylightMap();
 		}
 
-		if(!var4.blocklightMap.isValid()) {
+		if (!var4.blocklightMap.isValid()) {
 			var13 = var4.blocks.length;
 			var0.getClass();
 			var4.blocklightMap = new NibbleArray(var13, 7);
@@ -185,23 +186,23 @@ public class ChunkLoader implements IChunkLoader {
 		}
 
 		NBTTagList var5 = var1.getTagList("Entities");
-		if(var5 != null) {
-			for(int var6 = 0; var6 < var5.tagCount(); ++var6) {
-				NBTTagCompound var7 = (NBTTagCompound)var5.tagAt(var6);
+		if (var5 != null) {
+			for (int var6 = 0; var6 < var5.tagCount(); ++var6) {
+				NBTTagCompound var7 = (NBTTagCompound) var5.tagAt(var6);
 				Entity var8 = EntityList.createEntityFromNBT(var7, var0);
 				var4.hasEntities = true;
-				if(var8 != null) {
+				if (var8 != null) {
 					var4.addEntity(var8);
 				}
 			}
 		}
 
 		NBTTagList var10 = var1.getTagList("TileEntities");
-		if(var10 != null) {
-			for(int var11 = 0; var11 < var10.tagCount(); ++var11) {
-				NBTTagCompound var12 = (NBTTagCompound)var10.tagAt(var11);
+		if (var10 != null) {
+			for (int var11 = 0; var11 < var10.tagCount(); ++var11) {
+				NBTTagCompound var12 = (NBTTagCompound) var10.tagAt(var11);
 				TileEntity var9 = TileEntity.createAndLoadEntity(var12);
-				if(var9 != null) {
+				if (var9 != null) {
 					var4.addTileEntity(var9);
 				}
 			}

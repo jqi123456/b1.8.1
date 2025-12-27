@@ -54,7 +54,8 @@ public abstract class EntityPlayer extends EntityLiving {
 		this.craftingInventory = this.inventorySlots;
 		this.yOffset = 1.62F;
 		ChunkCoordinates var2 = var1.getSpawnPoint();
-		this.setLocationAndAngles((double)var2.posX + 0.5D, (double)(var2.posY + 1), (double)var2.posZ + 0.5D, 0.0F, 0.0F);
+		this.setLocationAndAngles((double) var2.posX + 0.5D, (double) (var2.posY + 1), (double) var2.posZ + 0.5D, 0.0F,
+				0.0F);
 		this.health = 20;
 		this.entityType = "humanoid";
 		this.field_9353_B = 180.0F;
@@ -64,8 +65,8 @@ public abstract class EntityPlayer extends EntityLiving {
 
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-		this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
+		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+		this.dataWatcher.addObject(17, Byte.valueOf((byte) 0));
 	}
 
 	public ItemStack func_35195_X() {
@@ -85,7 +86,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void func_35206_ab() {
-		if(this.field_34907_d != null) {
+		if (this.field_34907_d != null) {
 			this.field_34907_d.func_35862_a(this.worldObj, this, this.field_34906_e);
 		}
 
@@ -95,68 +96,70 @@ public abstract class EntityPlayer extends EntityLiving {
 	public void func_35207_ac() {
 		this.field_34907_d = null;
 		this.field_34906_e = 0;
-		if(!this.worldObj.multiplayerWorld) {
+		if (!this.worldObj.multiplayerWorld) {
 			this.func_35116_d(false);
 		}
 
 	}
 
 	public boolean func_35162_ad() {
-		return this.func_35196_Z() && Item.itemsList[this.field_34907_d.itemID].func_35412_b(this.field_34907_d) == EnumAction.block;
+		return this.func_35196_Z()
+				&& Item.itemsList[this.field_34907_d.itemID].func_35412_b(this.field_34907_d) == EnumAction.block;
 	}
 
 	public void onUpdate() {
-		if(this.field_34907_d != null) {
+		if (this.field_34907_d != null) {
 			ItemStack var1 = this.inventory.getCurrentItem();
-			if(var1 != this.field_34907_d) {
+			if (var1 != this.field_34907_d) {
 				this.func_35207_ac();
 			} else {
-				if(this.field_34906_e <= 25 && this.field_34906_e % 4 == 0) {
+				if (this.field_34906_e <= 25 && this.field_34906_e % 4 == 0) {
 					this.func_35201_a(var1, 5);
 				}
 
-				if(--this.field_34906_e == 0 && !this.worldObj.multiplayerWorld) {
+				if (--this.field_34906_e == 0 && !this.worldObj.multiplayerWorld) {
 					this.func_35208_ae();
 				}
 			}
 		}
 
-		if(this.field_35214_aG > 0) {
+		if (this.field_35214_aG > 0) {
 			--this.field_35214_aG;
 		}
 
-		if(this.isPlayerSleeping()) {
+		if (this.isPlayerSleeping()) {
 			++this.sleepTimer;
-			if(this.sleepTimer > 100) {
+			if (this.sleepTimer > 100) {
 				this.sleepTimer = 100;
 			}
 
-			if(!this.worldObj.multiplayerWorld) {
-				if(!this.isInBed()) {
+			if (!this.worldObj.multiplayerWorld) {
+				if (!this.isInBed()) {
 					this.wakeUpPlayer(true, true, false);
-				} else if(this.worldObj.isDaytime()) {
+				} else if (this.worldObj.isDaytime()) {
 					this.wakeUpPlayer(false, true, true);
 				}
 			}
-		} else if(this.sleepTimer > 0) {
+		} else if (this.sleepTimer > 0) {
 			++this.sleepTimer;
-			if(this.sleepTimer >= 110) {
+			if (this.sleepTimer >= 110) {
 				this.sleepTimer = 0;
 			}
 		}
 
 		super.onUpdate();
-		if(!this.worldObj.multiplayerWorld && this.craftingInventory != null && !this.craftingInventory.canInteractWith(this)) {
+		if (!this.worldObj.multiplayerWorld && this.craftingInventory != null
+				&& !this.craftingInventory.canInteractWith(this)) {
 			this.closeScreen();
 			this.craftingInventory = this.inventorySlots;
 		}
 
-		if(this.field_35212_aW.field_35757_b) {
-			for(int var9 = 0; var9 < 8; ++var9) {
+		if (this.field_35212_aW.field_35757_b) {
+			for (int var9 = 0; var9 < 8; ++var9) {
 			}
 		}
 
-		if(this.fire > 0 && this.field_35212_aW.field_35759_a) {
+		if (this.fire > 0 && this.field_35212_aW.field_35759_a) {
 			this.fire = 0;
 		}
 
@@ -167,27 +170,27 @@ public abstract class EntityPlayer extends EntityLiving {
 		double var3 = this.posY - this.field_20062_v;
 		double var5 = this.posZ - this.field_20061_w;
 		double var7 = 10.0D;
-		if(var10 > var7) {
+		if (var10 > var7) {
 			this.field_20066_r = this.field_20063_u = this.posX;
 		}
 
-		if(var5 > var7) {
+		if (var5 > var7) {
 			this.field_20064_t = this.field_20061_w = this.posZ;
 		}
 
-		if(var3 > var7) {
+		if (var3 > var7) {
 			this.field_20065_s = this.field_20062_v = this.posY;
 		}
 
-		if(var10 < -var7) {
+		if (var10 < -var7) {
 			this.field_20066_r = this.field_20063_u = this.posX;
 		}
 
-		if(var5 < -var7) {
+		if (var5 < -var7) {
 			this.field_20064_t = this.field_20061_w = this.posZ;
 		}
 
-		if(var3 < -var7) {
+		if (var3 < -var7) {
 			this.field_20065_s = this.field_20062_v = this.posY;
 		}
 
@@ -195,42 +198,46 @@ public abstract class EntityPlayer extends EntityLiving {
 		this.field_20061_w += var5 * 0.25D;
 		this.field_20062_v += var3 * 0.25D;
 		this.addStat(StatList.minutesPlayedStat, 1);
-		if(this.ridingEntity == null) {
+		if (this.ridingEntity == null) {
 			this.startMinecartRidingCoordinate = null;
 		}
 
-		if(!this.worldObj.multiplayerWorld) {
+		if (!this.worldObj.multiplayerWorld) {
 			this.field_35217_av.func_35768_a(this);
 		}
 
 	}
 
 	protected void func_35201_a(ItemStack var1, int var2) {
-		if(var1.func_35865_n() == EnumAction.eat) {
-			for(int var3 = 0; var3 < var2; ++var3) {
-				Vec3D var4 = Vec3D.createVector(((double)this.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
-				var4.rotateAroundX(-this.rotationPitch * (float)Math.PI / 180.0F);
-				var4.rotateAroundY(-this.rotationYaw * (float)Math.PI / 180.0F);
-				Vec3D var5 = Vec3D.createVector(((double)this.rand.nextFloat() - 0.5D) * 0.3D, (double)(-this.rand.nextFloat()) * 0.6D - 0.3D, 0.6D);
-				var5.rotateAroundX(-this.rotationPitch * (float)Math.PI / 180.0F);
-				var5.rotateAroundY(-this.rotationYaw * (float)Math.PI / 180.0F);
-				var5 = var5.addVector(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
-				this.worldObj.spawnParticle("iconcrack_" + var1.getItem().shiftedIndex, var5.xCoord, var5.yCoord, var5.zCoord, var4.xCoord, var4.yCoord + 0.05D, var4.zCoord);
+		if (var1.func_35865_n() == EnumAction.eat) {
+			for (int var3 = 0; var3 < var2; ++var3) {
+				Vec3D var4 = Vec3D.createVector(((double) this.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D,
+						0.0D);
+				var4.rotateAroundX(-this.rotationPitch * (float) Math.PI / 180.0F);
+				var4.rotateAroundY(-this.rotationYaw * (float) Math.PI / 180.0F);
+				Vec3D var5 = Vec3D.createVector(((double) this.rand.nextFloat() - 0.5D) * 0.3D,
+						(double) (-this.rand.nextFloat()) * 0.6D - 0.3D, 0.6D);
+				var5.rotateAroundX(-this.rotationPitch * (float) Math.PI / 180.0F);
+				var5.rotateAroundY(-this.rotationYaw * (float) Math.PI / 180.0F);
+				var5 = var5.addVector(this.posX, this.posY + (double) this.getEyeHeight(), this.posZ);
+				this.worldObj.spawnParticle("iconcrack_" + var1.getItem().shiftedIndex, var5.xCoord, var5.yCoord, var5.zCoord,
+						var4.xCoord, var4.yCoord + 0.05D, var4.zCoord);
 			}
 
-			this.worldObj.playSoundAtEntity(this, "mob.eat", 0.5F + 0.5F * (float)this.rand.nextInt(2), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+			this.worldObj.playSoundAtEntity(this, "mob.eat", 0.5F + 0.5F * (float) this.rand.nextInt(2),
+					(this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 		}
 
 	}
 
 	protected void func_35208_ae() {
-		if(this.field_34907_d != null) {
+		if (this.field_34907_d != null) {
 			this.func_35201_a(this.field_34907_d, 16);
 			int var1 = this.field_34907_d.stackSize;
 			ItemStack var2 = this.field_34907_d.func_35863_b(this.worldObj, this);
-			if(var2 != this.field_34907_d || var2 != null && var2.stackSize != var1) {
+			if (var2 != this.field_34907_d || var2 != null && var2.stackSize != var1) {
 				this.inventory.mainInventory[this.inventory.currentItem] = var2;
-				if(var2.stackSize == 0) {
+				if (var2.stackSize == 0) {
 					this.inventory.mainInventory[this.inventory.currentItem] = null;
 				}
 			}
@@ -241,7 +248,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void handleHealthUpdate(byte var1) {
-		if(var1 == 9) {
+		if (var1 == 9) {
 			this.func_35208_ae();
 		} else {
 			super.handleHealthUpdate(var1);
@@ -281,14 +288,18 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	private int func_35202_aE() {
-		return this.func_35160_a(Potion.field_35675_e) ? 6 - (1 + this.func_35167_b(Potion.field_35675_e).func_35801_c()) * 1 : (this.func_35160_a(Potion.field_35672_f) ? 6 + (1 + this.func_35167_b(Potion.field_35672_f).func_35801_c()) * 2 : 6);
+		return this.func_35160_a(Potion.field_35675_e)
+				? 6 - (1 + this.func_35167_b(Potion.field_35675_e).func_35801_c()) * 1
+				: (this.func_35160_a(Potion.field_35672_f)
+						? 6 + (1 + this.func_35167_b(Potion.field_35672_f).func_35801_c()) * 2
+						: 6);
 	}
 
 	protected void updateEntityActionState() {
 		int var1 = this.func_35202_aE();
-		if(this.isSwinging) {
+		if (this.isSwinging) {
 			++this.swingProgressInt;
-			if(this.swingProgressInt >= var1) {
+			if (this.swingProgressInt >= var1) {
 				this.swingProgressInt = 0;
 				this.isSwinging = false;
 			}
@@ -296,15 +307,15 @@ public abstract class EntityPlayer extends EntityLiving {
 			this.swingProgressInt = 0;
 		}
 
-		this.swingProgress = (float)this.swingProgressInt / (float)var1;
+		this.swingProgress = (float) this.swingProgressInt / (float) var1;
 	}
 
 	public void onLivingUpdate() {
-		if(this.field_35216_aw > 0) {
+		if (this.field_35216_aw > 0) {
 			--this.field_35216_aw;
 		}
 
-		if(this.worldObj.difficultySetting == 0 && this.health < 20 && this.ticksExisted % 20 * 12 == 0) {
+		if (this.worldObj.difficultySetting == 0 && this.health < 20 && this.ticksExisted % 20 * 12 == 0) {
 			this.heal(1);
 		}
 
@@ -313,33 +324,33 @@ public abstract class EntityPlayer extends EntityLiving {
 		super.onLivingUpdate();
 		this.field_35169_bv = this.field_35215_ba;
 		this.field_35168_bw = this.field_35213_bb;
-		if(this.func_35117_Q()) {
-			this.field_35169_bv = (float)((double)this.field_35169_bv + (double)this.field_35215_ba * 0.3D);
-			this.field_35168_bw = (float)((double)this.field_35168_bw + (double)this.field_35213_bb * 0.3D);
+		if (this.func_35117_Q()) {
+			this.field_35169_bv = (float) ((double) this.field_35169_bv + (double) this.field_35215_ba * 0.3D);
+			this.field_35168_bw = (float) ((double) this.field_35168_bw + (double) this.field_35213_bb * 0.3D);
 		}
 
 		float var1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		float var2 = (float)Math.atan(-this.motionY * (double)0.2F) * 15.0F;
-		if(var1 > 0.1F) {
+		float var2 = (float) Math.atan(-this.motionY * (double) 0.2F) * 15.0F;
+		if (var1 > 0.1F) {
 			var1 = 0.1F;
 		}
 
-		if(!this.onGround || this.health <= 0) {
+		if (!this.onGround || this.health <= 0) {
 			var1 = 0.0F;
 		}
 
-		if(this.onGround || this.health <= 0) {
+		if (this.onGround || this.health <= 0) {
 			var2 = 0.0F;
 		}
 
 		this.cameraYaw += (var1 - this.cameraYaw) * 0.4F;
 		this.cameraPitch += (var2 - this.cameraPitch) * 0.8F;
-		if(this.health > 0) {
+		if (this.health > 0) {
 			List var3 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(1.0D, 0.0D, 1.0D));
-			if(var3 != null) {
-				for(int var4 = 0; var4 < var3.size(); ++var4) {
-					Entity var5 = (Entity)var3.get(var4);
-					if(!var5.isDead) {
+			if (var3 != null) {
+				for (int var4 = 0; var4 < var3.size(); ++var4) {
+					Entity var5 = (Entity) var3.get(var4);
+					if (!var5.isDead) {
 						this.collideWithPlayer(var5);
 					}
 				}
@@ -360,15 +371,17 @@ public abstract class EntityPlayer extends EntityLiving {
 		super.onDeath(var1);
 		this.setSize(0.2F, 0.2F);
 		this.setPosition(this.posX, this.posY, this.posZ);
-		this.motionY = (double)0.1F;
-		if(this.username.equals("Notch")) {
+		this.motionY = (double) 0.1F;
+		if (this.username.equals("Notch")) {
 			this.dropPlayerItemWithRandomChoice(new ItemStack(Item.appleRed, 1), true);
 		}
 
 		this.inventory.dropAllItems();
-		if(var1 != null) {
-			this.motionX = (double)(-MathHelper.cos((this.attackedAtYaw + this.rotationYaw) * (float)Math.PI / 180.0F) * 0.1F);
-			this.motionZ = (double)(-MathHelper.sin((this.attackedAtYaw + this.rotationYaw) * (float)Math.PI / 180.0F) * 0.1F);
+		if (var1 != null) {
+			this.motionX = (double) (-MathHelper.cos((this.attackedAtYaw + this.rotationYaw) * (float) Math.PI / 180.0F)
+					* 0.1F);
+			this.motionZ = (double) (-MathHelper.sin((this.attackedAtYaw + this.rotationYaw) * (float) Math.PI / 180.0F)
+					* 0.1F);
 		} else {
 			this.motionX = this.motionZ = 0.0D;
 		}
@@ -379,7 +392,7 @@ public abstract class EntityPlayer extends EntityLiving {
 
 	public void addToPlayerScore(Entity var1, int var2) {
 		this.score += var2;
-		if(var1 instanceof EntityPlayer) {
+		if (var1 instanceof EntityPlayer) {
 			this.addStat(StatList.playerKillsStat, 1);
 		} else {
 			this.addStat(StatList.mobKillsStat, 1);
@@ -396,28 +409,31 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void dropPlayerItemWithRandomChoice(ItemStack var1, boolean var2) {
-		if(var1 != null) {
-			EntityItem var3 = new EntityItem(this.worldObj, this.posX, this.posY - (double)0.3F + (double)this.getEyeHeight(), this.posZ, var1);
+		if (var1 != null) {
+			EntityItem var3 = new EntityItem(this.worldObj, this.posX,
+					this.posY - (double) 0.3F + (double) this.getEyeHeight(), this.posZ, var1);
 			var3.delayBeforeCanPickup = 40;
 			float var4 = 0.1F;
 			float var5;
-			if(var2) {
+			if (var2) {
 				var5 = this.rand.nextFloat() * 0.5F;
-				float var6 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
-				var3.motionX = (double)(-MathHelper.sin(var6) * var5);
-				var3.motionZ = (double)(MathHelper.cos(var6) * var5);
-				var3.motionY = (double)0.2F;
+				float var6 = this.rand.nextFloat() * (float) Math.PI * 2.0F;
+				var3.motionX = (double) (-MathHelper.sin(var6) * var5);
+				var3.motionZ = (double) (MathHelper.cos(var6) * var5);
+				var3.motionY = (double) 0.2F;
 			} else {
 				var4 = 0.3F;
-				var3.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * var4);
-				var3.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * var4);
-				var3.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI) * var4 + 0.1F);
+				var3.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
+						* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * var4);
+				var3.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
+						* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * var4);
+				var3.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI) * var4 + 0.1F);
 				var4 = 0.02F;
-				var5 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
+				var5 = this.rand.nextFloat() * (float) Math.PI * 2.0F;
 				var4 *= this.rand.nextFloat();
-				var3.motionX += Math.cos((double)var5) * (double)var4;
-				var3.motionY += (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F);
-				var3.motionZ += Math.sin((double)var5) * (double)var4;
+				var3.motionX += Math.cos((double) var5) * (double) var4;
+				var3.motionY += (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F);
+				var3.motionZ += Math.sin((double) var5) * (double) var4;
 			}
 
 			this.joinEntityItemWithWorld(var3);
@@ -431,20 +447,20 @@ public abstract class EntityPlayer extends EntityLiving {
 
 	public float getCurrentPlayerStrVsBlock(Block var1) {
 		float var2 = this.inventory.getStrVsBlock(var1);
-		if(this.isInsideOfMaterial(Material.water)) {
+		if (this.isInsideOfMaterial(Material.water)) {
 			var2 /= 5.0F;
 		}
 
-		if(!this.onGround) {
+		if (!this.onGround) {
 			var2 /= 5.0F;
 		}
 
-		if(this.func_35160_a(Potion.field_35675_e)) {
-			var2 *= 1.0F + (float)(this.func_35167_b(Potion.field_35675_e).func_35801_c() + 1) * 0.2F;
+		if (this.func_35160_a(Potion.field_35675_e)) {
+			var2 *= 1.0F + (float) (this.func_35167_b(Potion.field_35675_e).func_35801_c() + 1) * 0.2F;
 		}
 
-		if(this.func_35160_a(Potion.field_35672_f)) {
-			var2 *= 1.0F - (float)(this.func_35167_b(Potion.field_35672_f).func_35801_c() + 1) * 0.2F;
+		if (this.func_35160_a(Potion.field_35672_f)) {
+			var2 *= 1.0F - (float) (this.func_35167_b(Potion.field_35672_f).func_35801_c() + 1) * 0.2F;
 		}
 
 		return var2;
@@ -464,13 +480,15 @@ public abstract class EntityPlayer extends EntityLiving {
 		this.field_35211_aX = var1.getInteger("Xp");
 		this.field_35210_aY = var1.getInteger("XpLevel");
 		this.field_35209_aZ = var1.getInteger("XpTotal");
-		if(this.sleeping) {
-			this.bedChunkCoordinates = new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+		if (this.sleeping) {
+			this.bedChunkCoordinates = new ChunkCoordinates(MathHelper.floor_double(this.posX),
+					MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
 			this.wakeUpPlayer(true, true, false);
 		}
 
-		if(var1.hasKey("SpawnX") && var1.hasKey("SpawnY") && var1.hasKey("SpawnZ")) {
-			this.playerSpawnCoordinate = new ChunkCoordinates(var1.getInteger("SpawnX"), var1.getInteger("SpawnY"), var1.getInteger("SpawnZ"));
+		if (var1.hasKey("SpawnX") && var1.hasKey("SpawnY") && var1.hasKey("SpawnZ")) {
+			this.playerSpawnCoordinate = new ChunkCoordinates(var1.getInteger("SpawnX"), var1.getInteger("SpawnY"),
+					var1.getInteger("SpawnZ"));
 		}
 
 		this.field_35217_av.func_35766_a(var1);
@@ -481,11 +499,11 @@ public abstract class EntityPlayer extends EntityLiving {
 		var1.setTag("Inventory", this.inventory.writeToNBT(new NBTTagList()));
 		var1.setInteger("Dimension", this.dimension);
 		var1.setBoolean("Sleeping", this.sleeping);
-		var1.setShort("SleepTimer", (short)this.sleepTimer);
+		var1.setShort("SleepTimer", (short) this.sleepTimer);
 		var1.setInteger("Xp", this.field_35211_aX);
 		var1.setInteger("XpLevel", this.field_35210_aY);
 		var1.setInteger("XpTotal", this.field_35209_aZ);
-		if(this.playerSpawnCoordinate != null) {
+		if (this.playerSpawnCoordinate != null) {
 			var1.setInteger("SpawnX", this.playerSpawnCoordinate.posX);
 			var1.setInteger("SpawnY", this.playerSpawnCoordinate.posY);
 			var1.setInteger("SpawnZ", this.playerSpawnCoordinate.posZ);
@@ -512,42 +530,42 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public boolean attackEntityFrom(DamageSource var1, int var2) {
-		if(this.field_35212_aW.field_35759_a && !var1.func_35529_d()) {
+		if (this.field_35212_aW.field_35759_a && !var1.func_35529_d()) {
 			return false;
 		} else {
 			this.entityAge = 0;
-			if(this.health <= 0) {
+			if (this.health <= 0) {
 				return false;
 			} else {
-				if(this.isPlayerSleeping() && !this.worldObj.multiplayerWorld) {
+				if (this.isPlayerSleeping() && !this.worldObj.multiplayerWorld) {
 					this.wakeUpPlayer(true, true, false);
 				}
 
 				Entity var3 = var1.func_35532_a();
-				if(var3 instanceof EntityMob || var3 instanceof EntityArrow) {
-					if(this.worldObj.difficultySetting == 0) {
+				if (var3 instanceof EntityMob || var3 instanceof EntityArrow) {
+					if (this.worldObj.difficultySetting == 0) {
 						var2 = 0;
 					}
 
-					if(this.worldObj.difficultySetting == 1) {
+					if (this.worldObj.difficultySetting == 1) {
 						var2 = var2 / 3 + 1;
 					}
 
-					if(this.worldObj.difficultySetting == 3) {
+					if (this.worldObj.difficultySetting == 3) {
 						var2 = var2 * 3 / 2;
 					}
 				}
 
-				if(var2 == 0) {
+				if (var2 == 0) {
 					return false;
 				} else {
 					Entity var4 = var3;
-					if(var3 instanceof EntityArrow && ((EntityArrow)var3).shootingEntity != null) {
-						var4 = ((EntityArrow)var3).shootingEntity;
+					if (var3 instanceof EntityArrow && ((EntityArrow) var3).shootingEntity != null) {
+						var4 = ((EntityArrow) var3).shootingEntity;
 					}
 
-					if(var4 instanceof EntityLiving) {
-						this.alertWolves((EntityLiving)var4, false);
+					if (var4 instanceof EntityLiving) {
+						this.alertWolves((EntityLiving) var4, false);
 					}
 
 					this.addStat(StatList.damageTakenStat, var2);
@@ -562,34 +580,36 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	protected void alertWolves(EntityLiving var1, boolean var2) {
-		if(!(var1 instanceof EntityCreeper) && !(var1 instanceof EntityGhast)) {
-			if(var1 instanceof EntityWolf) {
-				EntityWolf var3 = (EntityWolf)var1;
-				if(var3.isWolfTamed() && this.username.equals(var3.getWolfOwner())) {
+		if (!(var1 instanceof EntityCreeper) && !(var1 instanceof EntityGhast)) {
+			if (var1 instanceof EntityWolf) {
+				EntityWolf var3 = (EntityWolf) var1;
+				if (var3.isWolfTamed() && this.username.equals(var3.getWolfOwner())) {
 					return;
 				}
 			}
 
-			if(!(var1 instanceof EntityPlayer) || this.isPVPEnabled()) {
-				List var7 = this.worldObj.getEntitiesWithinAABB(EntityWolf.class, AxisAlignedBB.getBoundingBoxFromPool(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
+			if (!(var1 instanceof EntityPlayer) || this.isPVPEnabled()) {
+				List var7 = this.worldObj.getEntitiesWithinAABB(EntityWolf.class,
+						AxisAlignedBB.getBoundingBoxFromPool(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D,
+								this.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
 				Iterator var4 = var7.iterator();
 
-				while(true) {
+				while (true) {
 					EntityWolf var6;
 					do {
 						do {
 							do {
 								do {
-									if(!var4.hasNext()) {
+									if (!var4.hasNext()) {
 										return;
 									}
 
-									Entity var5 = (Entity)var4.next();
-									var6 = (EntityWolf)var5;
-								} while(!var6.isWolfTamed());
-							} while(var6.getEntityToAttack() != null);
-						} while(!this.username.equals(var6.getWolfOwner()));
-					} while(var2 && var6.isWolfSitting());
+									Entity var5 = (Entity) var4.next();
+									var6 = (EntityWolf) var5;
+								} while (!var6.isWolfTamed());
+							} while (var6.getEntityToAttack() != null);
+						} while (!this.username.equals(var6.getWolfOwner()));
+					} while (var2 && var6.isWolfSitting());
 
 					var6.setIsSitting(false);
 					var6.setEntityToAttack(var1);
@@ -599,11 +619,11 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	protected void b(DamageSource var1, int var2) {
-		if(!var1.func_35534_b() && this.func_35162_ad()) {
+		if (!var1.func_35534_b() && this.func_35162_ad()) {
 			var2 = 1 + var2 >> 1;
 		}
 
-		if(!var1.func_35534_b()) {
+		if (!var1.func_35534_b()) {
 			int var3 = 25 - this.inventory.getTotalArmorValue();
 			int var4 = var2 * var3 + this.damageRemainder;
 			this.inventory.damageArmor(var2);
@@ -625,11 +645,11 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void useCurrentItemOnEntity(Entity var1) {
-		if(!var1.interact(this)) {
+		if (!var1.interact(this)) {
 			ItemStack var2 = this.getCurrentEquippedItem();
-			if(var2 != null && var1 instanceof EntityLiving) {
-				var2.useItemOnEntity((EntityLiving)var1);
-				if(var2.stackSize <= 0) {
+			if (var2 != null && var1 instanceof EntityLiving) {
+				var2.useItemOnEntity((EntityLiving) var1);
+				if (var2.stackSize <= 0) {
 					var2.onItemDestroyedByUse(this);
 					this.destroyCurrentEquippedItem();
 				}
@@ -643,15 +663,15 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void destroyCurrentEquippedItem() {
-		this.inventory.setInventorySlotContents(this.inventory.currentItem, (ItemStack)null);
+		this.inventory.setInventorySlotContents(this.inventory.currentItem, (ItemStack) null);
 	}
 
 	public double getYOffset() {
-		return (double)(this.yOffset - 0.5F);
+		return (double) (this.yOffset - 0.5F);
 	}
 
 	public void swingItem() {
-		if(!this.isSwinging || this.swingProgressInt >= this.func_35202_aE() / 2 || this.swingProgressInt < 0) {
+		if (!this.isSwinging || this.swingProgressInt >= this.func_35202_aE() / 2 || this.swingProgressInt < 0) {
 			this.swingProgressInt = -1;
 			this.isSwinging = true;
 		}
@@ -660,38 +680,39 @@ public abstract class EntityPlayer extends EntityLiving {
 
 	public void attackTargetEntityWithCurrentItem(Entity var1) {
 		int var2 = this.inventory.getDamageVsEntity(var1);
-		if(var2 > 0) {
+		if (var2 > 0) {
 			boolean var3 = this.motionY < 0.0D && !this.onGround && !this.isOnLadder() && !this.isInWater();
-			if(var3) {
+			if (var3) {
 				var2 = var2 * 3 / 2 + 1;
 			}
 
 			boolean var4 = var1.attackEntityFrom(DamageSource.func_35527_a(this), var2);
-			if(var4) {
-				if(this.func_35117_Q()) {
-					var1.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * 1.0F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * 1.0F));
+			if (var4) {
+				if (this.func_35117_Q()) {
+					var1.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * 1.0F), 0.1D,
+							(double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * 1.0F));
 					this.motionX *= 0.6D;
 					this.motionZ *= 0.6D;
 					this.func_35113_c(false);
 				}
 
-				if(var3) {
+				if (var3) {
 					this.func_35200_b(var1);
 				}
 			}
 
 			ItemStack var5 = this.getCurrentEquippedItem();
-			if(var5 != null && var1 instanceof EntityLiving) {
-				var5.hitEntity((EntityLiving)var1, this);
-				if(var5.stackSize <= 0) {
+			if (var5 != null && var1 instanceof EntityLiving) {
+				var5.hitEntity((EntityLiving) var1, this);
+				if (var5.stackSize <= 0) {
 					var5.onItemDestroyedByUse(this);
 					this.destroyCurrentEquippedItem();
 				}
 			}
 
-			if(var1 instanceof EntityLiving) {
-				if(var1.isEntityAlive()) {
-					this.alertWolves((EntityLiving)var1, true);
+			if (var1 instanceof EntityLiving) {
+				if (var1.isEntityAlive()) {
+					this.alertWolves((EntityLiving) var1, true);
 				}
 
 				this.addStat(StatList.damageDealtStat, var2);
@@ -716,7 +737,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	public void setEntityDead() {
 		super.setEntityDead();
 		this.inventorySlots.onCraftGuiClosed(this);
-		if(this.craftingInventory != null) {
+		if (this.craftingInventory != null) {
 			this.craftingInventory.onCraftGuiClosed(this);
 		}
 
@@ -727,56 +748,59 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public EnumStatus sleepInBedAt(int var1, int var2, int var3) {
-		if(!this.worldObj.multiplayerWorld) {
-			if(this.isPlayerSleeping() || !this.isEntityAlive()) {
+		if (!this.worldObj.multiplayerWorld) {
+			if (this.isPlayerSleeping() || !this.isEntityAlive()) {
 				return EnumStatus.OTHER_PROBLEM;
 			}
 
-			if(this.worldObj.worldProvider.isNether) {
+			if (this.worldObj.worldProvider.isNether) {
 				return EnumStatus.NOT_POSSIBLE_HERE;
 			}
 
-			if(this.worldObj.isDaytime()) {
+			if (this.worldObj.isDaytime()) {
 				return EnumStatus.NOT_POSSIBLE_NOW;
 			}
 
-			if(Math.abs(this.posX - (double)var1) > 3.0D || Math.abs(this.posY - (double)var2) > 2.0D || Math.abs(this.posZ - (double)var3) > 3.0D) {
+			if (Math.abs(this.posX - (double) var1) > 3.0D || Math.abs(this.posY - (double) var2) > 2.0D
+					|| Math.abs(this.posZ - (double) var3) > 3.0D) {
 				return EnumStatus.TOO_FAR_AWAY;
 			}
 		}
 
 		this.setSize(0.2F, 0.2F);
 		this.yOffset = 0.2F;
-		if(this.worldObj.blockExists(var1, var2, var3)) {
+		if (this.worldObj.blockExists(var1, var2, var3)) {
 			int var4 = this.worldObj.getBlockMetadata(var1, var2, var3);
 			int var5 = BlockBed.getDirectionFromMetadata(var4);
 			float var6 = 0.5F;
 			float var7 = 0.5F;
-			switch(var5) {
-			case 0:
-				var7 = 0.9F;
-				break;
-			case 1:
-				var6 = 0.1F;
-				break;
-			case 2:
-				var7 = 0.1F;
-				break;
-			case 3:
-				var6 = 0.9F;
+			switch (var5) {
+				case 0:
+					var7 = 0.9F;
+					break;
+				case 1:
+					var6 = 0.1F;
+					break;
+				case 2:
+					var7 = 0.1F;
+					break;
+				case 3:
+					var6 = 0.9F;
 			}
 
 			this.func_22052_e(var5);
-			this.setPosition((double)((float)var1 + var6), (double)((float)var2 + 15.0F / 16.0F), (double)((float)var3 + var7));
+			this.setPosition((double) ((float) var1 + var6), (double) ((float) var2 + 15.0F / 16.0F),
+					(double) ((float) var3 + var7));
 		} else {
-			this.setPosition((double)((float)var1 + 0.5F), (double)((float)var2 + 15.0F / 16.0F), (double)((float)var3 + 0.5F));
+			this.setPosition((double) ((float) var1 + 0.5F), (double) ((float) var2 + 15.0F / 16.0F),
+					(double) ((float) var3 + 0.5F));
 		}
 
 		this.sleeping = true;
 		this.sleepTimer = 0;
 		this.bedChunkCoordinates = new ChunkCoordinates(var1, var2, var3);
 		this.motionX = this.motionZ = this.motionY = 0.0D;
-		if(!this.worldObj.multiplayerWorld) {
+		if (!this.worldObj.multiplayerWorld) {
 			this.worldObj.updateAllPlayersSleepingFlag();
 		}
 
@@ -786,18 +810,18 @@ public abstract class EntityPlayer extends EntityLiving {
 	private void func_22052_e(int var1) {
 		this.field_22063_x = 0.0F;
 		this.field_22061_z = 0.0F;
-		switch(var1) {
-		case 0:
-			this.field_22061_z = -1.8F;
-			break;
-		case 1:
-			this.field_22063_x = 1.8F;
-			break;
-		case 2:
-			this.field_22061_z = 1.8F;
-			break;
-		case 3:
-			this.field_22063_x = -1.8F;
+		switch (var1) {
+			case 0:
+				this.field_22061_z = -1.8F;
+				break;
+			case 1:
+				this.field_22063_x = 1.8F;
+				break;
+			case 2:
+				this.field_22061_z = 1.8F;
+				break;
+			case 3:
+				this.field_22063_x = -1.8F;
 		}
 
 	}
@@ -807,35 +831,37 @@ public abstract class EntityPlayer extends EntityLiving {
 		this.resetHeight();
 		ChunkCoordinates var4 = this.bedChunkCoordinates;
 		ChunkCoordinates var5 = this.bedChunkCoordinates;
-		if(var4 != null && this.worldObj.getBlockId(var4.posX, var4.posY, var4.posZ) == Block.bed.blockID) {
+		if (var4 != null && this.worldObj.getBlockId(var4.posX, var4.posY, var4.posZ) == Block.bed.blockID) {
 			BlockBed.setBedOccupied(this.worldObj, var4.posX, var4.posY, var4.posZ, false);
 			var5 = BlockBed.getNearestEmptyChunkCoordinates(this.worldObj, var4.posX, var4.posY, var4.posZ, 0);
-			if(var5 == null) {
+			if (var5 == null) {
 				var5 = new ChunkCoordinates(var4.posX, var4.posY + 1, var4.posZ);
 			}
 
-			this.setPosition((double)((float)var5.posX + 0.5F), (double)((float)var5.posY + this.yOffset + 0.1F), (double)((float)var5.posZ + 0.5F));
+			this.setPosition((double) ((float) var5.posX + 0.5F), (double) ((float) var5.posY + this.yOffset + 0.1F),
+					(double) ((float) var5.posZ + 0.5F));
 		}
 
 		this.sleeping = false;
-		if(!this.worldObj.multiplayerWorld && var2) {
+		if (!this.worldObj.multiplayerWorld && var2) {
 			this.worldObj.updateAllPlayersSleepingFlag();
 		}
 
-		if(var1) {
+		if (var1) {
 			this.sleepTimer = 0;
 		} else {
 			this.sleepTimer = 100;
 		}
 
-		if(var3) {
+		if (var3) {
 			this.setPlayerSpawnCoordinate(this.bedChunkCoordinates);
 		}
 
 	}
 
 	private boolean isInBed() {
-		return this.worldObj.getBlockId(this.bedChunkCoordinates.posX, this.bedChunkCoordinates.posY, this.bedChunkCoordinates.posZ) == Block.bed.blockID;
+		return this.worldObj.getBlockId(this.bedChunkCoordinates.posX, this.bedChunkCoordinates.posY,
+				this.bedChunkCoordinates.posZ) == Block.bed.blockID;
 	}
 
 	public static ChunkCoordinates verifyRespawnCoordinates(World var0, ChunkCoordinates var1) {
@@ -844,7 +870,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		var2.loadChunk(var1.posX + 3 >> 4, var1.posZ - 3 >> 4);
 		var2.loadChunk(var1.posX - 3 >> 4, var1.posZ + 3 >> 4);
 		var2.loadChunk(var1.posX + 3 >> 4, var1.posZ + 3 >> 4);
-		if(var0.getBlockId(var1.posX, var1.posY, var1.posZ) != Block.bed.blockID) {
+		if (var0.getBlockId(var1.posX, var1.posY, var1.posZ) != Block.bed.blockID) {
 			return null;
 		} else {
 			ChunkCoordinates var3 = BlockBed.getNearestEmptyChunkCoordinates(var0, var1.posX, var1.posY, var1.posZ, 0);
@@ -853,18 +879,19 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public float getBedOrientationInDegrees() {
-		if(this.bedChunkCoordinates != null) {
-			int var1 = this.worldObj.getBlockMetadata(this.bedChunkCoordinates.posX, this.bedChunkCoordinates.posY, this.bedChunkCoordinates.posZ);
+		if (this.bedChunkCoordinates != null) {
+			int var1 = this.worldObj.getBlockMetadata(this.bedChunkCoordinates.posX, this.bedChunkCoordinates.posY,
+					this.bedChunkCoordinates.posZ);
 			int var2 = BlockBed.getDirectionFromMetadata(var1);
-			switch(var2) {
-			case 0:
-				return 90.0F;
-			case 1:
-				return 0.0F;
-			case 2:
-				return 270.0F;
-			case 3:
-				return 180.0F;
+			switch (var2) {
+				case 0:
+					return 90.0F;
+				case 1:
+					return 0.0F;
+				case 2:
+					return 270.0F;
+				case 3:
+					return 180.0F;
 			}
 		}
 
@@ -891,7 +918,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void setPlayerSpawnCoordinate(ChunkCoordinates var1) {
-		if(var1 != null) {
+		if (var1 != null) {
 			this.playerSpawnCoordinate = new ChunkCoordinates(var1);
 		} else {
 			this.playerSpawnCoordinate = null;
@@ -909,7 +936,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	protected void jump() {
 		super.jump();
 		this.addStat(StatList.jumpStat, 1);
-		if(this.func_35117_Q()) {
+		if (this.func_35117_Q()) {
 			this.func_35198_d(0.8F);
 		} else {
 			this.func_35198_d(0.2F);
@@ -921,7 +948,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		double var3 = this.posX;
 		double var5 = this.posY;
 		double var7 = this.posZ;
-		if(this.field_35212_aW.field_35757_b) {
+		if (this.field_35212_aW.field_35757_b) {
 			double var9 = this.motionY;
 			float var11 = this.field_35168_bw;
 			this.field_35168_bw = 0.05F;
@@ -936,37 +963,37 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void addMovementStat(double var1, double var3, double var5) {
-		if(this.ridingEntity == null) {
+		if (this.ridingEntity == null) {
 			int var7;
-			if(this.isInsideOfMaterial(Material.water)) {
+			if (this.isInsideOfMaterial(Material.water)) {
 				var7 = Math.round(MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5) * 100.0F);
-				if(var7 > 0) {
+				if (var7 > 0) {
 					this.addStat(StatList.distanceDoveStat, var7);
-					this.func_35198_d(0.015F * (float)var7 * 0.01F);
+					this.func_35198_d(0.015F * (float) var7 * 0.01F);
 				}
-			} else if(this.isInWater()) {
+			} else if (this.isInWater()) {
 				var7 = Math.round(MathHelper.sqrt_double(var1 * var1 + var5 * var5) * 100.0F);
-				if(var7 > 0) {
+				if (var7 > 0) {
 					this.addStat(StatList.distanceSwumStat, var7);
-					this.func_35198_d(0.015F * (float)var7 * 0.01F);
+					this.func_35198_d(0.015F * (float) var7 * 0.01F);
 				}
-			} else if(this.isOnLadder()) {
-				if(var3 > 0.0D) {
-					this.addStat(StatList.distanceClimbedStat, (int)Math.round(var3 * 100.0D));
+			} else if (this.isOnLadder()) {
+				if (var3 > 0.0D) {
+					this.addStat(StatList.distanceClimbedStat, (int) Math.round(var3 * 100.0D));
 				}
-			} else if(this.onGround) {
+			} else if (this.onGround) {
 				var7 = Math.round(MathHelper.sqrt_double(var1 * var1 + var5 * var5) * 100.0F);
-				if(var7 > 0) {
+				if (var7 > 0) {
 					this.addStat(StatList.distanceWalkedStat, var7);
-					if(this.func_35117_Q()) {
-						this.func_35198_d(10.0F * 0.01F * (float)var7 * 0.01F);
+					if (this.func_35117_Q()) {
+						this.func_35198_d(10.0F * 0.01F * (float) var7 * 0.01F);
 					} else {
-						this.func_35198_d(0.01F * (float)var7 * 0.01F);
+						this.func_35198_d(0.01F * (float) var7 * 0.01F);
 					}
 				}
 			} else {
 				var7 = Math.round(MathHelper.sqrt_double(var1 * var1 + var5 * var5) * 100.0F);
-				if(var7 > 25) {
+				if (var7 > 25) {
 					this.addStat(StatList.distanceFlownStat, var7);
 				}
 			}
@@ -975,19 +1002,21 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	private void addMountedMovementStat(double var1, double var3, double var5) {
-		if(this.ridingEntity != null) {
+		if (this.ridingEntity != null) {
 			int var7 = Math.round(MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5) * 100.0F);
-			if(var7 > 0) {
-				if(this.ridingEntity instanceof EntityMinecart) {
+			if (var7 > 0) {
+				if (this.ridingEntity instanceof EntityMinecart) {
 					this.addStat(StatList.distanceByMinecartStat, var7);
-					if(this.startMinecartRidingCoordinate == null) {
-						this.startMinecartRidingCoordinate = new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
-					} else if(this.startMinecartRidingCoordinate.getSqDistanceTo(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) >= 1000.0D) {
+					if (this.startMinecartRidingCoordinate == null) {
+						this.startMinecartRidingCoordinate = new ChunkCoordinates(MathHelper.floor_double(this.posX),
+								MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+					} else if (this.startMinecartRidingCoordinate.getSqDistanceTo(MathHelper.floor_double(this.posX),
+							MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) >= 1000.0D) {
 						this.addStat(AchievementList.onARail, 1);
 					}
-				} else if(this.ridingEntity instanceof EntityBoat) {
+				} else if (this.ridingEntity instanceof EntityBoat) {
 					this.addStat(StatList.distanceByBoatStat, var7);
-				} else if(this.ridingEntity instanceof EntityPig) {
+				} else if (this.ridingEntity instanceof EntityPig) {
 					this.addStat(StatList.distanceByPigStat, var7);
 				}
 			}
@@ -996,9 +1025,9 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	protected void fall(float var1) {
-		if(!this.field_35212_aW.field_35758_c) {
-			if(var1 >= 2.0F) {
-				this.addStat(StatList.distanceFallenStat, (int)Math.round((double)var1 * 100.0D));
+		if (!this.field_35212_aW.field_35758_c) {
+			if (var1 >= 2.0F) {
+				this.addStat(StatList.distanceFallenStat, (int) Math.round((double) var1 * 100.0D));
 			}
 
 			super.fall(var1);
@@ -1006,7 +1035,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void onKillEntity(EntityLiving var1) {
-		if(var1 instanceof EntityMob) {
+		if (var1 instanceof EntityMob) {
 			this.triggerAchievement(AchievementList.killEnemy);
 		}
 
@@ -1014,19 +1043,19 @@ public abstract class EntityPlayer extends EntityLiving {
 
 	public int getItemIcon(ItemStack var1) {
 		int var2 = super.getItemIcon(var1);
-		if(var1.itemID == Item.fishingRod.shiftedIndex && this.fishEntity != null) {
+		if (var1.itemID == Item.fishingRod.shiftedIndex && this.fishEntity != null) {
 			var2 = var1.getIconIndex() + 16;
-		} else if(this.field_34907_d != null && var1.itemID == Item.bow.shiftedIndex) {
+		} else if (this.field_34907_d != null && var1.itemID == Item.bow.shiftedIndex) {
 			int var3 = var1.func_35866_m() - this.field_34906_e;
-			if(var3 >= 18) {
+			if (var3 >= 18) {
 				return 133;
 			}
 
-			if(var3 > 13) {
+			if (var3 > 13) {
 				return 117;
 			}
 
-			if(var3 > 0) {
+			if (var3 > 0) {
 				return 101;
 			}
 		}
@@ -1035,7 +1064,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void setInPortal() {
-		if(this.timeUntilPortal > 0) {
+		if (this.timeUntilPortal > 0) {
 			this.timeUntilPortal = 10;
 		} else {
 			this.inPortal = true;
@@ -1046,7 +1075,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		this.field_35211_aX += var1;
 		this.field_35209_aZ += var1;
 
-		while(this.field_35211_aX >= this.func_35193_as()) {
+		while (this.field_35211_aX >= this.func_35193_as()) {
 			this.field_35211_aX -= this.func_35193_as();
 			this.func_35203_aG();
 		}
@@ -1062,8 +1091,8 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void func_35198_d(float var1) {
-		if(!this.field_35212_aW.field_35759_a) {
-			if(!this.worldObj.multiplayerWorld) {
+		if (!this.field_35212_aW.field_35759_a) {
+			if (!this.worldObj.multiplayerWorld) {
 				this.field_35217_av.func_35762_a(var1);
 			}
 
@@ -1083,10 +1112,10 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public void func_35199_b(ItemStack var1, int var2) {
-		if(var1 != this.field_34907_d) {
+		if (var1 != this.field_34907_d) {
 			this.field_34907_d = var1;
 			this.field_34906_e = var2;
-			if(!this.worldObj.multiplayerWorld) {
+			if (!this.worldObj.multiplayerWorld) {
 				this.func_35116_d(true);
 			}
 

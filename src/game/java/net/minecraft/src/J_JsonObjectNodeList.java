@@ -10,8 +10,8 @@ class J_JsonObjectNodeList extends HashMap {
 		this.nodeBuilder = var1;
 		Iterator var2 = J_JsonObjectNodeBuilder.func_27236_a(this.nodeBuilder).iterator();
 
-		while(var2.hasNext()) {
-			J_JsonFieldBuilder var3 = (J_JsonFieldBuilder)var2.next();
+		while (var2.hasNext()) {
+			J_JsonFieldBuilder var3 = (J_JsonFieldBuilder) var2.next();
 			this.put(var3.func_27303_b(), var3.func_27302_c());
 		}
 

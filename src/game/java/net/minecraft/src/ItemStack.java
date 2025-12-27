@@ -7,7 +7,7 @@ public final class ItemStack {
 	private int itemDamage;
 
 	public ItemStack(Block var1) {
-		this((Block)var1, 1);
+		this((Block) var1, 1);
 	}
 
 	public ItemStack(Block var1, int var2) {
@@ -62,7 +62,7 @@ public final class ItemStack {
 
 	public boolean useItem(EntityPlayer var1, World var2, int var3, int var4, int var5, int var6) {
 		boolean var7 = this.getItem().onItemUse(this, var1, var2, var3, var4, var5, var6);
-		if(var7) {
+		if (var7) {
 			var1.addStat(StatList.objectUseStats[this.itemID], 1);
 		}
 
@@ -82,9 +82,9 @@ public final class ItemStack {
 	}
 
 	public NBTTagCompound writeToNBT(NBTTagCompound var1) {
-		var1.setShort("id", (short)this.itemID);
-		var1.setByte("Count", (byte)this.stackSize);
-		var1.setShort("Damage", (short)this.itemDamage);
+		var1.setShort("id", (short) this.itemID);
+		var1.setByte("Count", (byte) this.stackSize);
+		var1.setShort("Damage", (short) this.itemDamage);
 		return var1;
 	}
 
@@ -131,15 +131,15 @@ public final class ItemStack {
 	}
 
 	public void damageItem(int var1, Entity var2) {
-		if(this.isItemStackDamageable()) {
+		if (this.isItemStackDamageable()) {
 			this.itemDamage += var1;
-			if(this.itemDamage > this.getMaxDamage()) {
-				if(var2 instanceof EntityPlayer) {
-					((EntityPlayer)var2).addStat(StatList.objectBreakStats[this.itemID], 1);
+			if (this.itemDamage > this.getMaxDamage()) {
+				if (var2 instanceof EntityPlayer) {
+					((EntityPlayer) var2).addStat(StatList.objectBreakStats[this.itemID], 1);
 				}
 
 				--this.stackSize;
-				if(this.stackSize < 0) {
+				if (this.stackSize < 0) {
 					this.stackSize = 0;
 				}
 
@@ -151,7 +151,7 @@ public final class ItemStack {
 
 	public void hitEntity(EntityLiving var1, EntityPlayer var2) {
 		boolean var3 = Item.itemsList[this.itemID].hitEntity(this, var1, var2);
-		if(var3) {
+		if (var3) {
 			var2.addStat(StatList.objectUseStats[this.itemID], 1);
 		}
 
@@ -159,7 +159,7 @@ public final class ItemStack {
 
 	public void onDestroyBlock(int var1, int var2, int var3, int var4, EntityPlayer var5) {
 		boolean var6 = Item.itemsList[this.itemID].onBlockDestroyed(this, var1, var2, var3, var4, var5);
-		if(var6) {
+		if (var6) {
 			var5.addStat(StatList.objectUseStats[this.itemID], 1);
 		}
 
@@ -189,7 +189,8 @@ public final class ItemStack {
 	}
 
 	private boolean isItemStackEqual(ItemStack var1) {
-		return this.stackSize != var1.stackSize ? false : (this.itemID != var1.itemID ? false : this.itemDamage == var1.itemDamage);
+		return this.stackSize != var1.stackSize ? false
+				: (this.itemID != var1.itemID ? false : this.itemDamage == var1.itemDamage);
 	}
 
 	public boolean isItemEqual(ItemStack var1) {
@@ -209,7 +210,7 @@ public final class ItemStack {
 	}
 
 	public void updateAnimation(World var1, Entity var2, int var3, boolean var4) {
-		if(this.animationsToGo > 0) {
+		if (this.animationsToGo > 0) {
 			--this.animationsToGo;
 		}
 

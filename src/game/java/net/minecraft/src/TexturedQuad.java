@@ -16,16 +16,16 @@ public class TexturedQuad {
 		this(var1);
 		float var8 = 0.1F / var6;
 		float var9 = 0.1F / var7;
-		var1[0] = var1[0].setTexturePosition((float)var4 / var6 - var8, (float)var3 / var7 + var9);
-		var1[1] = var1[1].setTexturePosition((float)var2 / var6 + var8, (float)var3 / var7 + var9);
-		var1[2] = var1[2].setTexturePosition((float)var2 / var6 + var8, (float)var5 / var7 - var9);
-		var1[3] = var1[3].setTexturePosition((float)var4 / var6 - var8, (float)var5 / var7 - var9);
+		var1[0] = var1[0].setTexturePosition((float) var4 / var6 - var8, (float) var3 / var7 + var9);
+		var1[1] = var1[1].setTexturePosition((float) var2 / var6 + var8, (float) var3 / var7 + var9);
+		var1[2] = var1[2].setTexturePosition((float) var2 / var6 + var8, (float) var5 / var7 - var9);
+		var1[3] = var1[3].setTexturePosition((float) var4 / var6 - var8, (float) var5 / var7 - var9);
 	}
 
 	public void flipFace() {
 		PositionTextureVertex[] var1 = new PositionTextureVertex[this.vertexPositions.length];
 
-		for(int var2 = 0; var2 < this.vertexPositions.length; ++var2) {
+		for (int var2 = 0; var2 < this.vertexPositions.length; ++var2) {
 			var1[var2] = this.vertexPositions[this.vertexPositions.length - var2 - 1];
 		}
 
@@ -36,15 +36,17 @@ public class TexturedQuad {
 		Vec3D var3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
 		Vec3D var4 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
 		Vec3D var5 = var4.crossProduct(var3).normalize();
-		if(this.invertNormal) {
-			var1.setNormal(-((float)var5.xCoord), -((float)var5.yCoord), -((float)var5.zCoord));
+		if (this.invertNormal) {
+			var1.setNormal(-((float) var5.xCoord), -((float) var5.yCoord), -((float) var5.zCoord));
 		} else {
-			var1.setNormal((float)var5.xCoord, (float)var5.yCoord, (float)var5.zCoord);
+			var1.setNormal((float) var5.xCoord, (float) var5.yCoord, (float) var5.zCoord);
 		}
 
-		for(int var6 = 0; var6 < 4; ++var6) {
+		for (int var6 = 0; var6 < 4; ++var6) {
 			PositionTextureVertex var7 = this.vertexPositions[var6];
-			var1.addVertexWithUV((double)((float)var7.vector3D.xCoord * var2), (double)((float)var7.vector3D.yCoord * var2), (double)((float)var7.vector3D.zCoord * var2), (double)var7.texturePositionX, (double)var7.texturePositionY);
+			var1.addVertexWithUV((double) ((float) var7.vector3D.xCoord * var2),
+					(double) ((float) var7.vector3D.yCoord * var2), (double) ((float) var7.vector3D.zCoord * var2),
+					(double) var7.texturePositionX, (double) var7.texturePositionY);
 		}
 	}
 }

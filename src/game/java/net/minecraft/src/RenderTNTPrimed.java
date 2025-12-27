@@ -11,15 +11,15 @@ public class RenderTNTPrimed extends Render {
 
 	public void func_153_a(EntityTNTPrimed var1, double var2, double var4, double var6, float var8, float var9) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)var2, (float)var4, (float)var6);
+		GL11.glTranslatef((float) var2, (float) var4, (float) var6);
 		float var10;
-		if((float)var1.fuse - var9 + 1.0F < 10.0F) {
-			var10 = 1.0F - ((float)var1.fuse - var9 + 1.0F) / 10.0F;
-			if(var10 < 0.0F) {
+		if ((float) var1.fuse - var9 + 1.0F < 10.0F) {
+			var10 = 1.0F - ((float) var1.fuse - var9 + 1.0F) / 10.0F;
+			if (var10 < 0.0F) {
 				var10 = 0.0F;
 			}
 
-			if(var10 > 1.0F) {
+			if (var10 > 1.0F) {
 				var10 = 1.0F;
 			}
 
@@ -29,10 +29,10 @@ public class RenderTNTPrimed extends Render {
 			GL11.glScalef(var11, var11, var11);
 		}
 
-		var10 = (1.0F - ((float)var1.fuse - var9 + 1.0F) / 100.0F) * 0.8F;
+		var10 = (1.0F - ((float) var1.fuse - var9 + 1.0F) / 100.0F) * 0.8F;
 		this.loadTexture("/terrain.png");
 		this.blockRenderer.renderBlockOnInventory(Block.tnt, 0, var1.getEntityBrightness(var9));
-		if(var1.fuse / 5 % 2 == 0) {
+		if (var1.fuse / 5 % 2 == 0) {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -49,6 +49,6 @@ public class RenderTNTPrimed extends Render {
 	}
 
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
-		this.func_153_a((EntityTNTPrimed)var1, var2, var4, var6, var8, var9);
+		this.func_153_a((EntityTNTPrimed) var1, var2, var4, var6, var8, var9);
 	}
 }

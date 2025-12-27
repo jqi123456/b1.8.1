@@ -21,16 +21,16 @@ public class TileEntityChest extends TileEntity implements IInventory {
 	}
 
 	public ItemStack decrStackSize(int var1, int var2) {
-		if(this.chestContents[var1] != null) {
+		if (this.chestContents[var1] != null) {
 			ItemStack var3;
-			if(this.chestContents[var1].stackSize <= var2) {
+			if (this.chestContents[var1].stackSize <= var2) {
 				var3 = this.chestContents[var1];
 				this.chestContents[var1] = null;
 				this.onInventoryChanged();
 				return var3;
 			} else {
 				var3 = this.chestContents[var1].splitStack(var2);
-				if(this.chestContents[var1].stackSize == 0) {
+				if (this.chestContents[var1].stackSize == 0) {
 					this.chestContents[var1] = null;
 				}
 
@@ -44,7 +44,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
 
 	public void setInventorySlotContents(int var1, ItemStack var2) {
 		this.chestContents[var1] = var2;
-		if(var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
+		if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
 			var2.stackSize = this.getInventoryStackLimit();
 		}
 
@@ -60,10 +60,10 @@ public class TileEntityChest extends TileEntity implements IInventory {
 		NBTTagList var2 = var1.getTagList("Items");
 		this.chestContents = new ItemStack[this.getSizeInventory()];
 
-		for(int var3 = 0; var3 < var2.tagCount(); ++var3) {
-			NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+		for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
+			NBTTagCompound var4 = (NBTTagCompound) var2.tagAt(var3);
 			int var5 = var4.getByte("Slot") & 255;
-			if(var5 >= 0 && var5 < this.chestContents.length) {
+			if (var5 >= 0 && var5 < this.chestContents.length) {
 				this.chestContents[var5] = ItemStack.func_35864_a(var4);
 			}
 		}
@@ -74,10 +74,10 @@ public class TileEntityChest extends TileEntity implements IInventory {
 		super.writeToNBT(var1);
 		NBTTagList var2 = new NBTTagList();
 
-		for(int var3 = 0; var3 < this.chestContents.length; ++var3) {
-			if(this.chestContents[var3] != null) {
+		for (int var3 = 0; var3 < this.chestContents.length; ++var3) {
+			if (this.chestContents[var3] != null) {
 				NBTTagCompound var4 = new NBTTagCompound();
-				var4.setByte("Slot", (byte)var3);
+				var4.setByte("Slot", (byte) var3);
 				this.chestContents[var3].writeToNBT(var4);
 				var2.setTag(var4);
 			}
@@ -91,7 +91,9 @@ public class TileEntityChest extends TileEntity implements IInventory {
 	}
 
 	public boolean canInteractWith(EntityPlayer var1) {
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : var1.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false
+				: var1.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+						(double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void func_35144_b() {
@@ -100,41 +102,45 @@ public class TileEntityChest extends TileEntity implements IInventory {
 	}
 
 	public void func_35147_g() {
-		if(!this.field_35155_a) {
+		if (!this.field_35155_a) {
 			this.field_35155_a = true;
 			this.field_35152_b = null;
 			this.field_35153_c = null;
 			this.field_35150_d = null;
 			this.field_35151_e = null;
-			if(this.worldObj.getBlockId(this.xCoord - 1, this.yCoord, this.zCoord) == Block.chest.blockID) {
-				this.field_35150_d = (TileEntityChest)this.worldObj.getBlockTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if (this.worldObj.getBlockId(this.xCoord - 1, this.yCoord, this.zCoord) == Block.chest.blockID) {
+				this.field_35150_d = (TileEntityChest) this.worldObj.getBlockTileEntity(this.xCoord - 1, this.yCoord,
+						this.zCoord);
 			}
 
-			if(this.worldObj.getBlockId(this.xCoord + 1, this.yCoord, this.zCoord) == Block.chest.blockID) {
-				this.field_35153_c = (TileEntityChest)this.worldObj.getBlockTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if (this.worldObj.getBlockId(this.xCoord + 1, this.yCoord, this.zCoord) == Block.chest.blockID) {
+				this.field_35153_c = (TileEntityChest) this.worldObj.getBlockTileEntity(this.xCoord + 1, this.yCoord,
+						this.zCoord);
 			}
 
-			if(this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord - 1) == Block.chest.blockID) {
-				this.field_35152_b = (TileEntityChest)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord - 1) == Block.chest.blockID) {
+				this.field_35152_b = (TileEntityChest) this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
+						this.zCoord - 1);
 			}
 
-			if(this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord + 1) == Block.chest.blockID) {
-				this.field_35151_e = (TileEntityChest)this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord + 1) == Block.chest.blockID) {
+				this.field_35151_e = (TileEntityChest) this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord,
+						this.zCoord + 1);
 			}
 
-			if(this.field_35152_b != null) {
+			if (this.field_35152_b != null) {
 				this.field_35152_b.func_35144_b();
 			}
 
-			if(this.field_35151_e != null) {
+			if (this.field_35151_e != null) {
 				this.field_35151_e.func_35144_b();
 			}
 
-			if(this.field_35153_c != null) {
+			if (this.field_35153_c != null) {
 				this.field_35153_c.func_35144_b();
 			}
 
-			if(this.field_35150_d != null) {
+			if (this.field_35150_d != null) {
 				this.field_35150_d.func_35144_b();
 			}
 
@@ -144,7 +150,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
 	public void updateEntity() {
 		super.updateEntity();
 		this.func_35147_g();
-		if(++this.field_35154_q % 20 * 4 == 0) {
+		if (++this.field_35154_q % 20 * 4 == 0) {
 			this.worldObj.playNoteAt(this.xCoord, this.yCoord, this.zCoord, 1, this.field_35156_h);
 		}
 
@@ -152,45 +158,48 @@ public class TileEntityChest extends TileEntity implements IInventory {
 		float var1 = 0.1F;
 		double var2;
 		double var4;
-		if(this.field_35156_h > 0 && this.field_35148_f == 0.0F && this.field_35152_b == null && this.field_35150_d == null) {
-			var2 = (double)this.xCoord + 0.5D;
-			var4 = (double)this.zCoord + 0.5D;
-			if(this.field_35151_e != null) {
+		if (this.field_35156_h > 0 && this.field_35148_f == 0.0F && this.field_35152_b == null
+				&& this.field_35150_d == null) {
+			var2 = (double) this.xCoord + 0.5D;
+			var4 = (double) this.zCoord + 0.5D;
+			if (this.field_35151_e != null) {
 				var4 += 0.5D;
 			}
 
-			if(this.field_35153_c != null) {
+			if (this.field_35153_c != null) {
 				var2 += 0.5D;
 			}
 
-			this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "random.door_open", 1.0F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			this.worldObj.playSoundEffect(var2, (double) this.yCoord + 0.5D, var4, "random.door_open", 1.0F,
+					this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
-		if(this.field_35156_h == 0 && this.field_35148_f > 0.0F || this.field_35156_h > 0 && this.field_35148_f < 1.0F) {
-			if(this.field_35156_h > 0) {
+		if (this.field_35156_h == 0 && this.field_35148_f > 0.0F || this.field_35156_h > 0 && this.field_35148_f < 1.0F) {
+			if (this.field_35156_h > 0) {
 				this.field_35148_f += var1;
 			} else {
 				this.field_35148_f -= var1;
 			}
 
-			if(this.field_35148_f > 1.0F) {
+			if (this.field_35148_f > 1.0F) {
 				this.field_35148_f = 1.0F;
 			}
 
-			if(this.field_35148_f < 0.0F) {
+			if (this.field_35148_f < 0.0F) {
 				this.field_35148_f = 0.0F;
-				if(this.field_35152_b == null && this.field_35150_d == null) {
-					var2 = (double)this.xCoord + 0.5D;
-					var4 = (double)this.zCoord + 0.5D;
-					if(this.field_35151_e != null) {
+				if (this.field_35152_b == null && this.field_35150_d == null) {
+					var2 = (double) this.xCoord + 0.5D;
+					var4 = (double) this.zCoord + 0.5D;
+					if (this.field_35151_e != null) {
 						var4 += 0.5D;
 					}
 
-					if(this.field_35153_c != null) {
+					if (this.field_35153_c != null) {
 						var2 += 0.5D;
 					}
 
-					this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "random.door_close", 1.0F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+					this.worldObj.playSoundEffect(var2, (double) this.yCoord + 0.5D, var4, "random.door_close", 1.0F,
+							this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 				}
 			}
 		}
@@ -198,7 +207,7 @@ public class TileEntityChest extends TileEntity implements IInventory {
 	}
 
 	public void func_35143_b(int var1, int var2) {
-		if(var1 == 1) {
+		if (var1 == 1) {
 			this.field_35156_h = var2;
 		}
 

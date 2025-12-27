@@ -17,11 +17,12 @@ public class NextTickListEntry implements Comparable {
 	}
 
 	public boolean equals(Object var1) {
-		if(!(var1 instanceof NextTickListEntry)) {
+		if (!(var1 instanceof NextTickListEntry)) {
 			return false;
 		} else {
-			NextTickListEntry var2 = (NextTickListEntry)var1;
-			return this.xCoord == var2.xCoord && this.yCoord == var2.yCoord && this.zCoord == var2.zCoord && this.blockID == var2.blockID;
+			NextTickListEntry var2 = (NextTickListEntry) var1;
+			return this.xCoord == var2.xCoord && this.yCoord == var2.yCoord && this.zCoord == var2.zCoord
+					&& this.blockID == var2.blockID;
 		}
 	}
 
@@ -35,10 +36,12 @@ public class NextTickListEntry implements Comparable {
 	}
 
 	public int comparer(NextTickListEntry var1) {
-		return this.scheduledTime < var1.scheduledTime ? -1 : (this.scheduledTime > var1.scheduledTime ? 1 : (this.tickEntryID < var1.tickEntryID ? -1 : (this.tickEntryID > var1.tickEntryID ? 1 : 0)));
+		return this.scheduledTime < var1.scheduledTime ? -1
+				: (this.scheduledTime > var1.scheduledTime ? 1
+						: (this.tickEntryID < var1.tickEntryID ? -1 : (this.tickEntryID > var1.tickEntryID ? 1 : 0)));
 	}
 
 	public int compareTo(Object var1) {
-		return this.comparer((NextTickListEntry)var1);
+		return this.comparer((NextTickListEntry) var1);
 	}
 }

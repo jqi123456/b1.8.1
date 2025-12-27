@@ -16,29 +16,29 @@ class SorterStatsBlock implements Comparator {
 		int var4 = var2.func_25072_b();
 		StatBase var5 = null;
 		StatBase var6 = null;
-		if(this.slotStatsBlockGUI.field_27271_e == 2) {
+		if (this.slotStatsBlockGUI.field_27271_e == 2) {
 			var5 = StatList.mineBlockStatArray[var3];
 			var6 = StatList.mineBlockStatArray[var4];
-		} else if(this.slotStatsBlockGUI.field_27271_e == 0) {
+		} else if (this.slotStatsBlockGUI.field_27271_e == 0) {
 			var5 = StatList.objectCraftStats[var3];
 			var6 = StatList.objectCraftStats[var4];
-		} else if(this.slotStatsBlockGUI.field_27271_e == 1) {
+		} else if (this.slotStatsBlockGUI.field_27271_e == 1) {
 			var5 = StatList.objectUseStats[var3];
 			var6 = StatList.objectUseStats[var4];
 		}
 
-		if(var5 != null || var6 != null) {
-			if(var5 == null) {
+		if (var5 != null || var6 != null) {
+			if (var5 == null) {
 				return 1;
 			}
 
-			if(var6 == null) {
+			if (var6 == null) {
 				return -1;
 			}
 
 			int var7 = GuiStats.getStatsFileWriter(this.slotStatsBlockGUI.field_27274_a).writeStat(var5);
 			int var8 = GuiStats.getStatsFileWriter(this.slotStatsBlockGUI.field_27274_a).writeStat(var6);
-			if(var7 != var8) {
+			if (var7 != var8) {
 				return (var7 - var8) * this.slotStatsBlockGUI.field_27270_f;
 			}
 		}
@@ -47,6 +47,6 @@ class SorterStatsBlock implements Comparator {
 	}
 
 	public int compare(Object var1, Object var2) {
-		return this.func_27297_a((StatCrafting)var1, (StatCrafting)var2);
+		return this.func_27297_a((StatCrafting) var1, (StatCrafting) var2);
 	}
 }

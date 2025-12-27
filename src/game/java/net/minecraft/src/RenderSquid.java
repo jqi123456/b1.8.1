@@ -30,22 +30,22 @@ public class RenderSquid extends RenderLiving {
 	}
 
 	protected void preRenderCallback(EntityLiving var1, float var2) {
-		this.func_21005_a((EntitySquid)var1, var2);
+		this.func_21005_a((EntitySquid) var1, var2);
 	}
 
 	protected float handleRotationFloat(EntityLiving var1, float var2) {
-		return this.func_21006_b((EntitySquid)var1, var2);
+		return this.func_21006_b((EntitySquid) var1, var2);
 	}
 
 	protected void rotateCorpse(EntityLiving var1, float var2, float var3, float var4) {
-		this.func_21007_a((EntitySquid)var1, var2, var3, var4);
+		this.func_21007_a((EntitySquid) var1, var2, var3, var4);
 	}
 
 	public void doRenderLiving(EntityLiving var1, double var2, double var4, double var6, float var8, float var9) {
-		this.func_21008_a((EntitySquid)var1, var2, var4, var6, var8, var9);
+		this.func_21008_a((EntitySquid) var1, var2, var4, var6, var8, var9);
 	}
 
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
-		this.func_21008_a((EntitySquid)var1, var2, var4, var6, var8, var9);
+		this.func_21008_a((EntitySquid) var1, var2, var4, var6, var8, var9);
 	}
 }

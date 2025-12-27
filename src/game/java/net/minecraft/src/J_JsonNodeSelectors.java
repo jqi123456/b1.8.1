@@ -38,15 +38,17 @@ public final class J_JsonNodeSelectors {
 	private static J_JsonNodeSelector func_27352_a(Object[] var0, J_JsonNodeSelector var1) {
 		J_JsonNodeSelector var2 = var1;
 
-		for(int var3 = var0.length - 1; var3 >= 0; --var3) {
-			if(var0[var3] instanceof Integer) {
-				var2 = func_27345_a(func_27354_b(((Integer)var0[var3]).intValue()), var2);
+		for (int var3 = var0.length - 1; var3 >= 0; --var3) {
+			if (var0[var3] instanceof Integer) {
+				var2 = func_27345_a(func_27354_b(((Integer) var0[var3]).intValue()), var2);
 			} else {
-				if(!(var0[var3] instanceof String)) {
-					throw new IllegalArgumentException("Element [" + var0[var3] + "] of path elements" + " [" + Arrays.toString(var0) + "] was of illegal type [" + var0[var3].getClass().getCanonicalName() + "]; only Integer and String are valid.");
+				if (!(var0[var3] instanceof String)) {
+					throw new IllegalArgumentException(
+							"Element [" + var0[var3] + "] of path elements" + " [" + Arrays.toString(var0) + "] was of illegal type ["
+									+ var0[var3].getClass().getCanonicalName() + "]; only Integer and String are valid.");
 				}
 
-				var2 = func_27345_a(func_27351_b((String)var0[var3]), var2);
+				var2 = func_27345_a(func_27351_b((String) var0[var3]), var2);
 			}
 		}
 

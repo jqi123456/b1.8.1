@@ -26,13 +26,14 @@ public class WorldInfo {
 	public WorldInfo(NBTTagCompound var1) {
 		this.randomSeed = var1.getLong("RandomSeed");
 
-		if(var1.hasKey("generatorName")) {
+		if (var1.hasKey("generatorName")) {
 			this.worldType = EnumWorldType.func_46135_a(var1.getString("generatorName"));
-			if (this.worldType == null) this.worldType = EnumWorldType.NORMAL;
+			if (this.worldType == null)
+				this.worldType = EnumWorldType.NORMAL;
 		}
 
 		this.field_35920_p = var1.getInteger("GameType");
-		if(var1.hasKey("MapFeatures")) {
+		if (var1.hasKey("MapFeatures")) {
 			this.field_35919_q = var1.getBoolean("MapFeatures");
 		} else {
 			this.field_35919_q = true;
@@ -50,7 +51,7 @@ public class WorldInfo {
 		this.raining = var1.getBoolean("raining");
 		this.thunderTime = var1.getInteger("thunderTime");
 		this.thundering = var1.getBoolean("thundering");
-		if(var1.hasKey("Player")) {
+		if (var1.hasKey("Player")) {
 			this.playerTag = var1.getCompoundTag("Player");
 			this.dimension = this.playerTag.getInteger("Dimension");
 		}
@@ -96,11 +97,11 @@ public class WorldInfo {
 		NBTTagCompound var2 = new NBTTagCompound();
 		EntityPlayer var3 = null;
 		NBTTagCompound var4 = null;
-		if(var1.size() > 0) {
-			var3 = (EntityPlayer)var1.get(0);
+		if (var1.size() > 0) {
+			var3 = (EntityPlayer) var1.get(0);
 		}
 
-		if(var3 != null) {
+		if (var3 != null) {
 			var4 = new NBTTagCompound();
 			var3.writeToNBT(var4);
 		}
@@ -126,7 +127,7 @@ public class WorldInfo {
 		var1.setBoolean("raining", this.raining);
 		var1.setInteger("thunderTime", this.thunderTime);
 		var1.setBoolean("thundering", this.thundering);
-		if(var2 != null) {
+		if (var2 != null) {
 			var1.setCompoundTag("Player", var2);
 		}
 

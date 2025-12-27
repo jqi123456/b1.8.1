@@ -19,13 +19,13 @@ public class EntityPortalFX extends EntityFX {
 		this.particleRed = this.particleGreen = this.particleBlue = 1.0F * var14;
 		this.particleGreen *= 0.3F;
 		this.particleRed *= 0.9F;
-		this.particleMaxAge = (int)(Math.random() * 10.0D) + 40;
+		this.particleMaxAge = (int) (Math.random() * 10.0D) + 40;
 		this.noClip = true;
-		this.particleTextureIndex = (int)(Math.random() * 8.0D);
+		this.particleTextureIndex = (int) (Math.random() * 8.0D);
 	}
 
 	public void renderParticle(Tessellator var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-		float var8 = ((float)this.particleAge + var2) / (float)this.particleMaxAge;
+		float var8 = ((float) this.particleAge + var2) / (float) this.particleMaxAge;
 		var8 = 1.0F - var8;
 		var8 *= var8;
 		var8 = 1.0F - var8;
@@ -35,13 +35,13 @@ public class EntityPortalFX extends EntityFX {
 
 	public int func_35115_a(float var1) {
 		int var2 = super.func_35115_a(var1);
-		float var3 = (float)this.particleAge / (float)this.particleMaxAge;
+		float var3 = (float) this.particleAge / (float) this.particleMaxAge;
 		var3 *= var3;
 		var3 *= var3;
 		int var4 = var2 & 255;
 		int var5 = var2 >> 16 & 255;
-		var5 += (int)(var3 * 15.0F * 16.0F);
-		if(var5 > 240) {
+		var5 += (int) (var3 * 15.0F * 16.0F);
+		if (var5 > 240) {
 			var5 = 240;
 		}
 
@@ -50,7 +50,7 @@ public class EntityPortalFX extends EntityFX {
 
 	public float getEntityBrightness(float var1) {
 		float var2 = super.getEntityBrightness(var1);
-		float var3 = (float)this.particleAge / (float)this.particleMaxAge;
+		float var3 = (float) this.particleAge / (float) this.particleMaxAge;
 		var3 *= var3;
 		var3 *= var3;
 		return var2 * (1.0F - var3) + var3;
@@ -60,14 +60,14 @@ public class EntityPortalFX extends EntityFX {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		float var1 = (float)this.particleAge / (float)this.particleMaxAge;
+		float var1 = (float) this.particleAge / (float) this.particleMaxAge;
 		float var2 = var1;
 		var1 = -var1 + var1 * var1 * 2.0F;
 		var1 = 1.0F - var1;
-		this.posX = this.portalPosX + this.motionX * (double)var1;
-		this.posY = this.portalPosY + this.motionY * (double)var1 + (double)(1.0F - var2);
-		this.posZ = this.portalPosZ + this.motionZ * (double)var1;
-		if(this.particleAge++ >= this.particleMaxAge) {
+		this.posX = this.portalPosX + this.motionX * (double) var1;
+		this.posY = this.portalPosY + this.motionY * (double) var1 + (double) (1.0F - var2);
+		this.posZ = this.portalPosZ + this.motionZ * (double) var1;
+		if (this.particleAge++ >= this.particleMaxAge) {
 			this.setEntityDead();
 		}
 

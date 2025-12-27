@@ -22,16 +22,16 @@ class PlayerListEntry {
 	}
 
 	public final boolean equals(Object var1) {
-		if(!(var1 instanceof PlayerListEntry)) {
+		if (!(var1 instanceof PlayerListEntry)) {
 			return false;
 		} else {
-			PlayerListEntry var2 = (PlayerListEntry)var1;
+			PlayerListEntry var2 = (PlayerListEntry) var1;
 			Long var3 = Long.valueOf(this.func_35830_a());
 			Long var4 = Long.valueOf(var2.func_35830_a());
-			if(var3 == var4 || var3 != null && var3.equals(var4)) {
+			if (var3 == var4 || var3 != null && var3.equals(var4)) {
 				Object var5 = this.func_35829_b();
 				Object var6 = var2.func_35829_b();
-				if(var5 == var6 || var5 != null && var5.equals(var6)) {
+				if (var5 == var6 || var5 != null && var5.equals(var6)) {
 					return true;
 				}
 			}

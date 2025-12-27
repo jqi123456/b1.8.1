@@ -21,10 +21,10 @@ public class ChunkCoordinates implements Comparable {
 	}
 
 	public boolean equals(Object var1) {
-		if(!(var1 instanceof ChunkCoordinates)) {
+		if (!(var1 instanceof ChunkCoordinates)) {
 			return false;
 		} else {
-			ChunkCoordinates var2 = (ChunkCoordinates)var1;
+			ChunkCoordinates var2 = (ChunkCoordinates) var1;
 			return this.posX == var2.posX && this.posY == var2.posY && this.posZ == var2.posZ;
 		}
 	}
@@ -34,17 +34,18 @@ public class ChunkCoordinates implements Comparable {
 	}
 
 	public int compareChunkCoordinate(ChunkCoordinates var1) {
-		return this.posY == var1.posY ? (this.posZ == var1.posZ ? this.posX - var1.posX : this.posZ - var1.posZ) : this.posY - var1.posY;
+		return this.posY == var1.posY ? (this.posZ == var1.posZ ? this.posX - var1.posX : this.posZ - var1.posZ)
+				: this.posY - var1.posY;
 	}
 
 	public double getSqDistanceTo(int var1, int var2, int var3) {
 		int var4 = this.posX - var1;
 		int var5 = this.posY - var2;
 		int var6 = this.posZ - var3;
-		return Math.sqrt((double)(var4 * var4 + var5 * var5 + var6 * var6));
+		return Math.sqrt((double) (var4 * var4 + var5 * var5 + var6 * var6));
 	}
 
 	public int compareTo(Object var1) {
-		return this.compareChunkCoordinate((ChunkCoordinates)var1);
+		return this.compareChunkCoordinate((ChunkCoordinates) var1);
 	}
 }

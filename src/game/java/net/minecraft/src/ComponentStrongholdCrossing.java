@@ -22,49 +22,52 @@ public class ComponentStrongholdCrossing extends ComponentStronghold {
 	}
 
 	public void func_35004_a(StructureComponent var1, List var2, Random var3) {
-		this.func_35028_a((ComponentStrongholdStairs2)var1, var2, var3, 5, 1);
-		if(this.field_35042_b) {
-			this.func_35032_b((ComponentStrongholdStairs2)var1, var2, var3, 3, 1);
+		this.func_35028_a((ComponentStrongholdStairs2) var1, var2, var3, 5, 1);
+		if (this.field_35042_b) {
+			this.func_35032_b((ComponentStrongholdStairs2) var1, var2, var3, 3, 1);
 		}
 
-		if(this.field_35043_c) {
-			this.func_35032_b((ComponentStrongholdStairs2)var1, var2, var3, 5, 7);
+		if (this.field_35043_c) {
+			this.func_35032_b((ComponentStrongholdStairs2) var1, var2, var3, 5, 7);
 		}
 
-		if(this.field_35040_d) {
-			this.func_35029_c((ComponentStrongholdStairs2)var1, var2, var3, 3, 1);
+		if (this.field_35040_d) {
+			this.func_35029_c((ComponentStrongholdStairs2) var1, var2, var3, 3, 1);
 		}
 
-		if(this.field_35041_e) {
-			this.func_35029_c((ComponentStrongholdStairs2)var1, var2, var3, 5, 7);
+		if (this.field_35041_e) {
+			this.func_35029_c((ComponentStrongholdStairs2) var1, var2, var3, 5, 7);
 		}
 
 	}
 
-	public static ComponentStrongholdCrossing func_35039_a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
+	public static ComponentStrongholdCrossing func_35039_a(List var0, Random var1, int var2, int var3, int var4, int var5,
+			int var6) {
 		StructureBoundingBox var7 = StructureBoundingBox.func_35747_a(var2, var3, var4, -4, -3, 0, 10, 9, 11, var5);
-		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null ? new ComponentStrongholdCrossing(var6, var1, var7, var5) : null;
+		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null
+				? new ComponentStrongholdCrossing(var6, var1, var7, var5)
+				: null;
 	}
 
 	public boolean func_35023_a(World var1, Random var2, StructureBoundingBox var3) {
-		if(this.func_35013_a(var1, var3)) {
+		if (this.func_35013_a(var1, var3)) {
 			return false;
 		} else {
 			this.func_35022_a(var1, var3, 0, 0, 0, 9, 8, 10, true, var2, StructureStrongholdPieces.func_35852_b());
 			this.func_35033_a(var1, var2, var3, this.field_35044_a, 4, 3, 0);
-			if(this.field_35042_b) {
+			if (this.field_35042_b) {
 				this.func_35011_a(var1, var3, 0, 3, 1, 0, 5, 3, 0, 0, false);
 			}
 
-			if(this.field_35040_d) {
+			if (this.field_35040_d) {
 				this.func_35011_a(var1, var3, 9, 3, 1, 9, 5, 3, 0, 0, false);
 			}
 
-			if(this.field_35043_c) {
+			if (this.field_35043_c) {
 				this.func_35011_a(var1, var3, 0, 5, 7, 0, 7, 9, 0, 0, false);
 			}
 
-			if(this.field_35041_e) {
+			if (this.field_35041_e) {
 				this.func_35011_a(var1, var3, 9, 5, 7, 9, 7, 9, 0, 0, false);
 			}
 

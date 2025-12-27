@@ -10,8 +10,8 @@ final class J_JsonNodeList extends ArrayList {
 		this.field_27405_a = var1;
 		Iterator var2 = this.field_27405_a.iterator();
 
-		while(var2.hasNext()) {
-			J_JsonNode var3 = (J_JsonNode)var2.next();
+		while (var2.hasNext()) {
+			J_JsonNode var3 = (J_JsonNode) var2.next();
 			this.add(var3);
 		}
 

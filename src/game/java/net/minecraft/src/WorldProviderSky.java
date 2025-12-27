@@ -20,22 +20,22 @@ public class WorldProviderSky extends WorldProvider {
 
 	public Vec3D func_4096_a(float var1, float var2) {
 		int var3 = 8421536;
-		float var4 = MathHelper.cos(var1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
-		if(var4 < 0.0F) {
+		float var4 = MathHelper.cos(var1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
+		if (var4 < 0.0F) {
 			var4 = 0.0F;
 		}
 
-		if(var4 > 1.0F) {
+		if (var4 > 1.0F) {
 			var4 = 1.0F;
 		}
 
-		float var5 = (float)(var3 >> 16 & 255) / 255.0F;
-		float var6 = (float)(var3 >> 8 & 255) / 255.0F;
-		float var7 = (float)(var3 & 255) / 255.0F;
+		float var5 = (float) (var3 >> 16 & 255) / 255.0F;
+		float var6 = (float) (var3 >> 8 & 255) / 255.0F;
+		float var7 = (float) (var3 & 255) / 255.0F;
 		var5 *= var4 * 0.94F + 0.06F;
 		var6 *= var4 * 0.94F + 0.06F;
 		var7 *= var4 * 0.91F + 0.09F;
-		return Vec3D.createVector((double)var5, (double)var6, (double)var7);
+		return Vec3D.createVector((double) var5, (double) var6, (double) var7);
 	}
 
 	public boolean func_28112_c() {

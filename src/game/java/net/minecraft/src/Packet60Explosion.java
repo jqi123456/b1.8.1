@@ -21,11 +21,11 @@ public class Packet60Explosion extends Packet {
 		this.explosionSize = var1.readFloat();
 		int var2 = var1.readInt();
 		this.destroyedBlockPositions = new HashSet();
-		int var3 = (int)this.explosionX;
-		int var4 = (int)this.explosionY;
-		int var5 = (int)this.explosionZ;
+		int var3 = (int) this.explosionX;
+		int var4 = (int) this.explosionY;
+		int var5 = (int) this.explosionZ;
 
-		for(int var6 = 0; var6 < var2; ++var6) {
+		for (int var6 = 0; var6 < var2; ++var6) {
 			int var7 = var1.readByte() + var3;
 			int var8 = var1.readByte() + var4;
 			int var9 = var1.readByte() + var5;
@@ -40,13 +40,13 @@ public class Packet60Explosion extends Packet {
 		var1.writeDouble(this.explosionZ);
 		var1.writeFloat(this.explosionSize);
 		var1.writeInt(this.destroyedBlockPositions.size());
-		int var2 = (int)this.explosionX;
-		int var3 = (int)this.explosionY;
-		int var4 = (int)this.explosionZ;
+		int var2 = (int) this.explosionX;
+		int var3 = (int) this.explosionY;
+		int var4 = (int) this.explosionZ;
 		Iterator var5 = this.destroyedBlockPositions.iterator();
 
-		while(var5.hasNext()) {
-			ChunkPosition var6 = (ChunkPosition)var5.next();
+		while (var5.hasNext()) {
+			ChunkPosition var6 = (ChunkPosition) var5.next();
 			int var7 = var6.x - var2;
 			int var8 = var6.y - var3;
 			int var9 = var6.z - var4;

@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
+import net.lax1dude.eaglercraft.opengl.OpenGlHelper;
+
 public class TileEntityRenderer {
 	private Map specialRendererMap = new HashMap<>();
 	public static TileEntityRenderer instance = new TileEntityRenderer();
@@ -73,6 +75,7 @@ public class TileEntityRenderer {
 			int var3 = this.worldObj.func_35451_b(var1.xCoord, var1.yCoord, var1.zCoord, 0);
 			int var4 = var3 % 65536;
 			int var5 = var3 / 65536;
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) var4, (float) var5);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.renderTileEntityAt(var1, (double) var1.xCoord - staticPlayerX, (double) var1.yCoord - staticPlayerY,
 					(double) var1.zCoord - staticPlayerZ, var2);

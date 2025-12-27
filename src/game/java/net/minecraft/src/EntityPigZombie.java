@@ -17,20 +17,23 @@ public class EntityPigZombie extends EntityZombie {
 
 	public void onUpdate() {
 		this.moveSpeed = this.entityToAttack != null ? 0.95F : 0.5F;
-		if(this.randomSoundDelay > 0 && --this.randomSoundDelay == 0) {
-			this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+		if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0) {
+			this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F,
+					((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
 		}
 
 		super.onUpdate();
 	}
 
 	public boolean getCanSpawnHere() {
-		return this.worldObj.difficultySetting > 0 && this.worldObj.checkIfAABBIsClear(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.getIsAnyLiquid(this.boundingBox);
+		return this.worldObj.difficultySetting > 0 && this.worldObj.checkIfAABBIsClear(this.boundingBox)
+				&& this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0
+				&& !this.worldObj.getIsAnyLiquid(this.boundingBox);
 	}
 
 	public void writeEntityToNBT(NBTTagCompound var1) {
 		super.writeEntityToNBT(var1);
-		var1.setShort("Anger", (short)this.angerLevel);
+		var1.setShort("Anger", (short) this.angerLevel);
 	}
 
 	public void readEntityFromNBT(NBTTagCompound var1) {
@@ -48,13 +51,14 @@ public class EntityPigZombie extends EntityZombie {
 
 	public boolean attackEntityFrom(DamageSource var1, int var2) {
 		Entity var3 = var1.func_35532_a();
-		if(var3 instanceof EntityPlayer) {
-			List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
+		if (var3 instanceof EntityPlayer) {
+			List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this,
+					this.boundingBox.expand(32.0D, 32.0D, 32.0D));
 
-			for(int var5 = 0; var5 < var4.size(); ++var5) {
-				Entity var6 = (Entity)var4.get(var5);
-				if(var6 instanceof EntityPigZombie) {
-					EntityPigZombie var7 = (EntityPigZombie)var6;
+			for (int var5 = 0; var5 < var4.size(); ++var5) {
+				Entity var6 = (Entity) var4.get(var5);
+				if (var6 instanceof EntityPigZombie) {
+					EntityPigZombie var7 = (EntityPigZombie) var6;
 					var7.becomeAngryAt(var3);
 				}
 			}

@@ -11,9 +11,9 @@ class StructureStrongholdStart extends StructureStart {
 		var5.func_35004_a(var5, this.field_35717_a, var2);
 		ArrayList var6 = var5.field_35037_b;
 
-		while(!var6.isEmpty()) {
+		while (!var6.isEmpty()) {
 			int var7 = var2.nextInt(var6.size());
-			StructureComponent var8 = (StructureComponent)var6.remove(var7);
+			StructureComponent var8 = (StructureComponent) var6.remove(var7);
 			var8.func_35004_a(var5, this.field_35717_a, var2);
 		}
 

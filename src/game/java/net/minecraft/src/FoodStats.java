@@ -9,7 +9,7 @@ public class FoodStats {
 
 	public void func_35771_a(int var1, float var2) {
 		this.field_35776_a = Math.min(var1 + this.field_35776_a, 20);
-		this.field_35774_b = Math.min(this.field_35774_b + (float)var1 * var2 * 2.0F, (float)this.field_35776_a);
+		this.field_35774_b = Math.min(this.field_35774_b + (float) var1 * var2 * 2.0F, (float) this.field_35776_a);
 	}
 
 	public void func_35761_a(ItemFood var1) {
@@ -19,25 +19,25 @@ public class FoodStats {
 	public void func_35768_a(EntityPlayer var1) {
 		int var2 = var1.worldObj.difficultySetting;
 		this.field_35773_e = this.field_35776_a;
-		if(this.field_35775_c > 4.0F) {
+		if (this.field_35775_c > 4.0F) {
 			this.field_35775_c -= 4.0F;
-			if(this.field_35774_b > 0.0F) {
+			if (this.field_35774_b > 0.0F) {
 				this.field_35774_b = Math.max(this.field_35774_b - 1.0F, 0.0F);
-			} else if(var2 > 0) {
+			} else if (var2 > 0) {
 				this.field_35776_a = Math.max(this.field_35776_a - 1, 0);
 			}
 		}
 
-		if(this.field_35776_a >= 18 && var1.func_35194_au()) {
+		if (this.field_35776_a >= 18 && var1.func_35194_au()) {
 			++this.field_35772_d;
-			if(this.field_35772_d >= 80) {
+			if (this.field_35772_d >= 80) {
 				var1.heal(1);
 				this.field_35772_d = 0;
 			}
-		} else if(this.field_35776_a <= 0) {
+		} else if (this.field_35776_a <= 0) {
 			++this.field_35772_d;
-			if(this.field_35772_d >= 80) {
-				if(var1.health > 10 || var2 >= 3 || var1.health > 1 && var2 >= 2) {
+			if (this.field_35772_d >= 80) {
+				if (var1.health > 10 || var2 >= 3 || var1.health > 1 && var2 >= 2) {
 					var1.attackEntityFrom(DamageSource.field_35536_f, 1);
 				}
 
@@ -50,7 +50,7 @@ public class FoodStats {
 	}
 
 	public void func_35766_a(NBTTagCompound var1) {
-		if(var1.hasKey("foodLevel")) {
+		if (var1.hasKey("foodLevel")) {
 			this.field_35776_a = var1.getInteger("foodLevel");
 			this.field_35772_d = var1.getInteger("foodTickTimer");
 			this.field_35774_b = var1.getFloat("foodSaturationLevel");

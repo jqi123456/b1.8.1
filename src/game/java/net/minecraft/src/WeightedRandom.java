@@ -9,15 +9,15 @@ public class WeightedRandom {
 		int var1 = 0;
 
 		WeightedRandomChoice var3;
-		for(Iterator var2 = var0.iterator(); var2.hasNext(); var1 += var3.field_35590_d) {
-			var3 = (WeightedRandomChoice)var2.next();
+		for (Iterator var2 = var0.iterator(); var2.hasNext(); var1 += var3.field_35590_d) {
+			var3 = (WeightedRandomChoice) var2.next();
 		}
 
 		return var1;
 	}
 
 	public static WeightedRandomChoice func_35734_a(Random var0, Collection var1, int var2) {
-		if(var2 <= 0) {
+		if (var2 <= 0) {
 			throw new IllegalArgumentException();
 		} else {
 			int var3 = var0.nextInt(var2);
@@ -25,13 +25,13 @@ public class WeightedRandom {
 
 			WeightedRandomChoice var5;
 			do {
-				if(!var4.hasNext()) {
+				if (!var4.hasNext()) {
 					return null;
 				}
 
-				var5 = (WeightedRandomChoice)var4.next();
+				var5 = (WeightedRandomChoice) var4.next();
 				var3 -= var5.field_35590_d;
-			} while(var3 >= 0);
+			} while (var3 >= 0);
 
 			return var5;
 		}
@@ -46,7 +46,7 @@ public class WeightedRandom {
 		WeightedRandomChoice[] var2 = var0;
 		int var3 = var0.length;
 
-		for(int var4 = 0; var4 < var3; ++var4) {
+		for (int var4 = 0; var4 < var3; ++var4) {
 			WeightedRandomChoice var5 = var2[var4];
 			var1 += var5.field_35590_d;
 		}
@@ -55,17 +55,17 @@ public class WeightedRandom {
 	}
 
 	public static WeightedRandomChoice func_35732_a(Random var0, WeightedRandomChoice[] var1, int var2) {
-		if(var2 <= 0) {
+		if (var2 <= 0) {
 			throw new IllegalArgumentException();
 		} else {
 			int var3 = var0.nextInt(var2);
 			WeightedRandomChoice[] var4 = var1;
 			int var5 = var1.length;
 
-			for(int var6 = 0; var6 < var5; ++var6) {
+			for (int var6 = 0; var6 < var5; ++var6) {
 				WeightedRandomChoice var7 = var4[var6];
 				var3 -= var7.field_35590_d;
-				if(var3 < 0) {
+				if (var3 < 0) {
 					return var7;
 				}
 			}

@@ -17,8 +17,8 @@ public final class J_JsonArrayNodeBuilder implements J_JsonNodeBuilder {
 		GapList var1 = new GapList<>();
 		Iterator var2 = this.elementBuilders.iterator();
 
-		while(var2.hasNext()) {
-			J_JsonNodeBuilder var3 = (J_JsonNodeBuilder)var2.next();
+		while (var2.hasNext()) {
+			J_JsonNodeBuilder var3 = (J_JsonNodeBuilder) var2.next();
 			var1.add(var3.buildNode());
 		}
 

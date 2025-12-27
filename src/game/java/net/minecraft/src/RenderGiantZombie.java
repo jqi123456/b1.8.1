@@ -15,6 +15,6 @@ public class RenderGiantZombie extends RenderLiving {
 	}
 
 	protected void preRenderCallback(EntityLiving var1, float var2) {
-		this.preRenderScale((EntityGiantZombie)var1, var2);
+		this.preRenderScale((EntityGiantZombie) var1, var2);
 	}
 }

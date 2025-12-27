@@ -29,15 +29,15 @@ public class PlayerControllerSP extends PlayerController {
 		boolean var7 = super.sendBlockRemoved(var1, var2, var3, var4);
 		ItemStack var8 = this.mc.thePlayer.getCurrentEquippedItem();
 		boolean var9 = this.mc.thePlayer.canHarvestBlock(Block.blocksList[var5]);
-		if(var8 != null) {
+		if (var8 != null) {
 			var8.onDestroyBlock(var5, var1, var2, var3, this.mc.thePlayer);
-			if(var8.stackSize == 0) {
+			if (var8.stackSize == 0) {
 				var8.onItemDestroyedByUse(this.mc.thePlayer);
 				this.mc.thePlayer.destroyCurrentEquippedItem();
 			}
 		}
 
-		if(var7 && var9) {
+		if (var7 && var9) {
 			Block.blocksList[var5].harvestBlock(this.mc.theWorld, this.mc.thePlayer, var1, var2, var3, var6);
 		}
 
@@ -45,14 +45,14 @@ public class PlayerControllerSP extends PlayerController {
 	}
 
 	public void clickBlock(int var1, int var2, int var3, int var4) {
-		if(this.mc.thePlayer.func_35190_e(var1, var2, var3)) {
+		if (this.mc.thePlayer.func_35190_e(var1, var2, var3)) {
 			this.mc.theWorld.onBlockHit(this.mc.thePlayer, var1, var2, var3, var4);
 			int var5 = this.mc.theWorld.getBlockId(var1, var2, var3);
-			if(var5 > 0 && this.curBlockDamage == 0.0F) {
+			if (var5 > 0 && this.curBlockDamage == 0.0F) {
 				Block.blocksList[var5].onBlockClicked(this.mc.theWorld, var1, var2, var3, this.mc.thePlayer);
 			}
 
-			if(var5 > 0 && Block.blocksList[var5].blockStrength(this.mc.thePlayer) >= 1.0F) {
+			if (var5 > 0 && Block.blocksList[var5].blockStrength(this.mc.thePlayer) >= 1.0F) {
 				this.sendBlockRemoved(var1, var2, var3, var4);
 			}
 
@@ -65,27 +65,28 @@ public class PlayerControllerSP extends PlayerController {
 	}
 
 	public void sendBlockRemoving(int var1, int var2, int var3, int var4) {
-		if(this.blockHitWait > 0) {
+		if (this.blockHitWait > 0) {
 			--this.blockHitWait;
 		} else {
-			if(var1 == this.curBlockX && var2 == this.curBlockY && var3 == this.curBlockZ) {
+			if (var1 == this.curBlockX && var2 == this.curBlockY && var3 == this.curBlockZ) {
 				int var5 = this.mc.theWorld.getBlockId(var1, var2, var3);
-				if(!this.mc.thePlayer.func_35190_e(var1, var2, var3)) {
+				if (!this.mc.thePlayer.func_35190_e(var1, var2, var3)) {
 					return;
 				}
 
-				if(var5 == 0) {
+				if (var5 == 0) {
 					return;
 				}
 
 				Block var6 = Block.blocksList[var5];
 				this.curBlockDamage += var6.blockStrength(this.mc.thePlayer);
-				if(this.field_1069_h % 4.0F == 0.0F && var6 != null) {
-					this.mc.sndManager.playSound(var6.stepSound.stepSoundDir2(), (float)var1 + 0.5F, (float)var2 + 0.5F, (float)var3 + 0.5F, (var6.stepSound.getVolume() + 1.0F) / 8.0F, var6.stepSound.getPitch() * 0.5F);
+				if (this.field_1069_h % 4.0F == 0.0F && var6 != null) {
+					this.mc.sndManager.playSound(var6.stepSound.stepSoundDir2(), (float) var1 + 0.5F, (float) var2 + 0.5F,
+							(float) var3 + 0.5F, (var6.stepSound.getVolume() + 1.0F) / 8.0F, var6.stepSound.getPitch() * 0.5F);
 				}
 
 				++this.field_1069_h;
-				if(this.curBlockDamage >= 1.0F) {
+				if (this.curBlockDamage >= 1.0F) {
 					this.sendBlockRemoved(var1, var2, var3, var4);
 					this.curBlockDamage = 0.0F;
 					this.prevBlockDamage = 0.0F;
@@ -105,7 +106,7 @@ public class PlayerControllerSP extends PlayerController {
 	}
 
 	public void setPartialTime(float var1) {
-		if(this.curBlockDamage <= 0.0F) {
+		if (this.curBlockDamage <= 0.0F) {
 			this.mc.ingameGUI.damageGuiPartialTime = 0.0F;
 			this.mc.renderGlobal.damagePartialTime = 0.0F;
 		} else {
@@ -136,7 +137,8 @@ public class PlayerControllerSP extends PlayerController {
 
 	public boolean sendPlaceBlock(EntityPlayer var1, World var2, ItemStack var3, int var4, int var5, int var6, int var7) {
 		int var8 = var2.getBlockId(var4, var5, var6);
-		return var8 > 0 && Block.blocksList[var8].blockActivated(var2, var4, var5, var6, var1) ? true : (var3 == null ? false : var3.useItem(var1, var2, var4, var5, var6, var7));
+		return var8 > 0 && Block.blocksList[var8].blockActivated(var2, var4, var5, var6, var1) ? true
+				: (var3 == null ? false : var3.useItem(var1, var2, var4, var5, var6, var7));
 	}
 
 	public boolean func_35642_f() {

@@ -20,7 +20,7 @@ public class EntityGhast extends EntityFlying implements IMob {
 
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
 
 	public void onUpdate() {
@@ -30,7 +30,7 @@ public class EntityGhast extends EntityFlying implements IMob {
 	}
 
 	protected void updateEntityActionState() {
-		if(!this.worldObj.multiplayerWorld && this.worldObj.difficultySetting == 0) {
+		if (!this.worldObj.multiplayerWorld && this.worldObj.difficultySetting == 0) {
 			this.setEntityDead();
 		}
 
@@ -39,16 +39,16 @@ public class EntityGhast extends EntityFlying implements IMob {
 		double var1 = this.waypointX - this.posX;
 		double var3 = this.waypointY - this.posY;
 		double var5 = this.waypointZ - this.posZ;
-		double var7 = (double)MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
-		if(var7 < 1.0D || var7 > 60.0D) {
-			this.waypointX = this.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointY = this.posY + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointZ = this.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+		double var7 = (double) MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
+		if (var7 < 1.0D || var7 > 60.0D) {
+			this.waypointX = this.posX + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+			this.waypointY = this.posY + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+			this.waypointZ = this.posZ + (double) ((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
 		}
 
-		if(this.courseChangeCooldown-- <= 0) {
+		if (this.courseChangeCooldown-- <= 0) {
 			this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-			if(this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, var7)) {
+			if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, var7)) {
 				this.motionX += var1 / var7 * 0.1D;
 				this.motionY += var3 / var7 * 0.1D;
 				this.motionZ += var5 / var7 * 0.1D;
@@ -59,54 +59,58 @@ public class EntityGhast extends EntityFlying implements IMob {
 			}
 		}
 
-		if(this.targetedEntity != null && this.targetedEntity.isDead) {
+		if (this.targetedEntity != null && this.targetedEntity.isDead) {
 			this.targetedEntity = null;
 		}
 
-		if(this.targetedEntity == null || this.aggroCooldown-- <= 0) {
+		if (this.targetedEntity == null || this.aggroCooldown-- <= 0) {
 			this.targetedEntity = this.worldObj.getClosestPlayerToEntity(this, 100.0D);
-			if(this.targetedEntity != null) {
+			if (this.targetedEntity != null) {
 				this.aggroCooldown = 20;
 			}
 		}
 
 		double var9 = 64.0D;
-		if(this.targetedEntity != null && this.targetedEntity.getDistanceSqToEntity(this) < var9 * var9) {
+		if (this.targetedEntity != null && this.targetedEntity.getDistanceSqToEntity(this) < var9 * var9) {
 			double var11 = this.targetedEntity.posX - this.posX;
-			double var13 = this.targetedEntity.boundingBox.minY + (double)(this.targetedEntity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
+			double var13 = this.targetedEntity.boundingBox.minY + (double) (this.targetedEntity.height / 2.0F)
+					- (this.posY + (double) (this.height / 2.0F));
 			double var15 = this.targetedEntity.posZ - this.posZ;
-			this.renderYawOffset = this.rotationYaw = -((float)Math.atan2(var11, var15)) * 180.0F / (float)Math.PI;
-			if(this.canEntityBeSeen(this.targetedEntity)) {
-				if(this.attackCounter == 10) {
-					this.worldObj.playSoundAtEntity(this, "mob.ghast.charge", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+			this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(var11, var15)) * 180.0F / (float) Math.PI;
+			if (this.canEntityBeSeen(this.targetedEntity)) {
+				if (this.attackCounter == 10) {
+					this.worldObj.playSoundAtEntity(this, "mob.ghast.charge", this.getSoundVolume(),
+							(this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 				}
 
 				++this.attackCounter;
-				if(this.attackCounter == 20) {
-					this.worldObj.playSoundAtEntity(this, "mob.ghast.fireball", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+				if (this.attackCounter == 20) {
+					this.worldObj.playSoundAtEntity(this, "mob.ghast.fireball", this.getSoundVolume(),
+							(this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 					EntityFireball var17 = new EntityFireball(this.worldObj, this, var11, var13, var15);
 					double var18 = 4.0D;
 					Vec3D var20 = this.getLook(1.0F);
 					var17.posX = this.posX + var20.xCoord * var18;
-					var17.posY = this.posY + (double)(this.height / 2.0F) + 0.5D;
+					var17.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
 					var17.posZ = this.posZ + var20.zCoord * var18;
 					this.worldObj.entityJoinedWorld(var17);
 					this.attackCounter = -40;
 				}
-			} else if(this.attackCounter > 0) {
+			} else if (this.attackCounter > 0) {
 				--this.attackCounter;
 			}
 		} else {
-			this.renderYawOffset = this.rotationYaw = -((float)Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float)Math.PI;
-			if(this.attackCounter > 0) {
+			this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(this.motionX, this.motionZ)) * 180.0F
+					/ (float) Math.PI;
+			if (this.attackCounter > 0) {
 				--this.attackCounter;
 			}
 		}
 
-		if(!this.worldObj.multiplayerWorld) {
+		if (!this.worldObj.multiplayerWorld) {
 			byte var21 = this.dataWatcher.getWatchableObjectByte(16);
-			byte var12 = (byte)(this.attackCounter > 10 ? 1 : 0);
-			if(var21 != var12) {
+			byte var12 = (byte) (this.attackCounter > 10 ? 1 : 0);
+			if (var21 != var12) {
 				this.dataWatcher.updateObject(16, Byte.valueOf(var12));
 			}
 		}
@@ -119,9 +123,9 @@ public class EntityGhast extends EntityFlying implements IMob {
 		double var13 = (this.waypointZ - this.posZ) / var7;
 		AxisAlignedBB var15 = this.boundingBox.copy();
 
-		for(int var16 = 1; (double)var16 < var7; ++var16) {
+		for (int var16 = 1; (double) var16 < var7; ++var16) {
 			var15.offset(var9, var11, var13);
-			if(this.worldObj.getCollidingBoundingBoxes(this, var15).size() > 0) {
+			if (this.worldObj.getCollidingBoundingBoxes(this, var15).size() > 0) {
 				return false;
 			}
 		}

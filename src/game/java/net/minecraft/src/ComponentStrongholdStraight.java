@@ -18,24 +18,27 @@ public class ComponentStrongholdStraight extends ComponentStronghold {
 	}
 
 	public void func_35004_a(StructureComponent var1, List var2, Random var3) {
-		this.func_35028_a((ComponentStrongholdStairs2)var1, var2, var3, 1, 1);
-		if(this.field_35048_b) {
-			this.func_35032_b((ComponentStrongholdStairs2)var1, var2, var3, 1, 2);
+		this.func_35028_a((ComponentStrongholdStairs2) var1, var2, var3, 1, 1);
+		if (this.field_35048_b) {
+			this.func_35032_b((ComponentStrongholdStairs2) var1, var2, var3, 1, 2);
 		}
 
-		if(this.field_35049_c) {
-			this.func_35029_c((ComponentStrongholdStairs2)var1, var2, var3, 1, 2);
+		if (this.field_35049_c) {
+			this.func_35029_c((ComponentStrongholdStairs2) var1, var2, var3, 1, 2);
 		}
 
 	}
 
-	public static ComponentStrongholdStraight func_35047_a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
+	public static ComponentStrongholdStraight func_35047_a(List var0, Random var1, int var2, int var3, int var4, int var5,
+			int var6) {
 		StructureBoundingBox var7 = StructureBoundingBox.func_35747_a(var2, var3, var4, -1, -1, 0, 5, 5, 7, var5);
-		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null ? new ComponentStrongholdStraight(var6, var1, var7, var5) : null;
+		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null
+				? new ComponentStrongholdStraight(var6, var1, var7, var5)
+				: null;
 	}
 
 	public boolean func_35023_a(World var1, Random var2, StructureBoundingBox var3) {
-		if(this.func_35013_a(var1, var3)) {
+		if (this.func_35013_a(var1, var3)) {
 			return false;
 		} else {
 			this.func_35022_a(var1, var3, 0, 0, 0, 4, 4, 6, true, var2, StructureStrongholdPieces.func_35852_b());
@@ -45,11 +48,11 @@ public class ComponentStrongholdStraight extends ComponentStronghold {
 			this.func_35014_a(var1, var3, var2, 0.1F, 3, 2, 1, Block.torchWood.blockID, 0);
 			this.func_35014_a(var1, var3, var2, 0.1F, 1, 2, 5, Block.torchWood.blockID, 0);
 			this.func_35014_a(var1, var3, var2, 0.1F, 3, 2, 5, Block.torchWood.blockID, 0);
-			if(this.field_35048_b) {
+			if (this.field_35048_b) {
 				this.func_35011_a(var1, var3, 0, 1, 2, 0, 3, 4, 0, 0, false);
 			}
 
-			if(this.field_35049_c) {
+			if (this.field_35049_c) {
 				this.func_35011_a(var1, var3, 4, 1, 2, 4, 3, 4, 0, 0, false);
 			}
 

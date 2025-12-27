@@ -18,10 +18,10 @@ final class J_JsonStringNodeSelector extends J_LeafFunctor {
 	}
 
 	public Object typeSafeApplyTo(Object var1) {
-		return this.func_27073_b((J_JsonNode)var1);
+		return this.func_27073_b((J_JsonNode) var1);
 	}
 
 	public boolean matchsNode(Object var1) {
-		return this.func_27072_a((J_JsonNode)var1);
+		return this.func_27072_a((J_JsonNode) var1);
 	}
 }

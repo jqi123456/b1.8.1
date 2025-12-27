@@ -35,7 +35,7 @@ public class EntityFireball extends Entity {
 		this.setSize(1.0F, 1.0F);
 		this.setLocationAndAngles(var2, var4, var6, this.rotationYaw, this.rotationPitch);
 		this.setPosition(var2, var4, var6);
-		double var14 = (double)MathHelper.sqrt_double(var8 * var8 + var10 * var10 + var12 * var12);
+		double var14 = (double) MathHelper.sqrt_double(var8 * var8 + var10 * var10 + var12 * var12);
 		this.accelerationX = var8 / var14 * 0.1D;
 		this.accelerationY = var10 / var14 * 0.1D;
 		this.accelerationZ = var12 / var14 * 0.1D;
@@ -52,7 +52,7 @@ public class EntityFireball extends Entity {
 		var3 += this.rand.nextGaussian() * 0.4D;
 		var5 += this.rand.nextGaussian() * 0.4D;
 		var7 += this.rand.nextGaussian() * 0.4D;
-		double var9 = (double)MathHelper.sqrt_double(var3 * var3 + var5 * var5 + var7 * var7);
+		double var9 = (double) MathHelper.sqrt_double(var3 * var3 + var5 * var5 + var7 * var7);
 		this.accelerationX = var3 / var9 * 0.1D;
 		this.accelerationY = var5 / var9 * 0.1D;
 		this.accelerationZ = var7 / var9 * 0.1D;
@@ -61,15 +61,15 @@ public class EntityFireball extends Entity {
 	public void onUpdate() {
 		super.onUpdate();
 		this.fire = 10;
-		if(this.shake > 0) {
+		if (this.shake > 0) {
 			--this.shake;
 		}
 
-		if(this.inGround) {
+		if (this.inGround) {
 			int var1 = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
-			if(var1 == this.inTile) {
+			if (var1 == this.inTile) {
 				++this.ticksAlive;
-				if(this.ticksAlive == 1200) {
+				if (this.ticksAlive == 1200) {
 					this.setEntityDead();
 				}
 
@@ -77,9 +77,9 @@ public class EntityFireball extends Entity {
 			}
 
 			this.inGround = false;
-			this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-			this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-			this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+			this.motionX *= (double) (this.rand.nextFloat() * 0.2F);
+			this.motionY *= (double) (this.rand.nextFloat() * 0.2F);
+			this.motionZ *= (double) (this.rand.nextFloat() * 0.2F);
 			this.ticksAlive = 0;
 			this.ticksInAir = 0;
 		} else {
@@ -91,23 +91,24 @@ public class EntityFireball extends Entity {
 		MovingObjectPosition var3 = this.worldObj.rayTraceBlocks(var15, var2);
 		var15 = Vec3D.createVector(this.posX, this.posY, this.posZ);
 		var2 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-		if(var3 != null) {
+		if (var3 != null) {
 			var2 = Vec3D.createVector(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
 		}
 
 		Entity var4 = null;
-		List var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+		List var5 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this,
+				this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 		double var6 = 0.0D;
 
-		for(int var8 = 0; var8 < var5.size(); ++var8) {
-			Entity var9 = (Entity)var5.get(var8);
-			if(var9.canBeCollidedWith() && (var9 != this.shootingEntity || this.ticksInAir >= 25)) {
+		for (int var8 = 0; var8 < var5.size(); ++var8) {
+			Entity var9 = (Entity) var5.get(var8);
+			if (var9.canBeCollidedWith() && (var9 != this.shootingEntity || this.ticksInAir >= 25)) {
 				float var10 = 0.3F;
-				AxisAlignedBB var11 = var9.boundingBox.expand((double)var10, (double)var10, (double)var10);
+				AxisAlignedBB var11 = var9.boundingBox.expand((double) var10, (double) var10, (double) var10);
 				MovingObjectPosition var12 = var11.func_1169_a(var15, var2);
-				if(var12 != null) {
+				if (var12 != null) {
 					double var13 = var15.distanceTo(var12.hitVec);
-					if(var13 < var6 || var6 == 0.0D) {
+					if (var13 < var6 || var6 == 0.0D) {
 						var4 = var9;
 						var6 = var13;
 					}
@@ -115,16 +116,17 @@ public class EntityFireball extends Entity {
 			}
 		}
 
-		if(var4 != null) {
+		if (var4 != null) {
 			var3 = new MovingObjectPosition(var4);
 		}
 
-		if(var3 != null) {
-			if(!this.worldObj.multiplayerWorld) {
-				if(var3.entityHit != null && var3.entityHit.attackEntityFrom(DamageSource.func_35530_a(this, this.shootingEntity), 0)) {
+		if (var3 != null) {
+			if (!this.worldObj.multiplayerWorld) {
+				if (var3.entityHit != null
+						&& var3.entityHit.attackEntityFrom(DamageSource.func_35530_a(this, this.shootingEntity), 0)) {
 				}
 
-				this.worldObj.newExplosion((Entity)null, this.posX, this.posY, this.posZ, 1.0F, true);
+				this.worldObj.newExplosion((Entity) null, this.posX, this.posY, this.posZ, 1.0F, true);
 			}
 
 			this.setEntityDead();
@@ -134,30 +136,34 @@ public class EntityFireball extends Entity {
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
 		float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / (double)((float)Math.PI));
+		this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / (double) ((float) Math.PI));
 
-		for(this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var16) * 180.0D / (double)((float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+		for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var16) * 180.0D
+				/ (double) ((float) Math.PI)); this.rotationPitch
+						- this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
 		}
 
-		while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
+		while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 			this.prevRotationPitch += 360.0F;
 		}
 
-		while(this.rotationYaw - this.prevRotationYaw < -180.0F) {
+		while (this.rotationYaw - this.prevRotationYaw < -180.0F) {
 			this.prevRotationYaw -= 360.0F;
 		}
 
-		while(this.rotationYaw - this.prevRotationYaw >= 180.0F) {
+		while (this.rotationYaw - this.prevRotationYaw >= 180.0F) {
 			this.prevRotationYaw += 360.0F;
 		}
 
 		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
 		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
 		float var17 = 0.95F;
-		if(this.isInWater()) {
-			for(int var18 = 0; var18 < 4; ++var18) {
+		if (this.isInWater()) {
+			for (int var18 = 0; var18 < 4; ++var18) {
 				float var19 = 0.25F;
-				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)var19, this.posY - this.motionY * (double)var19, this.posZ - this.motionZ * (double)var19, this.motionX, this.motionY, this.motionZ);
+				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double) var19,
+						this.posY - this.motionY * (double) var19, this.posZ - this.motionZ * (double) var19, this.motionX,
+						this.motionY, this.motionZ);
 			}
 
 			var17 = 0.8F;
@@ -166,20 +172,20 @@ public class EntityFireball extends Entity {
 		this.motionX += this.accelerationX;
 		this.motionY += this.accelerationY;
 		this.motionZ += this.accelerationZ;
-		this.motionX *= (double)var17;
-		this.motionY *= (double)var17;
-		this.motionZ *= (double)var17;
+		this.motionX *= (double) var17;
+		this.motionY *= (double) var17;
+		this.motionZ *= (double) var17;
 		this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
 		this.setPosition(this.posX, this.posY, this.posZ);
 	}
 
 	public void writeEntityToNBT(NBTTagCompound var1) {
-		var1.setShort("xTile", (short)this.xTile);
-		var1.setShort("yTile", (short)this.yTile);
-		var1.setShort("zTile", (short)this.zTile);
-		var1.setByte("inTile", (byte)this.inTile);
-		var1.setByte("shake", (byte)this.shake);
-		var1.setByte("inGround", (byte)(this.inGround ? 1 : 0));
+		var1.setShort("xTile", (short) this.xTile);
+		var1.setShort("yTile", (short) this.yTile);
+		var1.setShort("zTile", (short) this.zTile);
+		var1.setByte("inTile", (byte) this.inTile);
+		var1.setByte("shake", (byte) this.shake);
+		var1.setByte("inGround", (byte) (this.inGround ? 1 : 0));
 	}
 
 	public void readEntityFromNBT(NBTTagCompound var1) {
@@ -201,9 +207,9 @@ public class EntityFireball extends Entity {
 
 	public boolean attackEntityFrom(DamageSource var1, int var2) {
 		this.setBeenAttacked();
-		if(var1.func_35532_a() != null) {
+		if (var1.func_35532_a() != null) {
 			Vec3D var3 = var1.func_35532_a().getLookVec();
-			if(var3 != null) {
+			if (var3 != null) {
 				this.motionX = var3.xCoord;
 				this.motionY = var3.yCoord;
 				this.motionZ = var3.zCoord;

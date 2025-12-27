@@ -23,7 +23,7 @@ public class IntCache {
 				return var1;
 			}
 		} else if (var0 > field_35273_a) {
-			System.out.println("New max size: " + var0);
+			// System.out.println("New max size: " + var0);
 			field_35273_a = var0;
 			field_35269_d.clear();
 			field_35270_e.clear();

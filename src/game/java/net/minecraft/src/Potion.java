@@ -43,26 +43,26 @@ public class Potion {
 	}
 
 	public void func_35662_a(EntityLiving var1, int var2) {
-		if(this.field_35670_H == field_35681_l.field_35670_H) {
-			if(var1.health < 20) {
+		if (this.field_35670_H == field_35681_l.field_35670_H) {
+			if (var1.health < 20) {
 				var1.heal(1);
 			}
-		} else if(this.field_35670_H == field_35689_u.field_35670_H) {
-			if(var1.health > 1) {
+		} else if (this.field_35670_H == field_35689_u.field_35670_H) {
+			if (var1.health > 1) {
 				var1.attackEntityFrom(DamageSource.field_35545_l, 1);
 			}
-		} else if(this.field_35670_H == field_35691_s.field_35670_H && var1 instanceof EntityPlayer) {
-			((EntityPlayer)var1).func_35198_d(0.025F * (float)(var2 + 1));
-		} else if(this.field_35670_H == field_35685_h.field_35670_H) {
+		} else if (this.field_35670_H == field_35691_s.field_35670_H && var1 instanceof EntityPlayer) {
+			((EntityPlayer) var1).func_35198_d(0.025F * (float) (var2 + 1));
+		} else if (this.field_35670_H == field_35685_h.field_35670_H) {
 			var1.heal(4 << var2);
-		} else if(this.field_35670_H == field_35686_i.field_35670_H) {
+		} else if (this.field_35670_H == field_35686_i.field_35670_H) {
 			var1.attackEntityFrom(DamageSource.field_35545_l, 4 << var2);
 		}
 
 	}
 
 	public boolean func_35660_a(int var1, int var2) {
-		if(this.field_35670_H != field_35681_l.field_35670_H && this.field_35670_H != field_35689_u.field_35670_H) {
+		if (this.field_35670_H != field_35681_l.field_35670_H && this.field_35670_H != field_35689_u.field_35670_H) {
 			return this.field_35670_H == field_35691_s.field_35670_H;
 		} else {
 			int var3 = 25 >> var2;

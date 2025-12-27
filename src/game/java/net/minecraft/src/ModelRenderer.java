@@ -41,21 +41,21 @@ public class ModelRenderer {
 		this.field_35977_i = var1;
 		this.field_35975_j = var2;
 		this.field_35976_k = var3;
-		this.field_35973_l = var1 + (float)var4;
-		this.field_35974_m = var2 + (float)var5;
-		this.field_35972_n = var3 + (float)var6;
+		this.field_35973_l = var1 + (float) var4;
+		this.field_35974_m = var2 + (float) var5;
+		this.field_35972_n = var3 + (float) var6;
 		this.field_35978_r = new PositionTextureVertex[8];
 		this.faces = new TexturedQuad[6];
-		float var8 = var1 + (float)var4;
-		float var9 = var2 + (float)var5;
-		float var10 = var3 + (float)var6;
+		float var8 = var1 + (float) var4;
+		float var9 = var2 + (float) var5;
+		float var10 = var3 + (float) var6;
 		var1 -= var7;
 		var2 -= var7;
 		var3 -= var7;
 		var8 += var7;
 		var9 += var7;
 		var10 += var7;
-		if(this.mirror) {
+		if (this.mirror) {
 			float var11 = var8;
 			var8 = var1;
 			var1 = var11;
@@ -77,14 +77,27 @@ public class ModelRenderer {
 		this.field_35978_r[5] = var16;
 		this.field_35978_r[6] = var17;
 		this.field_35978_r[7] = var18;
-		this.faces[0] = new TexturedQuad(new PositionTextureVertex[]{var16, var12, var13, var17}, this.textureOffsetX + var6 + var4, this.textureOffsetY + var6, this.textureOffsetX + var6 + var4 + var6, this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
-		this.faces[1] = new TexturedQuad(new PositionTextureVertex[]{var20, var15, var18, var14}, this.textureOffsetX + 0, this.textureOffsetY + var6, this.textureOffsetX + var6, this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
-		this.faces[2] = new TexturedQuad(new PositionTextureVertex[]{var16, var15, var20, var12}, this.textureOffsetX + var6, this.textureOffsetY + 0, this.textureOffsetX + var6 + var4, this.textureOffsetY + var6, this.field_35971_a, this.field_35970_b);
-		this.faces[3] = new TexturedQuad(new PositionTextureVertex[]{var13, var14, var18, var17}, this.textureOffsetX + var6 + var4, this.textureOffsetY + 0, this.textureOffsetX + var6 + var4 + var4, this.textureOffsetY + var6, this.field_35971_a, this.field_35970_b);
-		this.faces[4] = new TexturedQuad(new PositionTextureVertex[]{var12, var20, var14, var13}, this.textureOffsetX + var6, this.textureOffsetY + var6, this.textureOffsetX + var6 + var4, this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
-		this.faces[5] = new TexturedQuad(new PositionTextureVertex[]{var15, var16, var17, var18}, this.textureOffsetX + var6 + var4 + var6, this.textureOffsetY + var6, this.textureOffsetX + var6 + var4 + var6 + var4, this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
-		if(this.mirror) {
-			for(int var19 = 0; var19 < this.faces.length; ++var19) {
+		this.faces[0] = new TexturedQuad(new PositionTextureVertex[] { var16, var12, var13, var17 },
+				this.textureOffsetX + var6 + var4, this.textureOffsetY + var6, this.textureOffsetX + var6 + var4 + var6,
+				this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
+		this.faces[1] = new TexturedQuad(new PositionTextureVertex[] { var20, var15, var18, var14 },
+				this.textureOffsetX + 0, this.textureOffsetY + var6, this.textureOffsetX + var6,
+				this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
+		this.faces[2] = new TexturedQuad(new PositionTextureVertex[] { var16, var15, var20, var12 },
+				this.textureOffsetX + var6, this.textureOffsetY + 0, this.textureOffsetX + var6 + var4,
+				this.textureOffsetY + var6, this.field_35971_a, this.field_35970_b);
+		this.faces[3] = new TexturedQuad(new PositionTextureVertex[] { var13, var14, var18, var17 },
+				this.textureOffsetX + var6 + var4, this.textureOffsetY + 0, this.textureOffsetX + var6 + var4 + var4,
+				this.textureOffsetY + var6, this.field_35971_a, this.field_35970_b);
+		this.faces[4] = new TexturedQuad(new PositionTextureVertex[] { var12, var20, var14, var13 },
+				this.textureOffsetX + var6, this.textureOffsetY + var6, this.textureOffsetX + var6 + var4,
+				this.textureOffsetY + var6 + var5, this.field_35971_a, this.field_35970_b);
+		this.faces[5] = new TexturedQuad(new PositionTextureVertex[] { var15, var16, var17, var18 },
+				this.textureOffsetX + var6 + var4 + var6, this.textureOffsetY + var6,
+				this.textureOffsetX + var6 + var4 + var6 + var4, this.textureOffsetY + var6 + var5, this.field_35971_a,
+				this.field_35970_b);
+		if (this.mirror) {
+			for (int var19 = 0; var19 < this.faces.length; ++var19) {
 				this.faces[var19].flipFace();
 			}
 		}
@@ -98,14 +111,14 @@ public class ModelRenderer {
 	}
 
 	public void render(float var1) {
-		if(!this.field_1402_i) {
-			if(this.showModel) {
-				if(!this.compiled) {
+		if (!this.field_1402_i) {
+			if (this.showModel) {
+				if (!this.compiled) {
 					this.compileDisplayList(var1);
 				}
 
-				if(this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F) {
-					if(this.rotationPointX == 0.0F && this.rotationPointY == 0.0F && this.rotationPointZ == 0.0F) {
+				if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F) {
+					if (this.rotationPointX == 0.0F && this.rotationPointY == 0.0F && this.rotationPointZ == 0.0F) {
 						GL11.glCallList(this.displayList);
 					} else {
 						GL11.glTranslatef(this.rotationPointX * var1, this.rotationPointY * var1, this.rotationPointZ * var1);
@@ -115,16 +128,16 @@ public class ModelRenderer {
 				} else {
 					GL11.glPushMatrix();
 					GL11.glTranslatef(this.rotationPointX * var1, this.rotationPointY * var1, this.rotationPointZ * var1);
-					if(this.rotateAngleZ != 0.0F) {
-						GL11.glRotatef(this.rotateAngleZ * (180.0F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+					if (this.rotateAngleZ != 0.0F) {
+						GL11.glRotatef(this.rotateAngleZ * (180.0F / (float) Math.PI), 0.0F, 0.0F, 1.0F);
 					}
 
-					if(this.rotateAngleY != 0.0F) {
-						GL11.glRotatef(this.rotateAngleY * (180.0F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+					if (this.rotateAngleY != 0.0F) {
+						GL11.glRotatef(this.rotateAngleY * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
 					}
 
-					if(this.rotateAngleX != 0.0F) {
-						GL11.glRotatef(this.rotateAngleX * (180.0F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+					if (this.rotateAngleX != 0.0F) {
+						GL11.glRotatef(this.rotateAngleX * (180.0F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
 					}
 
 					GL11.glCallList(this.displayList);
@@ -136,24 +149,24 @@ public class ModelRenderer {
 	}
 
 	public void renderWithRotation(float var1) {
-		if(!this.field_1402_i) {
-			if(this.showModel) {
-				if(!this.compiled) {
+		if (!this.field_1402_i) {
+			if (this.showModel) {
+				if (!this.compiled) {
 					this.compileDisplayList(var1);
 				}
 
 				GL11.glPushMatrix();
 				GL11.glTranslatef(this.rotationPointX * var1, this.rotationPointY * var1, this.rotationPointZ * var1);
-				if(this.rotateAngleY != 0.0F) {
-					GL11.glRotatef(this.rotateAngleY * (180.0F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+				if (this.rotateAngleY != 0.0F) {
+					GL11.glRotatef(this.rotateAngleY * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
 				}
 
-				if(this.rotateAngleX != 0.0F) {
-					GL11.glRotatef(this.rotateAngleX * (180.0F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+				if (this.rotateAngleX != 0.0F) {
+					GL11.glRotatef(this.rotateAngleX * (180.0F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
 				}
 
-				if(this.rotateAngleZ != 0.0F) {
-					GL11.glRotatef(this.rotateAngleZ * (180.0F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+				if (this.rotateAngleZ != 0.0F) {
+					GL11.glRotatef(this.rotateAngleZ * (180.0F / (float) Math.PI), 0.0F, 0.0F, 1.0F);
 				}
 
 				GL11.glCallList(this.displayList);
@@ -163,28 +176,28 @@ public class ModelRenderer {
 	}
 
 	public void postRender(float var1) {
-		if(!this.field_1402_i) {
-			if(this.showModel) {
-				if(!this.compiled) {
+		if (!this.field_1402_i) {
+			if (this.showModel) {
+				if (!this.compiled) {
 					this.compileDisplayList(var1);
 				}
 
-				if(this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F) {
-					if(this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F) {
+				if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F) {
+					if (this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F) {
 						GL11.glTranslatef(this.rotationPointX * var1, this.rotationPointY * var1, this.rotationPointZ * var1);
 					}
 				} else {
 					GL11.glTranslatef(this.rotationPointX * var1, this.rotationPointY * var1, this.rotationPointZ * var1);
-					if(this.rotateAngleZ != 0.0F) {
-						GL11.glRotatef(this.rotateAngleZ * (180.0F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+					if (this.rotateAngleZ != 0.0F) {
+						GL11.glRotatef(this.rotateAngleZ * (180.0F / (float) Math.PI), 0.0F, 0.0F, 1.0F);
 					}
 
-					if(this.rotateAngleY != 0.0F) {
-						GL11.glRotatef(this.rotateAngleY * (180.0F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+					if (this.rotateAngleY != 0.0F) {
+						GL11.glRotatef(this.rotateAngleY * (180.0F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
 					}
 
-					if(this.rotateAngleX != 0.0F) {
-						GL11.glRotatef(this.rotateAngleX * (180.0F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+					if (this.rotateAngleX != 0.0F) {
+						GL11.glRotatef(this.rotateAngleX * (180.0F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
 					}
 				}
 
@@ -200,7 +213,8 @@ public class ModelRenderer {
 		int j = this.faces.length;
 		if (j > 0) {
 			var2.startDrawingQuads();
-			for(int i = 0; i < j; ++i) this.faces[i].draw(var2, var1);
+			for (int i = 0; i < j; ++i)
+				this.faces[i].draw(var2, var1);
 			var2.draw();
 		}
 
@@ -209,8 +223,8 @@ public class ModelRenderer {
 	}
 
 	public ModelRenderer func_35968_a(int var1, int var2) {
-		this.field_35971_a = (float)var1;
-		this.field_35970_b = (float)var2;
+		this.field_35971_a = (float) var1;
+		this.field_35970_b = (float) var2;
 		return this;
 	}
 

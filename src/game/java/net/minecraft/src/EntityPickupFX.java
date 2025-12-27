@@ -18,19 +18,22 @@ public class EntityPickupFX extends EntityFX {
 	}
 
 	public void renderParticle(Tessellator var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-		float var8 = ((float)this.age + var2) / (float)this.maxAge;
+		float var8 = ((float) this.age + var2) / (float) this.maxAge;
 		var8 *= var8;
 		double var9 = this.field_675_a.posX;
 		double var11 = this.field_675_a.posY;
 		double var13 = this.field_675_a.posZ;
-		double var15 = this.field_679_o.lastTickPosX + (this.field_679_o.posX - this.field_679_o.lastTickPosX) * (double)var2;
-		double var17 = this.field_679_o.lastTickPosY + (this.field_679_o.posY - this.field_679_o.lastTickPosY) * (double)var2 + (double)this.field_676_r;
-		double var19 = this.field_679_o.lastTickPosZ + (this.field_679_o.posZ - this.field_679_o.lastTickPosZ) * (double)var2;
-		double var21 = var9 + (var15 - var9) * (double)var8;
-		double var23 = var11 + (var17 - var11) * (double)var8;
-		double var25 = var13 + (var19 - var13) * (double)var8;
+		double var15 = this.field_679_o.lastTickPosX
+				+ (this.field_679_o.posX - this.field_679_o.lastTickPosX) * (double) var2;
+		double var17 = this.field_679_o.lastTickPosY
+				+ (this.field_679_o.posY - this.field_679_o.lastTickPosY) * (double) var2 + (double) this.field_676_r;
+		double var19 = this.field_679_o.lastTickPosZ
+				+ (this.field_679_o.posZ - this.field_679_o.lastTickPosZ) * (double) var2;
+		double var21 = var9 + (var15 - var9) * (double) var8;
+		double var23 = var11 + (var17 - var11) * (double) var8;
+		double var25 = var13 + (var19 - var13) * (double) var8;
 		int var27 = MathHelper.floor_double(var21);
-		int var28 = MathHelper.floor_double(var23 + (double)(this.yOffset / 2.0F));
+		int var28 = MathHelper.floor_double(var23 + (double) (this.yOffset / 2.0F));
 		int var29 = MathHelper.floor_double(var25);
 		int var30 = this.func_35115_a(var2);
 		int var31 = var30 % 65536;
@@ -39,12 +42,13 @@ public class EntityPickupFX extends EntityFX {
 		var21 -= interpPosX;
 		var23 -= interpPosY;
 		var25 -= interpPosZ;
-		RenderManager.instance.renderEntityWithPosYaw(this.field_675_a, (double)((float)var21), (double)((float)var23), (double)((float)var25), this.field_675_a.rotationYaw, var2);
+		RenderManager.instance.renderEntityWithPosYaw(this.field_675_a, (double) ((float) var21), (double) ((float) var23),
+				(double) ((float) var25), this.field_675_a.rotationYaw, var2);
 	}
 
 	public void onUpdate() {
 		++this.age;
-		if(this.age == this.maxAge) {
+		if (this.age == this.maxAge) {
 			this.setEntityDead();
 		}
 

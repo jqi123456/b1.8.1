@@ -8,8 +8,9 @@ public class RenderGhast extends RenderLiving {
 	}
 
 	protected void func_4014_a(EntityGhast var1, float var2) {
-		float var4 = ((float)var1.prevAttackCounter + (float)(var1.attackCounter - var1.prevAttackCounter) * var2) / 20.0F;
-		if(var4 < 0.0F) {
+		float var4 = ((float) var1.prevAttackCounter + (float) (var1.attackCounter - var1.prevAttackCounter) * var2)
+				/ 20.0F;
+		if (var4 < 0.0F) {
 			var4 = 0.0F;
 		}
 
@@ -21,6 +22,6 @@ public class RenderGhast extends RenderLiving {
 	}
 
 	protected void preRenderCallback(EntityLiving var1, float var2) {
-		this.func_4014_a((EntityGhast)var1, var2);
+		this.func_4014_a((EntityGhast) var1, var2);
 	}
 }

@@ -14,16 +14,19 @@ public class ComponentStrongholdPrison extends ComponentStronghold {
 	}
 
 	public void func_35004_a(StructureComponent var1, List var2, Random var3) {
-		this.func_35028_a((ComponentStrongholdStairs2)var1, var2, var3, 1, 1);
+		this.func_35028_a((ComponentStrongholdStairs2) var1, var2, var3, 1, 1);
 	}
 
-	public static ComponentStrongholdPrison func_35063_a(List var0, Random var1, int var2, int var3, int var4, int var5, int var6) {
+	public static ComponentStrongholdPrison func_35063_a(List var0, Random var1, int var2, int var3, int var4, int var5,
+			int var6) {
 		StructureBoundingBox var7 = StructureBoundingBox.func_35747_a(var2, var3, var4, -1, -1, 0, 9, 5, 11, var5);
-		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null ? new ComponentStrongholdPrison(var6, var1, var7, var5) : null;
+		return func_35030_a(var7) && StructureComponent.func_35020_a(var0, var7) == null
+				? new ComponentStrongholdPrison(var6, var1, var7, var5)
+				: null;
 	}
 
 	public boolean func_35023_a(World var1, Random var2, StructureBoundingBox var3) {
-		if(this.func_35013_a(var1, var3)) {
+		if (this.func_35013_a(var1, var3)) {
 			return false;
 		} else {
 			this.func_35022_a(var1, var3, 0, 0, 0, 8, 4, 10, true, var2, StructureStrongholdPieces.func_35852_b());
@@ -33,14 +36,18 @@ public class ComponentStrongholdPrison extends ComponentStronghold {
 			this.func_35022_a(var1, var3, 4, 1, 3, 4, 3, 3, false, var2, StructureStrongholdPieces.func_35852_b());
 			this.func_35022_a(var1, var3, 4, 1, 7, 4, 3, 7, false, var2, StructureStrongholdPieces.func_35852_b());
 			this.func_35022_a(var1, var3, 4, 1, 9, 4, 3, 9, false, var2, StructureStrongholdPieces.func_35852_b());
-			this.func_35011_a(var1, var3, 4, 1, 4, 4, 3, 6, Block.field_35288_bq.blockID, Block.field_35288_bq.blockID, false);
-			this.func_35011_a(var1, var3, 5, 1, 5, 7, 3, 5, Block.field_35288_bq.blockID, Block.field_35288_bq.blockID, false);
+			this.func_35011_a(var1, var3, 4, 1, 4, 4, 3, 6, Block.field_35288_bq.blockID, Block.field_35288_bq.blockID,
+					false);
+			this.func_35011_a(var1, var3, 5, 1, 5, 7, 3, 5, Block.field_35288_bq.blockID, Block.field_35288_bq.blockID,
+					false);
 			this.func_35018_a(var1, Block.field_35288_bq.blockID, 0, 4, 3, 2, var3);
 			this.func_35018_a(var1, Block.field_35288_bq.blockID, 0, 4, 3, 8, var3);
 			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3), 4, 1, 2, var3);
-			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3) + 8, 4, 2, 2, var3);
+			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3) + 8, 4, 2, 2,
+					var3);
 			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3), 4, 1, 8, var3);
-			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3) + 8, 4, 2, 8, var3);
+			this.func_35018_a(var1, Block.doorSteel.blockID, this.func_35009_c(Block.doorSteel.blockID, 3) + 8, 4, 2, 8,
+					var3);
 			return true;
 		}
 	}

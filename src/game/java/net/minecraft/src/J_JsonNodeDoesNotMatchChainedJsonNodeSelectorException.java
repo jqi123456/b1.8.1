@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.magicwerk.brownies.collections.GapList;
 
-public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException extends J_JsonNodeDoesNotMatchJsonNodeSelectorException {
+public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException
+		extends J_JsonNodeDoesNotMatchJsonNodeSelectorException {
 	final J_Functor field_27326_a;
 	final List field_27325_b;
 
@@ -12,13 +13,15 @@ public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException extend
 		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0, new GapList<>());
 	}
 
-	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27323_a(J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
+	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27323_a(
+			J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
 		GapList var2 = new GapList<>(var0.field_27325_b);
 		var2.add(var1);
 		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0.field_27326_a, var2);
 	}
 
-	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27321_b(J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
+	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27321_b(
+			J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
 		GapList var2 = new GapList<>();
 		var2.add(var1);
 		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0.field_27326_a, var2);
@@ -33,9 +36,9 @@ public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException extend
 	static String func_27324_a(List var0) {
 		StringBuilder var1 = new StringBuilder();
 
-		for(int var2 = var0.size() - 1; var2 >= 0; --var2) {
-			var1.append(((J_JsonNodeSelector)var0.get(var2)).shortForm());
-			if(var2 != 0) {
+		for (int var2 = var0.size() - 1; var2 >= 0; --var2) {
+			var1.append(((J_JsonNodeSelector) var0.get(var2)).shortForm());
+			if (var2 != 0) {
 				var1.append(".");
 			}
 		}
@@ -44,6 +47,7 @@ public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException extend
 	}
 
 	public String toString() {
-		return "JsonNodeDoesNotMatchJsonNodeSelectorException{failedNode=" + this.field_27326_a + ", failPath=" + this.field_27325_b + '}';
+		return "JsonNodeDoesNotMatchJsonNodeSelectorException{failedNode=" + this.field_27326_a + ", failPath="
+				+ this.field_27325_b + '}';
 	}
 }

@@ -27,31 +27,31 @@ public abstract class GenLayer {
 		GenLayer var5 = GenLayerZoom.func_35515_a(1000L, var10, 0);
 		GenLayerVillageLandscape var15 = new GenLayerVillageLandscape(200L, var5);
 		Object var16 = GenLayerZoom.func_35515_a(1000L, var15, 2);
-		Object var6 = new GenLayerTemperature((GenLayer)var16);
-		Object var7 = new GenLayerDownfall((GenLayer)var16);
+		Object var6 = new GenLayerTemperature((GenLayer) var16);
+		Object var7 = new GenLayerDownfall((GenLayer) var16);
 
-		for(int var8 = 0; var8 < var3; ++var8) {
-			var16 = new GenLayerZoom((long)(1000 + var8), (GenLayer)var16);
-			if(var8 == 0) {
-				var16 = new GenLayerIsland(3L, (GenLayer)var16);
+		for (int var8 = 0; var8 < var3; ++var8) {
+			var16 = new GenLayerZoom((long) (1000 + var8), (GenLayer) var16);
+			if (var8 == 0) {
+				var16 = new GenLayerIsland(3L, (GenLayer) var16);
 			}
 
-			GenLayerSmoothZoom var17 = new GenLayerSmoothZoom((long)(1000 + var8), (GenLayer)var6);
-			var6 = new GenLayerTemperatureMix(var17, (GenLayer)var16, var8);
-			GenLayerSmoothZoom var21 = new GenLayerSmoothZoom((long)(1000 + var8), (GenLayer)var7);
-			var7 = new GenLayerDownfallMix(var21, (GenLayer)var16, var8);
+			GenLayerSmoothZoom var17 = new GenLayerSmoothZoom((long) (1000 + var8), (GenLayer) var6);
+			var6 = new GenLayerTemperatureMix(var17, (GenLayer) var16, var8);
+			GenLayerSmoothZoom var21 = new GenLayerSmoothZoom((long) (1000 + var8), (GenLayer) var7);
+			var7 = new GenLayerDownfallMix(var21, (GenLayer) var16, var8);
 		}
 
-		GenLayerSmooth var18 = new GenLayerSmooth(1000L, (GenLayer)var16);
+		GenLayerSmooth var18 = new GenLayerSmooth(1000L, (GenLayer) var16);
 		GenLayerRiverMix var20 = new GenLayerRiverMix(100L, var18, var14);
-		GenLayer var19 = GenLayerSmoothZoom.func_35517_a(1000L, (GenLayer)var6, 2);
-		GenLayer var22 = GenLayerSmoothZoom.func_35517_a(1000L, (GenLayer)var7, 2);
+		GenLayer var19 = GenLayerSmoothZoom.func_35517_a(1000L, (GenLayer) var6, 2);
+		GenLayer var22 = GenLayerSmoothZoom.func_35517_a(1000L, (GenLayer) var7, 2);
 		GenLayerZoomVoronoi var23 = new GenLayerZoomVoronoi(10L, var20);
 		var20.func_35496_b(var0);
 		var19.func_35496_b(var0);
 		var22.func_35496_b(var0);
 		var23.func_35496_b(var0);
-		return new GenLayer[]{var20, var23, var19, var22};
+		return new GenLayer[] { var20, var23, var19, var22 };
 	}
 
 	public GenLayer(long var1) {
@@ -66,7 +66,7 @@ public abstract class GenLayer {
 
 	public void func_35496_b(long var1) {
 		this.field_35502_b = var1;
-		if(this.field_35504_a != null) {
+		if (this.field_35504_a != null) {
 			this.field_35504_a.func_35496_b(var1);
 		}
 
@@ -91,8 +91,8 @@ public abstract class GenLayer {
 	}
 
 	protected int func_35498_a(int var1) {
-		int var2 = (int)((this.field_35503_c >> 24) % (long)var1);
-		if(var2 < 0) {
+		int var2 = (int) ((this.field_35503_c >> 24) % (long) var1);
+		if (var2 < 0) {
 			var2 += var1;
 		}
 

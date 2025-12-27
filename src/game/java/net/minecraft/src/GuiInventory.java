@@ -14,7 +14,7 @@ public class GuiInventory extends GuiContainer {
 	}
 
 	public void updateScreen() {
-		if(this.mc.playerController.func_35640_h()) {
+		if (this.mc.playerController.func_35640_h()) {
 			this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
 		}
 
@@ -22,7 +22,7 @@ public class GuiInventory extends GuiContainer {
 
 	public void initGui() {
 		this.controlList.clear();
-		if(this.mc.playerController.func_35640_h()) {
+		if (this.mc.playerController.func_35640_h()) {
 			this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
 		}
 
@@ -34,8 +34,8 @@ public class GuiInventory extends GuiContainer {
 
 	public void drawScreen(int var1, int var2, float var3) {
 		super.drawScreen(var1, var2, var3);
-		this.xSize_lo = (float)var1;
-		this.ySize_lo = (float)var2;
+		this.xSize_lo = (float) var1;
+		this.ySize_lo = (float) var2;
 	}
 
 	protected void drawGuiContainerBackgroundLayer(float var1) {
@@ -48,22 +48,22 @@ public class GuiInventory extends GuiContainer {
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)(var3 + 51), (float)(var4 + 75), 50.0F);
+		GL11.glTranslatef((float) (var3 + 51), (float) (var4 + 75), 50.0F);
 		float var5 = 30.0F;
 		GL11.glScalef(-var5, var5, var5);
 		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
 		float var6 = this.mc.thePlayer.renderYawOffset;
 		float var7 = this.mc.thePlayer.rotationYaw;
 		float var8 = this.mc.thePlayer.rotationPitch;
-		float var9 = (float)(var3 + 51) - this.xSize_lo;
-		float var10 = (float)(var4 + 75 - 50) - this.ySize_lo;
+		float var9 = (float) (var3 + 51) - this.xSize_lo;
+		float var10 = (float) (var4 + 75 - 50) - this.ySize_lo;
 		GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-((float)Math.atan((double)(var10 / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-		this.mc.thePlayer.renderYawOffset = (float)Math.atan((double)(var9 / 40.0F)) * 20.0F;
-		this.mc.thePlayer.rotationYaw = (float)Math.atan((double)(var9 / 40.0F)) * 40.0F;
-		this.mc.thePlayer.rotationPitch = -((float)Math.atan((double)(var10 / 40.0F))) * 20.0F;
+		GL11.glRotatef(-((float) Math.atan((double) (var10 / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+		this.mc.thePlayer.renderYawOffset = (float) Math.atan((double) (var9 / 40.0F)) * 20.0F;
+		this.mc.thePlayer.rotationYaw = (float) Math.atan((double) (var9 / 40.0F)) * 40.0F;
+		this.mc.thePlayer.rotationPitch = -((float) Math.atan((double) (var10 / 40.0F))) * 20.0F;
 		GL11.glTranslatef(0.0F, this.mc.thePlayer.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
 		RenderManager.instance.renderEntityWithPosYaw(this.mc.thePlayer, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
@@ -76,11 +76,11 @@ public class GuiInventory extends GuiContainer {
 	}
 
 	protected void actionPerformed(GuiButton var1) {
-		if(var1.id == 0) {
+		if (var1.id == 0) {
 			this.mc.displayGuiScreen(new GuiAchievements(this.mc.statFileWriter));
 		}
 
-		if(var1.id == 1) {
+		if (var1.id == 1) {
 			this.mc.displayGuiScreen(new GuiStats(this, this.mc.statFileWriter));
 		}
 

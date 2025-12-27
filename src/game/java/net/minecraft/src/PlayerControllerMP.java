@@ -22,7 +22,7 @@ public class PlayerControllerMP extends PlayerController {
 
 	public void func_35648_a(boolean var1) {
 		this.field_35649_k = var1;
-		if(this.field_35649_k) {
+		if (this.field_35649_k) {
 			PlayerControllerTest.func_35646_d(this.mc.thePlayer);
 		} else {
 			PlayerControllerTest.func_35645_e(this.mc.thePlayer);
@@ -39,15 +39,15 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public boolean sendBlockRemoved(int var1, int var2, int var3, int var4) {
-		if(this.field_35649_k) {
+		if (this.field_35649_k) {
 			return false;
 		} else {
 			int var5 = this.mc.theWorld.getBlockId(var1, var2, var3);
 			boolean var6 = super.sendBlockRemoved(var1, var2, var3, var4);
 			ItemStack var7 = this.mc.thePlayer.getCurrentEquippedItem();
-			if(var7 != null) {
+			if (var7 != null) {
 				var7.onDestroyBlock(var5, var1, var2, var3, this.mc.thePlayer);
-				if(var7.stackSize == 0) {
+				if (var7.stackSize == 0) {
 					var7.onItemDestroyedByUse(this.mc.thePlayer);
 					this.mc.thePlayer.destroyCurrentEquippedItem();
 				}
@@ -58,18 +58,19 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public void clickBlock(int var1, int var2, int var3, int var4) {
-		if(this.field_35649_k) {
+		if (this.field_35649_k) {
 			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, var1, var2, var3, var4));
 			PlayerControllerTest.func_35644_a(this.mc, this, var1, var2, var3, var4);
 			this.blockHitDelay = 5;
-		} else if(!this.isHittingBlock || var1 != this.currentBlockX || var2 != this.currentBlockY || var3 != this.currentblockZ) {
+		} else if (!this.isHittingBlock || var1 != this.currentBlockX || var2 != this.currentBlockY
+				|| var3 != this.currentblockZ) {
 			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, var1, var2, var3, var4));
 			int var5 = this.mc.theWorld.getBlockId(var1, var2, var3);
-			if(var5 > 0 && this.curBlockDamageMP == 0.0F) {
+			if (var5 > 0 && this.curBlockDamageMP == 0.0F) {
 				Block.blocksList[var5].onBlockClicked(this.mc.theWorld, var1, var2, var3, this.mc.thePlayer);
 			}
 
-			if(var5 > 0 && Block.blocksList[var5].blockStrength(this.mc.thePlayer) >= 1.0F) {
+			if (var5 > 0 && Block.blocksList[var5].blockStrength(this.mc.thePlayer) >= 1.0F) {
 				this.sendBlockRemoved(var1, var2, var3, var4);
 			} else {
 				this.isHittingBlock = true;
@@ -91,28 +92,29 @@ public class PlayerControllerMP extends PlayerController {
 
 	public void sendBlockRemoving(int var1, int var2, int var3, int var4) {
 		this.syncCurrentPlayItem();
-		if(this.blockHitDelay > 0) {
+		if (this.blockHitDelay > 0) {
 			--this.blockHitDelay;
-		} else if(this.field_35649_k) {
+		} else if (this.field_35649_k) {
 			this.blockHitDelay = 5;
 			this.netClientHandler.addToSendQueue(new Packet14BlockDig(0, var1, var2, var3, var4));
 			PlayerControllerTest.func_35644_a(this.mc, this, var1, var2, var3, var4);
 		} else {
-			if(var1 == this.currentBlockX && var2 == this.currentBlockY && var3 == this.currentblockZ) {
+			if (var1 == this.currentBlockX && var2 == this.currentBlockY && var3 == this.currentblockZ) {
 				int var5 = this.mc.theWorld.getBlockId(var1, var2, var3);
-				if(var5 == 0) {
+				if (var5 == 0) {
 					this.isHittingBlock = false;
 					return;
 				}
 
 				Block var6 = Block.blocksList[var5];
 				this.curBlockDamageMP += var6.blockStrength(this.mc.thePlayer);
-				if(this.field_9441_h % 4.0F == 0.0F && var6 != null) {
-					this.mc.sndManager.playSound(var6.stepSound.stepSoundDir2(), (float)var1 + 0.5F, (float)var2 + 0.5F, (float)var3 + 0.5F, (var6.stepSound.getVolume() + 1.0F) / 8.0F, var6.stepSound.getPitch() * 0.5F);
+				if (this.field_9441_h % 4.0F == 0.0F && var6 != null) {
+					this.mc.sndManager.playSound(var6.stepSound.stepSoundDir2(), (float) var1 + 0.5F, (float) var2 + 0.5F,
+							(float) var3 + 0.5F, (var6.stepSound.getVolume() + 1.0F) / 8.0F, var6.stepSound.getPitch() * 0.5F);
 				}
 
 				++this.field_9441_h;
-				if(this.curBlockDamageMP >= 1.0F) {
+				if (this.curBlockDamageMP >= 1.0F) {
 					this.isHittingBlock = false;
 					this.netClientHandler.addToSendQueue(new Packet14BlockDig(2, var1, var2, var3, var4));
 					this.sendBlockRemoved(var1, var2, var3, var4);
@@ -129,7 +131,7 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public void setPartialTime(float var1) {
-		if(this.curBlockDamageMP <= 0.0F) {
+		if (this.curBlockDamageMP <= 0.0F) {
 			this.mc.ingameGUI.damageGuiPartialTime = 0.0F;
 			this.mc.renderGlobal.damagePartialTime = 0.0F;
 		} else {
@@ -156,7 +158,7 @@ public class PlayerControllerMP extends PlayerController {
 
 	private void syncCurrentPlayItem() {
 		int var1 = this.mc.thePlayer.inventory.currentItem;
-		if(var1 != this.currentPlayerItem) {
+		if (var1 != this.currentPlayerItem) {
 			this.currentPlayerItem = var1;
 			this.netClientHandler.addToSendQueue(new Packet16BlockItemSwitch(this.currentPlayerItem));
 		}
@@ -167,11 +169,11 @@ public class PlayerControllerMP extends PlayerController {
 		this.syncCurrentPlayItem();
 		this.netClientHandler.addToSendQueue(new Packet15Place(var4, var5, var6, var7, var1.inventory.getCurrentItem()));
 		int var8 = var2.getBlockId(var4, var5, var6);
-		if(var8 > 0 && Block.blocksList[var8].blockActivated(var2, var4, var5, var6, var1)) {
+		if (var8 > 0 && Block.blocksList[var8].blockActivated(var2, var4, var5, var6, var1)) {
 			return true;
-		} else if(var3 == null) {
+		} else if (var3 == null) {
 			return false;
-		} else if(this.field_35649_k) {
+		} else if (this.field_35649_k) {
 			int var9 = var3.getItemDamage();
 			int var10 = var3.stackSize;
 			boolean var11 = var3.useItem(var1, var2, var4, var5, var6, var7);
@@ -214,11 +216,11 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public void func_35637_a(ItemStack var1, int var2) {
-		if(this.field_35649_k) {
+		if (this.field_35649_k) {
 			int var3 = -1;
 			int var4 = 0;
 			int var5 = 0;
-			if(var1 != null) {
+			if (var1 != null) {
 				var3 = var1.itemID;
 				var4 = var1.stackSize > 0 ? var1.stackSize : 1;
 				var5 = var1.getItemDamage();
@@ -230,14 +232,15 @@ public class PlayerControllerMP extends PlayerController {
 	}
 
 	public void func_35639_a(ItemStack var1) {
-		if(this.field_35649_k && var1 != null) {
-			this.netClientHandler.addToSendQueue(new Packet107CreativeSetSlot(-1, var1.itemID, var1.stackSize, var1.getItemDamage()));
+		if (this.field_35649_k && var1 != null) {
+			this.netClientHandler
+					.addToSendQueue(new Packet107CreativeSetSlot(-1, var1.itemID, var1.stackSize, var1.getItemDamage()));
 		}
 
 	}
 
 	public void func_20086_a(int var1, EntityPlayer var2) {
-		if(var1 != -9999) {
+		if (var1 != -9999) {
 		}
 	}
 

@@ -18,7 +18,7 @@ final class J_JsonFieldNodeSelector extends J_LeafFunctor {
 	}
 
 	public J_JsonNode func_27064_b(Map var1) {
-		return (J_JsonNode)var1.get(this.field_27066_a);
+		return (J_JsonNode) var1.get(this.field_27066_a);
 	}
 
 	public String toString() {
@@ -26,10 +26,10 @@ final class J_JsonFieldNodeSelector extends J_LeafFunctor {
 	}
 
 	public Object typeSafeApplyTo(Object var1) {
-		return this.func_27064_b((Map)var1);
+		return this.func_27064_b((Map) var1);
 	}
 
 	public boolean matchsNode(Object var1) {
-		return this.func_27065_a((Map)var1);
+		return this.func_27065_a((Map) var1);
 	}
 }

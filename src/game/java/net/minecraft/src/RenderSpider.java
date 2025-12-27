@@ -13,9 +13,9 @@ public class RenderSpider extends RenderLiving {
 	}
 
 	protected boolean setSpiderEyeBrightness(EntitySpider var1, int var2, float var3) {
-		if(var2 != 0) {
+		if (var2 != 0) {
 			return false;
-		} else if(var2 != 0) {
+		} else if (var2 != 0) {
 			return false;
 		} else {
 			this.loadTexture("/mob/spider_eyes.png");
@@ -35,14 +35,14 @@ public class RenderSpider extends RenderLiving {
 	}
 
 	protected void preRenderCallback(EntityLiving var1, float var2) {
-		this.func_35446_a((EntitySpider)var1, var2);
+		this.func_35446_a((EntitySpider) var1, var2);
 	}
 
 	protected float getDeathMaxRotation(EntityLiving var1) {
-		return this.setSpiderDeathMaxRotation((EntitySpider)var1);
+		return this.setSpiderDeathMaxRotation((EntitySpider) var1);
 	}
 
 	protected boolean shouldRenderPass(EntityLiving var1, int var2, float var3) {
-		return this.setSpiderEyeBrightness((EntitySpider)var1, var2, var3);
+		return this.setSpiderEyeBrightness((EntitySpider) var1, var2, var3);
 	}
 }

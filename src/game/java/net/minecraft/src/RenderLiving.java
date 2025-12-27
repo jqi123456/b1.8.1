@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.lax1dude.eaglercraft.Random;
+import net.lax1dude.eaglercraft.opengl.OpenGlHelper;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -22,12 +23,12 @@ public class RenderLiving extends Render {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		this.mainModel.onGround = this.renderSwingProgress(var1, var9);
-		if(this.renderPassModel != null) {
+		if (this.renderPassModel != null) {
 			this.renderPassModel.onGround = this.mainModel.onGround;
 		}
 
 		this.mainModel.isRiding = var1.isRiding();
-		if(this.renderPassModel != null) {
+		if (this.renderPassModel != null) {
 			this.renderPassModel.isRiding = this.mainModel.isRiding;
 		}
 
@@ -45,7 +46,7 @@ public class RenderLiving extends Render {
 			GL11.glTranslatef(0.0F, -24.0F * var14 - 0.0078125F, 0.0F);
 			float var15 = var1.field_705_Q + (var1.field_704_R - var1.field_705_Q) * var9;
 			float var16 = var1.field_703_S - var1.field_704_R * (1.0F - var9);
-			if(var15 > 1.0F) {
+			if (var15 > 1.0F) {
 				var15 = 1.0F;
 			}
 
@@ -54,8 +55,8 @@ public class RenderLiving extends Render {
 			this.mainModel.setLivingAnimations(var1, var16, var15, var9);
 			this.mainModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 
-			for(int var17 = 0; var17 < 4; ++var17) {
-				if(this.shouldRenderPass(var1, var17, var9)) {
+			for (int var17 = 0; var17 < 4; ++var17) {
+				if (this.shouldRenderPass(var1, var17, var9)) {
 					this.renderPassModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -65,35 +66,37 @@ public class RenderLiving extends Render {
 			this.renderEquippedItems(var1, var9);
 			float var25 = var1.getEntityBrightness(var9);
 			int var18 = this.getColorMultiplier(var1, var25, var9);
+			OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			if((var18 >> 24 & 255) > 0 || var1.hurtTime > 0 || var1.deathTime > 0) {
+			OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+			if ((var18 >> 24 & 255) > 0 || var1.hurtTime > 0 || var1.deathTime > 0) {
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDisable(GL11.GL_ALPHA_TEST);
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glDepthFunc(GL11.GL_EQUAL);
-				if(var1.hurtTime > 0 || var1.deathTime > 0) {
+				if (var1.hurtTime > 0 || var1.deathTime > 0) {
 					GL11.glColor4f(var25, 0.0F, 0.0F, 0.4F);
 					this.mainModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 
-					for(int var19 = 0; var19 < 4; ++var19) {
-						if(this.inheritRenderPass(var1, var19, var9)) {
+					for (int var19 = 0; var19 < 4; ++var19) {
+						if (this.inheritRenderPass(var1, var19, var9)) {
 							GL11.glColor4f(var25, 0.0F, 0.0F, 0.4F);
 							this.renderPassModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 						}
 					}
 				}
 
-				if((var18 >> 24 & 255) > 0) {
-					float var26 = (float)(var18 >> 16 & 255) / 255.0F;
-					float var20 = (float)(var18 >> 8 & 255) / 255.0F;
-					float var21 = (float)(var18 & 255) / 255.0F;
-					float var22 = (float)(var18 >> 24 & 255) / 255.0F;
+				if ((var18 >> 24 & 255) > 0) {
+					float var26 = (float) (var18 >> 16 & 255) / 255.0F;
+					float var20 = (float) (var18 >> 8 & 255) / 255.0F;
+					float var21 = (float) (var18 & 255) / 255.0F;
+					float var22 = (float) (var18 >> 24 & 255) / 255.0F;
 					GL11.glColor4f(var26, var20, var21, var22);
 					this.mainModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 
-					for(int var23 = 0; var23 < 4; ++var23) {
-						if(this.inheritRenderPass(var1, var23, var9)) {
+					for (int var23 = 0; var23 < 4; ++var23) {
+						if (this.inheritRenderPass(var1, var23, var9)) {
 							GL11.glColor4f(var26, var20, var21, var22);
 							this.renderPassModel.render(var1, var16, var15, var13, var11 - var10, var12, var14);
 						}
@@ -111,22 +114,25 @@ public class RenderLiving extends Render {
 			var24.printStackTrace();
 		}
 
+		OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPopMatrix();
 		this.passSpecialRender(var1, var2, var4, var6);
 	}
 
 	protected void renderLivingAt(EntityLiving var1, double var2, double var4, double var6) {
-		GL11.glTranslatef((float)var2, (float)var4, (float)var6);
+		GL11.glTranslatef((float) var2, (float) var4, (float) var6);
 	}
 
 	protected void rotateCorpse(EntityLiving var1, float var2, float var3, float var4) {
 		GL11.glRotatef(180.0F - var3, 0.0F, 1.0F, 0.0F);
-		if(var1.deathTime > 0) {
-			float var5 = ((float)var1.deathTime + var4 - 1.0F) / 20.0F * 1.6F;
+		if (var1.deathTime > 0) {
+			float var5 = ((float) var1.deathTime + var4 - 1.0F) / 20.0F * 1.6F;
 			var5 = MathHelper.sqrt_float(var5);
-			if(var5 > 1.0F) {
+			if (var5 > 1.0F) {
 				var5 = 1.0F;
 			}
 
@@ -140,15 +146,15 @@ public class RenderLiving extends Render {
 	}
 
 	protected float handleRotationFloat(EntityLiving var1, float var2) {
-		return (float)var1.ticksExisted + var2;
+		return (float) var1.ticksExisted + var2;
 	}
 
 	protected void renderEquippedItems(EntityLiving var1, float var2) {
-		if(var1.field_35172_bP > 0) {
+		if (var1.field_35172_bP > 0) {
 			EntityArrow var3 = new EntityArrow(var1.worldObj, var1.posX, var1.posY, var1.posZ);
-			Random var4 = new Random((long)var1.entityId);
+			Random var4 = new Random((long) var1.entityId);
 
-			for(int var5 = 0; var5 < var1.field_35172_bP; ++var5) {
+			for (int var5 = 0; var5 < var1.field_35172_bP; ++var5) {
 				GL11.glPushMatrix();
 				ModelRenderer var6 = this.mainModel.func_35393_a(var4);
 				var6.postRender(1.0F / 16.0F);
@@ -166,8 +172,10 @@ public class RenderLiving extends Render {
 				var8 *= -1.0F;
 				var9 *= -1.0F;
 				float var13 = MathHelper.sqrt_float(var7 * var7 + var9 * var9);
-				var3.prevRotationYaw = var3.rotationYaw = (float)(Math.atan2((double)var7, (double)var9) * 180.0D / (double)((float)Math.PI));
-				var3.prevRotationPitch = var3.rotationPitch = (float)(Math.atan2((double)var8, (double)var13) * 180.0D / (double)((float)Math.PI));
+				var3.prevRotationYaw = var3.rotationYaw = (float) (Math.atan2((double) var7, (double) var9) * 180.0D
+						/ (double) ((float) Math.PI));
+				var3.prevRotationPitch = var3.rotationPitch = (float) (Math.atan2((double) var8, (double) var13) * 180.0D
+						/ (double) ((float) Math.PI));
 				double var14 = 0.0D;
 				double var16 = 0.0D;
 				double var18 = 0.0D;
@@ -199,19 +207,19 @@ public class RenderLiving extends Render {
 	}
 
 	protected void passSpecialRender(EntityLiving var1, double var2, double var4, double var6) {
-		if(Minecraft.isDebugInfoEnabled()) {
+		if (Minecraft.isDebugInfoEnabled()) {
 		}
 
 	}
 
 	protected void renderLivingLabel(EntityLiving var1, String var2, double var3, double var5, double var7, int var9) {
 		float var10 = var1.getDistanceToEntity(this.renderManager.livingPlayer);
-		if(var10 <= (float)var9) {
+		if (var10 <= (float) var9) {
 			FontRenderer var11 = this.getFontRendererFromRenderManager();
 			float var12 = 1.6F;
-			float var13 = (float)(1.0D / 60.0D) * var12;
+			float var13 = (float) (1.0D / 60.0D) * var12;
 			GL11.glPushMatrix();
-			GL11.glTranslatef((float)var3 + 0.0F, (float)var5 + 2.3F, (float)var7);
+			GL11.glTranslatef((float) var3 + 0.0F, (float) var5 + 2.3F, (float) var7);
 			GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
@@ -223,7 +231,7 @@ public class RenderLiving extends Render {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			Tessellator var14 = Tessellator.instance;
 			byte var15 = 0;
-			if(var2.equals("deadmau5")) {
+			if (var2.equals("deadmau5")) {
 				var15 = -10;
 			}
 
@@ -231,10 +239,10 @@ public class RenderLiving extends Render {
 			var14.startDrawingQuads();
 			int var16 = var11.getStringWidth(var2) / 2;
 			var14.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-			var14.addVertex((double)(-var16 - 1), (double)(-1 + var15), 0.0D);
-			var14.addVertex((double)(-var16 - 1), (double)(8 + var15), 0.0D);
-			var14.addVertex((double)(var16 + 1), (double)(8 + var15), 0.0D);
-			var14.addVertex((double)(var16 + 1), (double)(-1 + var15), 0.0D);
+			var14.addVertex((double) (-var16 - 1), (double) (-1 + var15), 0.0D);
+			var14.addVertex((double) (-var16 - 1), (double) (8 + var15), 0.0D);
+			var14.addVertex((double) (var16 + 1), (double) (8 + var15), 0.0D);
+			var14.addVertex((double) (var16 + 1), (double) (-1 + var15), 0.0D);
 			var14.draw();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			var11.drawString(var2, -var11.getStringWidth(var2) / 2, var15, 553648127);
@@ -249,6 +257,6 @@ public class RenderLiving extends Render {
 	}
 
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
-		this.doRenderLiving((EntityLiving)var1, var2, var4, var6, var8, var9);
+		this.doRenderLiving((EntityLiving) var1, var2, var4, var6, var8, var9);
 	}
 }

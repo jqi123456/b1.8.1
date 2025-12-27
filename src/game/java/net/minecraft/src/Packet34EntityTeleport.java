@@ -20,8 +20,8 @@ public class Packet34EntityTeleport extends Packet {
 		this.xPosition = MathHelper.floor_double(var1.posX * 32.0D);
 		this.yPosition = MathHelper.floor_double(var1.posY * 32.0D);
 		this.zPosition = MathHelper.floor_double(var1.posZ * 32.0D);
-		this.yaw = (byte)((int)(var1.rotationYaw * 256.0F / 360.0F));
-		this.pitch = (byte)((int)(var1.rotationPitch * 256.0F / 360.0F));
+		this.yaw = (byte) ((int) (var1.rotationYaw * 256.0F / 360.0F));
+		this.pitch = (byte) ((int) (var1.rotationPitch * 256.0F / 360.0F));
 	}
 
 	public void readPacketData(DataInputStream var1) throws IOException {
@@ -29,8 +29,8 @@ public class Packet34EntityTeleport extends Packet {
 		this.xPosition = var1.readInt();
 		this.yPosition = var1.readInt();
 		this.zPosition = var1.readInt();
-		this.yaw = (byte)var1.read();
-		this.pitch = (byte)var1.read();
+		this.yaw = (byte) var1.read();
+		this.pitch = (byte) var1.read();
 	}
 
 	public void writePacketData(DataOutputStream var1) throws IOException {

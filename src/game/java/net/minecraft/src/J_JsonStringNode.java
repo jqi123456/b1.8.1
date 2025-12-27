@@ -7,7 +7,7 @@ public final class J_JsonStringNode extends J_JsonNode implements Comparable {
 	private final String field_27224_a;
 
 	J_JsonStringNode(String var1) {
-		if(var1 == null) {
+		if (var1 == null) {
 			throw new NullPointerException("Attempt to construct a JsonString with a null value.");
 		} else {
 			this.field_27224_a = var1;
@@ -31,10 +31,10 @@ public final class J_JsonStringNode extends J_JsonNode implements Comparable {
 	}
 
 	public boolean equals(Object var1) {
-		if(this == var1) {
+		if (this == var1) {
 			return true;
-		} else if(var1 != null && this.getClass() == var1.getClass()) {
-			J_JsonStringNode var2 = (J_JsonStringNode)var1;
+		} else if (var1 != null && this.getClass() == var1.getClass()) {
+			J_JsonStringNode var2 = (J_JsonStringNode) var1;
 			return this.field_27224_a.equals(var2.field_27224_a);
 		} else {
 			return false;
@@ -54,6 +54,6 @@ public final class J_JsonStringNode extends J_JsonNode implements Comparable {
 	}
 
 	public int compareTo(Object var1) {
-		return this.func_27223_a((J_JsonStringNode)var1);
+		return this.func_27223_a((J_JsonStringNode) var1);
 	}
 }

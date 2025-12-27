@@ -20,10 +20,10 @@ final class J_JsonArrayNodeSelector extends J_LeafFunctor {
 	}
 
 	public Object typeSafeApplyTo(Object var1) {
-		return this.typeSafeApplyTo((J_JsonNode)var1);
+		return this.typeSafeApplyTo((J_JsonNode) var1);
 	}
 
 	public boolean matchsNode(Object var1) {
-		return this.matchsNode_((J_JsonNode)var1);
+		return this.matchsNode_((J_JsonNode) var1);
 	}
 }

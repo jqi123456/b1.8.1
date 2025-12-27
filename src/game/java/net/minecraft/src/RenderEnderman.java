@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderEnderman extends RenderLiving {
-	private ModelEnderman field_35444_c = (ModelEnderman)this.mainModel;
+	private ModelEnderman field_35444_c = (ModelEnderman) this.mainModel;
 	private Random field_35445_h = new Random();
 
 	public RenderEnderman() {
@@ -16,7 +16,7 @@ public class RenderEnderman extends RenderLiving {
 	public void func_35442_a(EntityEnderman var1, double var2, double var4, double var6, float var8, float var9) {
 		this.field_35444_c.field_35407_a = var1.func_35176_r() > 0;
 		this.field_35444_c.field_35406_b = var1.field_35187_a;
-		if(var1.field_35187_a) {
+		if (var1.field_35187_a) {
 			double var10 = 0.02D;
 			var2 += this.field_35445_h.nextGaussian() * var10;
 			var6 += this.field_35445_h.nextGaussian() * var10;
@@ -27,7 +27,7 @@ public class RenderEnderman extends RenderLiving {
 
 	protected void func_35443_a(EntityEnderman var1, float var2) {
 		super.renderEquippedItems(var1, var2);
-		if(var1.func_35176_r() > 0) {
+		if (var1.func_35176_r() > 0) {
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glPushMatrix();
 			float var3 = 0.5F;
@@ -50,7 +50,7 @@ public class RenderEnderman extends RenderLiving {
 	}
 
 	protected boolean func_35441_a(EntityEnderman var1, int var2, float var3) {
-		if(var2 != 0) {
+		if (var2 != 0) {
 			return false;
 		} else {
 			this.loadTexture("/mob/enderman_eyes.png");
@@ -70,18 +70,18 @@ public class RenderEnderman extends RenderLiving {
 	}
 
 	protected boolean shouldRenderPass(EntityLiving var1, int var2, float var3) {
-		return this.func_35441_a((EntityEnderman)var1, var2, var3);
+		return this.func_35441_a((EntityEnderman) var1, var2, var3);
 	}
 
 	protected void renderEquippedItems(EntityLiving var1, float var2) {
-		this.func_35443_a((EntityEnderman)var1, var2);
+		this.func_35443_a((EntityEnderman) var1, var2);
 	}
 
 	public void doRenderLiving(EntityLiving var1, double var2, double var4, double var6, float var8, float var9) {
-		this.func_35442_a((EntityEnderman)var1, var2, var4, var6, var8, var9);
+		this.func_35442_a((EntityEnderman) var1, var2, var4, var6, var8, var9);
 	}
 
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
-		this.func_35442_a((EntityEnderman)var1, var2, var4, var6, var8, var9);
+		this.func_35442_a((EntityEnderman) var1, var2, var4, var6, var8, var9);
 	}
 }

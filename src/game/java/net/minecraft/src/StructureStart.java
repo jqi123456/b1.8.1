@@ -16,9 +16,9 @@ public abstract class StructureStart {
 	public void func_35711_a(World var1, Random var2, StructureBoundingBox var3) {
 		Iterator var4 = this.field_35717_a.iterator();
 
-		while(var4.hasNext()) {
-			StructureComponent var5 = (StructureComponent)var4.next();
-			if(var5.func_35021_b().func_35740_a(var3) && !var5.func_35023_a(var1, var2, var3)) {
+		while (var4.hasNext()) {
+			StructureComponent var5 = (StructureComponent) var4.next();
+			if (var5.func_35021_b().func_35740_a(var3) && !var5.func_35023_a(var1, var2, var3)) {
 				var4.remove();
 			}
 		}
@@ -29,8 +29,8 @@ public abstract class StructureStart {
 		this.field_35716_b = StructureBoundingBox.func_35741_a();
 		Iterator var1 = this.field_35717_a.iterator();
 
-		while(var1.hasNext()) {
-			StructureComponent var2 = (StructureComponent)var1.next();
+		while (var1.hasNext()) {
+			StructureComponent var2 = (StructureComponent) var1.next();
 			this.field_35716_b.func_35738_b(var2.func_35021_b());
 		}
 
@@ -40,7 +40,7 @@ public abstract class StructureStart {
 		var1.getClass();
 		int var4 = 63 - var3;
 		int var5 = this.field_35716_b.func_35743_c() + 1;
-		if(var5 < var4) {
+		if (var5 < var4) {
 			var5 += var2.nextInt(var4 - var5);
 		}
 
@@ -48,8 +48,8 @@ public abstract class StructureStart {
 		this.field_35716_b.func_35745_a(0, var6, 0);
 		Iterator var7 = this.field_35717_a.iterator();
 
-		while(var7.hasNext()) {
-			StructureComponent var8 = (StructureComponent)var7.next();
+		while (var7.hasNext()) {
+			StructureComponent var8 = (StructureComponent) var7.next();
 			var8.func_35021_b().func_35745_a(0, var6, 0);
 		}
 

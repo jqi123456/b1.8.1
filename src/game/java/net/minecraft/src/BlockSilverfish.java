@@ -13,13 +13,14 @@ public class BlockSilverfish extends Block {
 	}
 
 	public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
-		return var2 == 1 ? Block.cobblestone.blockIndexInTexture : (var2 == 2 ? Block.field_35285_bn.blockIndexInTexture : Block.stone.blockIndexInTexture);
+		return var2 == 1 ? Block.cobblestone.blockIndexInTexture
+				: (var2 == 2 ? Block.field_35285_bn.blockIndexInTexture : Block.stone.blockIndexInTexture);
 	}
 
 	public void onBlockDestroyedByPlayer(World var1, int var2, int var3, int var4, int var5) {
-		if(!var1.multiplayerWorld) {
+		if (!var1.multiplayerWorld) {
 			EntitySilverfish var6 = new EntitySilverfish(var1);
-			var6.setLocationAndAngles((double)var2 + 0.5D, (double)var3, (double)var4 + 0.5D, 0.0F, 0.0F);
+			var6.setLocationAndAngles((double) var2 + 0.5D, (double) var3, (double) var4 + 0.5D, 0.0F, 0.0F);
 			var1.entityJoinedWorld(var6);
 			var6.spawnExplosionParticle();
 		}

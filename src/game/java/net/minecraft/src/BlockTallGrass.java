@@ -10,7 +10,9 @@ public class BlockTallGrass extends BlockFlower {
 	}
 
 	public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
-		return var2 == 1 ? this.blockIndexInTexture : (var2 == 2 ? this.blockIndexInTexture + 16 + 1 : (var2 == 0 ? this.blockIndexInTexture + 16 : this.blockIndexInTexture));
+		return var2 == 1 ? this.blockIndexInTexture
+				: (var2 == 2 ? this.blockIndexInTexture + 16 + 1
+						: (var2 == 0 ? this.blockIndexInTexture + 16 : this.blockIndexInTexture));
 	}
 
 	public int func_35274_i() {
@@ -25,16 +27,16 @@ public class BlockTallGrass extends BlockFlower {
 
 	public int colorMultiplier(IBlockAccess var1, int var2, int var3, int var4) {
 		int var5 = var1.getBlockMetadata(var2, var3, var4);
-		if(var5 == 0) {
+		if (var5 == 0) {
 			return 16777215;
 		} else {
-			long var6 = (long)(var2 * 3129871 + var4 * 6129781 + var3);
+			long var6 = (long) (var2 * 3129871 + var4 * 6129781 + var3);
 			var6 = var6 * var6 * 42317861L + var6 * 11L;
-			var2 = (int)((long)var2 + ((var6 >> 14 & 31L) - 16L));
-			var3 = (int)((long)var3 + ((var6 >> 19 & 31L) - 16L));
-			var4 = (int)((long)var4 + ((var6 >> 24 & 31L) - 16L));
-			double var8 = (double)var1.getWorldChunkManager().func_35554_b(var2, var4);
-			double var10 = (double)var1.getWorldChunkManager().func_35558_c(var2, var4);
+			var2 = (int) ((long) var2 + ((var6 >> 14 & 31L) - 16L));
+			var3 = (int) ((long) var3 + ((var6 >> 19 & 31L) - 16L));
+			var4 = (int) ((long) var4 + ((var6 >> 24 & 31L) - 16L));
+			double var8 = (double) var1.getWorldChunkManager().func_35554_b(var2, var4);
+			double var10 = (double) var1.getWorldChunkManager().func_35558_c(var2, var4);
 			return ColorizerGrass.getGrassColor(var8, var10);
 		}
 	}
@@ -44,7 +46,8 @@ public class BlockTallGrass extends BlockFlower {
 	}
 
 	public void harvestBlock(World var1, EntityPlayer var2, int var3, int var4, int var5, int var6) {
-		if(!var1.multiplayerWorld && var2.getCurrentEquippedItem() != null && var2.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex) {
+		if (!var1.multiplayerWorld && var2.getCurrentEquippedItem() != null
+				&& var2.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex) {
 			var2.addStat(StatList.mineBlockStatArray[this.blockID], 1);
 			this.dropBlockAsItem_do(var1, var3, var4, var5, new ItemStack(Block.tallGrass, 1, var6));
 		} else {

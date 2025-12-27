@@ -26,11 +26,11 @@ public class EntitySkeleton extends EntityMob {
 
 	public void onDeath(DamageSource var1) {
 		super.onDeath(var1);
-		if(var1.func_35526_e() instanceof EntityArrow && var1.func_35532_a() instanceof EntityPlayer) {
-			EntityPlayer var2 = (EntityPlayer)var1.func_35532_a();
+		if (var1.func_35526_e() instanceof EntityArrow && var1.func_35532_a() instanceof EntityPlayer) {
+			EntityPlayer var2 = (EntityPlayer) var1.func_35532_a();
 			double var3 = var2.posX - this.posX;
 			double var5 = var2.posZ - this.posZ;
-			if(var3 * var3 + var5 * var5 >= 2500.0D) {
+			if (var3 * var3 + var5 * var5 >= 2500.0D) {
 				var2.triggerAchievement(AchievementList.field_35608_v);
 			}
 		}
@@ -38,9 +38,11 @@ public class EntitySkeleton extends EntityMob {
 	}
 
 	public void onLivingUpdate() {
-		if(this.worldObj.isDaytime() && !this.worldObj.multiplayerWorld) {
+		if (this.worldObj.isDaytime() && !this.worldObj.multiplayerWorld) {
 			float var1 = this.getEntityBrightness(1.0F);
-			if(var1 > 0.5F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
+			if (var1 > 0.5F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX),
+					MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))
+					&& this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
 				this.fire = 300;
 			}
 		}
@@ -49,20 +51,20 @@ public class EntitySkeleton extends EntityMob {
 	}
 
 	protected void attackEntity(Entity var1, float var2) {
-		if(var2 < 10.0F) {
+		if (var2 < 10.0F) {
 			double var3 = var1.posX - this.posX;
 			double var5 = var1.posZ - this.posZ;
-			if(this.attackTime == 0) {
+			if (this.attackTime == 0) {
 				EntityArrow var7 = new EntityArrow(this.worldObj, this, 1.0F);
-				double var8 = var1.posY + (double)var1.getEyeHeight() - (double)0.7F - var7.posY;
+				double var8 = var1.posY + (double) var1.getEyeHeight() - (double) 0.7F - var7.posY;
 				float var10 = MathHelper.sqrt_double(var3 * var3 + var5 * var5) * 0.2F;
 				this.worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this.rand.nextFloat() * 0.4F + 0.8F));
 				this.worldObj.entityJoinedWorld(var7);
-				var7.setArrowHeading(var3, var8 + (double)var10, var5, 1.6F, 12.0F);
+				var7.setArrowHeading(var3, var8 + (double) var10, var5, 1.6F, 12.0F);
 				this.attackTime = 60;
 			}
 
-			this.rotationYaw = (float)(Math.atan2(var5, var3) * 180.0D / (double)((float)Math.PI)) - 90.0F;
+			this.rotationYaw = (float) (Math.atan2(var5, var3) * 180.0D / (double) ((float) Math.PI)) - 90.0F;
 			this.hasAttacked = true;
 		}
 
@@ -84,13 +86,13 @@ public class EntitySkeleton extends EntityMob {
 		int var2 = this.rand.nextInt(3);
 
 		int var3;
-		for(var3 = 0; var3 < var2; ++var3) {
+		for (var3 = 0; var3 < var2; ++var3) {
 			this.dropItem(Item.arrow.shiftedIndex, 1);
 		}
 
 		var2 = this.rand.nextInt(3);
 
-		for(var3 = 0; var3 < var2; ++var3) {
+		for (var3 = 0; var3 < var2; ++var3) {
 			this.dropItem(Item.bone.shiftedIndex, 1);
 		}
 

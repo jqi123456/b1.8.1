@@ -38,7 +38,8 @@ public class SaveFormatComparator implements Comparable {
 	}
 
 	public int func_22160_a(SaveFormatComparator var1) {
-		return this.field_22169_c < var1.field_22169_c ? 1 : (this.field_22169_c > var1.field_22169_c ? -1 : this.fileName.compareTo(var1.fileName));
+		return this.field_22169_c < var1.field_22169_c ? 1
+				: (this.field_22169_c > var1.field_22169_c ? -1 : this.fileName.compareTo(var1.fileName));
 	}
 
 	public int func_35719_f() {
@@ -46,6 +47,6 @@ public class SaveFormatComparator implements Comparable {
 	}
 
 	public int compareTo(Object var1) {
-		return this.func_22160_a((SaveFormatComparator)var1);
+		return this.func_22160_a((SaveFormatComparator) var1);
 	}
 }

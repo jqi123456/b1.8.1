@@ -38,16 +38,16 @@ public class CompressedStreamTools {
 
 	public static void func_35621_a(NBTTagCompound var0, VFile2 var1) throws IOException {
 		VFile2 var2 = new VFile2(var1.getPath() + "_tmp");
-		if(var2.exists()) {
+		if (var2.exists()) {
 			var2.delete();
 		}
 
 		func_35620_b(var0, var2);
-		if(var1.exists()) {
+		if (var1.exists()) {
 			var1.delete();
 		}
 
-		if(var1.exists()) {
+		if (var1.exists()) {
 			throw new IOException("Failed to delete " + var1);
 		} else {
 			var2.renameTo(var1);
@@ -66,7 +66,7 @@ public class CompressedStreamTools {
 	}
 
 	public static NBTTagCompound func_35622_a(VFile2 var0) throws IOException {
-		if(!var0.exists()) {
+		if (!var0.exists()) {
 			return null;
 		} else {
 			DataInputStream var1 = new DataInputStream(var0.getInputStream());
@@ -84,8 +84,8 @@ public class CompressedStreamTools {
 
 	public static NBTTagCompound func_1141_a(DataInput var0) throws IOException {
 		NBTBase var1 = NBTBase.readTag(var0);
-		if(var1 instanceof NBTTagCompound) {
-			return (NBTTagCompound)var1;
+		if (var1 instanceof NBTTagCompound) {
+			return (NBTTagCompound) var1;
 		} else {
 			throw new IOException("Root tag must be a named compound tag");
 		}

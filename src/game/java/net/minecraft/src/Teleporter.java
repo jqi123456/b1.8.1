@@ -6,7 +6,7 @@ public class Teleporter {
 	private Random random = new Random();
 
 	public void placeInPortal(World var1, Entity var2) {
-		if(!this.placeInExistingPortal(var1, var2)) {
+		if (!this.placeInExistingPortal(var1, var2)) {
 			this.createPortal(var1, var2);
 			this.placeInExistingPortal(var1, var2);
 		}
@@ -22,22 +22,22 @@ public class Teleporter {
 		int var10 = MathHelper.floor_double(var2.posZ);
 
 		double var18;
-		for(int var11 = var9 - var3; var11 <= var9 + var3; ++var11) {
-			double var12 = (double)var11 + 0.5D - var2.posX;
+		for (int var11 = var9 - var3; var11 <= var9 + var3; ++var11) {
+			double var12 = (double) var11 + 0.5D - var2.posX;
 
-			for(int var14 = var10 - var3; var14 <= var10 + var3; ++var14) {
-				double var15 = (double)var14 + 0.5D - var2.posZ;
+			for (int var14 = var10 - var3; var14 <= var10 + var3; ++var14) {
+				double var15 = (double) var14 + 0.5D - var2.posZ;
 				var1.getClass();
 
-				for(int var17 = 128 - 1; var17 >= 0; --var17) {
-					if(var1.getBlockId(var11, var17, var14) == Block.portal.blockID) {
-						while(var1.getBlockId(var11, var17 - 1, var14) == Block.portal.blockID) {
+				for (int var17 = 128 - 1; var17 >= 0; --var17) {
+					if (var1.getBlockId(var11, var17, var14) == Block.portal.blockID) {
+						while (var1.getBlockId(var11, var17 - 1, var14) == Block.portal.blockID) {
 							--var17;
 						}
 
-						var18 = (double)var17 + 0.5D - var2.posY;
+						var18 = (double) var17 + 0.5D - var2.posY;
 						double var20 = var12 * var12 + var18 * var18 + var15 * var15;
-						if(var4 < 0.0D || var20 < var4) {
+						if (var4 < 0.0D || var20 < var4) {
 							var4 = var20;
 							var6 = var11;
 							var7 = var17;
@@ -48,23 +48,23 @@ public class Teleporter {
 			}
 		}
 
-		if(var4 >= 0.0D) {
-			double var22 = (double)var6 + 0.5D;
-			double var16 = (double)var7 + 0.5D;
-			var18 = (double)var8 + 0.5D;
-			if(var1.getBlockId(var6 - 1, var7, var8) == Block.portal.blockID) {
+		if (var4 >= 0.0D) {
+			double var22 = (double) var6 + 0.5D;
+			double var16 = (double) var7 + 0.5D;
+			var18 = (double) var8 + 0.5D;
+			if (var1.getBlockId(var6 - 1, var7, var8) == Block.portal.blockID) {
 				var22 -= 0.5D;
 			}
 
-			if(var1.getBlockId(var6 + 1, var7, var8) == Block.portal.blockID) {
+			if (var1.getBlockId(var6 + 1, var7, var8) == Block.portal.blockID) {
 				var22 += 0.5D;
 			}
 
-			if(var1.getBlockId(var6, var7, var8 - 1) == Block.portal.blockID) {
+			if (var1.getBlockId(var6, var7, var8 - 1) == Block.portal.blockID) {
 				var18 -= 0.5D;
 			}
 
-			if(var1.getBlockId(var6, var7, var8 + 1) == Block.portal.blockID) {
+			if (var1.getBlockId(var6, var7, var8 + 1) == Block.portal.blockID) {
 				var18 += 0.5D;
 			}
 
@@ -103,44 +103,44 @@ public class Teleporter {
 		int var28;
 		double var32;
 		double var33;
-		for(var14 = var6 - var3; var14 <= var6 + var3; ++var14) {
-			var15 = (double)var14 + 0.5D - var2.posX;
+		for (var14 = var6 - var3; var14 <= var6 + var3; ++var14) {
+			var15 = (double) var14 + 0.5D - var2.posX;
 
-			for(var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
-				var18 = (double)var17 + 0.5D - var2.posZ;
+			for (var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
+				var18 = (double) var17 + 0.5D - var2.posZ;
 				var1.getClass();
 
-				label296:
-				for(var20 = 128 - 1; var20 >= 0; --var20) {
-					if(var1.isAirBlock(var14, var20, var17)) {
-						while(var20 > 0 && var1.isAirBlock(var14, var20 - 1, var17)) {
+				label296: for (var20 = 128 - 1; var20 >= 0; --var20) {
+					if (var1.isAirBlock(var14, var20, var17)) {
+						while (var20 > 0 && var1.isAirBlock(var14, var20 - 1, var17)) {
 							--var20;
 						}
 
-						for(var21 = var13; var21 < var13 + 4; ++var21) {
+						for (var21 = var13; var21 < var13 + 4; ++var21) {
 							var22 = var21 % 2;
 							var23 = 1 - var22;
-							if(var21 % 4 >= 2) {
+							if (var21 % 4 >= 2) {
 								var22 = -var22;
 								var23 = -var23;
 							}
 
-							for(var24 = 0; var24 < 3; ++var24) {
-								for(var25 = 0; var25 < 4; ++var25) {
-									for(var26 = -1; var26 < 4; ++var26) {
+							for (var24 = 0; var24 < 3; ++var24) {
+								for (var25 = 0; var25 < 4; ++var25) {
+									for (var26 = -1; var26 < 4; ++var26) {
 										var27 = var14 + (var25 - 1) * var22 + var24 * var23;
 										var28 = var20 + var26;
 										int var29 = var17 + (var25 - 1) * var23 - var24 * var22;
-										if(var26 < 0 && !var1.getBlockMaterial(var27, var28, var29).isSolid() || var26 >= 0 && !var1.isAirBlock(var27, var28, var29)) {
+										if (var26 < 0 && !var1.getBlockMaterial(var27, var28, var29).isSolid()
+												|| var26 >= 0 && !var1.isAirBlock(var27, var28, var29)) {
 											continue label296;
 										}
 									}
 								}
 							}
 
-							var32 = (double)var20 + 0.5D - var2.posY;
+							var32 = (double) var20 + 0.5D - var2.posY;
 							var33 = var15 * var15 + var32 * var32 + var18 * var18;
-							if(var4 < 0.0D || var33 < var4) {
+							if (var4 < 0.0D || var33 < var4) {
 								var4 = var33;
 								var9 = var14;
 								var10 = var20;
@@ -153,39 +153,39 @@ public class Teleporter {
 			}
 		}
 
-		if(var4 < 0.0D) {
-			for(var14 = var6 - var3; var14 <= var6 + var3; ++var14) {
-				var15 = (double)var14 + 0.5D - var2.posX;
+		if (var4 < 0.0D) {
+			for (var14 = var6 - var3; var14 <= var6 + var3; ++var14) {
+				var15 = (double) var14 + 0.5D - var2.posX;
 
-				for(var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
-					var18 = (double)var17 + 0.5D - var2.posZ;
+				for (var17 = var8 - var3; var17 <= var8 + var3; ++var17) {
+					var18 = (double) var17 + 0.5D - var2.posZ;
 					var1.getClass();
 
-					label234:
-					for(var20 = 128 - 1; var20 >= 0; --var20) {
-						if(var1.isAirBlock(var14, var20, var17)) {
-							while(var20 > 0 && var1.isAirBlock(var14, var20 - 1, var17)) {
+					label234: for (var20 = 128 - 1; var20 >= 0; --var20) {
+						if (var1.isAirBlock(var14, var20, var17)) {
+							while (var20 > 0 && var1.isAirBlock(var14, var20 - 1, var17)) {
 								--var20;
 							}
 
-							for(var21 = var13; var21 < var13 + 2; ++var21) {
+							for (var21 = var13; var21 < var13 + 2; ++var21) {
 								var22 = var21 % 2;
 								var23 = 1 - var22;
 
-								for(var24 = 0; var24 < 4; ++var24) {
-									for(var25 = -1; var25 < 4; ++var25) {
+								for (var24 = 0; var24 < 4; ++var24) {
+									for (var25 = -1; var25 < 4; ++var25) {
 										var26 = var14 + (var24 - 1) * var22;
 										var27 = var20 + var25;
 										var28 = var17 + (var24 - 1) * var23;
-										if(var25 < 0 && !var1.getBlockMaterial(var26, var27, var28).isSolid() || var25 >= 0 && !var1.isAirBlock(var26, var27, var28)) {
+										if (var25 < 0 && !var1.getBlockMaterial(var26, var27, var28).isSolid()
+												|| var25 >= 0 && !var1.isAirBlock(var26, var27, var28)) {
 											continue label234;
 										}
 									}
 								}
 
-								var32 = (double)var20 + 0.5D - var2.posY;
+								var32 = (double) var20 + 0.5D - var2.posY;
 								var33 = var15 * var15 + var32 * var32 + var18 * var18;
-								if(var4 < 0.0D || var33 < var4) {
+								if (var4 < 0.0D || var33 < var4) {
 									var4 = var33;
 									var9 = var14;
 									var10 = var20;
@@ -204,28 +204,28 @@ public class Teleporter {
 		var17 = var11;
 		int var31 = var12 % 2;
 		int var19 = 1 - var31;
-		if(var12 % 4 >= 2) {
+		if (var12 % 4 >= 2) {
 			var31 = -var31;
 			var19 = -var19;
 		}
 
 		boolean var34;
-		if(var4 < 0.0D) {
-			if(var10 < 70) {
+		if (var4 < 0.0D) {
+			if (var10 < 70) {
 				var10 = 70;
 			}
 
 			var1.getClass();
-			if(var10 > 128 - 10) {
+			if (var10 > 128 - 10) {
 				var1.getClass();
 				var10 = 128 - 10;
 			}
 
 			var16 = var10;
 
-			for(var20 = -1; var20 <= 1; ++var20) {
-				for(var21 = 1; var21 < 3; ++var21) {
-					for(var22 = -1; var22 < 3; ++var22) {
+			for (var20 = -1; var20 <= 1; ++var20) {
+				for (var21 = 1; var21 < 3; ++var21) {
+					for (var22 = -1; var22 < 3; ++var22) {
 						var23 = var30 + (var21 - 1) * var31 + var20 * var19;
 						var24 = var16 + var22;
 						var25 = var17 + (var21 - 1) * var19 - var20 * var31;
@@ -236,11 +236,11 @@ public class Teleporter {
 			}
 		}
 
-		for(var20 = 0; var20 < 4; ++var20) {
+		for (var20 = 0; var20 < 4; ++var20) {
 			var1.editingBlocks = true;
 
-			for(var21 = 0; var21 < 4; ++var21) {
-				for(var22 = -1; var22 < 4; ++var22) {
+			for (var21 = 0; var21 < 4; ++var21) {
+				for (var22 = -1; var22 < 4; ++var22) {
 					var23 = var30 + (var21 - 1) * var31;
 					var24 = var16 + var22;
 					var25 = var17 + (var21 - 1) * var19;
@@ -251,8 +251,8 @@ public class Teleporter {
 
 			var1.editingBlocks = false;
 
-			for(var21 = 0; var21 < 4; ++var21) {
-				for(var22 = -1; var22 < 4; ++var22) {
+			for (var21 = 0; var21 < 4; ++var21) {
+				for (var22 = -1; var22 < 4; ++var22) {
 					var23 = var30 + (var21 - 1) * var31;
 					var24 = var16 + var22;
 					var25 = var17 + (var21 - 1) * var19;
