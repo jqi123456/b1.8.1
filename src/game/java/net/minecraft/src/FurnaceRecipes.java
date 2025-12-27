@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class FurnaceRecipes {
 	private static final FurnaceRecipes smeltingBase = new FurnaceRecipes();
-	private Map smeltingList = new HashMap();
+	private Map smeltingList = new HashMap<>();
 
 	public static final FurnaceRecipes smelting() {
 		return smeltingBase;
@@ -31,7 +31,7 @@ public class FurnaceRecipes {
 	}
 
 	public ItemStack getSmeltingResult(int var1) {
-		return (ItemStack)this.smeltingList.get(Integer.valueOf(var1));
+		return (ItemStack) this.smeltingList.get(Integer.valueOf(var1));
 	}
 
 	public Map getSmeltingList() {

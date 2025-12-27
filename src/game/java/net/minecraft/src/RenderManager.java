@@ -6,7 +6,7 @@ import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
 public class RenderManager {
-	private Map entityRenderMap = new HashMap();
+	private Map entityRenderMap = new HashMap<>();
 	public static RenderManager instance = new RenderManager();
 	private FontRenderer fontRenderer;
 	public static double renderPosX;
@@ -58,16 +58,16 @@ public class RenderManager {
 		this.entityRenderMap.put(EntityLightningBolt.class, new RenderLightningBolt());
 		Iterator var1 = this.entityRenderMap.values().iterator();
 
-		while(var1.hasNext()) {
-			Render var2 = (Render)var1.next();
+		while (var1.hasNext()) {
+			Render var2 = (Render) var1.next();
 			var2.setRenderManager(this);
 		}
 
 	}
 
 	public Render getEntityClassRenderObject(Class var1) {
-		Render var2 = (Render)this.entityRenderMap.get(var1);
-		if(var2 == null && var1 != Entity.class) {
+		Render var2 = (Render) this.entityRenderMap.get(var1);
+		if (var2 == null && var1 != Entity.class) {
 			var2 = this.getEntityClassRenderObject(var1.getSuperclass());
 			this.entityRenderMap.put(var1, var2);
 		}
@@ -79,18 +79,21 @@ public class RenderManager {
 		return this.getEntityClassRenderObject(var1.getClass());
 	}
 
-	public void cacheActiveRenderInfo(World var1, RenderEngine var2, FontRenderer var3, EntityLiving var4, GameSettings var5, float var6) {
+	public void cacheActiveRenderInfo(World var1, RenderEngine var2, FontRenderer var3, EntityLiving var4,
+			GameSettings var5, float var6) {
 		this.worldObj = var1;
 		this.renderEngine = var2;
 		this.options = var5;
 		this.livingPlayer = var4;
 		this.fontRenderer = var3;
-		if(var4.isPlayerSleeping()) {
-			int var7 = var1.getBlockId(MathHelper.floor_double(var4.posX), MathHelper.floor_double(var4.posY), MathHelper.floor_double(var4.posZ));
-			if(var7 == Block.bed.blockID) {
-				int var8 = var1.getBlockMetadata(MathHelper.floor_double(var4.posX), MathHelper.floor_double(var4.posY), MathHelper.floor_double(var4.posZ));
+		if (var4.isPlayerSleeping()) {
+			int var7 = var1.getBlockId(MathHelper.floor_double(var4.posX), MathHelper.floor_double(var4.posY),
+					MathHelper.floor_double(var4.posZ));
+			if (var7 == Block.bed.blockID) {
+				int var8 = var1.getBlockMetadata(MathHelper.floor_double(var4.posX), MathHelper.floor_double(var4.posY),
+						MathHelper.floor_double(var4.posZ));
 				int var9 = var8 & 3;
-				this.playerViewY = (float)(var9 * 90 + 180);
+				this.playerViewY = (float) (var9 * 90 + 180);
 				this.playerViewX = 0.0F;
 			}
 		} else {
@@ -98,15 +101,15 @@ public class RenderManager {
 			this.playerViewX = var4.prevRotationPitch + (var4.rotationPitch - var4.prevRotationPitch) * var6;
 		}
 
-		this.field_1222_l = var4.lastTickPosX + (var4.posX - var4.lastTickPosX) * (double)var6;
-		this.field_1221_m = var4.lastTickPosY + (var4.posY - var4.lastTickPosY) * (double)var6;
-		this.field_1220_n = var4.lastTickPosZ + (var4.posZ - var4.lastTickPosZ) * (double)var6;
+		this.field_1222_l = var4.lastTickPosX + (var4.posX - var4.lastTickPosX) * (double) var6;
+		this.field_1221_m = var4.lastTickPosY + (var4.posY - var4.lastTickPosY) * (double) var6;
+		this.field_1220_n = var4.lastTickPosZ + (var4.posZ - var4.lastTickPosZ) * (double) var6;
 	}
 
 	public void renderEntity(Entity var1, float var2) {
-		double var3 = var1.lastTickPosX + (var1.posX - var1.lastTickPosX) * (double)var2;
-		double var5 = var1.lastTickPosY + (var1.posY - var1.lastTickPosY) * (double)var2;
-		double var7 = var1.lastTickPosZ + (var1.posZ - var1.lastTickPosZ) * (double)var2;
+		double var3 = var1.lastTickPosX + (var1.posX - var1.lastTickPosX) * (double) var2;
+		double var5 = var1.lastTickPosY + (var1.posY - var1.lastTickPosY) * (double) var2;
+		double var7 = var1.lastTickPosZ + (var1.posZ - var1.lastTickPosZ) * (double) var2;
 		float var9 = var1.prevRotationYaw + (var1.rotationYaw - var1.prevRotationYaw) * var2;
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.renderEntityWithPosYaw(var1, var3 - renderPosX, var5 - renderPosY, var7 - renderPosZ, var9, var2);
@@ -114,7 +117,7 @@ public class RenderManager {
 
 	public void renderEntityWithPosYaw(Entity var1, double var2, double var4, double var6, float var8, float var9) {
 		Render var10 = this.getEntityRenderObject(var1);
-		if(var10 != null) {
+		if (var10 != null) {
 			var10.doRender(var1, var2, var4, var6, var8, var9);
 			var10.doRenderShadowAndFire(var1, var2, var4, var6, var8, var9);
 		}

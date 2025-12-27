@@ -8,6 +8,8 @@ import org.lwjgl.input.Keyboard;
 
 import net.lax1dude.eaglercraft.EagRuntime;
 import net.lax1dude.eaglercraft.HString;
+import net.lax1dude.eaglercraft.Random;
+import net.lax1dude.eaglercraft.internal.PlatformRuntime;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.EntityPlayer;
@@ -73,6 +75,35 @@ public class ScuffedUtils {
     EntityPlayer player = mc.thePlayer;
     return HString.format("x: %d, y: %d, z: %d", truncateCoordinate(player.posX), truncateCoordinate(player.posY), truncateCoordinate(player.posZ));
   }
+
+  public static void showCrashReport(Throwable t) {
+    StringPrintStream log = new StringPrintStream();
+    t.printStackTrace();
+    t.printStackTrace(log);
+    PlatformRuntime.writeCrashReport(log.toString());
+  }
+
+  public static String getDefaultUsername() {
+    String[] defaultNames = new String[] {
+        "Yeeish", "Yeeish", "Yee", "Yee", "Yeer", "Yeeler", "Eagler", "Eagl",
+        "Darver", "Darvler", "Vool", "Vigg", "Vigg", "Deev", "Yigg", "Yeeg"
+    };
+
+    Random rand = new Random();
+
+    String name;
+
+    do {
+      name = HString.format("%s%s%04d", defaultNames[rand.nextInt(defaultNames.length)],
+          defaultNames[rand.nextInt(defaultNames.length)], rand.nextInt(10000));
+    } while (name.length() > 16);
+
+    return name;
+  }
+
+  public static boolean isDefaultUsername(String str) {
+		return str.toLowerCase().matches("^(yeeish|yee|yeer|yeeler|eagler|eagl|darver|darvler|vool|vigg|deev|yigg|yeeg){2}\\d{2,4}$");
+	}
 
   public static int truncateCoordinate(double coord) {
     return (int) Math.floor(coord);

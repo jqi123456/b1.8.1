@@ -25,7 +25,7 @@ public class RenderEngine {
 	private MCHash textureNameToImageMap = new MCHash();
 	private IntBuffer singleIntBuffer = GLAllocation.createDirectIntBuffer(1);
 	private ByteBuffer imageData = GLAllocation.createDirectByteBuffer(16777216);
-	private List textureList = new ArrayList();
+	private List textureList = new ArrayList<>();
 	private GameSettings options;
 	public boolean clampTexture = false;
 	public boolean blurTexture = false;
@@ -63,8 +63,10 @@ public class RenderEngine {
 					this.blurTexture = false;
 				} else {
 					InputStream var7 = TexturePack.getResourceAsStream(var1);
-					if (var7 == null) d = this.missingTextureImage;
-					else d = this.readTextureImage(var7);
+					if (var7 == null)
+						d = this.missingTextureImage;
+					else
+						d = this.readTextureImage(var7);
 					var3 = this.getImageContentsAndAllocate(d);
 				}
 

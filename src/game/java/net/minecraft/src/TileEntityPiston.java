@@ -12,7 +12,7 @@ public class TileEntityPiston extends TileEntity {
 	private boolean field_31023_j;
 	private float progress;
 	private float lastProgress;
-	private static List field_31018_m = new ArrayList();
+	private static List field_31018_m = new ArrayList<>();
 
 	public TileEntityPiston() {
 	}
@@ -46,7 +46,7 @@ public class TileEntityPiston extends TileEntity {
 	}
 
 	public float func_31008_a(float var1) {
-		if(var1 > 1.0F) {
+		if (var1 > 1.0F) {
 			var1 = 1.0F;
 		}
 
@@ -54,34 +54,43 @@ public class TileEntityPiston extends TileEntity {
 	}
 
 	public float func_31017_b(float var1) {
-		return this.extending ? (this.func_31008_a(var1) - 1.0F) * (float)PistonBlockTextures.offsetsXForSide[this.storedOrientation] : (1.0F - this.func_31008_a(var1)) * (float)PistonBlockTextures.offsetsXForSide[this.storedOrientation];
+		return this.extending
+				? (this.func_31008_a(var1) - 1.0F) * (float) PistonBlockTextures.offsetsXForSide[this.storedOrientation]
+				: (1.0F - this.func_31008_a(var1)) * (float) PistonBlockTextures.offsetsXForSide[this.storedOrientation];
 	}
 
 	public float func_31014_c(float var1) {
-		return this.extending ? (this.func_31008_a(var1) - 1.0F) * (float)PistonBlockTextures.offsetsYForSide[this.storedOrientation] : (1.0F - this.func_31008_a(var1)) * (float)PistonBlockTextures.offsetsYForSide[this.storedOrientation];
+		return this.extending
+				? (this.func_31008_a(var1) - 1.0F) * (float) PistonBlockTextures.offsetsYForSide[this.storedOrientation]
+				: (1.0F - this.func_31008_a(var1)) * (float) PistonBlockTextures.offsetsYForSide[this.storedOrientation];
 	}
 
 	public float func_31013_d(float var1) {
-		return this.extending ? (this.func_31008_a(var1) - 1.0F) * (float)PistonBlockTextures.offsetsZForSide[this.storedOrientation] : (1.0F - this.func_31008_a(var1)) * (float)PistonBlockTextures.offsetsZForSide[this.storedOrientation];
+		return this.extending
+				? (this.func_31008_a(var1) - 1.0F) * (float) PistonBlockTextures.offsetsZForSide[this.storedOrientation]
+				: (1.0F - this.func_31008_a(var1)) * (float) PistonBlockTextures.offsetsZForSide[this.storedOrientation];
 	}
 
 	private void func_31010_a(float var1, float var2) {
-		if(!this.extending) {
+		if (!this.extending) {
 			--var1;
 		} else {
 			var1 = 1.0F - var1;
 		}
 
-		AxisAlignedBB var3 = Block.pistonMoving.func_31035_a(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.storedBlockID, var1, this.storedOrientation);
-		if(var3 != null) {
-			List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity((Entity)null, var3);
-			if(!var4.isEmpty()) {
+		AxisAlignedBB var3 = Block.pistonMoving.func_31035_a(this.worldObj, this.xCoord, this.yCoord, this.zCoord,
+				this.storedBlockID, var1, this.storedOrientation);
+		if (var3 != null) {
+			List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity((Entity) null, var3);
+			if (!var4.isEmpty()) {
 				field_31018_m.addAll(var4);
 				Iterator var5 = field_31018_m.iterator();
 
-				while(var5.hasNext()) {
-					Entity var6 = (Entity)var5.next();
-					var6.moveEntity((double)(var2 * (float)PistonBlockTextures.offsetsXForSide[this.storedOrientation]), (double)(var2 * (float)PistonBlockTextures.offsetsYForSide[this.storedOrientation]), (double)(var2 * (float)PistonBlockTextures.offsetsZForSide[this.storedOrientation]));
+				while (var5.hasNext()) {
+					Entity var6 = (Entity) var5.next();
+					var6.moveEntity((double) (var2 * (float) PistonBlockTextures.offsetsXForSide[this.storedOrientation]),
+							(double) (var2 * (float) PistonBlockTextures.offsetsYForSide[this.storedOrientation]),
+							(double) (var2 * (float) PistonBlockTextures.offsetsZForSide[this.storedOrientation]));
 				}
 
 				field_31018_m.clear();
@@ -91,12 +100,13 @@ public class TileEntityPiston extends TileEntity {
 	}
 
 	public void clearPistonTileEntity() {
-		if(this.lastProgress < 1.0F) {
+		if (this.lastProgress < 1.0F) {
 			this.lastProgress = this.progress = 1.0F;
 			this.worldObj.removeBlockTileEntity(this.xCoord, this.yCoord, this.zCoord);
 			this.invalidate();
-			if(this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord) == Block.pistonMoving.blockID) {
-				this.worldObj.setBlockAndMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, this.storedBlockID, this.storedMetadata);
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord) == Block.pistonMoving.blockID) {
+				this.worldObj.setBlockAndMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, this.storedBlockID,
+						this.storedMetadata);
 			}
 		}
 
@@ -104,21 +114,22 @@ public class TileEntityPiston extends TileEntity {
 
 	public void updateEntity() {
 		this.lastProgress = this.progress;
-		if(this.lastProgress >= 1.0F) {
+		if (this.lastProgress >= 1.0F) {
 			this.func_31010_a(1.0F, 0.25F);
 			this.worldObj.removeBlockTileEntity(this.xCoord, this.yCoord, this.zCoord);
 			this.invalidate();
-			if(this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord) == Block.pistonMoving.blockID) {
-				this.worldObj.setBlockAndMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, this.storedBlockID, this.storedMetadata);
+			if (this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord) == Block.pistonMoving.blockID) {
+				this.worldObj.setBlockAndMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, this.storedBlockID,
+						this.storedMetadata);
 			}
 
 		} else {
 			this.progress += 0.5F;
-			if(this.progress >= 1.0F) {
+			if (this.progress >= 1.0F) {
 				this.progress = 1.0F;
 			}
 
-			if(this.extending) {
+			if (this.extending) {
 				this.func_31010_a(this.progress, this.progress - this.lastProgress + 1.0F / 16.0F);
 			}
 

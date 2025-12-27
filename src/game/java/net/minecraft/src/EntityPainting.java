@@ -24,21 +24,21 @@ public class EntityPainting extends Entity {
 		this.xPosition = var2;
 		this.yPosition = var3;
 		this.zPosition = var4;
-		ArrayList var6 = new ArrayList();
+		ArrayList var6 = new ArrayList<>();
 		EnumArt[] var7 = EnumArt.VALUES;
 		int var8 = var7.length;
 
-		for(int var9 = 0; var9 < var8; ++var9) {
+		for (int var9 = 0; var9 < var8; ++var9) {
 			EnumArt var10 = var7[var9];
 			this.art = var10;
 			this.func_412_b(var5);
-			if(this.canStay()) {
+			if (this.canStay()) {
 				var6.add(var10);
 			}
 		}
 
-		if(var6.size() > 0) {
-			this.art = (EnumArt)var6.get(this.rand.nextInt(var6.size()));
+		if (var6.size() > 0) {
+			this.art = (EnumArt) var6.get(this.rand.nextInt(var6.size()));
 		}
 
 		this.func_412_b(var5);
@@ -52,9 +52,9 @@ public class EntityPainting extends Entity {
 		EnumArt[] var7 = EnumArt.VALUES;
 		int var8 = var7.length;
 
-		for(int var9 = 0; var9 < var8; ++var9) {
+		for (int var9 = 0; var9 < var8; ++var9) {
 			EnumArt var10 = var7[var9];
-			if(var10.title.equals(var6)) {
+			if (var10.title.equals(var6)) {
 				this.art = var10;
 				break;
 			}
@@ -68,11 +68,11 @@ public class EntityPainting extends Entity {
 
 	public void func_412_b(int var1) {
 		this.direction = var1;
-		this.prevRotationYaw = this.rotationYaw = (float)(var1 * 90);
-		float var2 = (float)this.art.sizeX;
-		float var3 = (float)this.art.sizeY;
-		float var4 = (float)this.art.sizeX;
-		if(var1 != 0 && var1 != 2) {
+		this.prevRotationYaw = this.rotationYaw = (float) (var1 * 90);
+		float var2 = (float) this.art.sizeX;
+		float var3 = (float) this.art.sizeY;
+		float var4 = (float) this.art.sizeX;
+		if (var1 != 0 && var1 != 2) {
 			var2 = 0.5F;
 		} else {
 			var4 = 0.5F;
@@ -81,46 +81,48 @@ public class EntityPainting extends Entity {
 		var2 /= 32.0F;
 		var3 /= 32.0F;
 		var4 /= 32.0F;
-		float var5 = (float)this.xPosition + 0.5F;
-		float var6 = (float)this.yPosition + 0.5F;
-		float var7 = (float)this.zPosition + 0.5F;
+		float var5 = (float) this.xPosition + 0.5F;
+		float var6 = (float) this.yPosition + 0.5F;
+		float var7 = (float) this.zPosition + 0.5F;
 		float var8 = 9.0F / 16.0F;
-		if(var1 == 0) {
+		if (var1 == 0) {
 			var7 -= var8;
 		}
 
-		if(var1 == 1) {
+		if (var1 == 1) {
 			var5 -= var8;
 		}
 
-		if(var1 == 2) {
+		if (var1 == 2) {
 			var7 += var8;
 		}
 
-		if(var1 == 3) {
+		if (var1 == 3) {
 			var5 += var8;
 		}
 
-		if(var1 == 0) {
+		if (var1 == 0) {
 			var5 -= this.func_411_c(this.art.sizeX);
 		}
 
-		if(var1 == 1) {
+		if (var1 == 1) {
 			var7 += this.func_411_c(this.art.sizeX);
 		}
 
-		if(var1 == 2) {
+		if (var1 == 2) {
 			var5 += this.func_411_c(this.art.sizeX);
 		}
 
-		if(var1 == 3) {
+		if (var1 == 3) {
 			var7 -= this.func_411_c(this.art.sizeX);
 		}
 
 		var6 += this.func_411_c(this.art.sizeY);
-		this.setPosition((double)var5, (double)var6, (double)var7);
+		this.setPosition((double) var5, (double) var6, (double) var7);
 		float var9 = -(0.1F / 16.0F);
-		this.boundingBox.setBounds((double)(var5 - var2 - var9), (double)(var6 - var3 - var9), (double)(var7 - var4 - var9), (double)(var5 + var2 + var9), (double)(var6 + var3 + var9), (double)(var7 + var4 + var9));
+		this.boundingBox.setBounds((double) (var5 - var2 - var9), (double) (var6 - var3 - var9),
+				(double) (var7 - var4 - var9), (double) (var5 + var2 + var9), (double) (var6 + var3 + var9),
+				(double) (var7 + var4 + var9));
 	}
 
 	private float func_411_c(int var1) {
@@ -128,18 +130,19 @@ public class EntityPainting extends Entity {
 	}
 
 	public void onUpdate() {
-		if(this.tickCounter1++ == 100 && !this.worldObj.multiplayerWorld) {
+		if (this.tickCounter1++ == 100 && !this.worldObj.multiplayerWorld) {
 			this.tickCounter1 = 0;
-			if(!this.canStay()) {
+			if (!this.canStay()) {
 				this.setEntityDead();
-				this.worldObj.entityJoinedWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
+				this.worldObj.entityJoinedWorld(
+						new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
 			}
 		}
 
 	}
 
 	public boolean canStay() {
-		if(this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() > 0) {
+		if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() > 0) {
 			return false;
 		} else {
 			int var1 = this.art.sizeX / 16;
@@ -147,35 +150,35 @@ public class EntityPainting extends Entity {
 			int var3 = this.xPosition;
 			int var4 = this.yPosition;
 			int var5 = this.zPosition;
-			if(this.direction == 0) {
-				var3 = MathHelper.floor_double(this.posX - (double)((float)this.art.sizeX / 32.0F));
+			if (this.direction == 0) {
+				var3 = MathHelper.floor_double(this.posX - (double) ((float) this.art.sizeX / 32.0F));
 			}
 
-			if(this.direction == 1) {
-				var5 = MathHelper.floor_double(this.posZ - (double)((float)this.art.sizeX / 32.0F));
+			if (this.direction == 1) {
+				var5 = MathHelper.floor_double(this.posZ - (double) ((float) this.art.sizeX / 32.0F));
 			}
 
-			if(this.direction == 2) {
-				var3 = MathHelper.floor_double(this.posX - (double)((float)this.art.sizeX / 32.0F));
+			if (this.direction == 2) {
+				var3 = MathHelper.floor_double(this.posX - (double) ((float) this.art.sizeX / 32.0F));
 			}
 
-			if(this.direction == 3) {
-				var5 = MathHelper.floor_double(this.posZ - (double)((float)this.art.sizeX / 32.0F));
+			if (this.direction == 3) {
+				var5 = MathHelper.floor_double(this.posZ - (double) ((float) this.art.sizeX / 32.0F));
 			}
 
-			var4 = MathHelper.floor_double(this.posY - (double)((float)this.art.sizeY / 32.0F));
+			var4 = MathHelper.floor_double(this.posY - (double) ((float) this.art.sizeY / 32.0F));
 
 			int var7;
-			for(int var6 = 0; var6 < var1; ++var6) {
-				for(var7 = 0; var7 < var2; ++var7) {
+			for (int var6 = 0; var6 < var1; ++var6) {
+				for (var7 = 0; var7 < var2; ++var7) {
 					Material var8;
-					if(this.direction != 0 && this.direction != 2) {
+					if (this.direction != 0 && this.direction != 2) {
 						var8 = this.worldObj.getBlockMaterial(this.xPosition, var4 + var7, var5 + var6);
 					} else {
 						var8 = this.worldObj.getBlockMaterial(var3 + var6, var4 + var7, this.zPosition);
 					}
 
-					if(!var8.isSolid()) {
+					if (!var8.isSolid()) {
 						return false;
 					}
 				}
@@ -183,8 +186,8 @@ public class EntityPainting extends Entity {
 
 			List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox);
 
-			for(var7 = 0; var7 < var9.size(); ++var7) {
-				if(var9.get(var7) instanceof EntityPainting) {
+			for (var7 = 0; var7 < var9.size(); ++var7) {
+				if (var9.get(var7) instanceof EntityPainting) {
 					return false;
 				}
 			}
@@ -198,17 +201,18 @@ public class EntityPainting extends Entity {
 	}
 
 	public boolean attackEntityFrom(DamageSource var1, int var2) {
-		if(!this.isDead && !this.worldObj.multiplayerWorld) {
+		if (!this.isDead && !this.worldObj.multiplayerWorld) {
 			this.setEntityDead();
 			this.setBeenAttacked();
-			this.worldObj.entityJoinedWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
+			this.worldObj.entityJoinedWorld(
+					new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
 		}
 
 		return true;
 	}
 
 	public void writeEntityToNBT(NBTTagCompound var1) {
-		var1.setByte("Dir", (byte)this.direction);
+		var1.setByte("Dir", (byte) this.direction);
 		var1.setString("Motive", this.art.title);
 		var1.setInteger("TileX", this.xPosition);
 		var1.setInteger("TileY", this.yPosition);
@@ -224,14 +228,14 @@ public class EntityPainting extends Entity {
 		EnumArt[] var3 = EnumArt.VALUES;
 		int var4 = var3.length;
 
-		for(int var5 = 0; var5 < var4; ++var5) {
+		for (int var5 = 0; var5 < var4; ++var5) {
 			EnumArt var6 = var3[var5];
-			if(var6.title.equals(var2)) {
+			if (var6.title.equals(var2)) {
 				this.art = var6;
 			}
 		}
 
-		if(this.art == null) {
+		if (this.art == null) {
 			this.art = EnumArt.Kebab;
 		}
 
@@ -239,17 +243,19 @@ public class EntityPainting extends Entity {
 	}
 
 	public void moveEntity(double var1, double var3, double var5) {
-		if(!this.worldObj.multiplayerWorld && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
+		if (!this.worldObj.multiplayerWorld && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
 			this.setEntityDead();
-			this.worldObj.entityJoinedWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
+			this.worldObj.entityJoinedWorld(
+					new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
 		}
 
 	}
 
 	public void addVelocity(double var1, double var3, double var5) {
-		if(!this.worldObj.multiplayerWorld && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
+		if (!this.worldObj.multiplayerWorld && var1 * var1 + var3 * var3 + var5 * var5 > 0.0D) {
 			this.setEntityDead();
-			this.worldObj.entityJoinedWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
+			this.worldObj.entityJoinedWorld(
+					new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.painting)));
 		}
 
 	}

@@ -3,7 +3,6 @@ package net.minecraft.src;
 import java.util.List;
 import net.lax1dude.eaglercraft.Random;
 import net.lax1dude.eaglercraft.EagRuntime;
-import net.lax1dude.eaglercraft.EagUtils;
 import net.lax1dude.eaglercraft.internal.buffer.FloatBuffer;
 import net.lax1dude.eaglercraft.opengl.ImageData;
 import net.lax1dude.eaglercraft.opengl.OpenGlHelper;
@@ -25,10 +24,6 @@ public class EntityRenderer {
 	private Entity pointedEntity = null;
 	private MouseFilter mouseFilterXAxis = new MouseFilter();
 	private MouseFilter mouseFilterYAxis = new MouseFilter();
-	private MouseFilter mouseFilterDummy1 = new MouseFilter();
-	private MouseFilter mouseFilterDummy2 = new MouseFilter();
-	private MouseFilter mouseFilterDummy3 = new MouseFilter();
-	private MouseFilter mouseFilterDummy4 = new MouseFilter();
 	private float thirdPersonDistance = 4.0F;
 	private float field_22227_s = 4.0F;
 	private float debugCamYaw = 0.0F;
@@ -49,7 +44,6 @@ public class EntityRenderer {
 	private double cameraYaw = 0.0D;
 	private double cameraPitch = 0.0D;
 	private long prevFrameTime = EagRuntime.steadyTimeMillis();
-	private long renderEndNanoTime = 0L;
 	private boolean field_35815_V = false;
 	float field_35819_e = 0.0F;
 	float field_35816_f = 0.0F;
@@ -577,7 +571,6 @@ public class EntityRenderer {
 
 			if(this.mc.theWorld != null) {
 				this.renderWorld(var1, 0L);
-				this.renderEndNanoTime = System.nanoTime();
 				if(!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null) {
 					this.mc.ingameGUI.renderGameOverlay(var1, this.mc.currentScreen != null, var16, var17);
 				}
@@ -588,8 +581,6 @@ public class EntityRenderer {
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
 				GL11.glLoadIdentity();
 				this.func_905_b();
-
-				this.renderEndNanoTime = System.nanoTime();
 			}
 
 			if(this.mc.currentScreen != null) {
@@ -1088,8 +1079,6 @@ public class EntityRenderer {
 			float var5;
 			float var6;
 			float var7;
-			float var8;
-			float var9;
 			if(this.cloudFog) {
 				GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
 				GL11.glFogf(GL11.GL_FOG_DENSITY, 0.1F);
@@ -1098,8 +1087,6 @@ public class EntityRenderer {
 				var6 = 1.0F;
 				if(this.mc.gameSettings.anaglyph) {
 					var7 = (var4 * 30.0F + var5 * 59.0F + var6 * 11.0F) / 100.0F;
-					var8 = (var4 * 30.0F + var5 * 70.0F) / 100.0F;
-					var9 = (var4 * 30.0F + var6 * 70.0F) / 100.0F;
 				}
 			} else if(var3.isInsideOfMaterial(Material.water)) {
 				GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
@@ -1109,8 +1096,6 @@ public class EntityRenderer {
 				var6 = 0.9F;
 				if(this.mc.gameSettings.anaglyph) {
 					var7 = (var4 * 30.0F + var5 * 59.0F + var6 * 11.0F) / 100.0F;
-					var8 = (var4 * 30.0F + var5 * 70.0F) / 100.0F;
-					var9 = (var4 * 30.0F + var6 * 70.0F) / 100.0F;
 				}
 			} else if(var3.isInsideOfMaterial(Material.lava)) {
 				GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
@@ -1120,8 +1105,6 @@ public class EntityRenderer {
 				var6 = 0.3F;
 				if(this.mc.gameSettings.anaglyph) {
 					var7 = (var4 * 30.0F + var5 * 59.0F + var6 * 11.0F) / 100.0F;
-					var8 = (var4 * 30.0F + var5 * 70.0F) / 100.0F;
-					var9 = (var4 * 30.0F + var6 * 70.0F) / 100.0F;
 				}
 			} else {
 				var4 = this.farPlaneDistance;

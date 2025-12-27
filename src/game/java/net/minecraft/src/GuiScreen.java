@@ -13,23 +13,23 @@ public class GuiScreen extends Gui {
 	protected Minecraft mc;
 	public int width;
 	public int height;
-	protected List controlList = new ArrayList();
+	protected List controlList = new ArrayList<>();
 	public boolean allowUserInput = false;
 	protected FontRenderer fontRenderer;
 	public GuiParticle guiParticles;
 	private GuiButton selectedButton = null;
 
 	public void drawScreen(int var1, int var2, float var3) {
-		for(int var4 = 0; var4 < this.controlList.size(); ++var4) {
-			GuiButton var5 = (GuiButton)this.controlList.get(var4);
+		for (int var4 = 0; var4 < this.controlList.size(); ++var4) {
+			GuiButton var5 = (GuiButton) this.controlList.get(var4);
 			var5.drawButton(this.mc, var1, var2);
 		}
 
 	}
 
 	protected void keyTyped(char var1, int var2) {
-		if(var2 == 1 || (var2 == Keyboard.KEY_GRAVE && !(this instanceof GuiSleepMP))) {
-			this.mc.displayGuiScreen((GuiScreen)null);
+		if (var2 == 1 || (var2 == Keyboard.KEY_GRAVE && !(this instanceof GuiSleepMP))) {
+			this.mc.displayGuiScreen((GuiScreen) null);
 			this.mc.setIngameFocus();
 		}
 
@@ -40,10 +40,10 @@ public class GuiScreen extends Gui {
 	}
 
 	protected void mouseClicked(int var1, int var2, int var3) {
-		if(var3 == 0) {
-			for(int var4 = 0; var4 < this.controlList.size(); ++var4) {
-				GuiButton var5 = (GuiButton)this.controlList.get(var4);
-				if(var5.mousePressed(this.mc, var1, var2)) {
+		if (var3 == 0) {
+			for (int var4 = 0; var4 < this.controlList.size(); ++var4) {
+				GuiButton var5 = (GuiButton) this.controlList.get(var4);
+				if (var5.mousePressed(this.mc, var1, var2)) {
 					this.selectedButton = var5;
 					this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
 					this.actionPerformed(var5);
@@ -54,7 +54,7 @@ public class GuiScreen extends Gui {
 	}
 
 	protected void mouseMovedOrUp(int var1, int var2, int var3) {
-		if(this.selectedButton != null && var3 == 0) {
+		if (this.selectedButton != null && var3 == 0) {
 			this.selectedButton.mouseReleased(var1, var2);
 			this.selectedButton = null;
 		}
@@ -78,11 +78,11 @@ public class GuiScreen extends Gui {
 	}
 
 	public void handleInput() {
-		while(Mouse.next()) {
+		while (Mouse.next()) {
 			this.handleMouseInput();
 		}
 
-		while(Keyboard.next()) {
+		while (Keyboard.next()) {
 			this.handleKeyboardInput();
 		}
 
@@ -91,7 +91,7 @@ public class GuiScreen extends Gui {
 	public void handleMouseInput() {
 		int var1;
 		int var2;
-		if(Mouse.getEventButtonState()) {
+		if (Mouse.getEventButtonState()) {
 			var1 = Mouse.getEventX() * this.width / this.mc.displayWidth;
 			var2 = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
 			this.mouseClicked(var1, var2, Mouse.getEventButton());
@@ -104,8 +104,8 @@ public class GuiScreen extends Gui {
 	}
 
 	public void handleKeyboardInput() {
-		if(Keyboard.getEventKeyState()) {
-			if(Keyboard.getEventKey() == Keyboard.KEY_F11) {
+		if (Keyboard.getEventKeyState()) {
+			if (Keyboard.getEventKey() == Keyboard.KEY_F11) {
 				this.mc.toggleFullscreen();
 				return;
 			}
@@ -126,7 +126,7 @@ public class GuiScreen extends Gui {
 	}
 
 	public void drawWorldBackground(int var1) {
-		if(this.mc.theWorld != null) {
+		if (this.mc.theWorld != null) {
 			this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
 		} else {
 			this.drawBackground(var1);
@@ -143,10 +143,11 @@ public class GuiScreen extends Gui {
 		float var3 = 32.0F;
 		var2.startDrawingQuads();
 		var2.setColorOpaque_I(4210752);
-		var2.addVertexWithUV(0.0D, (double)this.height, 0.0D, 0.0D, (double)((float)this.height / var3 + (float)var1));
-		var2.addVertexWithUV((double)this.width, (double)this.height, 0.0D, (double)((float)this.width / var3), (double)((float)this.height / var3 + (float)var1));
-		var2.addVertexWithUV((double)this.width, 0.0D, 0.0D, (double)((float)this.width / var3), (double)(0 + var1));
-		var2.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.0D, (double)(0 + var1));
+		var2.addVertexWithUV(0.0D, (double) this.height, 0.0D, 0.0D, (double) ((float) this.height / var3 + (float) var1));
+		var2.addVertexWithUV((double) this.width, (double) this.height, 0.0D, (double) ((float) this.width / var3),
+				(double) ((float) this.height / var3 + (float) var1));
+		var2.addVertexWithUV((double) this.width, 0.0D, 0.0D, (double) ((float) this.width / var3), (double) (0 + var1));
+		var2.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.0D, (double) (0 + var1));
 		var2.draw();
 	}
 

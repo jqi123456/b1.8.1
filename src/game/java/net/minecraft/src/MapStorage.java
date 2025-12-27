@@ -14,9 +14,9 @@ import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 
 public class MapStorage {
 	private ISaveHandler saveHandler;
-	private Map loadedDataMap = new HashMap();
-	private List loadedDataList = new ArrayList();
-	private Map idCounts = new HashMap();
+	private Map loadedDataMap = new HashMap<>();
+	private List loadedDataList = new ArrayList<>();
+	private Map idCounts = new HashMap<>();
 
 	public MapStorage(ISaveHandler var1) {
 		this.saveHandler = var1;
@@ -24,16 +24,16 @@ public class MapStorage {
 	}
 
 	public MapDataBase loadData(Class var1, String var2) {
-		MapDataBase var3 = (MapDataBase)this.loadedDataMap.get(var2);
-		if(var3 != null) {
+		MapDataBase var3 = (MapDataBase) this.loadedDataMap.get(var2);
+		if (var3 != null) {
 			return var3;
 		} else {
-			if(this.saveHandler != null) {
+			if (this.saveHandler != null) {
 				try {
 					VFile2 var4 = this.saveHandler.func_28113_a(var2);
-					if(var4 != null && var4.exists()) {
+					if (var4 != null && var4.exists()) {
 						try {
-							var3 = (MapDataBase)var1.getConstructor(new Class[]{String.class}).newInstance(new Object[]{var2});
+							var3 = (MapDataBase) var1.getConstructor(new Class[] { String.class }).newInstance(new Object[] { var2 });
 						} catch (Exception var7) {
 							throw new RuntimeException("Failed to instantiate " + var1.toString(), var7);
 						}
@@ -48,7 +48,7 @@ public class MapStorage {
 				}
 			}
 
-			if(var3 != null) {
+			if (var3 != null) {
 				this.loadedDataMap.put(var2, var3);
 				this.loadedDataList.add(var3);
 			}
@@ -58,10 +58,10 @@ public class MapStorage {
 	}
 
 	public void setData(String var1, MapDataBase var2) {
-		if(var2 == null) {
+		if (var2 == null) {
 			throw new RuntimeException("Can\'t set null data");
 		} else {
-			if(this.loadedDataMap.containsKey(var1)) {
+			if (this.loadedDataMap.containsKey(var1)) {
 				this.loadedDataList.remove(this.loadedDataMap.remove(var1));
 			}
 
@@ -71,9 +71,9 @@ public class MapStorage {
 	}
 
 	public void saveAllData() {
-		for(int var1 = 0; var1 < this.loadedDataList.size(); ++var1) {
-			MapDataBase var2 = (MapDataBase)this.loadedDataList.get(var1);
-			if(var2.isDirty()) {
+		for (int var1 = 0; var1 < this.loadedDataList.size(); ++var1) {
+			MapDataBase var2 = (MapDataBase) this.loadedDataList.get(var1);
+			if (var2.isDirty()) {
 				this.saveData(var2);
 				var2.setDirty(false);
 			}
@@ -82,10 +82,10 @@ public class MapStorage {
 	}
 
 	private void saveData(MapDataBase var1) {
-		if(this.saveHandler != null) {
+		if (this.saveHandler != null) {
 			try {
 				VFile2 var2 = this.saveHandler.func_28113_a(var1.field_28168_a);
-				if(var2 != null) {
+				if (var2 != null) {
 					NBTTagCompound var3 = new NBTTagCompound();
 					var1.writeToNBT(var3);
 					NBTTagCompound var4 = new NBTTagCompound();
@@ -104,21 +104,21 @@ public class MapStorage {
 	private void loadIdCounts() {
 		try {
 			this.idCounts.clear();
-			if(this.saveHandler == null) {
+			if (this.saveHandler == null) {
 				return;
 			}
 
 			VFile2 var1 = this.saveHandler.func_28113_a("idcounts");
-			if(var1 != null && var1.exists()) {
+			if (var1 != null && var1.exists()) {
 				DataInputStream var2 = new DataInputStream(var1.getInputStream());
 				NBTTagCompound var3 = CompressedStreamTools.func_1141_a(var2);
 				var2.close();
 				Iterator var4 = var3.func_28110_c().iterator();
 
-				while(var4.hasNext()) {
-					NBTBase var5 = (NBTBase)var4.next();
-					if(var5 instanceof NBTTagShort) {
-						NBTTagShort var6 = (NBTTagShort)var5;
+				while (var4.hasNext()) {
+					NBTBase var5 = (NBTBase) var4.next();
+					if (var5 instanceof NBTTagShort) {
+						NBTTagShort var6 = (NBTTagShort) var5;
 						String var7 = var6.getKey();
 						short var8 = var6.shortValue;
 						this.idCounts.put(var7, Short.valueOf(var8));
@@ -132,26 +132,26 @@ public class MapStorage {
 	}
 
 	public int getUniqueDataId(String var1) {
-		Short var2 = (Short)this.idCounts.get(var1);
-		if(var2 == null) {
-			var2 = Short.valueOf((short)0);
+		Short var2 = (Short) this.idCounts.get(var1);
+		if (var2 == null) {
+			var2 = Short.valueOf((short) 0);
 		} else {
-			var2 = Short.valueOf((short)(var2.shortValue() + 1));
+			var2 = Short.valueOf((short) (var2.shortValue() + 1));
 		}
 
 		this.idCounts.put(var1, var2);
-		if(this.saveHandler == null) {
+		if (this.saveHandler == null) {
 			return var2.shortValue();
 		} else {
 			try {
 				VFile2 var3 = this.saveHandler.func_28113_a("idcounts");
-				if(var3 != null) {
+				if (var3 != null) {
 					NBTTagCompound var4 = new NBTTagCompound();
 					Iterator var5 = this.idCounts.keySet().iterator();
 
-					while(var5.hasNext()) {
-						String var6 = (String)var5.next();
-						short var7 = ((Short)this.idCounts.get(var6)).shortValue();
+					while (var5.hasNext()) {
+						String var6 = (String) var5.next();
+						short var7 = ((Short) this.idCounts.get(var6)).shortValue();
 						var4.setShort(var6, var7);
 					}
 

@@ -7,7 +7,7 @@ import java.util.List;
 public class ChunkProviderClient implements IChunkProvider {
 	private Chunk blankChunk;
 	private PlayerList chunkMapping = new PlayerList();
-	private List field_889_c = new ArrayList();
+	private List field_889_c = new ArrayList<>();
 	private World worldObj;
 
 	public ChunkProviderClient(World var1) {
@@ -22,7 +22,7 @@ public class ChunkProviderClient implements IChunkProvider {
 
 	public void func_539_c(int var1, int var2) {
 		Chunk var3 = this.provideChunk(var1, var2);
-		if(!var3.func_21167_h()) {
+		if (!var3.func_21167_h()) {
 			var3.onChunkUnload();
 		}
 
@@ -34,14 +34,14 @@ public class ChunkProviderClient implements IChunkProvider {
 		this.worldObj.getClass();
 		byte[] var3 = new byte[256 * 128];
 		Chunk var4 = new Chunk(this.worldObj, var3, var1, var2);
-		Arrays.fill(var4.skylightMap.data, (byte)-1);
+		Arrays.fill(var4.skylightMap.data, (byte) -1);
 		this.chunkMapping.func_35577_a(ChunkCoordIntPair.chunkXZ2Int(var1, var2), var4);
 		var4.isChunkLoaded = true;
 		return var4;
 	}
 
 	public Chunk provideChunk(int var1, int var2) {
-		Chunk var3 = (Chunk)this.chunkMapping.func_35578_a(ChunkCoordIntPair.chunkXZ2Int(var1, var2));
+		Chunk var3 = (Chunk) this.chunkMapping.func_35578_a(ChunkCoordIntPair.chunkXZ2Int(var1, var2));
 		return var3 == null ? this.blankChunk : var3;
 	}
 

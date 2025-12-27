@@ -40,15 +40,15 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 
 	public boolean convertMapFormat(String var1, IProgressUpdate var2) {
 		var2.setLoadingProgress(0);
-		ArrayList var3 = new ArrayList();
-		ArrayList var4 = new ArrayList();
-		ArrayList var5 = new ArrayList();
-		ArrayList var6 = new ArrayList();
+		ArrayList var3 = new ArrayList<>();
+		ArrayList var4 = new ArrayList<>();
+		ArrayList var5 = new ArrayList<>();
+		ArrayList var6 = new ArrayList<>();
 		VFile2 var7 = new VFile2(this.field_22180_a, var1);
 		VFile2 var8 = new VFile2(var7, "DIM-1");
 		System.out.println("Scanning folders...");
 		this.func_22183_a(var7, var3, var4);
-		if(var8.exists()) {
+		if (var8.exists()) {
 			this.func_22183_a(var8, var5, var6);
 		}
 
@@ -61,7 +61,7 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 		ISaveHandler var11 = this.getSaveLoader(var1, false);
 		var11.saveWorldInfo(var10);
 		this.func_22182_a(var4, var3.size() + var5.size(), var9, var2);
-		if(var8.exists()) {
+		if (var8.exists()) {
 			this.func_22182_a(var6, var3.size() + var5.size() + var4.size(), var9, var2);
 		}
 
@@ -69,26 +69,26 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 	}
 
 	private void func_22183_a(VFile2 var1, ArrayList var2, ArrayList var3) {
-		ChunkFolderPattern var4 = new ChunkFolderPattern((Empty2)null);
-		ChunkFilePattern var5 = new ChunkFilePattern((Empty2)null);
+		ChunkFolderPattern var4 = new ChunkFolderPattern((Empty2) null);
+		ChunkFilePattern var5 = new ChunkFilePattern((Empty2) null);
 		VFile2[] var6 = var1.listFiles(var4);
 		VFile2[] var7 = var6;
 		int var8 = var6.length;
 
-		for(int var9 = 0; var9 < var8; ++var9) {
+		for (int var9 = 0; var9 < var8; ++var9) {
 			VFile2 var10 = var7[var9];
 			var3.add(var10);
 			VFile2[] var11 = var10.listFiles(var4);
 			VFile2[] var12 = var11;
 			int var13 = var11.length;
 
-			for(int var14 = 0; var14 < var13; ++var14) {
+			for (int var14 = 0; var14 < var13; ++var14) {
 				VFile2 var15 = var12[var14];
 				VFile2[] var16 = var15.listFiles(var5);
 				VFile2[] var17 = var16;
 				int var18 = var16.length;
 
-				for(int var19 = 0; var19 < var18; ++var19) {
+				for (int var19 = 0; var19 < var18; ++var19) {
 					VFile2 var20 = var17[var19];
 					var2.add(new ChunkFile(var20));
 				}
@@ -102,20 +102,20 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 		byte[] var6 = new byte[4096];
 		Iterator var7 = var2.iterator();
 
-		while(var7.hasNext()) {
-			ChunkFile var8 = (ChunkFile)var7.next();
+		while (var7.hasNext()) {
+			ChunkFile var8 = (ChunkFile) var7.next();
 			int var9 = var8.getXChunk();
 			int var10 = var8.getYChunk();
 			RegionFile var11 = RegionFileCache.createOrLoadRegionFile(var1, var9, var10);
-			if(!var11.isChunkSaved(var9 & 31, var10 & 31)) {
+			if (!var11.isChunkSaved(var9 & 31, var10 & 31)) {
 				try {
 					DataInputStream var12 = new DataInputStream(new GZIPInputStream(var8.getChunkFile().getInputStream()));
 					DataOutputStream var13 = var11.getChunkDataOutputStream(var9 & 31, var10 & 31);
 					boolean var14 = false;
 
-					while(true) {
+					while (true) {
 						int var17 = var12.read(var6);
-						if(var17 == -1) {
+						if (var17 == -1) {
 							var13.close();
 							var12.close();
 							break;
@@ -129,7 +129,7 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 			}
 
 			++var3;
-			int var16 = (int)Math.round(100.0D * (double)var3 / (double)var4);
+			int var16 = (int) Math.round(100.0D * (double) var3 / (double) var4);
 			var5.setLoadingProgress(var16);
 		}
 
@@ -139,13 +139,13 @@ public class SaveConverterMcRegion extends SaveFormatOld {
 	private void func_22182_a(ArrayList var1, int var2, int var3, IProgressUpdate var4) {
 		Iterator var5 = var1.iterator();
 
-		while(var5.hasNext()) {
-			VFile2 var6 = (VFile2)var5.next();
+		while (var5.hasNext()) {
+			VFile2 var6 = (VFile2) var5.next();
 			VFile2[] var7 = var6.listFiles(false).toArray(new VFile2[0]);
 			func_22179_a(var6, var7);
 			var6.delete();
 			++var2;
-			int var8 = (int)Math.round(100.0D * (double)var2 / (double)var3);
+			int var8 = (int) Math.round(100.0D * (double) var2 / (double) var3);
 			var4.setLoadingProgress(var8);
 		}
 

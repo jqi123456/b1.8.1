@@ -15,8 +15,8 @@ public class NetClientHandler extends NetHandler {
 	private WorldClient worldClient;
 	private boolean field_1210_g = false;
 	public MapStorage mapStorage = new MapStorage((ISaveHandler) null);
-	private Map field_35787_k = new HashMap();
-	public List field_35786_c = new ArrayList();
+	private Map field_35787_k = new HashMap<>();
+	public List field_35786_c = new ArrayList<>();
 	public int field_35785_d = 20;
 	Random rand = new Random();
 

@@ -51,7 +51,7 @@ public class RegionFile {
 			}
 
 			var2 = (int) this.dataFile.getLength() / 4096;
-			this.sectorFree = new ArrayList(var2);
+			this.sectorFree = new ArrayList<>(var2);
 
 			int var3;
 			for (var3 = 0; var3 < var2; ++var3) {

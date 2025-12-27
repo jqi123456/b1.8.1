@@ -1,12 +1,13 @@
 package net.minecraft.src;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import net.lax1dude.eaglercraft.Random;
 
+import org.magicwerk.brownies.collections.GapList;
+
 public class ComponentMineshaftRoom extends StructureComponent {
-	private LinkedList field_35065_a = new LinkedList();
+	private GapList field_35065_a = new GapList<>();
 
 	public ComponentMineshaftRoom(int var1, Random var2, int var3, int var4) {
 		super(var1);

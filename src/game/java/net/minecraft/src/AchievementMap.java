@@ -9,7 +9,7 @@ import net.lax1dude.eaglercraft.EagRuntime;
 
 public class AchievementMap {
 	public static AchievementMap instance = new AchievementMap();
-	private Map guidMap = new HashMap();
+	private Map guidMap = new HashMap<>();
 
 	private AchievementMap() {
 		try {

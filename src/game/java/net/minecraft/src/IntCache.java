@@ -5,24 +5,24 @@ import java.util.List;
 
 public class IntCache {
 	private static int field_35273_a = 256;
-	private static List field_35271_b = new ArrayList();
-	private static List field_35272_c = new ArrayList();
-	private static List field_35269_d = new ArrayList();
-	private static List field_35270_e = new ArrayList();
+	private static List field_35271_b = new ArrayList<>();
+	private static List field_35272_c = new ArrayList<>();
+	private static List field_35269_d = new ArrayList<>();
+	private static List field_35270_e = new ArrayList<>();
 
 	public static int[] func_35267_a(int var0) {
 		int[] var1;
-		if(var0 <= 256) {
-			if(field_35271_b.size() == 0) {
+		if (var0 <= 256) {
+			if (field_35271_b.size() == 0) {
 				var1 = new int[256];
 				field_35272_c.add(var1);
 				return var1;
 			} else {
-				var1 = (int[])field_35271_b.remove(field_35271_b.size() - 1);
+				var1 = (int[]) field_35271_b.remove(field_35271_b.size() - 1);
 				field_35272_c.add(var1);
 				return var1;
 			}
-		} else if(var0 > field_35273_a) {
+		} else if (var0 > field_35273_a) {
 			System.out.println("New max size: " + var0);
 			field_35273_a = var0;
 			field_35269_d.clear();
@@ -30,23 +30,23 @@ public class IntCache {
 			var1 = new int[field_35273_a];
 			field_35270_e.add(var1);
 			return var1;
-		} else if(field_35269_d.size() == 0) {
+		} else if (field_35269_d.size() == 0) {
 			var1 = new int[field_35273_a];
 			field_35270_e.add(var1);
 			return var1;
 		} else {
-			var1 = (int[])field_35269_d.remove(field_35269_d.size() - 1);
+			var1 = (int[]) field_35269_d.remove(field_35269_d.size() - 1);
 			field_35270_e.add(var1);
 			return var1;
 		}
 	}
 
 	public static void func_35268_a() {
-		if(field_35269_d.size() > 0) {
+		if (field_35269_d.size() > 0) {
 			field_35269_d.remove(field_35269_d.size() - 1);
 		}
 
-		if(field_35271_b.size() > 0) {
+		if (field_35271_b.size() > 0) {
 			field_35271_b.remove(field_35271_b.size() - 1);
 		}
 

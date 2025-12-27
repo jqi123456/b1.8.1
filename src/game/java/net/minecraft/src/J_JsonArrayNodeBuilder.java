@@ -1,11 +1,12 @@
 package net.minecraft.src;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
+import org.magicwerk.brownies.collections.GapList;
+
 public final class J_JsonArrayNodeBuilder implements J_JsonNodeBuilder {
-	private final List elementBuilders = new LinkedList();
+	private final GapList elementBuilders = new GapList<>();
 
 	public J_JsonArrayNodeBuilder withElement(J_JsonNodeBuilder var1) {
 		this.elementBuilders.add(var1);
@@ -13,7 +14,7 @@ public final class J_JsonArrayNodeBuilder implements J_JsonNodeBuilder {
 	}
 
 	public J_JsonRootNode build() {
-		LinkedList var1 = new LinkedList();
+		GapList var1 = new GapList<>();
 		Iterator var2 = this.elementBuilders.iterator();
 
 		while(var2.hasNext()) {

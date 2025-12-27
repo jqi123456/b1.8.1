@@ -12,7 +12,7 @@ import java.util.Map;
 import net.lax1dude.eaglercraft.internal.vfs2.VFile2;
 
 public class RegionFileCache {
-	private static final Map regionsByFilename = new HashMap();
+	private static final Map regionsByFilename = new HashMap<>();
 
 	public static RegionFile createOrLoadRegionFile(VFile2 var0, int var1, int var2) {
 		VFile2 var3 = new VFile2(var0, "region");

@@ -16,7 +16,7 @@ final class J_JsonArray extends J_JsonRootNode {
 	}
 
 	public List getElements() {
-		return new ArrayList(this.elements);
+		return new ArrayList<>(this.elements);
 	}
 
 	public String getText() {
@@ -28,10 +28,10 @@ final class J_JsonArray extends J_JsonRootNode {
 	}
 
 	public boolean equals(Object var1) {
-		if(this == var1) {
+		if (this == var1) {
 			return true;
-		} else if(var1 != null && this.getClass() == var1.getClass()) {
-			J_JsonArray var2 = (J_JsonArray)var1;
+		} else if (var1 != null && this.getClass() == var1.getClass()) {
+			J_JsonArray var2 = (J_JsonArray) var1;
 			return this.elements.equals(var2.elements);
 		} else {
 			return false;

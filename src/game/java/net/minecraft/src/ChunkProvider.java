@@ -12,7 +12,7 @@ public class ChunkProvider implements IChunkProvider {
 	private IChunkProvider chunkProvider;
 	private IChunkLoader chunkLoader;
 	private PlayerList chunkMap = new PlayerList();
-	private List chunkList = new ArrayList();
+	private List chunkList = new ArrayList<>();
 	private World worldObj;
 	private int field_35392_h;
 
@@ -33,7 +33,7 @@ public class ChunkProvider implements IChunkProvider {
 		int var4 = var1 * 16 + 8 - var3.posX;
 		int var5 = var2 * 16 + 8 - var3.posZ;
 		short var6 = 128;
-		if(var4 < -var6 || var4 > var6 || var5 < -var6 || var5 > var6) {
+		if (var4 < -var6 || var4 > var6 || var5 < -var6 || var5 > var6) {
 			this.droppedChunksSet.add(Long.valueOf(ChunkCoordIntPair.chunkXZ2Int(var1, var2)));
 		}
 
@@ -42,16 +42,16 @@ public class ChunkProvider implements IChunkProvider {
 	public Chunk loadChunk(int var1, int var2) {
 		long var3 = ChunkCoordIntPair.chunkXZ2Int(var1, var2);
 		this.droppedChunksSet.remove(Long.valueOf(var3));
-		Chunk var5 = (Chunk)this.chunkMap.func_35578_a(var3);
-		if(var5 == null) {
+		Chunk var5 = (Chunk) this.chunkMap.func_35578_a(var3);
+		if (var5 == null) {
 			int var6 = 1875004;
-			if(var1 < -var6 || var2 < -var6 || var1 >= var6 || var2 >= var6) {
+			if (var1 < -var6 || var2 < -var6 || var1 >= var6 || var2 >= var6) {
 				return this.field_28064_b;
 			}
 
 			var5 = this.loadChunkFromFile(var1, var2);
-			if(var5 == null) {
-				if(this.chunkProvider == null) {
+			if (var5 == null) {
+				if (this.chunkProvider == null) {
 					var5 = this.field_28064_b;
 				} else {
 					var5 = this.chunkProvider.provideChunk(var1, var2);
@@ -60,7 +60,7 @@ public class ChunkProvider implements IChunkProvider {
 
 			this.chunkMap.func_35577_a(var3, var5);
 			this.chunkList.add(var5);
-			if(var5 != null) {
+			if (var5 != null) {
 				var5.func_4143_d();
 				var5.onChunkLoad();
 			}
@@ -72,17 +72,17 @@ public class ChunkProvider implements IChunkProvider {
 	}
 
 	public Chunk provideChunk(int var1, int var2) {
-		Chunk var3 = (Chunk)this.chunkMap.func_35578_a(ChunkCoordIntPair.chunkXZ2Int(var1, var2));
+		Chunk var3 = (Chunk) this.chunkMap.func_35578_a(ChunkCoordIntPair.chunkXZ2Int(var1, var2));
 		return var3 == null ? this.loadChunk(var1, var2) : var3;
 	}
 
 	private Chunk loadChunkFromFile(int var1, int var2) {
-		if(this.chunkLoader == null) {
+		if (this.chunkLoader == null) {
 			return null;
 		} else {
 			try {
 				Chunk var3 = this.chunkLoader.loadChunk(this.worldObj, var1, var2);
-				if(var3 != null) {
+				if (var3 != null) {
 					var3.lastSaveTime = this.worldObj.getWorldTime();
 				}
 
@@ -95,7 +95,7 @@ public class ChunkProvider implements IChunkProvider {
 	}
 
 	private void func_28063_a(Chunk var1) {
-		if(this.chunkLoader != null) {
+		if (this.chunkLoader != null) {
 			try {
 				this.chunkLoader.saveExtraChunkData(this.worldObj, var1);
 			} catch (Exception var3) {
@@ -106,7 +106,7 @@ public class ChunkProvider implements IChunkProvider {
 	}
 
 	private void func_28062_b(Chunk var1) {
-		if(this.chunkLoader != null) {
+		if (this.chunkLoader != null) {
 			try {
 				var1.lastSaveTime = this.worldObj.getWorldTime();
 				this.chunkLoader.saveChunk(this.worldObj, var1);
@@ -119,9 +119,9 @@ public class ChunkProvider implements IChunkProvider {
 
 	public void populate(IChunkProvider var1, int var2, int var3) {
 		Chunk var4 = this.provideChunk(var2, var3);
-		if(!var4.isTerrainPopulated) {
+		if (!var4.isTerrainPopulated) {
 			var4.isTerrainPopulated = true;
-			if(this.chunkProvider != null) {
+			if (this.chunkProvider != null) {
 				this.chunkProvider.populate(var1, var2, var3);
 				var4.setChunkModified();
 			}
@@ -132,24 +132,24 @@ public class ChunkProvider implements IChunkProvider {
 	public boolean saveChunks(boolean var1, IProgressUpdate var2) {
 		int var3 = 0;
 
-		for(int var4 = 0; var4 < this.chunkList.size(); ++var4) {
-			Chunk var5 = (Chunk)this.chunkList.get(var4);
-			if(var1 && !var5.neverSave) {
+		for (int var4 = 0; var4 < this.chunkList.size(); ++var4) {
+			Chunk var5 = (Chunk) this.chunkList.get(var4);
+			if (var1 && !var5.neverSave) {
 				this.func_28063_a(var5);
 			}
 
-			if(var5.needsSaving(var1)) {
+			if (var5.needsSaving(var1)) {
 				this.func_28062_b(var5);
 				var5.isModified = false;
 				++var3;
-				if(var3 == 24 && !var1) {
+				if (var3 == 24 && !var1) {
 					return false;
 				}
 			}
 		}
 
-		if(var1) {
-			if(this.chunkLoader == null) {
+		if (var1) {
+			if (this.chunkLoader == null) {
 				return true;
 			}
 
@@ -163,10 +163,10 @@ public class ChunkProvider implements IChunkProvider {
 
 	public boolean unload100OldestChunks() {
 		int var1;
-		for(var1 = 0; var1 < 100; ++var1) {
-			if(!this.droppedChunksSet.isEmpty()) {
-				Long var2 = (Long)this.droppedChunksSet.iterator().next();
-				Chunk var3 = (Chunk)this.chunkMap.func_35578_a(var2.longValue());
+		for (var1 = 0; var1 < 100; ++var1) {
+			if (!this.droppedChunksSet.isEmpty()) {
+				Long var2 = (Long) this.droppedChunksSet.iterator().next();
+				Chunk var3 = (Chunk) this.chunkMap.func_35578_a(var2.longValue());
 				var3.onChunkUnload();
 				this.func_28062_b(var3);
 				this.func_28063_a(var3);
@@ -176,20 +176,21 @@ public class ChunkProvider implements IChunkProvider {
 			}
 		}
 
-		for(var1 = 0; var1 < 10; ++var1) {
-			if(this.field_35392_h >= this.chunkList.size()) {
+		for (var1 = 0; var1 < 10; ++var1) {
+			if (this.field_35392_h >= this.chunkList.size()) {
 				this.field_35392_h = 0;
 				break;
 			}
 
-			Chunk var4 = (Chunk)this.chunkList.get(this.field_35392_h++);
-			EntityPlayer var5 = this.worldObj.getClosestPlayer((double)(var4.xPosition << 4) + 8.0D, 64.0D, (double)(var4.zPosition << 4) + 8.0D, 288.0D);
-			if(var5 == null) {
+			Chunk var4 = (Chunk) this.chunkList.get(this.field_35392_h++);
+			EntityPlayer var5 = this.worldObj.getClosestPlayer((double) (var4.xPosition << 4) + 8.0D, 64.0D,
+					(double) (var4.zPosition << 4) + 8.0D, 288.0D);
+			if (var5 == null) {
 				this.func_35391_d(var4.xPosition, var4.zPosition);
 			}
 		}
 
-		if(this.chunkLoader != null) {
+		if (this.chunkLoader != null) {
 			this.chunkLoader.func_814_a();
 		}
 

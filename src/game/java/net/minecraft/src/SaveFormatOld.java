@@ -20,14 +20,15 @@ public class SaveFormatOld implements ISaveFormat {
 	}
 
 	public List func_22176_b() {
-		ArrayList var1 = new ArrayList();
+		ArrayList var1 = new ArrayList<>();
 
-		if(worldsList.exists()) {
+		if (worldsList.exists()) {
 			for (int i = 0; i < worldsList.getAllLines().length; ++i) {
 				String var3 = "World" + (i + 1);
 				WorldInfo var4 = this.getWorldInfo(var3);
-				if(var4 != null) {
-					var1.add(new SaveFormatComparator(var3, "", var4.getLastTimePlayed(), var4.getSizeOnDisk(), var4.func_35918_q(), false));
+				if (var4 != null) {
+					var1.add(new SaveFormatComparator(var3, "", var4.getLastTimePlayed(), var4.getSizeOnDisk(),
+							var4.func_35918_q(), false));
 				}
 			}
 		}
@@ -41,12 +42,12 @@ public class SaveFormatOld implements ISaveFormat {
 	public WorldInfo getWorldInfo(String var1) {
 		VFile2 var2 = new VFile2(this.field_22180_a, var1);
 		VFile2 var3 = new VFile2(var2, "level.dat");
-		if(!var3.exists()) {
+		if (!var3.exists()) {
 			return null;
 		} else {
 			NBTTagCompound var4;
 			NBTTagCompound var5;
-			if(var3.exists()) {
+			if (var3.exists()) {
 				try {
 					var4 = CompressedStreamTools.loadGzippedCompoundFromOutputStream(var3.getInputStream());
 					var5 = var4.getCompoundTag("Data");
@@ -57,7 +58,7 @@ public class SaveFormatOld implements ISaveFormat {
 			}
 
 			var3 = new VFile2(var2, "level.dat_old");
-			if(var3.exists()) {
+			if (var3.exists()) {
 				try {
 					var4 = CompressedStreamTools.loadGzippedCompoundFromOutputStream(var3.getInputStream());
 					var5 = var4.getCompoundTag("Data");
@@ -74,7 +75,7 @@ public class SaveFormatOld implements ISaveFormat {
 	public void func_22170_a(String var1, String var2) {
 		VFile2 var3 = new VFile2(this.field_22180_a, var1);
 		VFile2 var4 = new VFile2(var3, "level.dat");
-		if(var4.exists()) {
+		if (var4.exists()) {
 			try {
 				NBTTagCompound var5 = CompressedStreamTools.loadGzippedCompoundFromOutputStream(var4.getInputStream());
 				NBTTagCompound var6 = var5.getCompoundTag("Data");
@@ -90,16 +91,17 @@ public class SaveFormatOld implements ISaveFormat {
 	public void func_22172_c(String var1) {
 		VFile2 var2 = new VFile2(this.field_22180_a, var1);
 		VFile2 var3 = new VFile2(var2, "level.dat");
-		if(var3.exists()) {
+		if (var3.exists()) {
 			func_22179_a(var2, var2.listFiles(true).toArray(new VFile2[0]));
 			var2.delete();
 		}
 	}
 
 	protected static void func_22179_a(VFile2 parent, VFile2[] var0) {
-		for(int var1 = 0; var1 < var0.length; ++var1) {
+		for (int var1 = 0; var1 < var0.length; ++var1) {
 			VFile2 file = var0[var1];
-			if (file.getPath().startsWith(parent.getPath() + "/")) file.delete();
+			if (file.getPath().startsWith(parent.getPath() + "/"))
+				file.delete();
 		}
 
 	}

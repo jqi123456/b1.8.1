@@ -11,11 +11,11 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.peyton.eagler.minecraft.suppliers.EntitySupplier;
 
 public class EntityList {
-	private static Map stringToClassMapping = new HashMap();
-	private static Map classToStringMapping = new HashMap();
+	private static Map stringToClassMapping = new HashMap<>();
+	private static Map classToStringMapping = new HashMap<>();
 	private static Int2ObjectMap IDtoClassMapping = new Int2ObjectOpenHashMap();
 	private static Object2IntMap classToIDMapping = new Object2IntOpenHashMap();
-	private static Map stringToIDMapping = new HashMap();
+	private static Map stringToIDMapping = new HashMap<>();
 
 	private static void addMapping(Class var0, EntitySupplier var1, String var2, int var3) {
 		stringToClassMapping.put(var2.toLowerCase(), var1);
@@ -29,9 +29,9 @@ public class EntityList {
 		Entity var2 = null;
 
 		try {
-			EntitySupplier var3 = (EntitySupplier)stringToClassMapping.get(var0.toLowerCase());
-			if(var3 != null) {
-				var2 = (Entity)var3.createEntity(var1);
+			EntitySupplier var3 = (EntitySupplier) stringToClassMapping.get(var0.toLowerCase());
+			if (var3 != null) {
+				var2 = (Entity) var3.createEntity(var1);
 			}
 		} catch (Exception var4) {
 			var4.printStackTrace();
@@ -44,15 +44,15 @@ public class EntityList {
 		Entity var2 = null;
 
 		try {
-			EntitySupplier var3 = (EntitySupplier)stringToClassMapping.get(var0.getString("id").toLowerCase());
-			if(var3 != null) {
-				var2 = (Entity)var3.createEntity(var1);
+			EntitySupplier var3 = (EntitySupplier) stringToClassMapping.get(var0.getString("id").toLowerCase());
+			if (var3 != null) {
+				var2 = (Entity) var3.createEntity(var1);
 			}
 		} catch (Exception var4) {
 			var4.printStackTrace();
 		}
 
-		if(var2 != null) {
+		if (var2 != null) {
 			var2.readFromNBT(var0);
 		} else {
 			System.out.println("Skipping Entity with id " + var0.getString("id"));
@@ -65,15 +65,15 @@ public class EntityList {
 		Entity var2 = null;
 
 		try {
-			EntitySupplier var3 = (EntitySupplier)IDtoClassMapping.get(Integer.valueOf(var0));
-			if(var3 != null) {
-				var2 = (Entity)var3.createEntity(var1);
+			EntitySupplier var3 = (EntitySupplier) IDtoClassMapping.get(Integer.valueOf(var0));
+			if (var3 != null) {
+				var2 = (Entity) var3.createEntity(var1);
 			}
 		} catch (Exception var4) {
 			var4.printStackTrace();
 		}
 
-		if(var2 == null) {
+		if (var2 == null) {
 			System.out.println("Skipping Entity with id " + var0);
 		}
 
@@ -81,15 +81,15 @@ public class EntityList {
 	}
 
 	public static int getEntityID(Entity var0) {
-		return ((Integer)classToIDMapping.get(var0.getClass())).intValue();
+		return ((Integer) classToIDMapping.get(var0.getClass())).intValue();
 	}
 
 	public static String getEntityString(Entity var0) {
-		return (String)classToStringMapping.get(var0.getClass());
+		return (String) classToStringMapping.get(var0.getClass());
 	}
 
 	public static int getEntityID(String var0) {
-		return ((Integer)stringToIDMapping.get(var0.toLowerCase()));
+		return ((Integer) stringToIDMapping.get(var0.toLowerCase()));
 	}
 
 	static {
@@ -120,6 +120,6 @@ public class EntityList {
 		addMapping(EntityTNTPrimed.class, EntityTNTPrimed::new, "PrimedTnt", 20);
 		addMapping(EntityFallingSand.class, EntityFallingSand::new, "FallingSand", 21);
 		addMapping(EntityMinecart.class, EntityMinecart::new, "Minecart", 40);
-		addMapping(EntityBoat.class, EntityBoat::new,"Boat", 41);
+		addMapping(EntityBoat.class, EntityBoat::new, "Boat", 41);
 	}
 }

@@ -1,11 +1,12 @@
 package net.minecraft.src;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import net.lax1dude.eaglercraft.Random;
 
+import org.magicwerk.brownies.collections.GapList;
+
 public abstract class StructureStart {
-	protected LinkedList field_35717_a = new LinkedList();
+	protected GapList field_35717_a = new GapList<>();
 	protected StructureBoundingBox field_35716_b;
 
 	public StructureBoundingBox func_35712_a() {

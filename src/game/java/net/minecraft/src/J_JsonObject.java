@@ -8,11 +8,11 @@ final class J_JsonObject extends J_JsonRootNode {
 	private final Map field_27222_a;
 
 	J_JsonObject(Map var1) {
-		this.field_27222_a = new HashMap(var1);
+		this.field_27222_a = new HashMap<>(var1);
 	}
 
 	public Map getFields() {
-		return new HashMap(this.field_27222_a);
+		return new HashMap<>(this.field_27222_a);
 	}
 
 	public EnumJsonNodeType getType() {
@@ -28,10 +28,10 @@ final class J_JsonObject extends J_JsonRootNode {
 	}
 
 	public boolean equals(Object var1) {
-		if(this == var1) {
+		if (this == var1) {
 			return true;
-		} else if(var1 != null && this.getClass() == var1.getClass()) {
-			J_JsonObject var2 = (J_JsonObject)var1;
+		} else if (var1 != null && this.getClass() == var1.getClass()) {
+			J_JsonObject var2 = (J_JsonObject) var1;
 			return this.field_27222_a.equals(var2.field_27222_a);
 		} else {
 			return false;

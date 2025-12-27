@@ -1,24 +1,25 @@
 package net.minecraft.src;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import org.magicwerk.brownies.collections.GapList;
 
 public final class J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException extends J_JsonNodeDoesNotMatchJsonNodeSelectorException {
 	final J_Functor field_27326_a;
 	final List field_27325_b;
 
 	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27322_a(J_Functor var0) {
-		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0, new LinkedList());
+		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0, new GapList<>());
 	}
 
 	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27323_a(J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
-		LinkedList var2 = new LinkedList(var0.field_27325_b);
+		GapList var2 = new GapList<>(var0.field_27325_b);
 		var2.add(var1);
 		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0.field_27326_a, var2);
 	}
 
 	static J_JsonNodeDoesNotMatchJsonNodeSelectorException func_27321_b(J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException var0, J_JsonNodeSelector var1) {
-		LinkedList var2 = new LinkedList();
+		GapList var2 = new GapList<>();
 		var2.add(var1);
 		return new J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException(var0.field_27326_a, var2);
 	}

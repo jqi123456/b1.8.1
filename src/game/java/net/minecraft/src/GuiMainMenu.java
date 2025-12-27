@@ -33,7 +33,7 @@ public class GuiMainMenu extends GuiScreen {
 
 	public GuiMainMenu() {
 		try {
-			ArrayList var1 = new ArrayList();
+			ArrayList var1 = new ArrayList<>();
 			BufferedReader var2 = new BufferedReader(
 					new InputStreamReader(TexturePack.getResourceAsStream("/title/splashes.txt"), Charset.forName("UTF-8")));
 			String var3 = "";

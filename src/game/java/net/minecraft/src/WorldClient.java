@@ -1,11 +1,12 @@
 package net.minecraft.src;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
+import org.magicwerk.brownies.collections.GapList;
+
 public class WorldClient extends World {
-	private LinkedList blocksToReceive = new LinkedList();
+	private GapList blocksToReceive = new GapList<>();
 	private NetClientHandler sendQueue;
 	private ChunkProviderClient field_20915_C;
 	private MCHash entityHashSet = new MCHash();

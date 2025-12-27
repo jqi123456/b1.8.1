@@ -6,8 +6,8 @@ import java.util.Map;
 import net.peyton.eagler.minecraft.suppliers.TileEntitySupplier;
 
 public class TileEntity {
-	private static Map nameToClassMap = new HashMap();
-	private static Map classToNameMap = new HashMap();
+	private static Map nameToClassMap = new HashMap<>();
+	private static Map classToNameMap = new HashMap<>();
 	public World worldObj;
 	public int xCoord;
 	public int yCoord;
@@ -17,7 +17,7 @@ public class TileEntity {
 	public Block field_35146_o;
 
 	private static void addMapping(Class var0, TileEntitySupplier var1, String var2) {
-		if(classToNameMap.containsKey(var2)) {
+		if (classToNameMap.containsKey(var2)) {
 			throw new IllegalArgumentException("Duplicate id: " + var2);
 		} else {
 			nameToClassMap.put(var2, var1);
@@ -32,8 +32,8 @@ public class TileEntity {
 	}
 
 	public void writeToNBT(NBTTagCompound var1) {
-		String var2 = (String)classToNameMap.get(this.getClass());
-		if(var2 == null) {
+		String var2 = (String) classToNameMap.get(this.getClass());
+		if (var2 == null) {
 			throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
 		} else {
 			var1.setString("id", var2);
@@ -50,15 +50,15 @@ public class TileEntity {
 		TileEntity var1 = null;
 
 		try {
-			TileEntitySupplier var2 = (TileEntitySupplier)nameToClassMap.get(var0.getString("id"));
-			if(var2 != null) {
-				var1 = (TileEntity)var2.createTileEntity();
+			TileEntitySupplier var2 = (TileEntitySupplier) nameToClassMap.get(var0.getString("id"));
+			if (var2 != null) {
+				var1 = (TileEntity) var2.createTileEntity();
 			}
 		} catch (Exception var3) {
 			var3.printStackTrace();
 		}
 
-		if(var1 != null) {
+		if (var1 != null) {
 			var1.readFromNBT(var0);
 		} else {
 			System.out.println("Skipping TileEntity with id " + var0.getString("id"));
@@ -68,7 +68,7 @@ public class TileEntity {
 	}
 
 	public int getBlockMetadata() {
-		if(this.field_35145_n == -1) {
+		if (this.field_35145_n == -1) {
 			this.field_35145_n = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
 		}
 
@@ -76,7 +76,7 @@ public class TileEntity {
 	}
 
 	public void onInventoryChanged() {
-		if(this.worldObj != null) {
+		if (this.worldObj != null) {
 			this.field_35145_n = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
 			this.worldObj.updateTileEntityChunkAndDoNothing(this.xCoord, this.yCoord, this.zCoord, this);
 		}
@@ -84,14 +84,14 @@ public class TileEntity {
 	}
 
 	public double getDistanceFrom(double var1, double var3, double var5) {
-		double var7 = (double)this.xCoord + 0.5D - var1;
-		double var9 = (double)this.yCoord + 0.5D - var3;
-		double var11 = (double)this.zCoord + 0.5D - var5;
+		double var7 = (double) this.xCoord + 0.5D - var1;
+		double var9 = (double) this.yCoord + 0.5D - var3;
+		double var11 = (double) this.zCoord + 0.5D - var5;
 		return var7 * var7 + var9 * var9 + var11 * var11;
 	}
 
 	public Block getBlockType() {
-		if(this.field_35146_o == null) {
+		if (this.field_35146_o == null) {
 			this.field_35146_o = Block.blocksList[this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord)];
 		}
 
